@@ -1,0 +1,1 @@
+Read AGENTS.md in the project root and follow it. The phase rules are in .bob/rules-ask/AGENTS-ask.md (Discover), .bob/rules-plan/AGENTS-plan.md (Design) and .bob/rules-code/AGENTS-code.md (Build); apply the one named at the start of the user's prompt.
