@@ -1,8 +1,8 @@
-# Chapter 3. How to work with your assistant
+# Chapter 3. How to work with Bob
 
-Before building anything, this chapter describes how the guide expects you to talk to the assistant. It is the part that decides whether the rest of the guide is a pleasant experience or a frustrating one. All the walkthroughs from chapter 4 onwards follow the same way of working, so once it is clear here you will not need to think about it again.
+Before building anything, this chapter describes how the guide expects you to talk to Bob. It is the part that decides whether the rest of the guide is a pleasant experience or a frustrating one. All the walkthroughs from chapter 4 onwards follow the same way of working, so once it is clear here you will not need to think about it again.
 
-The chapter is written with IBM Bob in mind, because the way of working described here fits Bob's three modes (Ask, Plan and Agent) exactly. If you use another coding assistant (Claude Code, Cursor, Copilot, Claude Desktop, or any other assistant that can be connected to Orchestrate) everything still applies. The only difference is that your assistant has no mode selector, so instead of changing the mode you state the phase at the start of the prompt, and the configuration installed in chapter 2 carries the same rules.
+The way of working described here fits Bob's three modes, Ask, Plan and Agent, exactly, and the rest of the guide relies on that fit. From here on, "the assistant" means Bob: the word is kept because the prompts, the rules and the habits are about working with an assistant, and Bob is the one this guide uses.
 
 ## 3.1 The three phases
 
@@ -24,7 +24,7 @@ The same thing as a table, for reference:
 
 Why three phases and not one? Because an assistant in Agent mode that receives a vague request starts creating things immediately. Creating things on the instance is fast and costs nothing, so within a few seconds it will have imported an agent, discovered that a tool was missing, created the tool, imported the agent again, and so on. You end up with a collection of half-thought artifacts on your instance, with names you did not choose, and you have to review what was built instead of reviewing a design. This happened more than once while preparing this guide. Ask mode forces the assistant to think before it can act, and Plan mode forces it to write its plan down where you can read it. Only after that does it get the keys.
 
-Note: in Bob you change the mode with one click on the dropdown, with the shortcut `⌘ .` on a Mac (`Ctrl .` on Windows and Linux), or by typing `/ask`, `/plan` or `/agent` in the chat. Bob often suggests a mode change itself when it notices the request needs one, and you can accept the suggestion. If you use another assistant, start your prompt with the phase name, for instance "Discover phase:", and the rules installed in chapter 2 do the rest.
+Note: you change the mode with one click on the dropdown, with the shortcut `⌘ .` on a Mac (`Ctrl .` on Windows and Linux), or by typing `/ask`, `/plan` or `/agent` in the chat. Bob often suggests a mode change itself when it notices the request needs one, and you can accept the suggestion.
 
 ## 3.2 The two approval points
 
@@ -32,9 +32,9 @@ There are only two moments where the assistant has to stop and wait for you. Thi
 
 The first gate is between Design and Build. What you approve here is a list, nothing more: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the order in which it will all be built. A practical test: if you cannot explain that design to a colleague by reading the list, send it back to the assistant with your questions. A design that you understand is the difference between a walkthrough that takes one hour and one that takes the whole afternoon.
 
-The second gate is at the end of Build, before anything goes live. Everything the assistant creates lands in the draft environment of your instance. Nothing reaches your end users until an agent is deployed, and deploying is done with a command in the terminal, not through the assistant's normal operations on the instance (chapter 1 explains why). Before that command the assistant has to switch the ADK to the right tenant. Be careful here: that switch changes the active environment for every assistant on your machine at the same time, Bob included, which is one more reason to make it an explicit decision and not something the assistant does on its own.
+The second gate is at the end of Build, before anything goes live. Everything the assistant creates lands in the draft environment of your instance. Nothing reaches your end users until an agent is deployed, and deploying is done with a command of the ADK, not through the assistant's normal operations on the instance (chapter 1 explains why, and chapter 11 shows the command). Before that command the assistant has to switch the ADK to the right tenant. Be careful here: that switch changes the active environment for every assistant on your machine at the same time, Bob included, which is one more reason to make it an explicit decision and not something the assistant does on its own.
 
-IMPORTANT: the rules installed with the kit tell the assistant to never deploy, never switch the environment, never set a credential and never remove anything without asking you first. If you see it doing one of those things without a question, the rules are not being read, and you should go back to chapter 2 and check the setup.
+IMPORTANT: the rules in the project folder, the instructions file described in chapter 2, tell the assistant to never deploy, never switch the environment, never set a credential and never remove anything without asking you first. If you see it doing one of those things without a question, the rules are not being read, and you should go through the checklist at the end of chapter 2 again.
 
 Apart from these two gates, let the assistant work. If you interrupt it in the middle of the Build phase to approve every single file, you lose the benefit of Agent mode. Control during Build does not come from approving each step; it comes from the verification habits described in section 3.4.
 
@@ -89,7 +89,7 @@ A structured prompt has fixed parts, each answering one question the assistant w
 
 ```
 Goal:        what should exist when this is done, in one sentence
-Context:     the files, folders and data to use, by name (in Bob, with @ mentions)
+Context:     the files, folders and data to use, by name, with @ mentions
 Constraints: names to keep, the model to use, what not to touch, limits from the design
 Deliverable: exactly what you want back (a file, an import, a chat transcript, a report)
 Verify:      how the assistant proves that it worked, in a way you can check yourself
@@ -157,7 +157,7 @@ Whatever type you use, two things must always be present in a prompt that asks f
 
 ## 3.4 Keeping control during the Build phase
 
-Three habits, all enforced by the rules installed in chapter 2, keep the Build phase under control without you approving every step. The first is to verify after every change: the assistant looks at the instance after each import, because the platform sometimes reports success when it has actually logged an error, and the only way to know is to look. The second is to read the reasoning of the agent when testing it, because that is where tool calls and their real results appear, and a polite final answer can hide a runtime error. The third is to restart the assistant's connection to Orchestrate before giving up on an operation and falling back to the command line, because some failures live in that connection rather than in your files. The walkthroughs show each of these habits at the moment it matters, and chapter 15 collects the cases behind them.
+Three habits, all enforced by the rules installed in chapter 2, keep the Build phase under control without you approving every step. The first is to verify after every change: the assistant looks at the instance after each import, because the platform sometimes reports success when it has actually logged an error, and the only way to know is to look. The second is to read the reasoning of the agent when testing it, because that is where tool calls and their real results appear, and a polite final answer can hide a runtime error. The third is to restart the Orchestrate server from Bob's MCP tab before giving up on an operation, because some failures live in that connection rather than in your files. The walkthroughs show each of these habits at the moment it matters, and chapter 15 collects the cases behind them.
 
 ## 3.5 How much you need to say
 
@@ -274,14 +274,14 @@ Two patterns run through all five pairs. The better prompt always points at real
 
 ## 3.7 What runs behind the scenes
 
-Every coding assistant reads a small set of files from the project folder automatically, at the start of each conversation, and those files are what allow the prompts in this guide to stay short. You do not need to know their contents now; chapter 2 installed them, and later chapters open them one at a time when a walkthrough needs to explain something they do. For the moment it is enough to know what kinds of files exist and what each kind is for.
+Bob reads a small set of files from the project folder automatically, at the start of each conversation, and those files are what allow the prompts in this guide to stay short. You do not need to know their contents now; they came with the repository you cloned in chapter 2, and later chapters open them one at a time when a walkthrough needs to explain something they do. For the moment it is enough to know what kinds of files exist and what each kind is for.
 
-The project instructions. A short text file in the root of the project that describes the project to the assistant: how the folders are organised, which naming rules apply, how it must work with your Orchestrate instance, and which actions require asking you first. Bob calls this file `AGENTS.md`; other assistants use their own name for it, with the same content.
+The project instructions. A short text file in the root of the project, `AGENTS.md`, that describes the project to the assistant: how the folders are organised, which naming rules apply, how it must work with your Orchestrate instance, and which actions require asking you first.
 
-The phase rules. Three short files, one for each phase, holding the rules that apply only during Discover, Design or Build. In Bob each one is tied to a mode, so the right rules load themselves when you switch modes. Other assistants read the three as sections of one file, and naming the phase in the prompt tells them which section applies.
+The phase rules. Three short files, one for each phase, holding the rules that apply only during Discover, Design or Build. Each one is tied to a mode, so the right rules load themselves when you switch modes.
 
-The connection settings. The configuration that tells the assistant how to reach your Orchestrate instance and the Orchestrate documentation, and which project folder it is allowed to read and write on your behalf. Chapter 2 set this up; chapter 4 is the first time you see it in action.
+The connection settings. The file the extension wrote in chapter 2, which tells Bob how to reach your Orchestrate instance and the Orchestrate documentation, and which project folder it is allowed to read and write on your behalf. Chapter 4 is the first time you see it in action.
 
-Bob keeps all of these under a `.bob` folder in the project plus the `AGENTS.md` file next to it; Claude Code keeps them under `.claude` plus a `CLAUDE.md` file; the other assistants have their equivalents. Appendix A lists the exact paths for each assistant if you need them earlier.
+All of these live under the `.bob` folder of the project, with `AGENTS.md` next to it. The repository also carries the equivalent files for other assistants, mentioned in chapter 2; they play no part in this guide.
 
-One last practical point. Keep one task per chat. When a phase of a walkthrough ends, start a new conversation for the next phase and give it the design document as context. Long conversations are where the assistant starts to forget constraints that it accepted an hour ago. Bob's documentation calls this context poisoning, and the remedy is the same on every platform: a fresh chat, with the right file mentioned at the start.
+One last practical point. Keep one task per chat. When a phase of a walkthrough ends, start a new conversation for the next phase and give it the design document as context. Long conversations are where the assistant starts to forget constraints that it accepted an hour ago. Bob's documentation calls this context poisoning, and the remedy is a fresh chat, with the right file mentioned at the start.

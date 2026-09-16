@@ -40,9 +40,9 @@ The extension is published by IBM under the name "watsonx Orchestrate ADK" and i
 
 Step 1. Get the guide's repository onto your machine and open it. The repository is the project folder: besides the chapters and the walkthrough files, it holds the instructions the assistant follows in this project and the empty folders your agents will go into. From Bob this needs no command. Click the files icon at the top left of the Bob panel; with no folder open, the Explorer shows two buttons, Open Folder and Clone Repository. Click Clone Repository, paste `https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git`, and choose where to save it when Bob asks. Bob creates a folder named after the repository in that location, then offers to open it: click Open, and answer Yes, I trust the authors to the question that follows. The repository is public, so no credentials are asked for.
 
-Do this before installing or initialising anything. The extension in step 3 records the folder that is open as the working directory of the MCP server, permanently; initialising one folder and then working in another is the most common way to end up with the "outside the working directory" error described in 2.10. If you would rather the folder had another name, such as `lumen-agents`, rename it now and open it again before going on.
+Do this before installing or initialising anything. The extension in step 3 records the folder that is open as the working directory of the MCP server, permanently; initialising one folder and then working in another is the most common way to end up with the "outside the working directory" error described in 2.9. If you would rather the folder had another name, such as `lumen-agents`, rename it now and open it again before going on.
 
-If you want your work to end up in a repository of your own on GitHub, fork the guide's repository first (the Fork button on its page) and clone the address of the fork instead; 2.8 explains why.
+If you want your work to end up in a repository of your own on GitHub, fork the guide's repository first (the Fork button on its page) and clone the address of the fork instead; 2.7 explains why.
 
 Step 2. Open the Extensions view (`Ctrl Shift X`, or `Cmd Shift X` on a Mac), search for "watsonx Orchestrate ADK", and install it. A watsonx Orchestrate icon appears in the left sidebar.
 
@@ -69,7 +69,7 @@ What the repository provides for the assistant, and what each piece is for:
 - `design/` and `exports/`, two folders the assistant uses for design documents and for files exported from the instance.
 - `guide/` and `walkthroughs/`, the chapters you are reading and the files each chapter produces. The assistant knows they are reading material, not build output.
 
-Step 4. Check the two servers. Open Bob's settings (the settings icon in the Bob panel) and its MCP tab. Both entries the extension wrote, `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, should show as connected, and expanding the first one lists its operations, about sixty of them with names such as `list_agents` and `import_agent`. If an entry shows an error, use its restart control once; if it still fails, 2.10 has the usual causes.
+Step 4. Check the two servers. Open Bob's settings (the settings icon in the Bob panel) and its MCP tab. Both entries the extension wrote, `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, should show as connected, and expanding the first one lists its operations, about sixty of them with names such as `list_agents` and `import_agent`. If an entry shows an error, use its restart control once; if it still fails, 2.9 has the usual causes.
 
 Step 5. Decide how often Bob asks for approval. Out of the box Bob asks before every one of those operations, including the ones that only read, and that gets tiresome quickly. The right balance is to pre-approve reading and keep asking for anything that creates, changes or removes something on your instance. In the MCP tab, each operation under `watsonx-orchestrate-adk` has an Always allow switch. Turn it on for these, which only read:
 
@@ -99,22 +99,11 @@ The assistant answers with something like `ibm-watsonx-orchestrate-mcp-server v2
 Which agents exist on my instance? List their names and one line each.
 ```
 
-On a new tenant there is one agent, `AskOrchestrate`; on a new Developer Edition there are two, with `DocProcessing`. If the instance has been used before you will see more. Any answer that mentions a working directory, a forbidden path, or an authentication problem means one of the steps above is not right; 2.10 says which.
+On a new tenant there is one agent, `AskOrchestrate`; on a new Developer Edition there are two, with `DocProcessing`. If the instance has been used before you will see more. Any answer that mentions a working directory, a forbidden path, or an authentication problem means one of the steps above is not right; 2.9 says which.
 
 If both prompts work, the setup is complete. Chapters 3 and 4 take it from here.
 
-## 2.7 What the extension gives you beyond setup
-
-The side panel has a few more things that this guide uses or refers to.
-
-- The Explorer lists what is on your instance and refreshes on demand. Chapter 4 uses it to look at the draft agent without leaving the assistant.
-- The Environment Manager adds, activates and changes environments without commands. Remember that switching affects every assistant on the machine.
-- Chat with agent opens a chat with any agent on the instance, and right-clicking an agent file offers to import it and open the chat. The guide has the assistant do these things through prompts, so that you see the operations; the panel is a convenient second view.
-- The status bar shows the ADK version and offers updates. Update the ADK and the MCP server together.
-
-None of these change how the assistant works. The Orchestrate documentation says so explicitly: the extension streamlines setup, and coding agents operate independently of it.
-
-## 2.8 Keeping your project in git, from Bob
+## 2.7 Keeping your project in git, from Bob
 
 Your project folder is worth keeping under version control from the first chapter: the definition files the assistant writes are the real product of this guide, and being able to go back to yesterday's version is the safety net that lets you let the assistant work. Because the folder is a clone, it is already a git repository. Bob can do the rest through prompts, without you typing a git command; each prompt produces an approval request showing the exact command before it runs.
 
@@ -141,7 +130,7 @@ Bob composes the message and asks you to approve the `git add`, `git commit` and
 
 Two cautions. The connection settings written by the extension and the script contain the absolute path of your folder and nothing secret, and the repository's `.gitignore` keeps them, the `venv` folder and the copied skills out of commits, so a clone on another machine has to run Initialise Workspace again. And never ask the assistant to commit a file that contains an API key; the rules in `AGENTS.md` forbid writing credentials into files precisely so that this does not happen.
 
-## 2.9 Setup checklist
+## 2.8 Setup checklist
 
 Answer every line with yes before moving on.
 
@@ -155,7 +144,7 @@ Answer every line with yes before moving on.
 8. The agent list prompt returns the agents you expect.
 9. You have not run `/init`, and `AGENTS.md` is the one from the repository.
 
-## 2.10 When setup goes wrong
+## 2.9 When setup goes wrong
 
 Five failures, each seen while preparing this guide, with the exact message and the fix.
 

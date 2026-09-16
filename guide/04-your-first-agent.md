@@ -1,26 +1,26 @@
 # Chapter 4. Your first agent
 
-Level: beginner. Time: about 45 minutes. Prerequisites: the setup from chapter 2 works, and you have read chapter 3.
+Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checklist at the end of chapter 2 answered yes, and chapter 3 read.
 
-In this chapter you build one agent with the assistant, from the first sentence to a tested agent on your Orchestrate instance, using the three phases from chapter 3 with one prompt each. The agent has no tools and no connection to any other system, on purpose: it answers from a small set of facts written into its own definition, so that you can judge every answer it gives and concentrate on the way of working rather than on the plumbing.
+In this chapter you build one agent with Bob, from the first sentence to a tested agent on your Orchestrate instance, using the three phases from chapter 3 with one prompt each. The agent has no tools and no connection to any other system, on purpose: it answers from a small set of facts written into its own definition, so that you can judge every answer it gives and concentrate on the way of working rather than on the plumbing.
 
 The scenario is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
-Everything shown in this chapter, the assistant's answers and the agent's answers, was captured from a real run on a Developer Edition. Your wording will differ a little; the substance should not.
+Everything shown in this chapter, the assistant's answers and the agent's answers, was captured from a real run on a Developer Edition, with the folder from chapter 2 open in Bob. Your wording will differ a little; the substance should not.
 
 ## 4.1 Before you start
 
 Check these three things. Each one takes a minute, and a missing one will cost you far more later.
 
-- Your assistant is connected to your Orchestrate instance. Ask it, in Ask mode, "Which agents exist on my instance?" On a new Developer Edition it will list two stock agents, called DocProcessing and AskOrchestrate. On a new tenant it will list one. Any answer that mentions a working directory or a refused path means the setup from chapter 2 is incomplete.
-- Your project folder is open in the assistant, and it contains the files chapter 2 installed. You will not edit them in this chapter.
+- The folder open in Bob is the one you cloned and initialised in chapter 2. The file `AGENTS.md` is visible at the top of Bob's file list, next to the `agents` and `design` folders, and the MCP tab of Bob's settings shows the two Orchestrate servers as connected. If any of that is not so, go through the checklist in section 2.8 before continuing.
+- Bob can reach your instance. Start a new chat in Ask mode and ask "Which agents exist on my instance?" On a new Developer Edition Bob lists two stock agents, DocProcessing and AskOrchestrate; on a new tenant it lists one. Bob should not ask for approval to do this, because listing was pre-approved in step 5 of chapter 2; if it does ask, approve it and revisit that step afterwards. Any answer that mentions a working directory, a forbidden path or an authentication problem is one of the failures described in section 2.9.
 - You have about an hour of uninterrupted time. The chapter is short, but the reading between steps is where the learning happens.
 
 No starting-state pack is needed for this chapter, because it starts from nothing.
 
 ## 4.2 Discover
 
-Switch the assistant to Ask mode (in Bob, the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt, which is a conversational prompt in the sense of chapter 3: your own words, a few example questions, and the sentence that keeps the assistant from building anything yet.
+Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt, which is a conversational prompt in the sense of chapter 3: your own words, a few example questions, and the sentence that keeps the assistant from building anything yet.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -101,7 +101,7 @@ Verify: the list of agents on the instance shows lumen_helpdesk_agent, and the
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-Now watch what the assistant does, because this is the whole Build phase in miniature. It writes the definition file. It imports the file into your instance; in Bob you will see this as an approval prompt for an operation called `import_agent`, and it is the first time in the guide that something is created on the instance. It looks at the instance to confirm the agent is there. Then it chats with the agent three times, asking for the reasoning each time, and reports the answers.
+Now watch what the assistant does, because this is the whole Build phase in miniature. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request for an operation called `import_agent`, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it chats with the agent three times, asking for the reasoning each time, and reports the answers.
 
 These are the three answers from the run, exactly as the agent gave them:
 
@@ -185,9 +185,11 @@ You will not write this file by hand in this guide; the assistant does it. But y
 
 ## 4.7 Try it yourself
 
-Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you. Then look at the agent outside the assistant: open the Orchestrate interface (on a Developer Edition, start it with `orchestrate chat start` in a terminal; on a tenant, open the Manage agents page) and find "Lumen Logistics helpdesk" among the draft agents. Its welcome message and the two starter prompts are the ones from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
+Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you.
 
-[Placeholder: one screenshot of the draft agent in the Orchestrate interface, to be decided.]
+Then look at the agent outside the chat. Click the watsonx Orchestrate icon in Bob's left bar; the Explorer section of its panel lists what is on your instance, read from the instance itself and not from your files. Refresh it and find `lumen_helpdesk_agent` under Agents, next to the stock agents. An agent that appears there has really been imported, whatever the chat said, and this is the check the rules make the assistant do after every import. On a tenant you can also open the Orchestrate web interface, Manage agents, and find "Lumen Logistics helpdesk" among the draft agents, with the welcome message and the two starter prompts from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
+
+[Placeholder: one screenshot of the Explorer section with the agent listed, to be decided.]
 
 ## 4.8 When an answer is not quite right
 
