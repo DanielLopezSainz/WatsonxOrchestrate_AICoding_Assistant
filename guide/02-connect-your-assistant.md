@@ -46,7 +46,7 @@ Developer Edition instead of a tenant: it registers itself as an environment nam
 
 The extension is published by IBM under the name "watsonx Orchestrate ADK" and is in public preview. It installs from the Extensions view of Bob, Cursor or VS Code.
 
-Step 1. Get the guide's repository onto your machine and open it. The repository is the project folder: besides the chapters and the walkthrough files, it holds the instructions the assistant follows in this project and the empty folders your agents will go into. From Bob this needs no command. Click the files icon at the top left of the Bob panel; with no folder open, the Explorer shows two buttons, Open Folder and Clone Repository. Click Clone Repository, paste `https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git`, and choose where to save it when Bob asks. Bob creates a folder named after the repository in that location, then offers to open it: click Open, and answer Yes, I trust the authors to the question that follows. The repository is public, so no credentials are asked for. From a terminal, `git clone` with the same address, then Open Folder on the result, comes to the same thing.
+Step 1. Get the guide's repository onto your machine and open it. The repository is the project folder: besides the chapters and the walkthrough files, it holds the instructions the assistant follows in this project and the empty folders your agents will go into. From Bob this needs no command. Click the files icon at the top left of the Bob panel; with no folder open, the Explorer shows two buttons, Open Folder and Clone Repository. Click Clone Repository, paste `https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git`, and choose where to save it when Bob asks. Bob creates a folder named after the repository in that location, then offers to open it: click Open, and answer Yes, I trust the authors to the question that follows. The repository is public, so no credentials are asked for.
 
 Do this before installing or initialising anything. The extension in step 3 records the folder that is open as the working directory of the MCP server, permanently; initialising one folder and then working in another is the most common way to end up with the "outside the working directory" error described in 2.10. If you would rather the folder had another name, such as `lumen-agents`, rename it now and open it again before going on.
 
@@ -66,16 +66,6 @@ Step 3. Click the watsonx Orchestrate icon to open the Explorer view, and click 
 
 When the extension reports success, the Explorer view shows your instance: its agents, tools, connections, knowledge bases and toolkits. On a new tenant the Agents list holds `AskOrchestrate`; on a new Developer Edition it also holds `DocProcessing`. That list is the first proof that the connection works.
 
-Step 4. Run the setup script once. The extension has prepared the connection and the repository provides the instructions, so one thing is missing: the list of operations the assistant may run without asking. The script `setup.sh` at the top of the folder adds it. In Bob, switch to Agent mode and send:
-
-```
-Run "bash setup.sh" in this folder and show me its output.
-```
-
-Bob shows the command as an approval request; approve it. From a terminal opened in the folder, `bash setup.sh` does the same.
-
-The script leaves the settings the extension wrote untouched. It adds one thing to the Bob entry: a list of the read-only operations the assistant may run without asking (listing, status checks, exports, test chats), and it warns you if the working directory in the settings is not the folder you are in. Its output ends with a line saying how many operations were added, or that the list was already present.
-
 What the repository provides for the assistant, and what each piece is for:
 
 - `AGENTS.md`, two pages that tell the assistant how to work in this project: where files go, how to work with your instance, what to verify, what never to do without asking. Bob reads it at the start of every conversation. You may read it; you will not need to edit it.
@@ -83,13 +73,19 @@ What the repository provides for the assistant, and what each piece is for:
 - `design/` and `exports/`, two folders the assistant uses for design documents and for files exported from the instance.
 - `guide/` and `walkthroughs/`, the chapters you are reading and the files each chapter produces. The assistant knows they are reading material, not build output.
 
-Step 5. Restart the MCP servers so that Bob picks up the pre-approval list: open Bob's settings (the settings icon in the Bob panel), MCP tab, and use the restart control on `watsonx-orchestrate-adk`, or restart Bob. Both entries should show as connected, and expanding `watsonx-orchestrate-adk` lists its operations, about sixty of them with names such as `list_agents` and `import_agent`.
+Step 4. Check the two servers. Open Bob's settings (the settings icon in the Bob panel) and its MCP tab. Both entries the extension wrote, `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, should show as connected, and expanding the first one lists its operations, about sixty of them with names such as `list_agents` and `import_agent`. If an entry shows an error, use its restart control once; if it still fails, 2.10 has the usual causes.
 
-Step 6. Two settings decide how often Bob asks you for approval. The list the script added to `.bob/mcp.json`, called `alwaysAllow`, names the operations that only read; Bob runs those without asking, and asks before anything that creates, changes or removes something on your instance. That is the intended balance. The list only takes effect if the MCP category is enabled in Bob's auto-approve toolbar, above the chat input; enable MCP and Read there, and leave Edit and Execute off while learning, so that Bob asks before writing a file or running a command. Do not put every operation in the list to save clicks: an assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
+Step 5. Decide how often Bob asks for approval. Out of the box Bob asks before every one of those operations, including the ones that only read, and that gets tiresome quickly. The right balance is to pre-approve reading and keep asking for anything that creates, changes or removes something on your instance. In the MCP tab, each operation under `watsonx-orchestrate-adk` has an Always allow switch. Turn it on for these, which only read:
+
+- `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`
+- `export_agent`, `export_tool`, `export_toolkit`
+- `chat_with_agent`, which sends a test message to an agent
+
+Leave every other switch off. The switches only take effect if the MCP category is enabled in Bob's auto-approve toolbar, above the chat input; enable MCP and Read there, and leave Edit and Execute off while learning, so that Bob asks before writing a file or running a command. Do not switch on every operation to save clicks: an assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
 
 One last Bob point. Do not run Bob's `/init` command in this folder. It generates an `AGENTS.md` by scanning the project and would offer to overwrite the one from the repository.
 
-Cursor and VS Code follow the same six steps; the extension writes their settings files, the repository provides their rule files, and the pre-approval mechanism is the per-tool setting in each product's MCP panel.
+Cursor and VS Code follow the same five steps; the extension writes their settings files, the repository provides their rule files, and the pre-approval is the per-tool setting in each product's MCP panel.
 
 ## 2.5 Route 2: manual setup (Claude Code, Claude Desktop)
 
@@ -106,21 +102,31 @@ Note: some IBM examples for connecting assistants pin the ADK to an old version 
 
 Step 2. Register and activate your environment with the two commands from 2.3.
 
-Step 3. Clone the repository, which is the project folder, and run the script inside it:
+Step 3. Get the repository onto your machine, with your git client or with Download ZIP from its GitHub page, and note the absolute path of the folder. Then create a file named `.mcp.json` at the top of that folder with this content, replacing the path with yours:
 
-```bash
-git clone https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git
-cd WatsonxOrchestrate_AICoding_Assistant
-bash setup.sh
+```json
+{
+  "mcpServers": {
+    "watsonx-orchestrate-adk": {
+      "command": "ibm-watsonx-orchestrate-mcp-server",
+      "env": {
+        "WXO_MCP_WORKING_DIRECTORY": "/absolute/path/to/WatsonxOrchestrate_AICoding_Assistant"
+      }
+    },
+    "watsonx-orchestrate-adk-docs": {
+      "type": "http",
+      "url": "https://developer.watson-orchestrate.ibm.com/mcp"
+    }
+  }
+}
 ```
 
-With no extension present, the script writes the connection settings itself, with the absolute path of the folder as the working directory: `.mcp.json` for Claude Code, plus the Bob, Cursor and VS Code equivalents in case you switch later. The folder contains the same `AGENTS.md`, phase rules and working folders described in 2.4, and `CLAUDE.md`, which makes Claude Code read them. Rename the folder if you like, then run the script again so that the path in the settings follows.
+The first entry starts the MCP server and tells it which folder it may work in; the second connects the documentation server. The file is ignored by git because it contains a path specific to your machine. The folder already contains the `AGENTS.md`, phase rules and working folders described in 2.4, and `CLAUDE.md`, which makes Claude Code read them. If you move or rename the folder later, update the path in the file.
 
 Step 4, Claude Code. Open a terminal in the folder and start Claude Code there. It finds `.mcp.json`, asks once whether to use the two project servers, and reads `CLAUDE.md`. There are no modes; start each prompt with the phase name, as chapter 3 explains.
 
-Step 4, Claude Desktop. Its settings are global, in `claude_desktop_config.json`, reached through Settings, Developer, Edit Config. Copy the `watsonx-orchestrate-adk` block from your project's `.mcp.json` into that file's `mcpServers` section, keeping the absolute path, and restart Claude Desktop. Remote servers such as the documentation server are only available on some plans; skip that entry if yours does not support them. Since Claude Desktop does not read files from a folder automatically, attach `AGENTS.md` at the start of each conversation.
+Step 4, Claude Desktop. Its settings are global, in `claude_desktop_config.json`, reached through Settings, Developer, Edit Config. Copy the `watsonx-orchestrate-adk` block above into that file's `mcpServers` section, with your absolute path, and restart Claude Desktop. Remote servers such as the documentation server are only available on some plans; skip that entry if yours does not support them. Since Claude Desktop does not read files from a folder automatically, attach `AGENTS.md` at the start of each conversation.
 
-If you move or rename the folder later, run `bash setup.sh` again so that the path in the settings follows.
 
 ## 2.6 Prove the connection
 
@@ -176,16 +182,16 @@ message that summarises what was built. Then push.
 
 Bob composes the message and asks you to approve the `git add`, `git commit` and `git push` commands: Approve for task on the first, and on the commit a warning to acknowledge with I understand the risks, then Approve. If you would rather point and click, the Source Control icon in the left bar (the third one down, a branch symbol) opens the standard view where changed files are listed, staged with the plus sign, and committed with a message typed in the box; the prompts do the same thing through the assistant. Before committing, `/review` in the chat runs Bob's code review over your uncommitted changes, and `@git-changes` in a prompt gives the assistant your current diff to reason about, for instance "explain what changed in agents/ since the last commit". Bob's `/create-pr` command opens a pull request from a branch, authenticating with GitHub in a browser window the first time; it is not needed for a personal project but is there when you work in a team.
 
-Two cautions. The connection settings written by the extension and the script contain the absolute path of your folder and nothing secret, and the repository's `.gitignore` keeps them, the `venv` folder and the copied skills out of commits, so a clone on another machine has to run Initialize Workspace and `bash setup.sh` again. And never ask the assistant to commit a file that contains an API key; the rules in `AGENTS.md` forbid writing credentials into files precisely so that this does not happen.
+Two cautions. The connection settings written by the extension and the script contain the absolute path of your folder and nothing secret, and the repository's `.gitignore` keeps them, the `venv` folder and the copied skills out of commits, so a clone on another machine has to run Initialize Workspace again. And never ask the assistant to commit a file that contains an API key; the rules in `AGENTS.md` forbid writing credentials into files precisely so that this does not happen.
 
 ## 2.9 Setup checklist
 
 Answer every line with yes before moving on.
 
-1. The folder open in the assistant is the cloned repository, and it is the one that was initialised (route 1) or the one `setup.sh` was run in (route 2).
+1. The folder open in the assistant is the cloned repository, and it is the one that was initialised (route 1) or the one named in `.mcp.json` (route 2).
 2. `AGENTS.md` is visible at the top level of that folder, next to the `.bob` folder.
 3. The settings file for your assistant names two servers, `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, and the working directory in the first one is this folder.
-4. In Bob, the `watsonx-orchestrate-adk` entry has an `alwaysAllow` list, and MCP and Read are enabled in the auto-approve toolbar.
+4. In Bob, Always allow is on for the reading operations of step 5, and MCP and Read are enabled in the auto-approve toolbar.
 5. Both servers show as connected.
 6. An environment is active (`orchestrate env list` marks it, or the extension's switcher shows it).
 7. The version prompt returns a version.
@@ -196,7 +202,7 @@ Answer every line with yes before moving on.
 
 Five failures, each seen while preparing this guide, with the exact message and the fix.
 
-The assistant reports `Attempting to access resources outside the working directory is forbidden.` The working directory in the settings is not the folder open in the assistant, or the assistant is pointing at a file elsewhere on your disk. During the tests, an assistant whose settings pointed at another folder had to copy every file across before it could use it, and reported that as a limitation of the server; it was a setup error. Route 1: check that you initialised the folder you are working in; if not, run Update MCP Servers from the command palette with the right folder open, or edit the path in the settings. Route 2: run `bash setup.sh` again.
+The assistant reports `Attempting to access resources outside the working directory is forbidden.` The working directory in the settings is not the folder open in the assistant, or the assistant is pointing at a file elsewhere on your disk. During the tests, an assistant whose settings pointed at another folder had to copy every file across before it could use it, and reported that as a limitation of the server; it was a setup error. Route 1: check that you initialised the folder you are working in; if not, run Update MCP Servers from the command palette with the right folder open, or edit the path in the settings. Route 2: correct the path in `.mcp.json`.
 
 Every operation fails with an authentication or authorization error after working earlier. The two-hour token has expired. Activate the environment again, from the switcher or with `orchestrate env activate <name> --api-key <key>`; the next call works without restarting anything.
 
