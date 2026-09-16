@@ -13,7 +13,8 @@ Whichever route you take, one detail decides whether the rest of the guide works
 - An Orchestrate instance. Either a SaaS tenant (IBM Cloud or AWS) on which you can generate an API key, or the Developer Edition running on your machine. The guide is written for a tenant; a box in 2.3 covers the Developer Edition. Note that the Developer Edition itself needs credentials from a SaaS tenant, or from another model provider, to start.
 - Your service instance URL and an API key for the tenant. Both come from the Orchestrate interface: your user icon, Settings, API details, where the key can be generated. The key is shown once. Keep both in a file named `.env` in the project folder, made by copying `.env.example`; git is told to ignore that file, so it never leaves your machine. Never paste the key into a chat with the assistant, and never write it into any other file.
 - One of the supported coding assistants: IBM Bob 2.1 or later, Cursor, VS Code with GitHub Copilot, Claude Code, or Claude Desktop.
-- Git installed on your machine. Bob, Cursor and VS Code use it to clone repositories from their own interface, so you will not type git commands on the extension route, but the program has to be there. Python 3.11 or later is needed only on the manual route.
+- Git installed on your machine. Bob, Cursor and VS Code use it to clone repositories from their own interface, so you will not type git commands on the extension route, but the program has to be there.
+- Nothing from IBM installed in advance. The ADK and the MCP server are not prerequisites: on the extension route the extension installs both inside the project folder, and on the manual route they are the first step. Python 3.11 or later is needed only on the manual route.
 
 ## 2.2 The two pieces that make it work
 
@@ -27,20 +28,14 @@ IBM also runs a second, remote MCP server that gives assistants a search over th
 
 ## 2.3 Point the ADK at your instance
 
-The extension route does this for you in 2.4, with a single prompt for the API key. Read this section anyway, because two facts in it matter for the whole guide, and the manual route needs the commands.
+The ADK keeps a list of named environments, one per Orchestrate instance, and one of them is active; every operation, whether typed on the command line or performed by your assistant, goes to the active one. Nothing in this section needs to be typed yet. How an environment gets registered depends on the route:
 
-The ADK keeps a list of named environments and one of them is active; every operation, whether typed on the command line or performed by your assistant, goes to the active one. To register and activate a tenant by hand:
+- On route 1, the extension installs the ADK inside the project folder and registers the environment for you, asking once for your API key. Afterwards, the Environment Manager section of its side panel lists your environments and switches between them.
+- On route 2, you install the ADK yourself and register the environment with two commands, both given in 2.5.
 
-```bash
-orchestrate env add -n mytenant -u https://api.<region>.watson-orchestrate.cloud.ibm.com/instances/<instance-id> --activate
-orchestrate env activate mytenant --api-key <your-api-key>
-```
+Two facts about environments matter for the whole guide, whichever route you take. First, the token obtained when an environment is activated expires after two hours. When it does, every operation your assistant attempts fails with an authentication error until the environment is activated again: from the Environment Manager on route 1, with the activation command on route 2. If an assistant suddenly cannot do anything it could do an hour ago, this is the first thing to check. Second, the active environment is one setting on your machine, shared by every assistant and every copy of the MCP server. Activating another environment switches all of them at once. Only chapter 11 switches environments, and it does so on purpose.
 
-The output ends with `Environment 'mytenant' is now active`. A warning about the authentication type being inferred from the URL may appear; it is harmless when the URL comes from the Settings page.
-
-The two facts. First, the token obtained by activation expires after two hours. When it does, every operation your assistant attempts fails with an authentication error until the environment is activated again, from the command line or, with the extension, from the environment switcher. If an assistant suddenly cannot do anything it could do an hour ago, this is the first thing to check. Second, the active environment is one setting on your machine, shared by every assistant and every copy of the MCP server. Activating another environment switches all of them at once. Only chapter 11 switches environments, and it does so on purpose.
-
-Developer Edition instead of a tenant: it registers itself as an environment named `local`, needs no key, and the extension can start and stop it from its side panel. It has only a draft environment, so nothing can be deployed on it, and it does not process uploaded documents unless started with the document-processing option. Everything else in this guide works on it.
+Developer Edition instead of a tenant: it registers itself as an environment named `local`, needs no key, and the extension can start and stop it from the Environment Manager. It has only a draft environment, so nothing can be deployed on it, and it does not process uploaded documents unless started with the document-processing option. Everything else in this guide works on it.
 
 ## 2.4 Route 1: the watsonx Orchestrate ADK extension (Bob, Cursor, VS Code)
 
@@ -104,7 +99,14 @@ The first line printed is the ADK version, for example `ADK Version: 2.16.1`, th
 
 Note: some IBM examples for connecting assistants pin the ADK to an old version such as `1.13.0`. Do not copy that; the server and the ADK must be the same version, and the current one.
 
-Step 2. Register and activate your environment with the two commands from 2.3.
+Step 2. Register your environment and activate it, with the URL and the API key from 2.1:
+
+```bash
+orchestrate env add -n mytenant -u https://api.<region>.watson-orchestrate.cloud.ibm.com/instances/<instance-id> --activate
+orchestrate env activate mytenant --api-key <your-api-key>
+```
+
+The output ends with `Environment 'mytenant' is now active`. A warning about the authentication type being inferred from the URL may appear; it is harmless when the URL comes from the Settings page. The second command is the one to repeat when the two-hour token of 2.3 expires.
 
 Step 3. Get the repository onto your machine, with your git client or with Download ZIP from its GitHub page, and note the absolute path of the folder. Then create a file named `.mcp.json` at the top of that folder with this content, replacing the path with yours:
 
@@ -155,7 +157,7 @@ If both prompts work, the setup is complete. Chapters 3 and 4 take it from here.
 Route 1 readers have a few more things in the side panel that this guide uses or refers to.
 
 - The Explorer lists what is on your instance and refreshes on demand. Chapter 4 uses it to look at the draft agent without leaving the assistant.
-- The environment switcher adds, activates and changes environments without commands. Remember that switching affects every assistant on the machine.
+- The Environment Manager adds, activates and changes environments without commands. Remember that switching affects every assistant on the machine.
 - Chat with agent opens a chat with any agent on the instance, and right-clicking an agent file offers to import it and open the chat. The guide has the assistant do these things through prompts, so that you see the operations; the panel is a convenient second view.
 - The status bar shows the ADK version and offers updates. Update the ADK and the MCP server together.
 
@@ -197,7 +199,7 @@ Answer every line with yes before moving on.
 3. The settings file for your assistant names two servers, `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, and the working directory in the first one is this folder.
 4. In Bob, Always allow is on for the reading operations of step 5, and MCP and Read are enabled in the auto-approve toolbar.
 5. Both servers show as connected.
-6. An environment is active (`orchestrate env list` marks it, or the extension's switcher shows it).
+6. An environment is active: the Environment Manager shows it on route 1, `orchestrate env list` marks it on route 2.
 7. The version prompt returns a version.
 8. The agent list prompt returns the agents you expect.
 9. You have not run `/init`, and `AGENTS.md` is the one from the repository.
@@ -208,7 +210,7 @@ Five failures, each seen while preparing this guide, with the exact message and 
 
 The assistant reports `Attempting to access resources outside the working directory is forbidden.` The working directory in the settings is not the folder open in the assistant, or the assistant is pointing at a file elsewhere on your disk. During the tests, an assistant whose settings pointed at another folder had to copy every file across before it could use it, and reported that as a limitation of the server; it was a setup error. Route 1: check that you initialised the folder you are working in; if not, run Update MCP Servers from the command palette with the right folder open, or edit the path in the settings. Route 2: correct the path in `.mcp.json`.
 
-Every operation fails with an authentication or authorization error after working earlier. The two-hour token has expired. Activate the environment again, from the switcher or with `orchestrate env activate <name> --api-key <key>`; the next call works without restarting anything.
+Every operation fails with an authentication or authorization error after working earlier. The two-hour token has expired. Activate the environment again, from the Environment Manager on route 1 or with `orchestrate env activate <name> --api-key <key>` on route 2; the next call works without restarting anything.
 
 The assistant says an artifact was imported, but listing the instance does not show it. Some Orchestrate operations report success even when the platform logged an error; the knowledge base import with an unsupported document type does this, answering `Knowledge base imported successfully.` and creating nothing. The real message appears when the same operation is run from the command line. This is why the rules make the assistant verify after every change.
 
