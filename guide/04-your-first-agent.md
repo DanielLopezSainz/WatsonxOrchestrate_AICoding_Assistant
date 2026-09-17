@@ -50,7 +50,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 ## 4.2 Discover
 
-Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt.
+Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
 
 Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Discover rules in the project folder, described in section 3.7, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
 
@@ -100,7 +100,7 @@ Note: keep the facts short and exact. Everything the agent will ever say comes f
 
 ## 4.3 Design
 
-Switch to Plan mode (`/plan`) in the same chat, so that Bob keeps your answers. Prompt type: structured, reduced to one Deliverable line.
+Mode: Plan, in the same chat, so that Bob keeps your answers. Switch with `/plan`. Prompt type: structured, reduced to one Deliverable line.
 
 ```
 Write the design for this agent into design/helpdesk-design.md.
@@ -131,19 +131,20 @@ The file is in `design/` in your project and, from the run, in the walkthrough f
 
 ## 4.4 The first gate
 
-Read the design as if a colleague had written it. Can you say, from the file alone, what the agent will and will not answer? If yes, approve it with one line ("Approved, go ahead"). If something is missing, say so now; the assistant will revise the file and wait again.
+Mode: still Plan, same chat. Nothing is sent to Bob in this section unless the design needs changing.
+
+Read the design as if a colleague had written it. Can you say, from the file alone, what the agent will and will not answer? If something is missing, say so now in a follow-up; Bob revises the file and waits again. If the design says what you mean, your approval is the first line of the Build prompt in the next section, and there is nothing else to send here.
 
 A small exercise, if you want one: the design says what happens for questions outside the three teams. Ask yourself whether it also says what happens for a question about one of the three teams that the facts do not cover, for example the name of the HR manager. On the run behind this chapter, it did not, and section 4.8 shows the consequence.
 
 ## 4.5 Build
 
-Switch to Agent mode (`/agent`).
-
-Prompt type: structured (chapter 3, type 3), in Agent mode, with three of its six parts. This is the prompt for anything that creates or changes something on the instance.
+Mode: Agent, same chat. Switch with `/agent`. Prompt type: structured (chapter 3, type 3) with three of its six parts. This is the prompt for anything that creates or changes something on the instance, and its first line is the approval from the first gate.
 
 ```
-Goal: the agent described in design/helpdesk-design.md exists on my instance
-  in draft and passes the tests listed in the design.
+The design in design/helpdesk-design.md is approved.
+Goal: the agent it describes exists on my instance in draft and passes the
+  tests listed in the design.
 Context: @design/helpdesk-design.md
 Constraints: add two starter prompts, the badge question and the password
   question, and a short welcome message. Keep everything else as designed.
@@ -186,6 +187,8 @@ All three are right. The agent also added bold to the contacts on its own; nobod
 One more thing to notice in the assistant's report. Each test conversation was asked for reasoning, and each time the reasoning came back empty. That is not a fault. The reasoning of an agent lists the tools it called and what they returned, and this agent has no tools, so there is nothing to list. From chapter 5 on, the reasoning is where you will look first when an answer is wrong, so it is useful to have seen the empty case now: empty reasoning means the agent answered from its instructions and the model alone.
 
 ## 4.6 Reading the definition
+
+Mode: none; this section is reading only.
 
 Open `agents/lumen_helpdesk_agent.yaml`, the file the assistant wrote. It is about fifty lines, and this is the moment to read it once from top to bottom. The version from the run is in the walkthrough files that accompany this guide; the parts that matter are these.
 
@@ -235,6 +238,8 @@ You will not write this file by hand in this guide; the assistant does it. But y
 
 ## 4.7 Try it yourself
 
+Mode: Agent, same chat.
+
 Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you.
 
 Then look at the agent outside the chat. Click the watsonx Orchestrate icon in Bob's left bar; the Explorer section of its panel lists what is on your instance, read from the instance itself and not from your files. Refresh it and find `lumen_helpdesk_agent` under Agents, next to the stock agents. An agent that appears there has really been imported, whatever the chat said, and this is the check the rules make the assistant do after every import. On a tenant you can also open the Orchestrate web interface, Manage agents, and find "Lumen Logistics helpdesk" among the draft agents, with the welcome message and the two starter prompts from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
@@ -242,6 +247,8 @@ Then look at the agent outside the chat. Click the watsonx Orchestrate icon in B
 [Placeholder: one screenshot of the Explorer section with the agent listed, to be decided.]
 
 ## 4.8 When an answer is not quite right
+
+Mode: Agent, same chat.
 
 On the run behind this chapter, the badge conversation was continued with one more question in the same thread:
 
@@ -294,6 +301,8 @@ That loop, read the answer, find the gap in the instructions, change the file, i
 
 ## 4.9 Round trip
 
+Mode: Agent, same chat.
+
 One last prompt for this chapter, to learn something about the files you will be keeping.
 
 Prompt type: question (chapter 3, type 1) with a file as deliverable, in Agent mode because a file gets written. Nothing on the instance changes.
@@ -310,6 +319,8 @@ Two practical conclusions. The exported file is the complete truth about the age
 
 ## 4.10 Checkpoint
 
+Mode: Agent, same chat.
+
 Before moving on, ask the agent these three questions through the assistant and compare.
 
 | Question | A correct answer contains |
@@ -322,6 +333,6 @@ If the first answer has no hours, the fix from 4.8 was not imported; ask for the
 
 ## 4.11 What you learned
 
-The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one structured prompt in Agent mode, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one structured prompt in Agent mode whose first line is the approval, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
 
 Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.
