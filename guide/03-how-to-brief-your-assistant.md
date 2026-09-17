@@ -1,6 +1,20 @@
 # Chapter 3. How to work with Bob
 
-Before building anything, this chapter describes how the guide expects you to talk to Bob. It is the part that decides whether the rest of the guide is a pleasant experience or a frustrating one. All the walkthroughs from chapter 4 onwards follow the same way of working, so once it is clear here you will not need to think about it again.
+Level: beginner. Time: about 40 minutes of reading; nothing is built. Prerequisites: none, though the examples refer to the project folder from chapter 2.
+
+## What this chapter is about
+
+The subject. How to talk to Bob so that it builds what you meant, and not something else. It is the part that decides whether the rest of the guide is a pleasant experience or a frustrating one. All the walkthroughs from chapter 4 onwards follow the same way of working, so once it is clear here you will not need to think about it again.
+
+What you will be able to do afterwards:
+
+- Split any piece of Orchestrate work into the three phases the guide uses, Discover, Design and Build, and match each one to Bob's Ask, Plan and Agent modes.
+- Name the two moments where Bob must stop and wait for you, and what you are approving at each.
+- Choose among five kinds of prompt, question, conversational, structured, specification and follow-up, according to what you want back, and write each one.
+- Turn a weak prompt into one that says what "done" looks like and when Bob should stop and ask.
+- Say what the files Bob reads at the start of every conversation are for, without having opened them.
+
+Skip this chapter if you already work with Bob in its three modes and write prompts that state the deliverable, the verification and the stopping rule. Read section 3.3 anyway, because the structured prompt with its six parts is used verbatim from chapter 4 on, and the walkthroughs do not explain it again.
 
 The way of working described here fits Bob's three modes, Ask, Plan and Agent, exactly, and the rest of the guide relies on that fit. From here on, "the assistant" means Bob: the word is kept because the prompts, the rules and the habits are about working with an assistant, and Bob is the one this guide uses.
 

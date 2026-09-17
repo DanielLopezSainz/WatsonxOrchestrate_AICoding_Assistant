@@ -2,7 +2,19 @@
 
 Level: beginner. Time: about 30 minutes. Prerequisites: an Orchestrate instance you can log in to, and IBM Bob installed.
 
-This chapter takes you from "I have Bob and an Orchestrate instance" to "Bob just listed the agents on my instance", with the project folder prepared for every chapter that follows.
+## What this chapter is about
+
+The result. Bob connected to your Orchestrate instance, working inside a project folder that holds the guide, the instructions Bob follows, and the empty folders your agents will go into. Nothing is built yet; at the end, Bob lists the agents on your instance on request, and every chapter that follows starts from that state.
+
+What you will be able to do afterwards:
+
+- Clone the guide's repository from inside Bob and set it up as an Orchestrate project with the watsonx Orchestrate ADK extension, without typing a command.
+- Say which folder Bob is allowed to work in and why that folder, the one open in Bob and the one the extension initialised must be the same.
+- Decide which Orchestrate operations Bob may run without asking and which ones it must always ask for.
+- Keep the project in git through Bob, and know where your commits go.
+- Recognise the five most common setup failures from their messages and fix them.
+
+Skip this chapter if the checklist in section 2.8 already answers yes on every line for the folder you have open. Everyone else needs it, including readers who have used Bob before: the folder layout and the pre-approval choices made here are assumed by every later chapter.
 
 The setup relies on the watsonx Orchestrate ADK extension, which IBM provides for Bob: one button installs the toolkit, connects Bob to your instance, and lays out the project folder. The same extension exists for Cursor and VS Code, and other assistants can connect to the same server by other means; 2.5 says where that is documented, but this guide walks through Bob only.
 
