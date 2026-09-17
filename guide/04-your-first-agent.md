@@ -52,7 +52,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt.
 
-Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and the closing sentence that keeps the assistant from building anything yet.
+Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what kind of answer you want. Nothing in the prompt needs to stop Bob from building: Ask mode does that. The closing sentence has a different job, keeping Bob from answering with a finished proposal before it has asked its questions.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -63,8 +63,7 @@ IT, HR and Facilities; it does not look anything up in other systems and it
 does not create tickets.
 
 Tell me what you understood, what you need to know from me, and what already
-exists on my instance. Do not propose a design yet, and wait for my approval
-before creating anything.
+exists on my instance. Do not propose a design yet.
 ```
 
 What comes back is three things. The assistant restates the goal in its own words; read this carefully, because a misunderstanding here is cheap to fix and expensive later. It lists what already exists on your instance, which it found by looking at the instance rather than from memory; on the run behind this chapter, that was the two stock agents and nothing else. And it asks its questions. On that run the assistant asked four: which facts exactly it should know for each team (contact, hours, what the team handles), what tone to use, what to say when a question is about something other than the three teams, and whether it should ever look anything up (the answer to the last one being no).
@@ -308,6 +307,6 @@ If the first answer has no hours, the fix from 4.8 was not imported; ask for the
 
 ## 4.11 What you learned
 
-The three phases in practice: a conversational prompt in Ask mode that ends with "wait for my approval", a design file in Plan mode, one structured prompt in Agent mode, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one structured prompt in Agent mode, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
 
 Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.

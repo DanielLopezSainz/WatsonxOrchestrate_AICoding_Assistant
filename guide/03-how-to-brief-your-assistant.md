@@ -95,7 +95,7 @@ and wait for my approval before making changes.
 
 What it is good for: starting a project, exploring, and any moment when you do not yet know exactly what you want. The assistant's questions help you find out. It needs no format to learn, and the example user sentences you include tell the assistant more than any title would.
 
-Limits: it is only as clear as you are. Anything you leave out, the assistant will guess, and it will not tell you it guessed. And without the last sentence, an assistant in Agent mode will start building from it. Use it in Discover and for the first version of a design, and add facts to it as you learn them.
+Limits: it is only as clear as you are. Anything you leave out, the assistant will guess, and it will not tell you it guessed. The last sentence depends on the mode. In Agent mode it is the only thing that stops the assistant from building straight away, so it must be there. In Ask mode the mode itself prevents building, and the closing sentence has a lighter job: asking for a restatement and questions rather than a finished proposal, which the assistant would otherwise produce. Use it in Discover and for the first version of a design, and add facts to it as you learn them.
 
 ### Type 3: the structured prompt
 
@@ -161,7 +161,7 @@ Limits: it only works while the conversation is short and focused. After many fo
 | You want to | Type | Bob mode |
 |---|---|---|
 | Understand something, or check what the assistant understood | Question | Ask |
-| Start a project, explore, get a first proposal | Conversational, ending with "propose first and wait for my approval" | Ask, then Plan |
+| Start a project, explore, get a first proposal | Conversational, ending with what you want back: questions in Ask mode, a proposal to approve in Plan mode | Ask, then Plan |
 | Revise a design | Structured, or a follow-up if the change is small | Plan |
 | Create or change anything on the instance | Structured, with Verify and Stop filled in | Agent |
 | Get one file whose contents you already know | Specification | Plan or Agent |
@@ -203,11 +203,10 @@ No agent should have more than ten tools and collaborators combined, and
 please reuse what already exists on the instance.
 
 Tell me what you understood, what you would need to know, and what already
-exists on the instance. Do not propose a design yet, and wait for my approval
-before creating anything.
+exists on the instance. Do not propose a design yet.
 ```
 
-Why it is better: the weak prompt lets the assistant guess the data, invent tools and start importing before you have seen a name. The better one gives three example user sentences, points at the real files, states the one hard limit, and ends by keeping the assistant in the Discover phase.
+Why it is better: the weak prompt lets the assistant guess the data, invent tools and start importing before you have seen a name. The better one gives three example user sentences, points at the real files, states the one hard limit, and ends by asking for understanding and questions, which keeps the answer in the Discover phase; the Ask mode it is typed in is what keeps the assistant from building.
 
 Adding one tool (structured). Weak:
 
