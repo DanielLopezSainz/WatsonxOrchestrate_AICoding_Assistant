@@ -52,7 +52,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt.
 
-Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what kind of answer you want. Nothing in the prompt needs to stop Bob from building: Ask mode does that. The closing sentence has a different job, keeping Bob from answering with a finished proposal before it has asked its questions.
+Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Discover rules in the project folder, described in section 3.7, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -63,10 +63,10 @@ IT, HR and Facilities; it does not look anything up in other systems and it
 does not create tickets.
 
 Tell me what you understood, what you need to know from me, and what already
-exists on my instance. Do not propose a design yet.
+exists on my instance.
 ```
 
-What comes back is three things. The assistant restates the goal in its own words; read this carefully, because a misunderstanding here is cheap to fix and expensive later. It lists what already exists on your instance, which it found by looking at the instance rather than from memory; on the run behind this chapter, that was the two stock agents and nothing else. And it asks its questions. On that run the assistant asked four: which facts exactly it should know for each team (contact, hours, what the team handles), what tone to use, what to say when a question is about something other than the three teams, and whether it should ever look anything up (the answer to the last one being no).
+What comes back is three things, and no design; if Bob proposes agents and tools at this point, the Discover rules are not loading, and the checklist in section 2.8 is where to look. The assistant restates the goal in its own words; read this carefully, because a misunderstanding here is cheap to fix and expensive later. It lists what already exists on your instance, which it found by looking at the instance rather than from memory; on the run behind this chapter, that was the two stock agents and nothing else. And it asks its questions. On that run the assistant asked four: which facts exactly it should know for each team (contact, hours, what the team handles), what tone to use, what to say when a question is about something other than the three teams, and whether it should ever look anything up (the answer to the last one being no).
 
 Answer the questions in a follow-up, in plain text. Here is the answer given on the run, which is also the data every later chapter reuses:
 
