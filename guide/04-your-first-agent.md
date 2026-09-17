@@ -4,7 +4,25 @@ Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checkl
 
 ## What this chapter is about
 
-The agent. An internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. It has no tools and no connection to any other system, on purpose: everything it knows is a short list of facts written into its own definition, so that you can judge every answer it gives and concentrate on the way of working rather than on the plumbing. Small, but real enough that the questions you ask it are questions a colleague would ask.
+The agent. An internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
+
+Its components. Of everything an Orchestrate agent can be made of, this chapter uses the smallest set that still produces a working agent: one agent, one model, and a block of instructions. Every other component is deliberately absent, and each one is introduced by a later chapter, on the same agent or one next to it.
+
+| Component | In this chapter | Introduced in |
+|---|---|---|
+| Agents | One native agent, `lumen_helpdesk_agent`, defined in one YAML file | |
+| Collaborator agents | None. The agent answers every question itself and delegates nothing | Chapter 9 |
+| Tools | None. No Python tools, no OpenAPI tools; the agent cannot look anything up or act on anything | Chapter 5 |
+| Connections to external systems | None. Nothing leaves the Orchestrate instance | Chapter 6 |
+| MCP toolkits | None | Chapter 7 |
+| Knowledge base | None. The facts the agent knows are written into its instructions, not indexed from documents | Chapter 8 |
+| Flows | None. Every answer is produced by the model reasoning over the instructions | Chapter 10 |
+| Model and reasoning style | `groq/openai/gpt-oss-120b`, the instance default, with the `react_core` style | |
+| Instructions | About twenty lines: the facts for three teams, the tone, and the rule for questions the facts do not cover | |
+| Conversation surface | A welcome message and two starter prompts, shown before the user types | |
+| Environment | Draft only. The agent is never deployed in this chapter and no end user sees it | Chapter 11 |
+
+The consequence of that list is what makes the chapter useful: the agent's behaviour is entirely determined by the text of its instructions. When an answer is right, it is because the fact was there; when an answer is wrong, the gap is in that text and nowhere else. Later chapters add components one at a time, and each time the question "where did this answer come from" gets one more possible answer.
 
 What you will be able to do afterwards:
 
@@ -190,7 +208,7 @@ Line by line, what each part is for:
 - `description` is for other agents and for the interface, as explained in 4.3.
 - `llm` is the model, and `style` is how the agent reasons; `react_core` is the current recommended style and the only one this guide uses. If you list the agent on the instance you may see it reported as `react_intrinsic`, which is the same style under an older name.
 - `instructions` is the agent's operating manual, and in this chapter also its only source of facts.
-- `collaborators`, `tools` and `knowledge_base` are empty lists here. Chapters 5, 8 and 9 fill them.
+- `collaborators`, `tools` and `knowledge_base` are empty lists here. Chapter 5 fills `tools`, chapter 8 `knowledge_base` and chapter 9 `collaborators`.
 - `starter_prompts` and `welcome_content` are what a user sees in the chat window before typing: a greeting and two clickable example questions.
 
 You will not write this file by hand in this guide; the assistant does it. But you will read files like it often, and you will change lines in them, as the next sections show.
