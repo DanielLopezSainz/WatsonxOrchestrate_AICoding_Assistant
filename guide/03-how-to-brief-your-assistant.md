@@ -54,7 +54,7 @@ Apart from these two gates, let the assistant work. If you interrupt it in the m
 
 ## 3.3 The types of prompts
 
-A prompt is simply what you type in the chat to the assistant. There is no single correct way to write one, but there are a few clearly different types, each good for something and bad for something else, and knowing which type to use in which situation is probably the most useful thing you will take from this chapter. This section lists the five types used in this guide, explains what each one is for, gives its advantages and its limits, and shows an example. Section 3.6 then puts weak and better prompts side by side.
+A prompt is simply what you type in the chat to the assistant. There is no single correct way to write one, but there are a few clearly different types, each good for something and bad for something else, and knowing which type fits which situation is what you will use most from this chapter. This section lists the five types used in this guide, explains what each one is for, gives its advantages and its limits, and shows an example. Section 3.6 then puts weak and better prompts side by side.
 
 Before the types, the four rules that Bob's documentation gives for any prompt, because they apply to all five: be specific and clear, since vague prompts produce vague output; give an example of the output you want when the format matters; reference files with `@` mentions instead of pasting their content; and start in Plan mode for anything new, so that a plan exists before code does.
 
@@ -177,7 +177,7 @@ Three habits, all enforced by the rules installed in chapter 2, keep the Build p
 
 The walkthroughs ask less of you as they go. In chapter 4 you write one prompt per phase and read every operation the assistant performs. In chapters 5 and 6 the Build prompt covers several artifacts and you only check the result. From chapter 9 on you describe the business need once, approve one design, and read the report.
 
-The reason is simple. The assistant writes the YAML and the Python; you do not need to learn that. What you need to learn is when to be precise and when to delegate, and the only way to learn it is to start precise and loosen as you see what the assistant gets right on its own. So chapter 4 is slow on purpose. By chapter 9 the same assistant will need one paragraph from you.
+The assistant writes the YAML and the Python; you do not need to learn that. What you need to learn is when to be precise and when to delegate, and the only way to learn it is to start precise and loosen as you see what the assistant gets right on its own. So chapter 4 is slow on purpose. By chapter 9 the same assistant will need one paragraph from you.
 
 ## 3.6 Prompts, weak and better
 
