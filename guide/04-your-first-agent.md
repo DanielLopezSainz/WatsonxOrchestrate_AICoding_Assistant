@@ -100,21 +100,34 @@ Note: keep the facts short and exact. Everything the agent will ever say comes f
 
 ## 4.3 Design
 
-Switch to Plan mode (`/plan`) in the same chat, so that Bob keeps your answers. One prompt.
-
-Prompt type: structured (chapter 3, type 3), reduced to a single Deliverable line, in Plan mode.
+Switch to Plan mode (`/plan`) in the same chat, so that Bob keeps your answers. Prompt type: structured, reduced to one Deliverable line.
 
 ```
 Write the design for this agent into design/helpdesk-design.md.
 ```
 
-One line, because everything else is decided elsewhere. The Design rules in the project folder, one of the files described in section 3.7, tell Bob the seven sections a design document has and their order, that it must show you the file, and that it must wait for your approval before anything is built. The prompt adds the one thing the rules cannot know, the file name, which the Build prompt in 4.5 refers to. Every design document in this guide has the same shape for the same reason. Bob writes the file and shows it to you. This is the first time you see what an agent is made of, so it is worth reading the design slowly. On the run it proposed one agent named `lumen_helpdesk_agent`, with a display name "Lumen Logistics helpdesk", no tools, no collaborators and no knowledge base ("all the facts fit in the instructions"), the three blocks of facts, the behaviour rules from your answer, and a build order of four steps: write the definition file, import it into the instance, test it with three questions, report.
+One line is enough because the Design rules in the project folder already fix the rest: the seven sections of a design document, their order, showing you the file, and waiting for your approval. The prompt adds only the file name, which the Build prompt refers to.
 
-Two things in the design deserve a word of explanation now, because every agent you build from here on has them.
+What Bob does: says the requirements are settled, writes the file, and answers with a one-line summary per section, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
 
-The first is the model. Every agent runs on a language model, and the design names it: `groq/openai/gpt-oss-120b`. That is the model watsonx Orchestrate uses by default, it is available on every instance, and this guide uses it everywhere. You do not need to choose one; you need to know that the line exists, because an agent definition without it is incomplete.
+The design, section by section, from the run:
 
-The second is the difference between the description and the instructions. The description is what other agents and the Orchestrate interface read to decide when this agent is the right one to ask; it says what the agent is for and what it is not for. The instructions are what the agent itself reads on every conversation; they say how to behave and, in this chapter, contain the facts. The two are written for different readers, and later chapters will show that a good description matters as much as good instructions.
+| Section | What it holds |
+|---|---|
+| 1. What was asked | The scope in two sentences |
+| 2. What exists on the instance | The inventory from Discover, every item marked unrelated and untouched; no name clash |
+| 3. Proposed agent | A table of the agent's fields: name, display name, kind, style, model; tools, knowledge bases, collaborators all none |
+| 4. Proposed tools, connections, knowledge bases, workflows | None, with the reason: the facts fit in the instructions |
+| 5. Behaviour | Tone, length, the rule for unknowns, language, and the full instruction text the agent will read, facts included |
+| 6. Build order | Write the file, import, verify with the agent list, test |
+| 7. Tests | Four questions with what each correct answer must contain, the fourth an out-of-scope probe |
+
+Two fields in section 3 deserve a word, because every agent from here on has them.
+
+- The model, `groq/openai/gpt-oss-120b`. Orchestrate's default, available on every instance, used throughout this guide. You do not choose it; you need to know the line exists, because a definition without it is incomplete.
+- Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; section 5 of the design is the second, and later chapters show why the first matters as much.
+
+The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
 
 ## 4.4 The first gate
 
