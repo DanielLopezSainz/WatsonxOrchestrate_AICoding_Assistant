@@ -128,7 +128,7 @@ What it is good for: the Build phase, and any task where the assistant creates o
 
 Limits: it takes longer to write, it can feel bureaucratic for a small task, and you need to know the names of things (files, agents, tools) to fill it in. It is the wrong type when you are still exploring.
 
-The two parts people leave out most often are Verify and Stop, and they are the two that matter most. A structured prompt without them is a conversational prompt with headings.
+The two parts people leave out most often are Verify and Stop, and they are the two that matter most when the check and the stopping condition are specific to the task. A structured prompt without them is a conversational prompt with headings. There is one legitimate reason to leave a part out: its content would only repeat what the project's rules or an approved design already say. A part is there to carry what is specific to the task; repeating the rules in every prompt is noise, and chapter 4 shows a Build prompt with three parts for exactly that reason.
 
 ### Type 4: the specification prompt
 

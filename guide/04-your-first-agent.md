@@ -84,22 +84,21 @@ If a question is outside these three teams, say so and point to the closest
 team. Never invent an answer.
 ```
 
+Bob confirms the answers in a sentence or two, asks about anything still missing, and tells you to switch to Plan mode for the Design phase. That is the Discover rules again: they stop Bob from designing in this phase even once it has everything it needs, so that the design lands in a file you can approve rather than in a chat message.
+
 Note: keep the facts short and exact. Everything the agent will ever say comes from this text, and later in the chapter you will see what happens when a fact is missing.
 
 ## 4.3 Design
 
-Switch to Plan mode (`/plan`). One prompt.
+Switch to Plan mode (`/plan`) in the same chat, so that Bob keeps your answers. One prompt.
 
-Prompt type: structured (chapter 3, type 3), reduced to its Deliverable and Stop parts, in Plan mode. It says what the file must contain and ends with the instruction to wait.
+Prompt type: structured (chapter 3, type 3), reduced to a single Deliverable line, in Plan mode.
 
 ```
-Write the design for this agent into design/helpdesk-design.md: the agent's
-name and purpose, the model, whether it needs tools, collaborators or a
-knowledge base and why not, the facts it will know, how it should behave,
-and the build order. Then wait for my approval.
+Write the design for this agent into design/helpdesk-design.md.
 ```
 
-The prompt lists what the design must cover but not how the file should be laid out. That layout comes from the Plan-mode rules in the project folder, one of the files described in section 3.7, which tell the assistant what a design document contains and in what order; this is why the prompt can stay short, and why every design document in this guide has the same shape. The assistant writes the file and shows it to you. This is the first time you see what an agent is made of, so it is worth reading the design slowly. On the run it proposed one agent named `lumen_helpdesk_agent`, with a display name "Lumen Logistics helpdesk", no tools, no collaborators and no knowledge base ("all the facts fit in the instructions"), the three blocks of facts, the behaviour rules from your answer, and a build order of four steps: write the definition file, import it into the instance, test it with three questions, report.
+One line, because everything else is decided elsewhere. The Design rules in the project folder, one of the files described in section 3.7, tell Bob the seven sections a design document has and their order, that it must show you the file, and that it must wait for your approval before anything is built. The prompt adds the one thing the rules cannot know, the file name, which the Build prompt in 4.5 refers to. Every design document in this guide has the same shape for the same reason. Bob writes the file and shows it to you. This is the first time you see what an agent is made of, so it is worth reading the design slowly. On the run it proposed one agent named `lumen_helpdesk_agent`, with a display name "Lumen Logistics helpdesk", no tools, no collaborators and no knowledge base ("all the facts fit in the instructions"), the three blocks of facts, the behaviour rules from your answer, and a build order of four steps: write the definition file, import it into the instance, test it with three questions, report.
 
 Two things in the design deserve a word of explanation now, because every agent you build from here on has them.
 
@@ -117,26 +116,19 @@ A small exercise, if you want one: the design says what happens for questions ou
 
 Switch to Agent mode (`/agent`).
 
-Prompt type: structured (chapter 3, type 3), all six parts, in Agent mode. This is the prompt for anything that creates or changes something on the instance.
+Prompt type: structured (chapter 3, type 3), in Agent mode, with three of its six parts. This is the prompt for anything that creates or changes something on the instance.
 
 ```
-Goal: the helpdesk agent from design/helpdesk-design.md exists on my instance
-  in draft and answers the three example questions correctly.
+Goal: the agent described in design/helpdesk-design.md exists on my instance
+  in draft and passes the tests listed in the design.
 Context: @design/helpdesk-design.md
-Constraints: name lumen_helpdesk_agent, model groq/openai/gpt-oss-120b, no tools.
-  Write the definition to agents/lumen_helpdesk_agent.yaml before importing it.
-  Add two starter prompts (the badge question and the password question) and a
-  short welcome message.
-Deliverable: the definition file, the import done, and three test conversations
-  with reasoning included: the badge question, the password question, and
-  "What is the company policy on working from home?".
-Verify: the list of agents on the instance shows lumen_helpdesk_agent, and the
-  three answers name the right team and contact; the third one must say it does
-  not have that information.
-Stop: if the import returns an error, show me the exact text and wait.
+Constraints: add two starter prompts, the badge question and the password
+  question, and a short welcome message. Keep everything else as designed.
 ```
 
-Now watch what the assistant does, because this is the whole Build phase in miniature. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request for an operation called `import_agent`, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it chats with the agent three times, asking for the reasoning each time, and reports the answers.
+Three parts are missing on purpose, and the reason matters for every Build prompt you will write. Deliverable, Verify and Stop carry what is specific to a task. Here the design already lists the tests and what a correct answer contains, so a Verify line would repeat it; and the Build rules in the project folder already say to write the file before importing, to check the instance after every import, to stop and report when something is not there, and to end with a report, so Deliverable and Stop would repeat them. What remains is what neither the rules nor the design know: the two starter prompts and the welcome message, which the design did not mention. Chapter 5 shows a Build prompt where all six parts are needed, because the checks there are specific to a tool's behaviour.
+
+Now watch what Bob does, because this is the whole Build phase in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
 These are the three answers from the run, exactly as the agent gave them:
 
