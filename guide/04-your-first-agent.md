@@ -108,7 +108,7 @@ Write the design for this agent into design/helpdesk-design.md.
 
 One line is enough because the Design rules in the project folder already fix the rest: the seven sections of a design document, their order, showing you the file, and waiting for your approval. The prompt adds only the file name, which the Build prompt refers to.
 
-What Bob does: says the requirements are settled, writes the file, and answers with a one-line summary per section, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
+What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a one-line summary per section, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
 
 The design, section by section, from the run:
 
