@@ -66,40 +66,12 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. This is what Bob answered on the run behind this chapter, with the prompt above:
+Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, in this order every time, because the Discover rules prescribe them; only the wording varies.
 
-> **What I understood.** You want a single internal helpdesk agent for Lumen Logistics employees. Employees ask it free-text questions about three teams, IT, HR, and Facilities, and it answers from a fixed, curated fact base. It does not call any external system, does not open or close tickets, and does not look anything up dynamically. The badge-door example, the password-reset example, and the HR-hours example are all representative of the scope. The agent's job is: receive question, find the right fact, answer in plain English. Nothing else.
->
-> **What already exists on your instance**
->
-> | Category | What's there | Reusable? |
-> |---|---|---|
-> | Agents | DocProcessing (document processing demo) and AskOrchestrate (empty assistant) | Neither is reusable; no name clash with lumen_helpdesk_agent |
-> | Tools | example_document_processing_flow (flow tool, tied to DocProcessing) | No |
-> | Knowledge bases | None | |
-> | Toolkits | None | |
-> | Connections | Three voice-webhook connections (unconfigured, unrelated) | No |
->
-> Your instance is essentially clean for this work. Nothing will be replaced or overwritten.
->
-> **Questions I need answered before writing a design**
->
-> 1. The facts themselves. Do you already have the contact numbers, email addresses, hours, and procedures for IT, HR, and Facilities written down somewhere? Or do I need to draft placeholder content and you'll fill it in?
-> 2. Delivery format. When the agent answers, should it give a short conversational reply, or a more structured response with a team name, contact, and hours laid out clearly?
-> 3. Out-of-scope questions. If an employee asks something the fact base doesn't cover, what should the agent say? A polite "I don't have that information" and stop, or redirect to a specific contact?
-> 4. Language. English only, or does Lumen Logistics need other languages?
-> 5. Agent name. Do you have a preferred name for the agent (the internal system name, e.g. lumen_helpdesk_agent) and a display name employees will see in the chat UI?
-> 6. Architecture preference. For a fixed fact base there are two clean options: (a) embed the facts directly in the agent's instructions (simple, no moving parts, works well for a small set), or (b) load them into a knowledge base and let the agent retrieve from it (scales better if facts grow). Do you have a preference, or should I recommend one?
->
-> Waiting for your answers before the Design phase.
-
-Your wording will differ; the parts will not, because the Discover rules prescribe them. Take them in order.
-
-- The restatement. Read it against what you meant. The last line, "receive question, find the right fact, answer, nothing else", is Bob's understanding of the scope in nine words, and if it is wrong this is the cheapest moment to say so.
-- The inventory. Bob read it from the instance, not from memory, and it answers two questions at once: is there anything to reuse, and does the chosen name clash with something already there. It also lists things Bob did not understand, such as three unconfigured voice connections, rather than leaving them out. The sentence after the table is the conclusion the table exists to support.
-- The questions. Six on this run, numbered, all at once. Each one is a gap in the prompt: the prompt said what the agent does and gave three examples, and nothing about who uses it, in which language, in what format it answers, what it says when it does not know, what it is called, or where its facts live. A brief that covers the six items of chapter 3 pre-empts most of these; the short prompt was chosen here so that you would see the questions once. The last question is the first design decision of the guide, and Bob gave the two options with their trade-off; the answer is (a) here because the facts fit on half a page, and chapter 8 is where (b) becomes the right one.
-- The name. Bob proposed `lumen_helpdesk_agent` on its own. It had seen the finished file in the walkthrough folder of the repository, which is the folder doing its job as context. Readers who prefer another name can say so now.
-- The closing line. That is the Discover rules speaking, and it is also the check that they loaded: a design at this point, instead of that line, means they did not, and the checklist in section 2.8 is where to look.
+1. What I understood. A restatement of the request in Bob's words, ending on the run with a nine-word version of the scope: "receive question, find the right fact, answer in plain English. Nothing else." Read it against what you meant. If it is wrong, this is the cheapest moment to say so.
+2. What already exists on your instance. A table with one row per category, agents, tools, knowledge bases, toolkits, connections, saying what is there and whether it can be reused. On the run it listed the two stock agents, one demo tool, no knowledge bases, no toolkits, three unconfigured voice connections it did not understand but reported anyway, and concluded that nothing would be replaced and that the name `lumen_helpdesk_agent` clashed with nothing. Bob read all of this from the instance, not from memory; the table answers whether there is anything to reuse and whether the chosen name is free.
+3. Questions I need answered before writing a design. Six on the run, numbered, all at once: whether the facts exist already or should be drafted as placeholders; whether answers should be short and conversational or laid out as team, contact and hours; what to say when a question is outside the facts; which languages; the agent's name and display name; and whether the facts should live in the instructions or in a knowledge base, with the two options and their trade-off spelled out. Each question is a gap in the prompt: it said what the agent does and gave three examples, and nothing about the users, the language, the format, the unknowns, the name or the source of the facts. A brief that covers the six items of chapter 3 pre-empts most of them; the short prompt was chosen here so that you would see the questions once. The last question is the first design decision of the guide; the answer is "instructions" because the facts fit on half a page, and chapter 8 is where a knowledge base becomes the right choice. Bob also proposed the name on its own, having seen the finished file in the walkthrough folder of the repository.
+4. The closing line, "Waiting for your answers before the Design phase." That is the Discover rules speaking, and it is also the check that they loaded: a design at this point, instead of that line, means they did not, and the checklist in section 2.8 is where to look.
 
 Answer the questions in a follow-up, in plain text and in order. Here is the answer given on the run, which is also the data every later chapter reuses:
 
