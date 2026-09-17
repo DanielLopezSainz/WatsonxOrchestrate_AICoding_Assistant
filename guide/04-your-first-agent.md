@@ -124,7 +124,7 @@ The design, section by section, from the run:
 
 Two fields in section 3 deserve a word, because every agent from here on has them.
 
-- The model, `groq/openai/gpt-oss-120b`. Orchestrate's default, available on every instance, used throughout this guide. You do not choose it; you need to know the line exists, because a definition without it is incomplete.
+- The `llm` row, `groq/openai/gpt-oss-120b`, is the model the agent runs on. You did not name one and Bob did not ask: the value comes from the instructions file in the project, which lists it as the default model, along with the `react_core` style in the row above it. It is Orchestrate's default, available on every instance, and used throughout this guide. A definition without this line is incomplete.
 - Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; section 5 of the design is the second, and later chapters show why the first matters as much.
 
 The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
