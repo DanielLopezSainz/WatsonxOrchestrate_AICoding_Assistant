@@ -50,7 +50,9 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 ## 4.2 Discover
 
-Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt, which is a conversational prompt in the sense of chapter 3: your own words, a few example questions, and the sentence that keeps the assistant from building anything yet.
+Switch Bob to Ask mode (the dropdown at the bottom of the chat, or type `/ask`). Start a new chat. Then give it this prompt.
+
+Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and the closing sentence that keeps the assistant from building anything yet.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -87,7 +89,9 @@ Note: keep the facts short and exact. Everything the agent will ever say comes f
 
 ## 4.3 Design
 
-Switch to Plan mode (`/plan`). One prompt:
+Switch to Plan mode (`/plan`). One prompt.
+
+Prompt type: structured (chapter 3, type 3), reduced to its Deliverable and Stop parts, in Plan mode. It says what the file must contain and ends with the instruction to wait.
 
 ```
 Write the design for this agent into design/helpdesk-design.md: the agent's
@@ -96,7 +100,7 @@ knowledge base and why not, the facts it will know, how it should behave,
 and the build order. Then wait for my approval.
 ```
 
-The assistant writes the file and shows it to you. This is the first time you see what an agent is made of, so it is worth reading the design slowly. On the run it proposed one agent named `lumen_helpdesk_agent`, with a display name "Lumen Logistics helpdesk", no tools, no collaborators and no knowledge base ("all the facts fit in the instructions"), the three blocks of facts, the behaviour rules from your answer, and a build order of four steps: write the definition file, import it into the instance, test it with three questions, report.
+The prompt lists what the design must cover but not how the file should be laid out. That layout comes from the Plan-mode rules in the project folder, one of the files described in section 3.7, which tell the assistant what a design document contains and in what order; this is why the prompt can stay short, and why every design document in this guide has the same shape. The assistant writes the file and shows it to you. This is the first time you see what an agent is made of, so it is worth reading the design slowly. On the run it proposed one agent named `lumen_helpdesk_agent`, with a display name "Lumen Logistics helpdesk", no tools, no collaborators and no knowledge base ("all the facts fit in the instructions"), the three blocks of facts, the behaviour rules from your answer, and a build order of four steps: write the definition file, import it into the instance, test it with three questions, report.
 
 Two things in the design deserve a word of explanation now, because every agent you build from here on has them.
 
@@ -112,7 +116,9 @@ A small exercise, if you want one: the design says what happens for questions ou
 
 ## 4.5 Build
 
-Switch to Agent mode (`/agent`). This is the structured prompt from chapter 3, filled in for this agent:
+Switch to Agent mode (`/agent`).
+
+Prompt type: structured (chapter 3, type 3), all six parts, in Agent mode. This is the prompt for anything that creates or changes something on the instance.
 
 ```
 Goal: the helpdesk agent from design/helpdesk-design.md exists on my instance
@@ -240,7 +246,9 @@ anytime by emailing **facilities@lumen-logistics.example** or calling
 
 Read that against the facts. The facts gave no opening hours for Facilities, and the instruction said "do not guess" about other teams, not about missing details of the three teams. So the agent did what language models do with a gap: it filled it, and "anytime" is not true. This is the most useful thing that happened in the whole run, because it shows the two rules that govern every agent you will build: the agent knows exactly what its instructions say and nothing more, and the rule about what to do with missing information has to be explicit.
 
-The fix is a follow-up prompt to the assistant, still in Agent mode:
+The fix is a follow-up.
+
+Prompt type: follow-up (chapter 3, type 5), in the same Agent-mode chat. It says what was wrong, what to change, and how to check it.
 
 ```
 The agent invented opening hours for Facilities. Add "Monday to Friday 07:00
@@ -272,7 +280,9 @@ That loop, read the answer, find the gap in the instructions, change the file, i
 
 ## 4.9 Round trip
 
-One last prompt for this chapter, to learn something about the files you will be keeping:
+One last prompt for this chapter, to learn something about the files you will be keeping.
+
+Prompt type: question (chapter 3, type 1) with a file as deliverable, in Agent mode because a file gets written. Nothing on the instance changes.
 
 ```
 Export lumen_helpdesk_agent from the instance as a definition file to
