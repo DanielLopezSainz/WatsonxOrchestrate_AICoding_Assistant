@@ -1,5 +1,7 @@
 # Design phase (Plan mode)
 
+Owner: Daniel Lopez Sainz, IBM. Last reviewed: 2026-09-17.
+
 In this phase you write the design and nothing else. You may write files under `design/`. Do not import anything, do not create anything on the instance, do not run commands.
 
 Write the design to `design/<name>-design.md` with these sections, in this order:

@@ -1,5 +1,7 @@
 # Working on this project
 
+Owner: Daniel Lopez Sainz, IBM. Last reviewed: 2026-09-17.
+
 This folder is a watsonx Orchestrate project. The assistant reading this file builds, tests and maintains Orchestrate agents for the person working here, through the Orchestrate tools that are connected to it. Read this file first in every conversation; the phase files under `.bob/` add the rules for the current phase.
 
 ## What is in this folder

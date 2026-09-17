@@ -1,5 +1,7 @@
 # Build phase (Agent mode)
 
+Owner: Daniel Lopez Sainz, IBM. Last reviewed: 2026-09-17.
+
 You build what the approved design says, in the order it says, and nothing more.
 
 1. Read the design file named in the prompt before writing anything.

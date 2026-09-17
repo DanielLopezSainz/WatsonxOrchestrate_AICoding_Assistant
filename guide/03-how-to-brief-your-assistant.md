@@ -93,6 +93,19 @@ Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
+IBM's own Bob training states the rule behind this type in one line: a good prompt is a use case brief, not a question. Its brief answers six things, who, what, how it is consumed, which data, which products, and what is out of scope, and anything left out is filled with a generic default. For an Orchestrate agent the six become:
+
+```
+Users:        who will talk to the agent, and in which language
+Purpose:      what the agent does, in one sentence, plus three example questions
+Reached from: the Orchestrate chat, a web page, a messaging channel, the phone
+Draws on:     the facts, documents or systems it needs, and which of them exist already
+Out of scope: what it must not do, and what must not be built yet
+Done when:    the questions it must answer correctly, and what a correct answer contains
+```
+
+A conversational prompt that covers the six needs few follow-up questions. One that covers two or three, like the first prompt of chapter 4, gets the rest back as questions, which is fine when you are still finding out what you want and slow when you already know.
+
 What it is good for: starting a project, exploring, and any moment when you do not yet know exactly what you want. The assistant's questions help you find out. It needs no format to learn, and the example user sentences you include tell the assistant more than any title would.
 
 Limits: it is only as clear as you are. Anything you leave out, the assistant will guess, and it will not tell you it guessed. The last sentence depends on the mode. In Agent mode it is the only thing that stops the assistant from building straight away, so it must be there. In Ask mode the mode itself prevents building, and the Discover rules in the project folder already tell the assistant to answer with a restatement and questions rather than a design, so the closing sentence only needs to say what you want back. Use it in Discover and for the first version of a design, and add facts to it as you learn them.
@@ -284,6 +297,16 @@ introduction, and keep the whole answer under 80 words.
 Why it is better: "try again" gives the assistant nothing to change, so it changes something at random. The better one says what to keep, what to remove, and the limit to respect.
 
 Two patterns run through all five pairs. The better prompt always points at real files instead of describing them, and it always says what the assistant should hand back and when it should stop. Keep those two things and the rest of the wording can be as informal as you like.
+
+The same lessons as a table of prompts to avoid, in the style IBM's Bob training uses:
+
+| Prompt | Why it fails | What to write instead |
+|---|---|---|
+| "Build me a customer service agent" | The assistant invents the users, the facts, the tools and the names | The six-item brief above, in Ask mode |
+| "Give it tools, a knowledge base and a few collaborators" | Every component is a place an answer can go wrong; with all of them at once, nothing can be traced | One component per iteration, starting with instructions alone, as the walkthroughs do |
+| "It does not work, fix it" | The assistant patches the first thing it sees | Ask for the reasoning of the failing test first, then decide |
+| "Make it production ready" | Everything lands in draft; going live is a decision at the second gate, not a prompt | Build and test in draft; deploy in chapter 11 |
+| "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules already enforce, and teaches the reader that the prompt is the safeguard | Only what is specific to the task; the rules do the rest |
 
 ## 3.7 What runs behind the scenes
 
