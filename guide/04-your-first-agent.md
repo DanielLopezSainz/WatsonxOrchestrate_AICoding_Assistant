@@ -2,11 +2,23 @@
 
 Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checklist at the end of chapter 2 answered yes, and chapter 3 read.
 
-In this chapter you build one agent with Bob, from the first sentence to a tested agent on your Orchestrate instance, using the three phases from chapter 3 with one prompt each. The agent has no tools and no connection to any other system, on purpose: it answers from a small set of facts written into its own definition, so that you can judge every answer it gives and concentrate on the way of working rather than on the plumbing.
+## What this chapter is about
 
-The scenario is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
+The agent. An internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. It has no tools and no connection to any other system, on purpose: everything it knows is a short list of facts written into its own definition, so that you can judge every answer it gives and concentrate on the way of working rather than on the plumbing. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
-Everything shown in this chapter, the assistant's answers and the agent's answers, was captured from a real run on a Developer Edition, with the folder from chapter 2 open in Bob. Your wording will differ a little; the substance should not.
+What you will be able to do afterwards:
+
+- Take a request from a sentence to a tested agent on your instance with Bob, using the three phases of chapter 3 with one prompt each, and recognise the two moments where you approve.
+- Read an agent definition file and say what each of its parts is for: name, description, instructions, model, and the lists of tools, collaborators and knowledge that later chapters fill.
+- Tell from the reasoning of a test conversation whether the agent called anything or answered from its instructions alone.
+- Find a gap in an agent's instructions from a wrong answer, fix the file, and update the agent on the instance by importing it again.
+- Export an agent from the instance and know which of the two files, yours or the exported one, to edit and which to keep.
+
+Skip this chapter if you have already built an agent from a definition file through Bob, updated it by re-importing, and read the reasoning of a test chat. Chapter 5 starts from the agent built here, and the finished files are in `walkthroughs/ch04` for anyone who did not build it: copy `agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it, and you are where this chapter ends.
+
+Everything shown in this chapter, Bob's answers and the agent's answers, was captured from a real run on a Developer Edition, with the folder from chapter 2 open in Bob. Your wording will differ a little; the substance should not.
+
+ Your wording will differ a little; the substance should not.
 
 ## 4.1 Before you start
 
