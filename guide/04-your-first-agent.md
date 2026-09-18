@@ -66,7 +66,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, in this order every time, because the Discover rules prescribe them; only the wording varies.
+Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, because the Discover rules ask Bob for them; the wording and the layout vary from run to run.
 
 1. What I understood. A restatement of the request in Bob's words, ending on the run with a nine-word version of the scope: "receive question, find the right fact, answer in plain English. Nothing else." Read it against what you meant. If it is wrong, this is the cheapest moment to say so.
 2. What already exists on your instance. A table with one row per category, agents, tools, knowledge bases, toolkits, connections, saying what is there and whether it can be reused. On the run it listed the two stock agents, one demo tool, no knowledge bases, no toolkits, three unconfigured voice connections it did not understand but reported anyway, and concluded that nothing would be replaced and that the name `lumen_helpdesk_agent` clashed with nothing. Bob read all of this from the instance, not from memory; the table answers whether there is anything to reuse and whether the chosen name is free.
@@ -106,51 +106,55 @@ Mode: Plan, in the same chat, so that Bob keeps your answers. Switch with `/plan
 Write the design for this agent into design/helpdesk-design.md.
 ```
 
-One line is enough because the Design rules in the project folder already fix the rest: the seven sections of a design document, their order, showing you the file, and waiting for your approval. The prompt adds only the file name, which the Build prompt refers to.
+One line is enough. The Design rules in the project folder tell Bob what a design has to let you judge, to show you the file, and to wait for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide; the rules are instructions to Bob, not to you.
 
-What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a one-line summary per section, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
+What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a short summary, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
 
-The design, section by section, from the run:
+What Bob's design covered on the run. The headings and the layout are Bob's choice and will differ on yours; the content should not.
 
-| Section | What it holds |
+| Part of the design | What it holds |
 |---|---|
-| 1. What was asked | The scope in two sentences |
-| 2. What exists on the instance | The inventory from Discover, every item marked unrelated and untouched; no name clash |
-| 3. Proposed agent | A table of the agent's fields: name, display name, kind, style, model; tools, knowledge bases, collaborators all none |
-| 4. Proposed tools, connections, knowledge bases, workflows | None, with the reason: the facts fit in the instructions |
-| 5. Behaviour | Tone, length, the rule for unknowns, language, and the full instruction text the agent will read, facts included |
-| 6. Build order | Write the file, import, verify with the agent list, test |
-| 7. Tests | Four questions with what each correct answer must contain, the fourth an out-of-scope probe |
+| What was asked | The scope in two sentences |
+| What exists on the instance | The inventory from Discover, every item marked unrelated and untouched; no name clash |
+| The proposed agent | A table of the agent's fields: name, display name, kind, style, model; tools, knowledge bases, collaborators all none |
+| Tools, connections, knowledge bases | None, with the reason: the facts fit in the instructions |
+| Behaviour | Tone, length, the rule for unknowns, language, and the full instruction text the agent will read, facts included |
+| Build order | Write the file, import, check the agent list, test |
+| Tests | Four questions with what each correct answer must contain, the fourth an out-of-scope probe |
 
-Two fields in section 3 deserve a word, because every agent from here on has them.
+Two fields of the proposed agent deserve a word, because every agent from here on has them.
 
 - The `llm` row, `groq/openai/gpt-oss-120b`, is the model the agent runs on. You did not name one and Bob did not ask: the value comes from the instructions file in the project, which lists it as the default model, along with the `react_core` style in the row above it. It is Orchestrate's default, available on every instance, and used throughout this guide. A definition without this line is incomplete.
-- Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; section 5 of the design is the second, and later chapters show why the first matters as much.
+- Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; the instruction text in the design is the second, and later chapters show why the first matters as much.
 
 The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
 
 ## 4.4 The first gate
 
-Mode: still Plan, same chat. Nothing is sent to Bob in this section unless the design needs changing.
+Mode: still Plan, same chat.
 
-Read the design as if a colleague had written it. Can you say, from the file alone, what the agent will and will not answer? If something is missing, say so now in a follow-up; Bob revises the file and waits again. If the design says what you mean, your approval is the first line of the Build prompt in the next section, and there is nothing else to send here.
+Read the design as if a colleague had written it. Can you say, from the file alone, what the agent will and will not answer? Anything you want built has to be in the design before you approve it; the Build prompt is not the place to add things.
 
-A small exercise, if you want one: the design says what happens for questions outside the three teams. Ask yourself whether it also says what happens for a question about one of the three teams that the facts do not cover, for example the name of the HR manager. On the run behind this chapter, it did not, and section 4.8 shows the consequence.
+The design from 4.3 has one gap of that kind: it says nothing about what an employee sees before typing. Ask for it, in plain words:
+
+```
+Add a welcome message and two starter prompts to the design: the badge
+question and the password question.
+```
+
+Bob revises the file and waits again. That is the first gate at work. When the design says what you mean, go to 4.5; the approval is given there.
+
+A question to keep in mind for later: the design says what happens with questions outside the three teams. Does it say what happens with a question about one of the three teams that the facts do not cover, such as the name of the HR manager? Section 4.8 shows why that matters.
 
 ## 4.5 Build
 
-Mode: Agent, same chat. Switch with `/agent`. Prompt type: structured (chapter 3, type 3) with three of its six parts. This is the prompt for anything that creates or changes something on the instance, and its first line is the approval from the first gate.
+Mode: Agent, same chat. Switch with `/agent`.
 
 ```
-The design in design/helpdesk-design.md is approved.
-Goal: the agent it describes exists on my instance in draft and passes the
-  tests listed in the design.
-Context: @design/helpdesk-design.md
-Constraints: add two starter prompts, the badge question and the password
-  question, and a short welcome message. Keep everything else as designed.
+The design in @design/helpdesk-design.md is approved. Build it.
 ```
 
-Three parts are missing on purpose, and the reason matters for every Build prompt you will write. Deliverable, Verify and Stop carry what is specific to a task. Here the design already lists the tests and what a correct answer contains, so a Verify line would repeat it; and the Build rules in the project folder already say to write the file before importing, to check the instance after every import, to stop and report when something is not there, and to end with a report, so Deliverable and Stop would repeat them. What remains is what neither the rules nor the design know: the two starter prompts and the welcome message, which the design did not mention. Chapter 5 shows a Build prompt where all six parts are needed, because the checks there are specific to a tool's behaviour.
+That is the whole prompt, and it is also the approval from the first gate. The design says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
 
 Now watch what Bob does, because this is the whole Build phase in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
@@ -333,6 +337,6 @@ If the first answer has no hours, the fix from 4.8 was not imported; ask for the
 
 ## 4.11 What you learned
 
-The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one structured prompt in Agent mode whose first line is the approval, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
 
 Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.

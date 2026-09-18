@@ -44,7 +44,7 @@ Note: you change the mode with one click on the dropdown, with the shortcut `⌘
 
 There are only two moments where the assistant has to stop and wait for you. This guide calls them gates.
 
-The first gate is between Design and Build. What you approve here is a list, nothing more: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the order in which it will all be built. A practical test: if you cannot explain that design to a colleague by reading the list, send it back to the assistant with your questions. When it is right, the approval is one line, and the walkthroughs put that line at the top of the Build prompt, so that switching to Agent mode and approving are the same step. A design that you understand is the difference between a walkthrough that takes one hour and one that takes the whole afternoon.
+The first gate is between Design and Build. What you approve here is a list, nothing more: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the order in which it will all be built. A practical test: if you cannot explain that design to a colleague by reading the list, send it back to the assistant with your questions. When it is right, the approval is one line, and in chapter 4 that line is the whole Build prompt, so that switching to Agent mode and approving are the same step. A design that you understand is the difference between a walkthrough that takes one hour and one that takes the whole afternoon.
 
 The second gate is at the end of Build, before anything goes live. Everything the assistant creates lands in the draft environment of your instance. Nothing reaches your end users until an agent is deployed, and deploying is done with a command of the ADK, not through the assistant's normal operations on the instance (chapter 1 explains why, and chapter 11 shows the command). Before that command the assistant has to switch the ADK to the right tenant. Be careful here: that switch changes the active environment for every assistant on your machine at the same time, Bob included, which is one more reason to make it an explicit decision and not something the assistant does on its own.
 
@@ -112,7 +112,7 @@ Limits: it is only as clear as you are. Anything you leave out, the assistant wi
 
 ### Type 3: the structured prompt
 
-A structured prompt has fixed parts, each answering one question the assistant would otherwise have to guess. This guide uses six parts, always in the same order:
+A structured prompt has parts, each answering one question the assistant would otherwise have to guess. The labels are for you, not for Bob: they are a checklist that keeps you from forgetting what done looks like and when to stop, and Bob understands the same content written as ordinary sentences. This guide uses six parts:
 
 ```
 Goal:        what should exist when this is done, in one sentence
@@ -141,7 +141,7 @@ What it is good for: the Build phase, and any task where the assistant creates o
 
 Limits: it takes longer to write, it can feel bureaucratic for a small task, and you need to know the names of things (files, agents, tools) to fill it in. It is the wrong type when you are still exploring.
 
-The two parts people leave out most often are Verify and Stop, and they are the two that matter most when the check and the stopping condition are specific to the task. A structured prompt without them is a conversational prompt with headings. There is one legitimate reason to leave a part out: its content would only repeat what the project's rules or an approved design already say. A part is there to carry what is specific to the task; repeating the rules in every prompt is noise, and chapter 4 shows a Build prompt with three parts for exactly that reason.
+The two parts people leave out most often are Verify and Stop, and they are the two that matter most when the check and the stopping condition are specific to the task. A structured prompt without them is a conversational prompt with headings. There is one legitimate reason to leave a part out: its content would only repeat what the project's rules or an approved design already say. A part is there to carry what is specific to the task; repeating the rules in every prompt is noise, and in chapter 4 the whole Build prompt is one line for exactly that reason.
 
 ### Type 4: the specification prompt
 
