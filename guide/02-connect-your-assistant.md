@@ -99,8 +99,8 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-1. In the auto-approve toolbar above the chat, switch on Read and MCP. Leave Edit and Execute off.
-2. In the MCP tab, expand `watsonx-orchestrate-adk` and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
+1. At the bottom of the chat input box, next to the dropdown where you choose the mode, click the Permissions button. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
+2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
 
 You should see: nothing yet. The effect shows in the next step, where Bob lists agents without asking you first.
 
@@ -139,7 +139,7 @@ Developer Edition instead of a tenant: it registers itself as an environment nam
 
 Bob asks your permission before it acts, and two settings decide how often.
 
-- The auto-approve toolbar above the chat has one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands; leave them off while learning, so that Bob asks before either.
+- The Permissions button below the chat input opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands; leave them off while learning, so that Bob asks before either.
 - The Always allow switch on each operation in the MCP tab marks that operation as safe. Step 7 marked the eleven that only read from the instance or send a test message. Every other operation, importing, creating, removing, setting credentials, still asks.
 
 That is the intended balance: reading is free, changing asks. Do not mark every operation to save clicks. An assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
@@ -184,7 +184,7 @@ Answer every line with yes before moving on.
 1. The folder open in Bob is the cloned repository, and it is the one you initialised.
 2. `AGENTS.md` is visible at the top level of that folder, next to the `.bob` folder.
 3. The MCP tab shows `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, both connected.
-4. Read and MCP are on in the toolbar, Edit and Execute are off, and Always allow is on for the eleven reading operations.
+4. Under the Permissions button, Read and MCP are on and Edit and Execute are off, and Always allow is on for the eleven reading operations.
 5. The Environment Manager shows an active environment.
 6. The agent list prompt returns the agents you expect, without an approval request.
 7. You have not run `/init`.
