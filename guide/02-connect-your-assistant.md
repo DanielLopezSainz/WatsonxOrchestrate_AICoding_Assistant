@@ -62,7 +62,20 @@ You should see: the panel now has two sections. Explorer lists Agents, Tools, Co
 
 Step 4. Send Bob its starting message.
 
-When initialisation ends, the extension places a ready-made message in Bob's chat, headed "SYSTEM PROMPT - IBM watsonx Orchestrate". Its three lines tell Bob to switch to Agent mode, to load IBM's Orchestrate skills, and to use the Orchestrate server for all agent, tool and environment operations and the documentation server for reference. Send it as it is.
+When initialisation ends, the extension quietly types a message into the box at the bottom of Bob's chat, where you normally write, and does not send it. It is easy to miss: no notification announces it, and the box looks as if you had typed something yourself. Look at the box before doing anything else.
+
+1. Find the text headed "SYSTEM PROMPT - IBM watsonx Orchestrate" in the chat input box.
+2. Press Enter to send it as it is.
+
+Its three lines tell Bob to switch to Agent mode, to load IBM's Orchestrate skills, and to use the Orchestrate server for all agent, tool and environment operations and the documentation server for reference. If the box is empty because the text was cleared, paste this and send it:
+
+```
+# SYSTEM PROMPT - IBM watsonx Orchestrate
+## Instructions
+1. Switch to **Agent mode** if not already active.
+2. Use the `fetch_all_skills` tool on the `watsonx-orchestrate-adk` MCP server to load available skills.
+3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
+```
 
 You should see: Bob answering that the session is ready and the Orchestrate server is connected. Bob may or may not load the skills at this point; nothing before chapter 12 needs them.
 
