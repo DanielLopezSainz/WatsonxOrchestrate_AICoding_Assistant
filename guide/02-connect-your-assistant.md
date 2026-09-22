@@ -52,15 +52,15 @@ You should see: a watsonx Orchestrate icon in the left bar. If the bar is full, 
 
 Step 3. Initialise the workspace.
 
-1. Click the watsonx Orchestrate icon. Its panel has two sections, Explorer and Environment Manager.
-2. If the panel says the extension loaded in restricted mode, click its link to trust the folder, confirm, and reload the window when asked. Bob asks this question once per folder.
-3. In Explorer, click the link Initialise Workspace.
+1. Click the watsonx Orchestrate icon. A panel headed "Watsonx Orchestrate: Explorer" opens with the message "No workspace found. Please initialise a workspace to begin building" and a button, Initialise Workspace.
+2. If the panel says instead that the extension loaded in restricted mode, click its link to trust the folder, confirm, and reload the window when asked. Bob asks this once per folder.
+3. Click Initialise Workspace.
 4. If Bob asks permission to install `uv`, accept.
 5. If you use a tenant, a box asks for your API key: paste it. If the Developer Edition is running on your machine, nothing is asked.
 6. Wait. The extension installs a Python environment and the ADK inside the folder; this takes a minute or two.
 7. When the chat shows a ready-made message headed "SYSTEM PROMPT - IBM watsonx Orchestrate", send it. Bob answers that the session is ready.
 
-You should see: the Explorer section listing the agents on your instance. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
+You should see: the Explorer section listing the agents on your instance, and a second section in the panel, Environment Manager. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
 
 Step 4. Check the two servers.
 
