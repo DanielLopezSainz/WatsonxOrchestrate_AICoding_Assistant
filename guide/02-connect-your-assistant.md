@@ -99,6 +99,8 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
+Bob asks your permission before every action unless you tell it otherwise. Left as it is, that means a click for each file Bob reads and each time it looks at your instance, dozens per chapter, and readers stop reading what they approve. Switched on entirely, Bob could write files, run commands and remove agents without a word. The settings below sit in between: Bob reads and looks without asking, and asks before anything that changes a file or the instance. Section 2.4 explains the two settings in more detail.
+
 1. At the bottom of the chat input box, next to the dropdown where you choose the mode, click the Permissions button. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
 
