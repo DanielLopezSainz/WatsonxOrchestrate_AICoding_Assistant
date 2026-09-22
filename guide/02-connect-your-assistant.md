@@ -61,12 +61,14 @@ Step 3. Initialise the workspace.
 
 You should see: the panel now has two sections. Explorer lists Agents, Tools, Connections, Knowledge Bases and Toolkits. Environment Manager shows an Environment dropdown and an Add button.
 
-Step 4. Connect to your instance. What you do here depends on what you have.
+Step 4. Connect to your instance.
 
-- Developer Edition running on your machine: nothing. The dropdown already shows `local (active)`, and below it "Local server: Started". Go to step 5.
-- SaaS tenant: the dropdown is empty. Click Add and answer the four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, say yes.
+Your instance is the watsonx Orchestrate service where your agents will live: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
 
-You should see: the dropdown showing your environment with "(active)", and the Explorer's Agents list filled. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
+- Developer Edition running on your machine: nothing to do. The dropdown already reads `local (active)`, and below it "Local server: Started".
+- SaaS tenant: the dropdown is empty. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, say yes.
+
+You should see: in Environment Manager, the dropdown reading your environment's name followed by "(active)". In Explorer, expand Agents: the list is read from the instance, so it shows the agents that exist there. A new tenant has one, `AskOrchestrate`. A new Developer Edition has two, shown as "Try Document Processing Agent (DocProcessing)" and "AskOrchestrate".
 
 Step 5. Check the two servers.
 
