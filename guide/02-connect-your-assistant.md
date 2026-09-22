@@ -39,9 +39,9 @@ Step 1. Clone the repository.
 1. In Bob, click the files icon at the top left. With no folder open, the panel shows two buttons: Open Folder and Clone Repository.
 2. Click Clone Repository and paste `https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git`.
 3. Choose where to save it. Bob creates a folder named `WatsonxOrchestrate_AICoding_Assistant` there.
-4. When Bob offers to open the cloned repository, click Open. When it asks whether you trust the authors, click Yes, I trust the authors.
+4. When Bob offers to open the cloned repository, click Open.
 
-You should see: the repository's files in the panel, including `AGENTS.md`, `guide` and empty folders such as `agents` and `tools`.
+You should see: the folder name at the top of the panel. If Bob's chat is in front, click the files icon to see the files, among them `AGENTS.md`, `guide` and empty folders such as `agents` and `tools`.
 
 Step 2. Install the extension.
 
@@ -53,11 +53,12 @@ You should see: a watsonx Orchestrate icon in the left bar. If the bar is full, 
 Step 3. Initialise the workspace.
 
 1. Click the watsonx Orchestrate icon. Its panel has two sections, Explorer and Environment Manager.
-2. In Explorer, click the link Initialise Workspace.
-3. If Bob asks permission to install `uv`, accept.
-4. If you use a tenant, a box asks for your API key: paste it. If the Developer Edition is running on your machine, nothing is asked.
-5. Wait. The extension installs a Python environment and the ADK inside the folder; this takes a minute or two.
-6. When the chat shows a ready-made message headed "SYSTEM PROMPT - IBM watsonx Orchestrate", send it. Bob answers that the session is ready.
+2. If the panel says the extension loaded in restricted mode, click its link to trust the folder, confirm, and reload the window when asked. Bob asks this question once per folder.
+3. In Explorer, click the link Initialise Workspace.
+4. If Bob asks permission to install `uv`, accept.
+5. If you use a tenant, a box asks for your API key: paste it. If the Developer Edition is running on your machine, nothing is asked.
+6. Wait. The extension installs a Python environment and the ADK inside the folder; this takes a minute or two.
+7. When the chat shows a ready-made message headed "SYSTEM PROMPT - IBM watsonx Orchestrate", send it. Bob answers that the session is ready.
 
 You should see: the Explorer section listing the agents on your instance. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
 
