@@ -1,83 +1,76 @@
 # Chapter 3. How to work with Bob
 
-Level: beginner. Time: about 40 minutes of reading; nothing is built. Prerequisites: none, though the examples refer to the project folder from chapter 2.
+Level: beginner. Time: about 30 minutes of reading; nothing is built. Prerequisites: none. The examples refer to the project folder from chapter 2.
 
-## What this chapter is about
+## Overview
 
-The subject. How to talk to Bob so that it builds what you meant, and not something else. It is the part that decides whether the rest of the guide is a pleasant experience or a frustrating one. All the walkthroughs from chapter 4 onwards follow the same way of working, so once it is clear here you will not need to think about it again.
+This chapter describes how to work with Bob on a piece of watsonx Orchestrate work: the three phases, the two points where you approve, and the prompts each phase needs. Every walkthrough from chapter 4 on follows this way of working without explaining it again. In this guide, "the assistant" means Bob.
 
-What you will be able to do afterwards:
+After completing this chapter, you can:
 
-- Split any piece of Orchestrate work into the three phases the guide uses, Discover, Design and Build, and match each one to Bob's Ask, Plan and Agent modes.
-- Name the two moments where Bob must stop and wait for you, and what you are approving at each.
-- Choose among five kinds of prompt, question, conversational, structured, specification and follow-up, according to what you want back, and write each one.
-- Turn a weak prompt into one that says what "done" looks like and when Bob should stop and ask.
-- Say what the files Bob reads at the start of every conversation are for, without having opened them.
+- Split a piece of work into the Discover, Design and Build phases and run each one in the matching Bob mode.
+- Identify the two points where Bob stops for your approval, and what you approve at each.
+- Choose among five kinds of prompt and write each one.
+- Rewrite a weak prompt so that it states what done looks like and when Bob must stop.
+- Describe the files Bob reads at the start of every conversation and what each one does.
 
-Skip this chapter if you already work with Bob in its three modes and write prompts that state the deliverable, the verification and the stopping rule. Read section 3.3 anyway, because the structured prompt with its six parts is used verbatim from chapter 4 on, and the walkthroughs do not explain it again.
-
-The way of working described here fits Bob's three modes, Ask, Plan and Agent, exactly, and the rest of the guide relies on that fit. From here on, "the assistant" means Bob: the word is kept because the prompts, the rules and the habits are about working with an assistant, and Bob is the one this guide uses.
+Skip this chapter if you already work with Bob in its three modes and write prompts that state the deliverable, the check and the stopping rule. Read 3.3 in any case: the structured prompt described there is used from chapter 5 on without further explanation.
 
 ## 3.1 The three phases
 
-Building an Orchestrate agent with an assistant goes through three phases, called Discover, Design and Build in this guide. Each phase gives the assistant a bit more freedom than the previous one, and in Bob each phase is simply one of the modes you choose from the dropdown at the bottom of the chat window.
+A piece of Orchestrate work goes through three phases. Each phase gives Bob more freedom than the previous one, and each corresponds to one Bob mode, selected in the dropdown at the bottom of the chat.
 
-In the Discover phase (Ask mode in Bob) the assistant is only allowed to read. It can read your project files, it can look at what already exists on your Orchestrate instance (the agents, the tools, the connections, and so on) and it can search the Orchestrate documentation. It cannot write files and it cannot run commands. The expected result of this phase is that the assistant tells you, in its own words, what it has understood of your request, which questions it needs answered, and what already exists on your instance. Read the restatement carefully. If the assistant has misunderstood something, this is the cheapest moment to correct it; later it becomes expensive.
-
-In the Design phase (Plan mode in Bob) the assistant can also write files, but still no commands and still nothing that creates artifacts on the instance. The expected result is a design document written into the project: which agents there will be, which tools each one gets, which external systems need a connection and of which kind, which documents will become a knowledge base, which workflows if any, and in which order all of it must be built. This document is what you approve before anything gets created. Section 3.2 comes back to this approval.
-
-In the Build phase (Agent mode in Bob) the assistant has all its capabilities. It writes the YAML and Python files, it imports them into your Orchestrate instance in the right order, it chats with the resulting agent to test it, it reads the reasoning of the agent to see what really happened, it fixes what failed and it repeats until the tests pass. At the end of this phase the artifacts are in the draft environment of your instance, together with a short report of what was built.
-
-The same thing as a table, for reference:
-
-| Phase | Bob mode | The assistant can | You get at the end |
+| Phase | Bob mode | Bob can | Result |
 |---|---|---|---|
-| Discover | Ask | Read files, look at what exists on the instance, search the documentation | A restatement of your request, the open questions, an inventory of what exists |
-| Design | Plan | The above, plus write files | A design document in the project, waiting for your approval |
-| Build | Agent | Everything | The artifacts imported in draft, a test transcript, a short report |
+| Discover | Ask | Read project files, look at the instance, search the documentation. No writing, no commands | A restatement of the request, the open questions, an inventory of what exists on the instance |
+| Design | Plan | The above, plus write files. Nothing is created on the instance | A design document in the project folder, awaiting your approval |
+| Build | Agent | Everything: write files, import them, test the agent, fix and repeat | The artifacts in the draft environment of the instance, a test transcript, a short report |
 
-Why three phases and not one? Because an assistant in Agent mode that receives a vague request starts creating things immediately. Creating things on the instance is fast and costs nothing, so within a few seconds it will have imported an agent, discovered that a tool was missing, created the tool, imported the agent again, and so on. You end up with a collection of half-thought artifacts on your instance, with names you did not choose, and you have to review what was built instead of reviewing a design. This happened more than once while preparing this guide. Ask mode forces the assistant to think before it can act, and Plan mode forces it to write its plan down where you can read it. Only after that does it get the keys.
+In Discover, Bob reads. It restates what it understood, lists what already exists on the instance, and asks the questions it needs answered. Correct any misunderstanding here; it costs nothing at this point and a great deal later.
 
-Note: you change the mode with one click on the dropdown, with the shortcut `⌘ .` on a Mac (`Ctrl .` on Windows and Linux), or by typing `/ask`, `/plan` or `/agent` in the chat. Bob often suggests a mode change itself when it notices the request needs one, and you can accept the suggestion.
+In Design, Bob writes one file: which agents there will be, which tools each one gets, which systems need a connection, which documents become knowledge, and in which order it all gets built. You approve this file before anything is created.
+
+In Build, Bob writes the definition and tool files, imports them in the right order, tests the result, reads the reasoning of the agent to see what happened, fixes what failed, and reports.
+
+Why three phases. In Agent mode, a vague request produces artifacts within seconds: an agent is imported, a missing tool is created, the agent is imported again, and the instance fills with half-designed objects under names nobody chose. Ask mode makes Bob think before it can act; Plan mode makes it write the plan down where you can read it. Only then does it get the keys.
+
+To change mode: the dropdown, the shortcut `⌘ .` on a Mac or `Ctrl .` elsewhere, or `/ask`, `/plan` and `/agent` typed in the chat. Bob proposes a mode change itself when a request needs one; you can accept the proposal.
 
 ## 3.2 The two approval points
 
-There are only two moments where the assistant has to stop and wait for you. This guide calls them gates.
+Bob stops and waits for you at two points. This guide calls them gates.
 
-The first gate is between Design and Build. What you approve here is a list, nothing more: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the order in which it will all be built. A practical test: if you cannot explain that design to a colleague by reading the list, send it back to the assistant with your questions. When it is right, the approval is one line, and in chapter 4 that line is the whole Build prompt, so that switching to Agent mode and approving are the same step. A design that you understand is the difference between a walkthrough that takes one hour and one that takes the whole afternoon.
+The first gate is between Design and Build. You approve a list: which agents exist and what each is for, which tools each has, which systems need a connection, which documents become knowledge, and the build order. If you cannot explain that list to a colleague from the file alone, send it back with your questions. When it is right, the approval is one line, and in chapter 4 that line is the whole Build prompt, so that switching to Agent mode and approving are one step.
 
-The second gate is at the end of Build, before anything goes live. Everything the assistant creates lands in the draft environment of your instance. Nothing reaches your end users until an agent is deployed, and deploying is done with a command of the ADK, not through the assistant's normal operations on the instance (chapter 1 explains why, and chapter 11 shows the command). Before that command the assistant has to switch the ADK to the right tenant. Be careful here: that switch changes the active environment for every assistant on your machine at the same time, Bob included, which is one more reason to make it an explicit decision and not something the assistant does on its own.
+The second gate is at the end of Build, before anything goes live. Everything Bob creates lands in the draft environment of the instance. Nothing reaches end users until an agent is deployed, and deploying is done with an ADK command that Bob never runs on its own; chapter 11 shows it. Before that command, the active environment may have to be switched to the right tenant, and that switch affects every assistant on your machine at once, which is one more reason to make it an explicit decision.
 
-IMPORTANT: the rules in the project folder, the instructions file described in chapter 2, tell the assistant to never deploy, never switch the environment, never set a credential and never remove anything without asking you first. If you see it doing one of those things without a question, the rules are not being read, and you should go through the checklist at the end of chapter 2 again.
+IMPORTANT: the instructions file in the project folder tells Bob never to deploy, switch environment, set a credential or remove anything without asking you first. If Bob does one of those things without asking, the file is not being read; go through the checklist in section 2.6.
 
-Apart from these two gates, let the assistant work. If you interrupt it in the middle of the Build phase to approve every single file, you lose the benefit of Agent mode. Control during Build does not come from approving each step; it comes from the verification habits described in section 3.4.
+Between the two gates, let Bob work. Approving every file during Build removes the benefit of Agent mode; control during Build comes from the checks in 3.4.
 
 ## 3.3 The types of prompts
 
-A prompt is simply what you type in the chat to the assistant. There is no single correct way to write one, but there are a few clearly different types, each good for something and bad for something else, and knowing which type fits which situation is what you will use most from this chapter. This section lists the five types used in this guide, explains what each one is for, gives its advantages and its limits, and shows an example. Section 3.6 then puts weak and better prompts side by side.
+A prompt is what you type in the chat. Five kinds are used in this guide; each fits a situation, and the choice matters more than the wording.
 
-Before the types, the four rules that Bob's documentation gives for any prompt, because they apply to all five: be specific and clear, since vague prompts produce vague output; give an example of the output you want when the format matters; reference files with `@` mentions instead of pasting their content; and start in Plan mode for anything new, so that a plan exists before code does.
+Four rules from Bob's documentation apply to all of them: be specific, since vague prompts produce vague output; show an example of the output when its format matters; refer to files with @ mentions instead of pasting their content; and plan before building.
 
 ### Type 1: the question
 
-A question is a prompt that asks the assistant to find something out and tell you, without changing anything. "Which agents exist on my instance?", "What does the description of lab_order_agent say?", "Why did the last test answer that the order was unknown?" are questions.
+A question asks Bob to find something out and report, without changing anything. "Which agents exist on my instance?", "Why did the last test answer that the order was unknown?"
 
-What it is good for: understanding your project or your instance, understanding why something happened, and checking the assistant's own understanding before you give it work. Questions belong in Ask mode, where the assistant cannot act, which makes them completely safe.
+Use it to understand your project or your instance, to understand why something happened, or to check what Bob understood before giving it work. Questions belong in Ask mode, where Bob cannot act.
 
-Limits: nothing gets built. And the answer is only as good as what the assistant read; if you want it to look at a particular file or a particular test, mention it, otherwise it answers from memory.
-
-Example:
+Limits: nothing gets built, and the answer is only as good as what Bob read. Name the file or the test you want it to look at; otherwise it answers from memory.
 
 ```
 Chat with lab_order_agent asking "Where is order LL-1001?" with reasoning included.
-Show me every tool call and every tool result from the reasoning, exactly as
-returned. If a result contains an error, quote it and tell me what you think
-caused it. Do not change anything.
+Show every tool call and every tool result from the reasoning, exactly as
+returned. If a result contains an error, quote it and say what caused it.
 ```
 
-### Type 2: the conversational prompt
+### Type 2: the brief
 
-A conversational prompt describes what you want in your own words, as you would to a colleague, and ends with one sentence that asks the assistant to propose before it acts. This is the type IBM's own accelerator for Bob uses to start a project, and its example looks like this:
+A brief describes what you want in your own words, as you would to a colleague. IBM's accelerator for Bob starts a project this way:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
@@ -93,35 +86,35 @@ Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
-IBM's own Bob training states the rule behind this type in one line: a good prompt is a use case brief, not a question. Its brief answers six things, who, what, how it is consumed, which data, which products, and what is out of scope, and anything left out is filled with a generic default. For an Orchestrate agent the six become:
+IBM's Bob training states the rule in one line: a good prompt is a use case brief, not a question. A complete brief answers six things; anything left out, Bob fills with a generic default. For an Orchestrate agent the six are:
 
 ```
 Users:        who will talk to the agent, and in which language
 Purpose:      what the agent does, in one sentence, plus three example questions
 Reached from: the Orchestrate chat, a web page, a messaging channel, the phone
-Draws on:     the facts, documents or systems it needs, and which of them exist already
+Draws on:     the facts, documents or systems it needs, and which exist already
 Out of scope: what it must not do, and what must not be built yet
 Done when:    the questions it must answer correctly, and what a correct answer contains
 ```
 
-A conversational prompt that covers the six needs few follow-up questions. One that covers two or three, like the first prompt of chapter 4, gets the rest back as questions, which is fine when you are still finding out what you want and slow when you already know.
+Use a brief to start a project, in Ask mode. A brief that covers the six items gets few questions back; one that covers two or three, like the first prompt of chapter 4, gets the rest back as questions, which is fine when you are still finding out what you want.
 
-What it is good for: starting a project, exploring, and any moment when you do not yet know exactly what you want. The assistant's questions help you find out. It needs no format to learn, and the example user sentences you include tell the assistant more than any title would.
-
-Limits: it is only as clear as you are. Anything you leave out, the assistant will guess, and it will not tell you it guessed. The last sentence depends on the mode. In Agent mode it is the only thing that stops the assistant from building straight away, so it must be there. In Ask mode the mode itself prevents building, and the Discover rules in the project folder already tell the assistant to answer with a restatement and questions rather than a design, so the closing sentence only needs to say what you want back. Use it in Discover and for the first version of a design, and add facts to it as you learn them.
+Limits: it is only as clear as you are. Anything left out, Bob guesses, without saying so. The closing sentence depends on the mode: in Agent mode it is the only thing that stops Bob from building at once; in Ask mode the mode prevents building and the Discover rules already ask for questions rather than a design, so the closing sentence only says what you want back.
 
 ### Type 3: the structured prompt
 
-A structured prompt has parts, each answering one question the assistant would otherwise have to guess. The labels are for you, not for Bob: they are a checklist that keeps you from forgetting what done looks like and when to stop, and Bob understands the same content written as ordinary sentences. This guide uses six parts:
+A structured prompt has parts, each answering one question Bob would otherwise guess. This guide uses six:
 
 ```
 Goal:        what should exist when this is done, in one sentence
 Context:     the files, folders and data to use, by name, with @ mentions
-Constraints: names to keep, the model to use, what not to touch, limits from the design
-Deliverable: exactly what you want back (a file, an import, a chat transcript, a report)
-Verify:      how the assistant proves that it worked, in a way you can check yourself
-Stop:        when it should ask you instead of guessing
+Constraints: names to keep, the model to use, what not to touch
+Deliverable: what you want back: a file, an import, a chat transcript, a report
+Verify:      how Bob proves that it worked, in a way you can check yourself
+Stop:        when Bob should ask you instead of guessing
 ```
+
+The labels are for you, not for Bob. They are a checklist that keeps you from forgetting what done looks like and when to stop; Bob understands the same content as plain sentences. Leave a part out when the project's rules or an approved design already say it: in chapter 4 the whole Build prompt is one line for that reason.
 
 Example, from the Build phase of chapter 5:
 
@@ -137,15 +130,13 @@ Verify: the list of tools shows lab_get_order_status with order_id in its input
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-What it is good for: the Build phase, and any task where the assistant creates or changes something on your instance. This is the type to use when mistakes cost time. Why it works better there than a conversational prompt: each of the six parts closes one door to guessing. Goal stops the assistant from doing more than asked; Context stops it from inventing data; Constraints stop it from renaming or "improving" things; Deliverable tells it what to hand back; Verify replaces its own idea of "done" (usually "the command did not fail") with a check you can repeat; Stop tells it what to do when it is unsure, which is the moment most surprises come from. The result is a prompt that two different people, or two different assistants, would execute the same way.
+Use it in Build, for anything that creates or changes something on the instance, whenever the check is specific to the task. Each part closes one way of guessing: Goal limits the work, Context stops invented data, Constraints stop renaming, Deliverable says what to hand back, Verify replaces Bob's idea of done with a check you can repeat, Stop says what to do when unsure.
 
-Limits: it takes longer to write, it can feel bureaucratic for a small task, and you need to know the names of things (files, agents, tools) to fill it in. It is the wrong type when you are still exploring.
-
-The two parts people leave out most often are Verify and Stop, and they are the two that matter most when the check and the stopping condition are specific to the task. A structured prompt without them is a conversational prompt with headings. There is one legitimate reason to leave a part out: its content would only repeat what the project's rules or an approved design already say. A part is there to carry what is specific to the task; repeating the rules in every prompt is noise, and in chapter 4 the whole Build prompt is one line for exactly that reason.
+Limits: it takes longer to write, and you need the names of files, agents and tools to fill it in. It is the wrong type while you are still exploring.
 
 ### Type 4: the specification prompt
 
-A specification prompt asks for one file and lists what the file must contain. IBM's Planning Analytics workshop uses this type to have Bob write agent definitions:
+A specification prompt asks for one file and lists what the file must contain. IBM's Planning Analytics workshop uses it to have Bob write agent definitions:
 
 ```
 Generate a ready-to-import agent YAML with these properties:
@@ -157,170 +148,82 @@ Generate a ready-to-import agent YAML with these properties:
 Follow the spec_version v1, kind native schema. Return only the YAML.
 ```
 
-What it is good for: small, well-understood artifacts that you want quickly and predictably. Every property is listed, the schema is named, and "return only the YAML" avoids a page of explanation you did not ask for. It is a structured prompt reduced to what one file needs.
+Use it for small artifacts whose design is already approved and whose fields you know. "Return only the YAML" avoids a page of explanation.
 
-Limits: it only works when you already know the fields of the file. It produces the file and nothing else; importing it and testing it is a separate prompt. Used on its own, it skips the design conversation, so keep it for artifacts whose design is already approved.
+Limits: it produces the file and nothing else; importing and testing are separate prompts. It skips the design conversation, so it is not for new work.
 
 ### Type 5: the follow-up
 
-A follow-up is a short correction inside a conversation that is already going: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back", "Show me the reasoning for that last test". Bob's documentation calls this iterating.
+A follow-up is a short correction inside a conversation that is already going: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back". Bob's documentation calls this iterating.
 
-What it is good for: adjusting a result you mostly like. It is the fastest type by far, because all the context is already in the conversation.
+Use it to adjust a result you mostly like. It is the fastest type, because the context is already in the conversation.
 
-Limits: it only works while the conversation is short and focused. After many follow-ups the assistant starts to lose track of earlier constraints; the remedy is to start a new chat with a fresh, complete prompt and the current files mentioned. A useful rule: three follow-ups on the same problem means the original prompt was missing something, so rewrite the prompt instead of sending a fourth.
+Limits: it works while the conversation is short. After many follow-ups Bob loses track of earlier constraints; start a new chat with a complete prompt and the current files mentioned. Three follow-ups on the same problem mean the original prompt was missing something: rewrite it instead of sending a fourth.
 
 ### Choosing the type
 
 | You want to | Type | Bob mode |
 |---|---|---|
-| Understand something, or check what the assistant understood | Question | Ask |
-| Start a project, explore, get a first proposal | Conversational, ending with what you want back: questions in Ask mode, a proposal to approve in Plan mode | Ask, then Plan |
+| Understand something, or check what Bob understood | Question | Ask |
+| Start a project, explore, get a first proposal | Brief, ending with what you want back | Ask, then Plan |
 | Revise a design | Structured, or a follow-up if the change is small | Plan |
-| Create or change anything on the instance | Structured, with Verify and Stop filled in | Agent |
+| Create or change anything on the instance | Structured, or one line when the design and the rules carry the rest | Agent |
 | Get one file whose contents you already know | Specification | Plan or Agent |
-| Adjust a result you mostly like | Follow-up | Whatever mode you are in |
+| Adjust a result you mostly like | Follow-up | The mode you are in |
 
-Whatever type you use, two things must always be present in a prompt that asks for work: what "done" looks like, and when the assistant should stop and ask. The conversational prompt carries them in its last sentence; the structured prompt has a line for each; the specification prompt has "return only the file". A prompt without them is the source of most of the surprises people report with coding assistants.
+Whatever the type, a prompt that asks for work must say two things: what done looks like, and when Bob should stop and ask. The brief carries them in its last lines, the structured prompt in Verify and Stop, the specification in "return only the file". Prompts without them are the source of most surprises.
 
-## 3.4 Keeping control during the Build phase
+## 3.4 Keeping control during Build
 
-Three habits, all enforced by the rules installed in chapter 2, keep the Build phase under control without you approving every step. The first is to verify after every change: the assistant looks at the instance after each import, because the platform sometimes reports success when it has actually logged an error, and the only way to know is to look. The second is to read the reasoning of the agent when testing it, because that is where tool calls and their real results appear, and a polite final answer can hide a runtime error. The third is to restart the Orchestrate server from Bob's MCP tab before giving up on an operation, because some failures live in that connection rather than in your files. The walkthroughs show each of these habits at the moment it matters, and chapter 15 collects the cases behind them.
+Three checks, all enforced by the rules in the project folder, keep Build under control without approving every step.
 
-## 3.5 How much you need to say
+- Verify after every change. Bob looks at the instance after each import, because the platform sometimes reports success when it has logged an error.
+- Read the reasoning when testing. Tool calls and their real results appear there, and a polite final answer can hide a runtime error.
+- Restart the Orchestrate server before giving up. Some failures live in the connection, not in your files; the restart control is in Bob's settings, MCP tab.
 
-The walkthroughs ask less of you as they go. In chapter 4 you write one prompt per phase and read every operation the assistant performs. In chapters 5 and 6 the Build prompt covers several artifacts and you only check the result. From chapter 9 on you describe the business need once, approve one design, and read the report.
+The walkthroughs show each check at the moment it matters; chapter 15 collects the cases behind them.
 
-The assistant writes the YAML and the Python; you do not need to learn that. What you need to learn is when to be precise and when to delegate, and the only way to learn it is to start precise and loosen as you see what the assistant gets right on its own. So chapter 4 is slow on purpose. By chapter 9 the same assistant will need one paragraph from you.
+## 3.5 How much to say
+
+The walkthroughs ask less of you as they go. In chapter 4 you write one prompt per phase and read every operation Bob performs. In chapters 5 and 6 the Build prompt covers several artifacts and you check the result. From chapter 9 on, you describe the business need once, approve one design, and read the report.
+
+Bob writes the YAML and the Python; you do not need to learn them. What you need to learn is when to be precise and when to delegate, and the way to learn it is to start precise and loosen as you see what Bob gets right on its own. Chapter 4 is slow on purpose.
 
 ## 3.6 Prompts, weak and better
 
-Writing good prompts is the most important thing to learn in this guide, so this section gives one weak prompt and one better prompt for the same situation, five times, with a line on why the better one works. Each pair uses one of the types from section 3.3. The walkthroughs contain the real answers the assistant gave.
+One weak prompt and one better prompt for the same situation, one per type.
 
-Starting a project (conversational). Weak, typed in Agent mode:
+| Situation | Weak | Better | Why |
+|---|---|---|---|
+| Starting a project (brief) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes." typed in Agent mode | The six-item brief: three example user sentences, the data files and the existing tool named with @, the ten-tool limit, and "tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt lets Bob guess the data, invent tools and import before you have seen a name |
+| Adding one tool (structured) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success; Bob may create the tool from scratch, rename it, or declare victory when the import returns |
+| Investigating a failure (question) | "The agent does not work, fix it." | "Chat with lab_order_agent asking 'Where is order LL-1001?' with reasoning included. Show every tool call and result exactly as returned before proposing any change. Do not modify anything yet." | "Fix it" invites Bob to patch the first thing it sees; the evidence is in the reasoning and nowhere else |
+| Asking for a single file (specification) | "Write me an agent YAML for order tracking." | The specification prompt shown in 3.3 | Every property is listed and the schema named; the weak prompt yields a plausible file with a made-up name |
+| Adjusting a result (follow-up) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something at random |
 
-```
-Build me a customer service agent for Lumen Logistics that can track orders,
-answer policy questions and give shipping quotes.
-```
+Two patterns run through the better column: point at real files instead of describing them, and say what Bob should hand back and when it should stop. Keep those two and the rest of the wording can be as informal as you like.
 
-Better, in Ask mode:
-
-```
-I would like to build a customer service front door for Lumen Logistics with
-watsonx Orchestrate. Users will ask things like "where is order LL-1003",
-"what is the hotel limit in Paris" and "how much to ship 3 kg to Germany".
-The orders are in @lab/data/orders.json, the policies are the two documents
-in @lab/knowledge/docs, and there is already a carrier quote tool in
-@lab/tools/lab_get_carrier_quote.py that needs the connection lab_carrier_api.
-No agent should have more than ten tools and collaborators combined, and
-please reuse what already exists on the instance.
-
-Tell me what you understood, what you would need to know, and what already
-exists on the instance.
-```
-
-Why it is better: the weak prompt lets the assistant guess the data, invent tools and start importing before you have seen a name. The better one gives three example user sentences, points at the real files, states the one hard limit, and ends by saying what it wants back. The Ask mode it is typed in keeps the assistant from building, and the Discover rules keep the answer to understanding and questions.
-
-Adding one tool (structured). Weak:
-
-```
-Add the order status tool to the agent.
-```
-
-Better:
-
-```
-Goal: the order status tool exists on the instance and lab_order_agent can call it.
-Context: @lab/tools/lab_get_order_status.py and @agents/lab_order_agent.yaml.
-Constraints: import the tool from that file. Keep the name lab_get_order_status.
-  Do not change the agent's instructions.
-Deliverable: the tool imported, the agent re-imported, and one chat asking
-  "Where is order LL-1001?" with reasoning included.
-Verify: the list of tools shows lab_get_order_status with order_id in its input
-  schema, and the chat reasoning shows one call to it returning "in transit".
-Stop: if the import returns an error, show me the exact text and wait.
-```
-
-Why it is better: the weak prompt does not say which file, which agent, or what proves success, so the assistant may create the tool from scratch, rename it, or declare victory when the import returns. The better one names both files, fixes the name, says what to hand back and how it will be checked, and says what to do on error.
-
-Investigating a failure (question). Weak:
-
-```
-The agent does not work, fix it.
-```
-
-Better:
-
-```
-Chat with lab_order_agent asking "Where is order LL-1001?" with reasoning
-included. Show me every tool call and every tool result from the reasoning,
-exactly as returned, before proposing any change. If a result contains an
-error or a traceback, quote it and tell me what you think caused it.
-Do not modify anything yet.
-```
-
-Why it is better: "fix it" invites the assistant to patch the first thing it sees. The better prompt brings the evidence into the open first; most runtime problems (a tool that imported but cannot run, a parameter the agent invented, a tool that was never called) are visible in the reasoning and nowhere else.
-
-Asking for a single file (specification). Weak:
-
-```
-Write me an agent YAML for order tracking.
-```
-
-Better:
-
-```
-Generate a ready-to-import agent YAML with these properties:
-- name: lab_order_agent
-- description: answers questions about the shipping status of customer orders
-- llm: groq/openai/gpt-oss-120b
-- style: react_core
-- no tools or collaborators yet, they are added in the next step
-Follow the spec_version v1, kind native schema. Return only the YAML.
-```
-
-Why it is better: every property the file needs is listed and the schema is named, so the file is predictable. The weak prompt produces a plausible file with a made-up name and whatever fields the assistant remembers.
-
-Adjusting a result (follow-up). Weak:
-
-```
-That's not right, try again.
-```
-
-Better:
-
-```
-The table is right but the answer is too long. Keep the table, remove the
-introduction, and keep the whole answer under 80 words.
-```
-
-Why it is better: "try again" gives the assistant nothing to change, so it changes something at random. The better one says what to keep, what to remove, and the limit to respect.
-
-Two patterns run through all five pairs. The better prompt always points at real files instead of describing them, and it always says what the assistant should hand back and when it should stop. Keep those two things and the rest of the wording can be as informal as you like.
-
-The same lessons as a table of prompts to avoid, in the style IBM's Bob training uses:
+Prompts to avoid, in the form IBM's Bob training uses:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
-| "Build me a customer service agent" | The assistant invents the users, the facts, the tools and the names | The six-item brief above, in Ask mode |
-| "Give it tools, a knowledge base and a few collaborators" | Every component is a place an answer can go wrong; with all of them at once, nothing can be traced | One component per iteration, starting with instructions alone, as the walkthroughs do |
-| "It does not work, fix it" | The assistant patches the first thing it sees | Ask for the reasoning of the failing test first, then decide |
-| "Make it production ready" | Everything lands in draft; going live is a decision at the second gate, not a prompt | Build and test in draft; deploy in chapter 11 |
-| "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules already enforce, and teaches the reader that the prompt is the safeguard | Only what is specific to the task; the rules do the rest |
+| "Build me a customer service agent" | Bob invents the users, the facts, the tools and the names | The six-item brief, in Ask mode |
+| "Give it tools, a knowledge base and a few collaborators" | Every component is a place an answer can go wrong; with all of them at once, nothing can be traced | One component per iteration, as the walkthroughs do |
+| "It does not work, fix it" | Bob patches the first thing it sees | Ask for the reasoning of the failing test first |
+| "Make it production ready" | Everything lands in draft; going live is a decision at the second gate | Build and test in draft; deploy in chapter 11 |
+| "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules already enforce, and teaches that the prompt is the safeguard | Only what is specific to the task; the rules do the rest |
 
-## 3.7 What runs behind the scenes
+## 3.7 The files behind the prompts
 
-Bob reads a small set of files from the project folder automatically, at the start of each conversation, and those files are what allow the prompts in this guide to stay short. You do not need to know their contents now; they came with the repository you cloned in chapter 2, and later chapters open them one at a time when a walkthrough needs to explain something they do. For the moment it is enough to know what kinds of files exist and what each kind is for.
+Bob reads a few files from the project folder at the start of every conversation. They are the reason the prompts in this guide stay short. They came with the repository cloned in chapter 2; you do not edit them, and later chapters open them when a walkthrough needs to explain what they do.
 
-The project instructions. A short text file in the root of the project, `AGENTS.md`, that describes the project to the assistant: how the folders are organised, which naming rules apply, how it must work with your Orchestrate instance, and which actions require asking you first.
+| File | What it does |
+|---|---|
+| `AGENTS.md`, at the top of the folder | Describes the project to Bob: how the folders are organised, the naming rules, how to work with the instance, and which actions require asking you first |
+| `.bob/rules-ask`, `.bob/rules-plan`, `.bob/rules-code` | One short file per phase, loaded with the matching mode: what a Discover answer contains, what a design must let you judge, how a build is verified |
+| `.bob/mcp.json` | Written by the extension in chapter 2: how Bob starts the Orchestrate server and the documentation server, and which folder it may work in |
 
-The phase rules. Three short files, one for each phase, holding the rules that apply only during Discover, Design or Build. Each one is tied to a mode, so the right rules load themselves when you switch modes.
-
-The connection settings. The file the extension wrote in chapter 2, which tells Bob how to reach your Orchestrate instance and the Orchestrate documentation, and which project folder it is allowed to read and write on your behalf. Chapter 4 is the first time you see it in action.
-
-All of these live under the `.bob` folder of the project, with `AGENTS.md` next to it. The repository also carries the equivalent files for other assistants, mentioned in chapter 2; they play no part in this guide.
-
-One last practical point. Keep one task per chat. When a phase of a walkthrough ends, start a new conversation for the next phase and give it the design document as context. Long conversations are where the assistant starts to forget constraints that it accepted an hour ago. Bob's documentation calls this context poisoning, and the remedy is a fresh chat, with the right file mentioned at the start.
+One practical rule: keep one task per chat. When a phase of a walkthrough ends, start a new conversation for the next phase and mention the design file. Long conversations are where Bob forgets constraints it accepted an hour ago; Bob's documentation calls this context poisoning.
 
 ## 3.8 Keeping your work
 
@@ -343,4 +246,3 @@ and push.
 ```
 
 Bob composes the message and asks you to approve the commands. Files specific to your machine, the Python environment, the connection settings and `.env`, are ignored by git and never leave your computer. If you would rather click than type, the Source Control icon in the left bar does the same.
-

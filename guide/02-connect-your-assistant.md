@@ -2,11 +2,11 @@
 
 Level: beginner. Time: about 30 minutes. Prerequisites: IBM Bob installed, and a watsonx Orchestrate instance you can log in to.
 
-## What this chapter is about
+## Overview
 
-At the end of this chapter Bob is connected to your Orchestrate instance and works inside one project folder, the one you clone from this guide's repository. Bob can list what is on your instance, and every later chapter starts from here.
+This chapter connects Bob to your watsonx Orchestrate instance and prepares the project folder that every later chapter uses. At the end, Bob lists what is on your instance on request.
 
-What you will be able to do afterwards:
+After completing this chapter, you can:
 
 - Clone the guide's repository from inside Bob and connect it to your instance with the watsonx Orchestrate ADK extension, without typing a command.
 - Decide which operations Bob may run without asking you.

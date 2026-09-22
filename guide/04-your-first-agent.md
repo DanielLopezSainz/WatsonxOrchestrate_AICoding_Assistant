@@ -2,11 +2,13 @@
 
 Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checklist at the end of chapter 2 answered yes, and chapter 3 read.
 
-## What this chapter is about
+## Overview
 
-The agent. An internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
+This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using the three phases of chapter 3 with one prompt each.
 
-Its components. Of everything an Orchestrate agent can be made of, this chapter uses the smallest set that still produces a working agent: one agent, one model, and a block of instructions. Every other component is deliberately absent, and each one is introduced by a later chapter, on the same agent or one next to it.
+The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
+
+Of everything an Orchestrate agent can be made of, this chapter uses the smallest set that still produces a working agent: one agent, one model, and a block of instructions. Every other component is deliberately absent, and each one is introduced by a later chapter, on the same agent or one next to it.
 
 | Component | In this chapter | Introduced in |
 |---|---|---|
@@ -24,7 +26,7 @@ Its components. Of everything an Orchestrate agent can be made of, this chapter 
 
 The consequence of that list is what makes the chapter useful: the agent's behaviour is entirely determined by the text of its instructions. When an answer is right, it is because the fact was there; when an answer is wrong, the gap is in that text and nowhere else. Later chapters add components one at a time, and each time the question "where did this answer come from" gets one more possible answer.
 
-What you will be able to do afterwards:
+After completing this chapter, you can:
 
 - Take a request from a sentence to a tested agent on your instance with Bob, using the three phases of chapter 3 with one prompt each, and recognise the two moments where you approve.
 - Read an agent definition file and say what each of its parts is for: name, description, instructions, model, and the lists of tools, collaborators and knowledge that later chapters fill.
