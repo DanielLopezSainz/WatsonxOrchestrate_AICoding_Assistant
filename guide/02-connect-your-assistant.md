@@ -127,14 +127,13 @@ Bob's left bar now has two icons that matter for this guide, and they show two d
 
 The two are connected by Bob's work: a definition is a file in the project folder until Bob imports it, and only then does it appear in the Orchestrate view. When the two disagree, the Orchestrate view is the truth about the instance and the file is the truth about what you decided. Chapter 4 uses both.
 
-What connects Bob to the instance. Two IBM programs were installed in step 3 and do the work whenever Bob touches the instance; you never run them yourself, but their names appear in Bob's messages.
+What connects Bob to the instance. Three pieces do the work whenever Bob touches the instance or looks something up; you never run them yourself, but their names appear in Bob's messages and in the MCP tab you checked in step 6.
 
-| Program | What it does |
+| Piece | What it does |
 |---|---|
-| The watsonx Orchestrate Agent Development Kit, the ADK | Defines agents, tools and everything around them as files, and pushes those files to an instance |
-| The watsonx Orchestrate MCP server | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
-
-A third connection, to IBM's documentation server on the internet, gives Bob a search over the Orchestrate documentation, so that it looks things up instead of guessing. That is the second entry you checked in step 6.
+| The watsonx Orchestrate Agent Development Kit, the ADK | Defines agents, tools and everything around them as files, and pushes those files to an instance. Installed in step 3 |
+| The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
+| IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and gives Bob a search over the Orchestrate documentation, so that it looks things up instead of guessing |
 
 Three things to remember for the whole guide.
 
