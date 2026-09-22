@@ -127,24 +127,20 @@ Bob's left bar now has two icons that matter for this guide, and they show two d
 
 The two are connected by Bob's work: a definition is a file in the project folder until Bob imports it, and only then does it appear in the Orchestrate view. When the two disagree, the Orchestrate view is the truth about the instance and the file is the truth about what you decided. Chapter 4 uses both.
 
-What the extension added to the folder: `venv`, a Python environment holding the ADK; `workspace_config.yaml`, which records where agents, tools and the rest live; `.bob/mcp.json`, the settings that tell Bob how to start the two servers; and `.bob/skills`, the Orchestrate skills loaded in step 4. None of them needs editing, and git ignores the ones that are specific to your machine.
+What connects Bob to the instance. Two IBM programs were installed in step 3 and do the work whenever Bob touches the instance; you never run them yourself, but their names appear in Bob's messages.
 
-The two IBM packages behind all this:
-
-| Package | What it is |
+| Program | What it does |
 |---|---|
-| The watsonx Orchestrate Agent Development Kit, the ADK | IBM's toolkit for defining agents, tools and everything around them as files, and for pushing those files to an instance. It also provides the `orchestrate` command, which this guide never asks you to type |
-| The watsonx Orchestrate MCP server | A small program that lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
+| The watsonx Orchestrate Agent Development Kit, the ADK | Defines agents, tools and everything around them as files, and pushes those files to an instance |
+| The watsonx Orchestrate MCP server | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
 
-A third piece is remote: IBM's documentation server, which gives Bob a search over the Orchestrate documentation, so that Bob looks things up instead of guessing.
+A third connection, to IBM's documentation server on the internet, gives Bob a search over the Orchestrate documentation, so that it looks things up instead of guessing. That is the second entry you checked in step 6.
 
 Three things to remember for the whole guide.
 
 1. One folder. Bob works inside the cloned repository and nowhere else. The server refuses to read or write outside it, and the extension recorded that folder when you initialised it. Always open this folder in Bob; do not initialise another one and then work here.
 2. The token lasts two hours. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. When it does, everything Bob tries fails with an authentication error until you activate the environment again from the Environment Manager. If Bob suddenly cannot do what it did an hour ago, this is the first thing to check.
 3. The active environment is shared. The ADK keeps one active environment per machine, and every assistant on the machine uses it. Switching it in the Environment Manager switches it for all of them. Only chapter 11 switches environments, on purpose.
-
-Developer Edition instead of a tenant: it registers itself as an environment named `local`, needs no key, and the Environment Manager starts and stops it. It has only a draft environment, so nothing can be deployed on it, and it does not process uploaded documents unless started with the document-processing option. Everything else in this guide works on it.
 
 ## 2.4 The approvals, explained
 
