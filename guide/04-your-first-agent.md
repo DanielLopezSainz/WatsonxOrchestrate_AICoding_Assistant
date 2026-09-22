@@ -150,13 +150,13 @@ A question to keep in mind for later: the design says what happens with question
 
 ## 4.5 Build
 
-Mode: Agent, same chat. Switch with `/agent`.
+Mode: Agent, in a new conversation. Click the plus sign at the top of the chat to start it, then choose Agent in the dropdown. IBM's workflow starts implementation in a fresh conversation so that the planning discussion does not weigh on it; the @ mention gives Bob the design.
 
 ```
 The design in @design/helpdesk-design.md is approved. Build it.
 ```
 
-That is the whole prompt, and it is also the approval from the first gate. The design says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
+That is the whole prompt, and it is also the approval from the first gate. Bob reads the design from the mention; it says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
 
 Now watch what Bob does, because this is the whole Build phase in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
@@ -244,7 +244,7 @@ You will not write this file by hand in this guide; the assistant does it. But y
 
 ## 4.7 Try it yourself
 
-Mode: Agent, same chat.
+Mode: Agent, same conversation as the build.
 
 Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you.
 
@@ -254,7 +254,7 @@ Then look at the agent outside the chat. Click the watsonx Orchestrate icon in B
 
 ## 4.8 When an answer is not quite right
 
-Mode: Agent, same chat.
+Mode: Agent, same conversation as the build.
 
 On the run behind this chapter, the badge conversation was continued with one more question in the same thread:
 
@@ -307,7 +307,7 @@ That loop, read the answer, find the gap in the instructions, change the file, i
 
 ## 4.9 Round trip
 
-Mode: Agent, same chat.
+Mode: Agent, same conversation as the build.
 
 One last prompt for this chapter, to learn something about the files you will be keeping.
 
@@ -325,7 +325,7 @@ Two practical conclusions. The exported file is the complete truth about the age
 
 ## 4.10 Checkpoint
 
-Mode: Agent, same chat.
+Mode: Agent, same conversation as the build.
 
 Before moving on, ask the agent these three questions through the assistant and compare.
 
