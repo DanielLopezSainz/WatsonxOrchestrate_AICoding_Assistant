@@ -321,3 +321,26 @@ The connection settings. The file the extension wrote in chapter 2, which tells 
 All of these live under the `.bob` folder of the project, with `AGENTS.md` next to it. The repository also carries the equivalent files for other assistants, mentioned in chapter 2; they play no part in this guide.
 
 One last practical point. Keep one task per chat. When a phase of a walkthrough ends, start a new conversation for the next phase and give it the design document as context. Long conversations are where the assistant starts to forget constraints that it accepted an hour ago. Bob's documentation calls this context poisoning, and the remedy is a fresh chat, with the right file mentioned at the start.
+
+## 3.8 Keeping your work
+
+The files Bob writes into the project folder, the designs and the definitions, are the product of this guide. Keep them in git, so that any chapter can be undone and every version of an agent can be found again. The folder is a clone of the guide's repository, so git is already there; what is missing is a place of your own to push to, because the guide's repository is not writable by readers.
+
+Once, before the first commit: create an empty repository in your own git account, copy its address, and in Agent mode send:
+
+```
+Point this repository's origin at <the address you copied> and push the
+current branch to it.
+```
+
+Bob shows the git commands and asks before running each; the first push asks for your git credentials, as any client does.
+
+Then, at the end of every chapter:
+
+```
+Commit everything I changed with a short message saying what was built,
+and push.
+```
+
+Bob composes the message and asks you to approve the commands. Files specific to your machine, the Python environment, the connection settings and `.env`, are ignored by git and never leave your computer. If you would rather click than type, the Source Control icon in the left bar does the same.
+

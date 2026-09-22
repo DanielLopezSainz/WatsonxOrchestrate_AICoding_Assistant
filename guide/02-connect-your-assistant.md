@@ -10,10 +10,9 @@ What you will be able to do afterwards:
 
 - Clone the guide's repository from inside Bob and connect it to your instance with the watsonx Orchestrate ADK extension, without typing a command.
 - Decide which operations Bob may run without asking you.
-- Keep your work in git through Bob.
 - Recognise the common setup failures and fix them.
 
-Skip this chapter if the checklist in 2.7 answers yes on every line for the folder you have open in Bob.
+Skip this chapter if the checklist in 2.6 answers yes on every line for the folder you have open in Bob.
 
 ## 2.1 Before you start
 
@@ -112,7 +111,7 @@ Step 8. Prove the connection. Start a new chat, choose Ask mode in the dropdown 
 Which agents exist on my instance? List their names and one line each.
 ```
 
-You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 7 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.8.
+You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 7 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.7.
 
 The setup is complete. What each step installed is explained next; the chapters that build things start at chapter 3.
 
@@ -156,34 +155,7 @@ One more Bob setting. Do not run Bob's `/init` command in this folder. It genera
 
 The instructions and rules in the repository work for any assistant, and the server is the same. Cursor and VS Code with Copilot have the same extension and the same steps; their rule files are in the repository. Claude Code and Claude Desktop connect through a settings file that names the server and the folder; `CLAUDE.md` in the repository makes Claude Code read the same instructions. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide follows Bob only.
 
-## 2.6 Keeping your project in git, from Bob
-
-The definition files Bob writes are the real product of this guide, and being able to go back to yesterday's version is what lets you let Bob work. The folder is a clone, so it is already a git repository. Bob does the rest through prompts in Agent mode; before each git command it shows the command and asks.
-
-First, where your commits go. The clone points at the guide's repository, which you cannot push to. Two ways to fix that:
-
-- Fork before cloning: on the repository's GitHub page, click Fork, then clone the fork's address in step 1 instead. Pushes work, and GitHub's Sync fork button brings in guide updates later.
-- Or create an empty repository in your GitHub account and send:
-
-```
-Change the remote named origin to https://github.com/<your-account>/<your-repo>.git
-and push the current branch to it.
-```
-
-The first push asks for your GitHub credentials, as any git client does.
-
-Then, after each chapter:
-
-```
-Stage all my changes, show me the list of files, commit them with a short
-message that summarises what was built, and push.
-```
-
-Bob composes the message and asks you to approve `git add`, `git commit` and `git push`. The Source Control icon in the left bar, the branch symbol, does the same by clicking. `/review` in the chat reviews your uncommitted changes, and `/create-pr` opens a pull request, signing in to GitHub in a browser the first time.
-
-Two cautions. The settings files and the `venv` folder are ignored by git, so a clone on another machine needs Initialise Workspace again. And never ask Bob to commit a file with an API key in it; `.env` is ignored for that reason.
-
-## 2.7 Checklist
+## 2.6 Checklist
 
 Answer every line with yes before moving on.
 
@@ -195,7 +167,7 @@ Answer every line with yes before moving on.
 6. The agent list prompt returns the agents you expect, without an approval request.
 7. You have not run `/init`.
 
-## 2.8 When something goes wrong
+## 2.7 When something goes wrong
 
 Five failures, each seen while preparing this guide, with the message and the fix.
 
