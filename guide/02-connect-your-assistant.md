@@ -116,18 +116,27 @@ You should see: Bob calling the server, visible above its answer, and the same a
 
 The setup is complete. What each step installed is explained next; the chapters that build things start at chapter 3.
 
-## 2.3 What was installed, and the three things to remember
+## 2.3 The two views, and what was installed
 
-Two IBM packages now sit inside your project folder.
+Bob's left bar now has two icons that matter for this guide, and they show two different things.
+
+| Icon | What it shows | Use it to |
+|---|---|---|
+| Files, at the top | The project folder on your disk: the repository's files, `AGENTS.md`, `guide`, `agents`, `tools` and the other folders, plus what the extension added | Read and edit the files Bob writes, definitions and designs, and keep them in git |
+| watsonx Orchestrate | What is on your instance, read live from it: the Explorer lists its agents, tools, connections, knowledge bases and toolkits; the Environment Manager shows the environments and the local server | Check what really exists after Bob imports something, switch environment, start or stop the Developer Edition |
+
+The two are connected by Bob's work: a definition is a file in the project folder until Bob imports it, and only then does it appear in the Orchestrate view. When the two disagree, the Orchestrate view is the truth about the instance and the file is the truth about what you decided. Chapter 4 uses both.
+
+What the extension added to the folder: `venv`, a Python environment holding the ADK; `workspace_config.yaml`, which records where agents, tools and the rest live; `.bob/mcp.json`, the settings that tell Bob how to start the two servers; and `.bob/skills`, the Orchestrate skills loaded in step 4. None of them needs editing, and git ignores the ones that are specific to your machine.
+
+The two IBM packages behind all this:
 
 | Package | What it is |
 |---|---|
 | The watsonx Orchestrate Agent Development Kit, the ADK | IBM's toolkit for defining agents, tools and everything around them as files, and for pushing those files to an instance. It also provides the `orchestrate` command, which this guide never asks you to type |
 | The watsonx Orchestrate MCP server | A small program that lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
 
-A third piece is remote: IBM's documentation server, which gives Bob a search over the Orchestrate documentation. The extension connected it too, so that Bob looks things up instead of guessing.
-
-The extension also created, inside the folder: `venv`, the Python environment with the ADK; `workspace_config.yaml`, which records where agents, tools and the rest live; and `.bob/mcp.json`, the settings that tell Bob how to start the two servers. None of them needs editing.
+A third piece is remote: IBM's documentation server, which gives Bob a search over the Orchestrate documentation, so that Bob looks things up instead of guessing.
 
 Three things to remember for the whole guide.
 
