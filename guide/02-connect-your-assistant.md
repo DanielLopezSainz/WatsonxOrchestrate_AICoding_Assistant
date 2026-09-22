@@ -77,7 +77,7 @@ Its three lines tell Bob to switch to Agent mode, to load IBM's Orchestrate skil
 3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
 ```
 
-You should see: Bob answering that the session is ready and the Orchestrate server is connected. Bob may or may not load the skills at this point; nothing before chapter 12 needs them.
+You should see: Bob answering that the skills are loaded, with a table of eight of them, and that it is in Agent mode. The skills now sit in `.bob/skills` in the folder; nothing before chapter 12 uses them. Bob may also ask how you want to proceed with the guide's example agent: it read that name from the walkthrough files in the repository, and no agent exists yet.
 
 Step 5. Connect to your instance.
 
