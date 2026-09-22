@@ -54,35 +54,41 @@ Step 3. Initialise the workspace.
 
 1. Click the watsonx Orchestrate icon. A panel headed "Watsonx Orchestrate: Explorer" opens with the message "No workspace found. Please initialise a workspace to begin building" and a button, Initialise Workspace.
 2. If the panel says instead that the extension loaded in restricted mode, click its link to trust the folder, confirm, and reload the window when asked. Bob asks this once per folder.
-3. Click Initialise Workspace.
+3. Click Initialise Workspace. A dialog asks "Initialize watsonx Orchestrate workspace in the current folder?" and shows the folder's path. Click Continue with Current Folder.
 4. If Bob asks permission to install `uv`, accept.
-5. If you use a tenant, a box asks for your API key: paste it. If the Developer Edition is running on your machine, nothing is asked.
-6. Wait. The extension installs a Python environment and the ADK inside the folder; this takes a minute or two.
-7. When the chat shows a ready-made message headed "SYSTEM PROMPT - IBM watsonx Orchestrate", send it. Bob answers that the session is ready.
+5. Wait. A progress message counts through the steps; the extension installs a Python environment and the ADK inside the folder, which takes a minute or two.
+6. When the chat shows a ready-made message headed "SYSTEM PROMPT - IBM watsonx Orchestrate", send it. Bob answers that the session is ready.
 
-You should see: the Explorer section listing the agents on your instance, and a second section in the panel, Environment Manager. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
+You should see: the panel now has two sections. Explorer lists Agents, Tools, Connections, Knowledge Bases and Toolkits. Environment Manager shows an Environment dropdown and an Add button.
 
-Step 4. Check the two servers.
+Step 4. Connect to your instance. What you do here depends on what you have.
+
+- Developer Edition running on your machine: nothing. The dropdown already shows `local (active)`, and below it "Local server: Started". Go to step 5.
+- SaaS tenant: the dropdown is empty. Click Add and answer the four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, say yes.
+
+You should see: the dropdown showing your environment with "(active)", and the Explorer's Agents list filled. A new tenant shows `AskOrchestrate`; a new Developer Edition also shows `DocProcessing`.
+
+Step 5. Check the two servers.
 
 1. Open Bob's settings with the settings icon in the Bob panel, then the MCP tab.
 2. Find the two entries `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`.
 
 You should see: both marked as connected, and about sixty operations listed under the first one when you expand it.
 
-Step 5. Set the approvals.
+Step 6. Set the approvals.
 
 1. In the auto-approve toolbar above the chat, switch on Read and MCP. Leave Edit and Execute off.
 2. In the MCP tab, expand `watsonx-orchestrate-adk` and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
 
 You should see: nothing yet. The effect shows in the next step, where Bob lists agents without asking you first.
 
-Step 6. Prove the connection. Start a new chat, choose Ask mode in the dropdown at the bottom of the chat, and send:
+Step 7. Prove the connection. Start a new chat, choose Ask mode in the dropdown at the bottom of the chat, and send:
 
 ```
 Which agents exist on my instance? List their names and one line each.
 ```
 
-You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 5 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.8.
+You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 6 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.8.
 
 The setup is complete. What each step installed is explained next; the chapters that build things start at chapter 3.
 
@@ -102,7 +108,7 @@ The extension also created, inside the folder: `venv`, the Python environment wi
 Three things to remember for the whole guide.
 
 1. One folder. Bob works inside the cloned repository and nowhere else. The server refuses to read or write outside it, and the extension recorded that folder when you initialised it. Always open this folder in Bob; do not initialise another one and then work here.
-2. The token lasts two hours. The API key you gave produced a token that expires after two hours. When it does, everything Bob tries fails with an authentication error until you activate the environment again from the Environment Manager. If Bob suddenly cannot do what it did an hour ago, this is the first thing to check.
+2. The token lasts two hours. On a tenant, the API key you gave in step 4 produced a token that expires after two hours. When it does, everything Bob tries fails with an authentication error until you activate the environment again from the Environment Manager. If Bob suddenly cannot do what it did an hour ago, this is the first thing to check.
 3. The active environment is shared. The ADK keeps one active environment per machine, and every assistant on the machine uses it. Switching it in the Environment Manager switches it for all of them. Only chapter 11 switches environments, on purpose.
 
 Developer Edition instead of a tenant: it registers itself as an environment named `local`, needs no key, and the Environment Manager starts and stops it. It has only a draft environment, so nothing can be deployed on it, and it does not process uploaded documents unless started with the document-processing option. Everything else in this guide works on it.
@@ -112,7 +118,7 @@ Developer Edition instead of a tenant: it registers itself as an environment nam
 Bob asks your permission before it acts, and two settings decide how often.
 
 - The auto-approve toolbar above the chat has one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands; leave them off while learning, so that Bob asks before either.
-- The Always allow switch on each operation in the MCP tab marks that operation as safe. Step 5 marked the eleven that only read from the instance or send a test message. Every other operation, importing, creating, removing, setting credentials, still asks.
+- The Always allow switch on each operation in the MCP tab marks that operation as safe. Step 6 marked the eleven that only read from the instance or send a test message. Every other operation, importing, creating, removing, setting credentials, still asks.
 
 That is the intended balance: reading is free, changing asks. Do not mark every operation to save clicks. An assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
 
