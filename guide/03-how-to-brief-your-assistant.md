@@ -266,24 +266,31 @@ Bob reads two things from the project folder at the start of every conversation,
 
 One task per conversation. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation, with the design file referenced. In long conversations, Bob loses track of constraints that it accepted earlier.
 
-## 3.6 Keeping your work
+## 3.6 Bob with Git
 
-The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Keep them in git, so that any change can be undone and every version of an agent can be retrieved. The folder is a clone of the guide's repository, so git is already configured. You need a repository of your own to push to, because readers cannot write to the guide's repository.
+The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them. You do not need to know the git command line: Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. Bob composes commit messages itself.
 
-Once, before the first commit, create an empty repository in your own git account, copy its address, and send this prompt in Agent mode:
+The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
 
 ```
 Point this repository's origin at <the address you copied> and push the
 current branch to it.
 ```
 
-Bob shows the git commands and asks for approval before running each one. The first push asks for your git credentials.
+The first push asks for your git credentials, once.
 
-At the end of every chapter, send:
+After that, the following requests cover daily use. Each one is a plain instruction, and Bob asks for approval before each command it runs.
 
-```
-Commit everything I changed with a short message saying what was built,
-and push.
-```
+| You want to | Send |
+|---|---|
+| Save your work | `Commit everything I changed with a short message saying what was built, and push.` |
+| Save only some files | `Commit the files in the design folder with the message "Helpdesk design v2" and push.` |
+| See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
+| See the history | `List the last ten commits with their dates and messages.` |
+| Get the latest version of the guide | `Pull the latest changes from the repository.` |
+| Undo the last change to a file | `Restore agents/lumen_helpdesk_agent.yaml to the version in the last commit.` |
+| Go back to an earlier version | `Show me what agents/lumen_helpdesk_agent.yaml looked like three commits ago.` |
+| Work on a change without touching the main version | `Create a branch named helpdesk-hours and switch to it.` |
+| Bring a finished branch back | `Switch to the main branch and merge helpdesk-hours into it, then push.` |
 
-Bob composes the commit message and asks you to approve the commands. Files that are specific to your machine, the Python environment, the connection settings and `.env`, are ignored by git and never leave your computer. The Source Control icon in the left bar provides the same operations by clicking.
+Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control icon in the left bar provides the same operations by clicking, if you prefer.
