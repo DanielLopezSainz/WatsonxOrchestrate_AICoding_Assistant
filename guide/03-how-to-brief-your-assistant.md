@@ -4,7 +4,7 @@ Level: beginner. Time: about 30 minutes of reading; nothing is built. Prerequisi
 
 ## Overview
 
-This chapter describes how to create agents in watsonx Orchestrate with Bob. The method is IBM's: the work is done in three phases, Discover, Design and Build, each in one of Bob's three modes, and you approve the design before Bob builds and the deployment before anything goes live. The chapter explains the method, then the prompts to use in each phase. The walkthroughs from chapter 4 on apply it without repeating it. In this guide, "the assistant" means Bob.
+This chapter describes how to create agents in watsonx Orchestrate with Bob. The work is done in three phases, Discover, Design and Build, each in one of Bob's three modes, and you approve the design before Bob builds and the deployment before anything goes live. The chapter explains the method, then the prompts to use in each phase. The walkthroughs from chapter 4 on apply it without repeating it. In this guide, "the assistant" means Bob.
 
 After completing this chapter, you can:
 
@@ -16,37 +16,37 @@ After completing this chapter, you can:
 
 Skip this chapter if you already work with Bob in its three modes and write prompts that state the expected result and when Bob must stop. Section 3.3 describes the structured prompt used from chapter 5 on.
 
-## 3.1 IBM's way of working with Bob
+## 3.1 Bob proposed workflow
 
-IBM designed Bob to do the work rather than to be supervised line by line. You describe the problem and take the decisions; Bob writes the files, imports and tests them, and reports the result, including failures. Three recommendations from IBM's documentation follow from this.
+Bob is designed to do the work rather than to be supervised line by line. You describe the problem and take the decisions; Bob writes the files, imports and tests them, and reports the result, including failures. Three recommendations follow from this.
 
-- Plan first. "Always start complex projects or features in Plan mode", so that a plan exists before anything is built. IBM's reason: it prevents breaking changes and gives the work a clear direction.
-- One task per conversation. "Start new tasks regularly with specific aims", and reference files with @ mentions instead of pasting them. Before implementing a plan, IBM's tutorial starts a new conversation on purpose, so that the planning discussion does not consume the context and Bob does not conflate planning and implementation.
-- Approve according to risk. IBM describes three approval strategies: manual approval of every action, auto-approval of specific actions, and a hybrid that auto-approves low-risk actions and asks for the rest. Chapter 2 set up the hybrid.
+- Plan first. Always start new projects or complex features in Plan mode, so that a plan exists before anything is built. It prevents breaking changes and gives the work a clear direction.
+- One task per conversation. Start new tasks regularly with specific aims, and reference files with @ mentions instead of pasting them. Before implementing a plan, start a new conversation, so that the planning discussion does not consume the context and Bob does not conflate planning and implementation.
+- Approve according to risk. There are three approval strategies: manual approval of every action, auto-approval of specific actions, and a hybrid that auto-approves low-risk actions and asks for the rest. Chapter 2 set up the hybrid.
 
 The mode is what makes this possible. A mode determines what Bob is allowed to do in a conversation, and Bob provides three.
 
 ### Ask mode
 
-IBM's definition: "Ask questions and get explanations." Bob can read your files, use the connected servers, which for Orchestrate means looking at your instance and searching the documentation, and load skills. It cannot write files or run commands. IBM recommends it "when you need explanations or information without making changes".
+Ask mode is for asking questions and getting explanations. Bob can read your files, use the connected servers, which for Orchestrate means looking at your instance and searching the documentation, and load skills. It cannot write files or run commands. Use it when you need explanations or information without making changes.
 
-In this guide, every agent project starts in Ask mode, as the Discover phase: Bob restates the request, looks at what exists on the instance, and asks its questions. IBM's own workflow starts new work in Plan mode; this guide adds a read-only step in front, because Plan mode can already write files and the first contact with a request should change nothing.
+In this guide, every agent project starts in Ask mode, as the Discover phase: Bob restates the request, looks at what exists on the instance, and asks its questions. Bob's standard workflow starts new work in Plan mode; this guide adds a read-only step in front, because Plan mode can already write files and the first contact with a request should change nothing.
 
 ### Plan mode
 
-IBM's definition: "Plans tasks: analyzes requirements, researches and designs implementation steps." Bob can do everything Ask mode can, and write files; it still cannot run commands. In IBM's tutorial, Plan mode asks clarifying questions, asks your approval before writing the plan files, and writes them into the project as Markdown. You review the plan for three things: that its scope matches your request, that it names concrete files rather than using vague language, and that nothing is missing. You ask for revisions in the same conversation.
+Plan mode plans tasks: it analyses requirements, researches, and designs the implementation steps. Bob can do everything Ask mode can, and write files; it still cannot run commands. In Plan mode, Bob asks clarifying questions, asks your approval before writing the plan files, and writes them into the project as Markdown. You review the plan for three things: that its scope matches your request, that it names concrete files rather than using vague language, and that nothing is missing. You ask for revisions in the same conversation.
 
 In this guide, Plan mode is the Design phase. The plan is a design document written into the `design` folder, and it is what you approve before Bob builds.
 
 ### Agent mode
 
-IBM's definition: "Take your idea, or plan, and bring it to life." Bob has every capability: read, write, run commands, use the servers, switch modes, delegate to subagents. IBM recommends it "for implementing features, fixing bugs, and any tasks requiring file modifications", and its tutorial enters it with a new conversation and a prompt that points at the plan with an @ mention.
+Agent mode takes an idea or a plan and implements it. Bob has every capability: read, write, run commands, use the servers, switch modes, delegate to subagents. Use it for implementing features, fixing bugs, and any task that modifies files. Enter it with a new conversation and a prompt that points at the plan with an @ mention.
 
 In this guide, Agent mode is the Build phase: Bob writes the definition and tool files, imports them, tests the agent, reads its reasoning, fixes what failed, and reports.
 
 ### Switching modes
 
-There are four ways, all described in IBM's documentation: the dropdown to the left of the chat input; the shortcut `⌘ .` on a Mac or `Ctrl .` elsewhere; accepting a switch Bob proposes when it notices the request needs another mode; and Bob switching by itself during a task when the work evolves. The slash commands `/ask`, `/plan` and `/agent` typed in the chat do the same as the dropdown.
+There are four ways: the dropdown to the left of the chat input; the shortcut `⌘ .` on a Mac or `Ctrl .` elsewhere; accepting a switch Bob proposes when it notices the request needs another mode; and Bob switching by itself during a task when the work evolves. The slash commands `/ask`, `/plan` and `/agent` typed in the chat do the same as the dropdown.
 
 The three phases of this guide and the Bob mode of each:
 
@@ -60,7 +60,7 @@ The three phases of this guide and the Bob mode of each:
 
 You approve twice in every agent project: the design, before Bob builds it, and the deployment, before an agent reaches its users.
 
-The design approval comes between Design and Build. You approve a list: which agents exist and what each is for, which tools each has, which systems need a connection, which documents become knowledge, and the build order. If you cannot explain that list to a colleague from the file alone, send it back with your questions. When it is right, the approval is one line. Following IBM's workflow, Build starts in a new conversation, so in chapter 4 that line, with the design file mentioned, is the whole Build prompt.
+The design approval comes between Design and Build. You approve a list: which agents exist and what each is for, which tools each has, which systems need a connection, which documents become knowledge, and the build order. If you cannot explain that list to a colleague from the file alone, send it back with your questions. When it is right, the approval is one line. Build starts in a new conversation, so in chapter 4 that line, with the design file mentioned, is the whole Build prompt.
 
 The deployment approval comes at the end of Build. Everything Bob creates lands in the draft environment of the instance. Nothing reaches end users until an agent is deployed, and deploying is done with an ADK command that Bob never runs on its own; chapter 11 shows it. Before that command, the active environment may have to be switched to the right tenant, and that switch affects every assistant on your machine at once, which is one more reason to make it an explicit decision.
 
@@ -90,7 +90,7 @@ returned. If a result contains an error, quote it and say what caused it.
 
 ### Type 2: the brief
 
-A brief describes what you want in your own words, as you would to a colleague. IBM's accelerator for Bob starts a project this way:
+A brief describes what you want in your own words, as you would to a colleague. The watsonx Orchestrate accelerator for Bob starts a project this way:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
@@ -106,7 +106,7 @@ Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
-IBM's Bob training states the rule in one line: a good prompt is a use case brief, not a question. A complete brief answers six things; anything left out, Bob fills with a generic default. For an Orchestrate agent the six are:
+The rule in one line: a good prompt is a use case brief, not a question. A complete brief answers six things; anything left out, Bob fills with a generic default. For an Orchestrate agent the six are:
 
 ```
 Users:        who will talk to the agent, and in which language
@@ -156,7 +156,7 @@ Limits: it takes longer to write, and you need the names of files, agents and to
 
 ### Type 4: the specification prompt
 
-A specification prompt asks for one file and lists what the file must contain. IBM's Planning Analytics workshop uses it to have Bob write agent definitions:
+A specification prompt asks for one file and lists what the file must contain. The Planning Analytics workshop for Bob uses it to write agent definitions:
 
 ```
 Generate a ready-to-import agent YAML with these properties:
@@ -223,7 +223,7 @@ A weak prompt and a better prompt for the same situation, one pair per type.
 
 The better prompts have two things in common: they name real files instead of describing them, and they state what Bob should return and when it should stop. With those two, the rest of the wording can be as informal as you like.
 
-Prompts to avoid, in the form IBM's Bob training uses:
+Prompts to avoid:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
@@ -243,7 +243,7 @@ Bob reads a few files from the project folder at the start of every conversation
 | `.bob/rules-ask`, `.bob/rules-plan`, `.bob/rules-code` | One short file per phase, loaded with the matching mode: what a Discover answer contains, what a design must let you judge, how a build is verified |
 | `.bob/mcp.json` | Written by the extension in chapter 2: how Bob starts the Orchestrate server and the documentation server, and which folder it may work in |
 
-One rule from IBM's best practices: one task per conversation. Discover and Design share one conversation, because the design needs your answers; Build starts a new one, with the design file mentioned. In long conversations Bob loses track of constraints it accepted earlier; Bob's documentation calls this context poisoning.
+One task per conversation. Discover and Design share one conversation, because the design needs your answers; Build starts a new one, with the design file mentioned. In long conversations Bob loses track of constraints it accepted earlier; Bob's documentation calls this context poisoning.
 
 ## 3.8 Keeping your work
 
