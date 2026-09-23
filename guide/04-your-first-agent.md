@@ -17,15 +17,15 @@ The agent uses the smallest set of components that produces a working agent:
 
 It has no tools, no connections to external systems, no knowledge base, no collaborator agents and no flows, and it stays in draft. Each of those components is introduced by a later chapter, on this agent or on one next to it:
 
-| Component | Chapter |
-|---|---|
-| Tools | 5 |
-| Connections to external systems | 6 |
-| MCP toolkits | 7 |
-| Knowledge base | 8 |
-| Collaborator agents | 9 |
-| Flows | 10 |
-| Deployment | 11 |
+| Component | What it is | Chapter |
+|---|---|---|
+| Tools | Functions the agent can call to look something up or act: a Python function or an API operation. With a tool, the agent stops answering from its instructions alone and starts using data | 5 |
+| Connections | Credentials and endpoints for the external systems that tools reach, such as an order database or a ticketing service, kept apart from the tool code | 6 |
+| MCP toolkits | Groups of tools provided by an external MCP server and attached to the agent as a set, without writing tool code | 7 |
+| Knowledge base | A set of documents, such as policies or manuals, that the agent searches when a question needs information too large for its instructions | 8 |
+| Collaborator agents | Other agents that this agent delegates to, so that each one keeps a small set of tools and a clear purpose | 9 |
+| Flows | Fixed sequences of steps that run the same way every time, for work that must not depend on the model's judgement | 10 |
+| Deployment | The move from the draft environment, visible to you only, to the live environment, visible to users | 11 |
 
 With nothing else present, the agent's behaviour is determined entirely by the text of its instructions. When an answer is right, the fact was there; when an answer is wrong, the gap is in that text. Later chapters add one component at a time, and each adds one more place an answer can come from.
 
