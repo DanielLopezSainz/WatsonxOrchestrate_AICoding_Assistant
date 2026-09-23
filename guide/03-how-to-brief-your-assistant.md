@@ -1,6 +1,6 @@
 # Chapter 3. How to work with Bob
 
-Level: beginner. Time: about 30 minutes of reading; nothing is built. Prerequisites: none. The examples refer to the project folder from chapter 2.
+Level: beginner. Time: about 30 minutes of reading. Prerequisites: none. The examples refer to the project folder from chapter 2.
 
 ## Overview
 
@@ -70,9 +70,14 @@ Between the two approvals, let Bob work. Approving every file in Agent mode remo
 
 ## 3.3 The types of prompts
 
-A prompt is what you type in the chat. This guide uses five kinds; each fits a situation, and choosing the right kind matters more than the wording.
+A prompt is the text you type in the chat. This guide uses five kinds of prompt, one for each situation.
 
-Whatever the kind, four practices apply to every prompt: be specific, since vague prompts produce vague output; show an example of the output when its format matters; refer to files with @ mentions instead of pasting their content; and plan before building.
+The following practices apply to every prompt:
+
+- Be specific. Vague prompts produce vague output.
+- Show an example of the output when its format matters.
+- Refer to files with @ mentions instead of pasting their content.
+- Plan before building.
 
 ### Type 1: the question
 
@@ -90,7 +95,7 @@ returned. If a result contains an error, quote it and say what caused it.
 
 ### Type 2: the brief
 
-A brief describes what you want in your own words, as you would to a colleague. The watsonx Orchestrate accelerator for Bob starts a project this way:
+A brief describes what you want in your own words. The watsonx Orchestrate accelerator for Bob starts a project this way:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
@@ -119,7 +124,7 @@ Done when:    the questions it must answer correctly, and what a correct answer 
 
 Use a brief to start an agent project, in Ask mode. A brief that covers the six items gets few questions back; one that covers two or three, like the first prompt of chapter 4, gets the rest back as questions, which is appropriate when you are still deciding what you want.
 
-Limits: it is only as clear as you are. Anything left out, Bob guesses, without saying so. The closing sentence depends on the mode: in Agent mode it is the only thing that stops Bob from building at once; in Ask mode the mode prevents building and the Ask-mode rules already ask for questions rather than a design, so the closing sentence only says what you want back.
+Limits: the result depends on the completeness of the brief. Bob fills any gap with an assumption and does not report it. The closing sentence depends on the mode: in Agent mode it is the only thing that stops Bob from building at once; in Ask mode the mode prevents building and the Ask-mode rules already ask for questions rather than a design, so the closing sentence only says what you want back.
 
 ### Type 3: the structured prompt
 
@@ -134,7 +139,7 @@ Verify:      how Bob proves that it worked, in a way you can check yourself
 Stop:        when Bob should ask you instead of guessing
 ```
 
-The labels are for you, not for Bob. They are a checklist so that you do not forget to state the expected result and when Bob must stop; Bob understands the same content written as plain sentences. Leave a part out when the project's rules or an approved design already say it: in chapter 4 the whole Build prompt is one line for that reason.
+The labels are a checklist for the writer, so that the expected result and the stopping condition are not forgotten. Bob does not require them and understands the same content written as plain sentences. Leave a part out when the project's rules or an approved design already say it: in chapter 4 the whole Build prompt is one line for that reason.
 
 Example, from the Agent-mode step of chapter 5:
 
@@ -191,7 +196,7 @@ Limits: it works while the conversation is short. After many follow-ups Bob lose
 | Get one file whose contents you already know | Specification | Plan or Agent |
 | Adjust a result you mostly like | Follow-up | The mode you are in |
 
-Whatever the type, a prompt that asks Bob to do something must state two things: the expected result, and when Bob should stop and ask. The brief states them in its last lines, the structured prompt in Verify and Stop, the specification in "return only the file". Most unexpected results come from prompts that omit them.
+Every prompt that asks Bob to do something must state two things: the expected result, and when Bob should stop and ask. The brief states them in its last lines, the structured prompt in Verify and Stop, the specification in "return only the file". Most unexpected results come from prompts that omit them.
 
 ## 3.4 Keeping control in Agent mode
 
@@ -207,7 +212,7 @@ The walkthroughs show each check where it applies; chapter 15 collects the cases
 
 The walkthroughs ask less of you as they go. In chapter 4 you write one prompt per mode and read every operation Bob performs. In chapters 5 and 6 the Agent-mode prompt covers several artifacts and you check the result. From chapter 9 on, you describe the business need once, approve one design, and read the report.
 
-Bob writes the YAML and the Python; you do not need to learn them. What you need to learn is when to be precise and when to delegate, and the way to learn it is to start precise and delegate more as you see what Bob gets right on its own. Chapter 4 is deliberately detailed.
+Bob writes the YAML and the Python; you do not need to learn them. The skill to acquire is knowing when to be precise and when to delegate. Start precise, and delegate more as you see what Bob gets right on its own. Chapter 4 is the most detailed walkthrough for this reason.
 
 ## 3.6 Prompts, weak and better
 
@@ -228,7 +233,7 @@ Prompts to avoid:
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
 | "Build me a customer service agent" | Bob invents the users, the facts, the tools and the names | The six-item brief, in Ask mode |
-| "Give it tools, a knowledge base and a few collaborators" | Every component is a place an answer can go wrong; with all of them at once, nothing can be traced | One component per iteration, as the walkthroughs do |
+| "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer; with several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob patches the first thing it sees | Ask for the reasoning of the failing test first |
 | "Make it production ready" | Everything Bob creates is a draft; deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
 | "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules in the project folder already require | Only what is specific to the task; the rules cover the rest |
@@ -256,7 +261,7 @@ Point this repository's origin at <the address you copied> and push the
 current branch to it.
 ```
 
-Bob shows the git commands and asks before running each; the first push asks for your git credentials, as any client does.
+Bob shows the git commands and asks before running each. The first push asks for your git credentials.
 
 Then, at the end of every chapter:
 
