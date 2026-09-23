@@ -102,7 +102,7 @@ Note: keep the facts short and exact. Everything the agent will ever say comes f
 
 ## 4.3 Plan mode: write the design
 
-Mode: Plan, in the same chat, so that Bob keeps your answers. Switch with `/plan`. Prompt type: structured, reduced to one Deliverable line.
+Mode: Plan, in the same conversation, so that Bob keeps your answers. Switch with `/plan`. Prompt type: instruction (chapter 3, type 2).
 
 ```
 Write the design for this agent into design/helpdesk-design.md.
@@ -150,7 +150,7 @@ A question to keep in mind for later: the design says what happens with question
 
 ## 4.5 Agent mode: build and test
 
-Mode: Agent, in a new conversation. Click the plus sign at the top of the chat to start it, then choose Agent in the dropdown. IBM's workflow starts implementation in a fresh conversation so that the planning discussion does not weigh on it; the @ mention gives Bob the design.
+Mode: Agent, in a new conversation. Click the plus sign at the top of the chat to start it, then choose Agent in the dropdown. Implementation starts in a new conversation so that the planning discussion does not consume the context; the @ mention gives Bob the design. Prompt type: instruction (chapter 3, type 2).
 
 ```
 The design in @design/helpdesk-design.md is approved. Build it.
