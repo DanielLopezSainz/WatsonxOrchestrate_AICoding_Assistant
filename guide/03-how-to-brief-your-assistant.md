@@ -72,7 +72,7 @@ Between the two approvals, let Bob work. Approving every file in Agent mode remo
 
 A prompt is what you type in the chat. This guide uses five kinds; each fits a situation, and choosing the right kind matters more than the wording.
 
-Four rules from Bob's documentation apply to all of them: be specific, since vague prompts produce vague output; show an example of the output when its format matters; refer to files with @ mentions instead of pasting their content; and plan before building.
+Whatever the kind, four practices apply to every prompt: be specific, since vague prompts produce vague output; show an example of the output when its format matters; refer to files with @ mentions instead of pasting their content; and plan before building.
 
 ### Type 1: the question
 
@@ -174,7 +174,7 @@ Limits: it produces the file and nothing else; importing and testing are separat
 
 ### Type 5: the follow-up
 
-A follow-up is a short correction inside a conversation that is already going: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back". Bob's documentation calls this iterating.
+A follow-up is a short correction inside a conversation that is already going: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back".
 
 Use it to adjust a result you mostly like. It is the fastest type, because the context is already in the conversation.
 
@@ -243,7 +243,7 @@ Bob reads a few files from the project folder at the start of every conversation
 | `.bob/rules-ask`, `.bob/rules-plan`, `.bob/rules-code` | One short file per mode, loaded when that mode is active: what an Ask-mode answer contains, what a design must let you judge, how a build is verified |
 | `.bob/mcp.json` | Written by the extension in chapter 2: how Bob starts the Orchestrate server and the documentation server, and which folder it may work in |
 
-One task per conversation. Ask mode and Plan mode share one conversation, because the design needs your answers; Agent mode starts a new one, with the design file mentioned. In long conversations Bob loses track of constraints it accepted earlier; Bob's documentation calls this context poisoning.
+One task per conversation. Ask mode and Plan mode share one conversation, because the design needs your answers; Agent mode starts a new one, with the design file mentioned. In long conversations Bob loses track of constraints it accepted earlier.
 
 ## 3.8 Keeping your work
 
