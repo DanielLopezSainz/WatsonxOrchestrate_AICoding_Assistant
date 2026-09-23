@@ -93,7 +93,7 @@ The deployment approval takes place when the agent is built and tested. Everythi
 
 IMPORTANT: the instructions file in the project folder tells Bob never to deploy, switch environment, set a credential or remove anything without asking you first. If Bob performs one of these actions without asking, the file is not being read. Go through the checklist in section 2.6.
 
-Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode. Control in Agent mode comes from the checks described in 3.4.
+Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode; the rules in the project folder require Bob to verify each import and to read the agent's reasoning when testing.
 
 ## 3.3 The types of prompts
 
@@ -214,23 +214,7 @@ Limitations: corrections work while the conversation is short. After many correc
 
 Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The use case description states them in its last lines, the structured prompt in the Verify and Stop parts, and the request for a single file in "Return only the file". Most unexpected results come from prompts that omit them.
 
-## 3.4 Keeping control in Agent mode
-
-Three checks, all required by the rules in the project folder, keep Agent mode under control without approving every step.
-
-- Verify after every change. Bob queries the instance after each import, because the platform sometimes reports success when it has logged an error.
-- Read the reasoning when testing. Tool calls and their results appear in the reasoning, and a well-formed final answer can hide a runtime error.
-- Restart the Orchestrate server before concluding that something is broken. Some failures are in the connection, not in the files. The restart control is in Bob's settings, MCP tab.
-
-The walkthroughs show each check where it applies. Chapter 15 collects the cases behind them.
-
-## 3.5 How much to specify
-
-The walkthroughs require less input from you as they progress. In chapter 4, you write one prompt per mode and read every operation that Bob performs. In chapters 5 and 6, the Agent-mode prompt covers several artifacts and you check the result. From chapter 9 onwards, you describe the business need once, approve one design, and read the report.
-
-Bob writes the YAML and the Python; you do not need to learn them. The skill to acquire is knowing when to be precise and when to delegate. Start precise, and delegate more as you see what Bob gets right on its own. Chapter 4 is the most detailed walkthrough for this reason.
-
-## 3.6 Prompts, weak and better
+## 3.4 Prompts, weak and better
 
 A weak prompt and a better prompt for the same situation, one pair per type.
 
@@ -254,7 +238,7 @@ Prompts to avoid:
 | "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
 | "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules in the project folder already require | Only what is specific to the task; the rules cover the rest |
 
-## 3.7 The files that Bob reads
+## 3.5 The files that Bob reads
 
 Bob reads a few files from the project folder at the start of every conversation. These files are the reason the prompts in this guide are short. They are part of the repository cloned in chapter 2. You do not edit them. Later chapters open them when a walkthrough needs to explain what they do.
 
@@ -266,7 +250,7 @@ Bob reads a few files from the project folder at the start of every conversation
 
 One task per conversation. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation, with the design file referenced. In long conversations, Bob loses track of constraints that it accepted earlier.
 
-## 3.8 Keeping your work
+## 3.6 Keeping your work
 
 The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Keep them in git, so that any change can be undone and every version of an agent can be retrieved. The folder is a clone of the guide's repository, so git is already configured. You need a repository of your own to push to, because readers cannot write to the guide's repository.
 

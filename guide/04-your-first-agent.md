@@ -54,7 +54,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
 
-Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.7, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
+Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.5, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
