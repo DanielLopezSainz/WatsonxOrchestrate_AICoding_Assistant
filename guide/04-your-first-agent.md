@@ -8,6 +8,8 @@ This chapter builds one agent with Bob, from a request to a tested agent in draf
 
 The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
+Skip this chapter if you have already built an agent from a definition file through Bob, updated it by re-importing, and read the reasoning of a test chat. Chapter 5 starts from the agent built here, and the finished files are in `walkthroughs/ch04` for anyone who did not build it: copy `agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it, and you are where this chapter ends.
+
 The agent uses the smallest set of components that produces a working agent:
 
 - One native agent, `lumen_helpdesk_agent`, defined in one file.
@@ -29,15 +31,6 @@ It has no tools, no connections to external systems, no knowledge base, no colla
 
 With nothing else present, the agent's behaviour is determined entirely by the text of its instructions. When an answer is right, the fact was there; when an answer is wrong, the gap is in that text. Later chapters add one component at a time, and each adds one more place an answer can come from.
 
-After completing this chapter, you can:
-
-- Take a request from a sentence to a tested agent on your instance with Bob, using Bob's three modes with one prompt in each, and approve the design before it is built.
-- Read an agent definition file and say what each of its parts is for: name, description, instructions, model, and the lists of tools, collaborators and knowledge that later chapters fill.
-- Tell from the reasoning of a test conversation whether the agent called anything or answered from its instructions alone.
-- Find a gap in an agent's instructions from a wrong answer, fix the file, and update the agent on the instance by importing it again.
-- Export an agent from the instance and know which of the two files, yours or the exported one, to edit and which to keep.
-
-Skip this chapter if you have already built an agent from a definition file through Bob, updated it by re-importing, and read the reasoning of a test chat. Chapter 5 starts from the agent built here, and the finished files are in `walkthroughs/ch04` for anyone who did not build it: copy `agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it, and you are where this chapter ends.
 
 Everything shown in this chapter, Bob's answers and the agent's answers, was captured from a real run on a Developer Edition, with the folder from chapter 2 open in Bob. Your wording will differ a little; the substance should not.
 
