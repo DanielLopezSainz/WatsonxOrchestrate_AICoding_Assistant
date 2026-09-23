@@ -217,12 +217,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Generated connection settings and local state (see chapter 2)
-.bob/mcp.json
-.mcp.json
-.cursor/mcp.json
-.vscode/mcp.json
-.bob/skills/
-exports/*
-!exports/.gitkeep
+# Written by the watsonx Orchestrate ADK extension and by Bob (see chapter 2)
+.bob/
+workspace_config.yaml
 .DS_Store

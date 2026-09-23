@@ -44,7 +44,7 @@ Everything shown in this chapter, Bob's answers and the agent's answers, was cap
 
 Check these three things. Each one takes a minute, and a missing one will cost you far more later.
 
-- The folder open in Bob is the one you cloned and initialised in chapter 2. The file `AGENTS.md` is visible at the top of Bob's file list, next to the `agents` and `design` folders, and the MCP tab of Bob's settings shows the two Orchestrate servers as connected. If any of that is not so, go through the checklist in section 2.6 before continuing.
+- The folder open in Bob is the one you cloned and initialised in chapter 2. The `guide` folder is visible at the top of Bob's file list, next to the `agents` folder the extension created, and the MCP tab of Bob's settings shows the two Orchestrate servers as connected. If any of that is not so, go through the checklist in section 2.6 before continuing.
 - Bob can reach your instance. Start a new chat in Ask mode and ask "Which agents exist on my instance?" On a new Developer Edition Bob lists two stock agents, DocProcessing and AskOrchestrate; on a new tenant it lists one. Bob should not ask for approval to do this, because listing was pre-approved in step 5 of chapter 2; if it does ask, approve it and revisit that step afterwards. Any answer that mentions a working directory, a forbidden path or an authentication problem is one of the failures described in section 2.7. If the list already contains `lumen_helpdesk_agent`, someone has run this chapter on the instance before you. Ask Bob to remove it and list the agents again; Bob asks for your approval first, because removing anything without asking is forbidden by the instructions file, and that approval request is the first sign in this guide that the file is being read.
 - You have about an hour of uninterrupted time. The chapter is short, but the reading between steps is where the learning happens.
 
@@ -54,7 +54,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
 
-Prompt type: structured prompt (chapter 3, type 3) written as running text, in Ask mode: your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.5, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
+Prompt type: structured prompt (chapter 3, type 3) written as running text, in Ask mode: your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building: Ask mode prevents it. The closing sentence says what the answer must contain.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -68,12 +68,12 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, because the Ask-mode rules ask Bob for them; the wording and the layout vary from run to run.
+Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. On the run behind this chapter, the answer had four parts; the wording and the layout vary from run to run.
 
 1. What I understood. A restatement of the request in Bob's words, ending on the run with a nine-word version of the scope: "receive question, find the right fact, answer in plain English. Nothing else." Read it against what you meant. If it is wrong, this is the cheapest moment to say so.
 2. What already exists on your instance. A table with one row per category, agents, tools, knowledge bases, toolkits, connections, saying what is there and whether it can be reused. On the run it listed the two stock agents, one demo tool, no knowledge bases, no toolkits, three unconfigured voice connections it did not understand but reported anyway, and concluded that nothing would be replaced and that the name `lumen_helpdesk_agent` clashed with nothing. Bob read all of this from the instance, not from memory; the table answers whether there is anything to reuse and whether the chosen name is free.
 3. Questions I need answered before writing a design. Six on the run, numbered, all at once: whether the facts exist already or should be drafted as placeholders; whether answers should be short and conversational or laid out as team, contact and hours; what to say when a question is outside the facts; which languages; the agent's name and display name; and whether the facts should live in the instructions or in a knowledge base, with the two options and their trade-off spelled out. Each question is a gap in the prompt: it said what the agent does and gave three examples, and nothing about the users, the language, the format, the unknowns, the name or the source of the facts. A brief that covers the six items of chapter 3 pre-empts most of them; the short prompt was chosen here so that you would see the questions once. The last question is the first design decision of the guide; the answer is "instructions" because the facts fit on half a page, and chapter 8 is where a knowledge base becomes the right choice. Bob also proposed the name on its own, having seen the finished file in the walkthrough folder of the repository.
-4. The closing line, "Waiting for your answers." That is the Ask-mode rules speaking, and it is also the check that they loaded: a design at this point, instead of that line, means they did not, and the checklist in section 2.6 is where to look.
+4. A closing line saying that Bob waits for your answers.
 
 Answer the questions in a follow-up, in plain text and in order. Here is the answer given on the run, which is also the data every later chapter reuses:
 
@@ -96,7 +96,7 @@ access problems go to Facilities. Urgent building problems such as water, power
 or alarms go to extension 4444 at any time.
 ```
 
-Bob confirms the answers in a sentence or two, asks about anything still missing, and tells you to switch to Plan mode to write the design. That is the Ask-mode rules again: they stop Bob from designing in Ask mode even once it has everything it needs, so that the design lands in a file you can approve rather than in a chat message.
+Bob confirms the answers and may already outline a design in the chat. Ask mode prevents it from writing the file; that happens in Plan mode, where the design lands in a file you can approve.
 
 Note: keep the facts short and exact. Everything the agent will ever say comes from this text, and later in the chapter you will see what happens when a fact is missing.
 
@@ -108,7 +108,7 @@ Mode: Plan, in the same conversation, so that Bob keeps your answers. Switch wit
 Write the design for this agent into design/helpdesk-design.md.
 ```
 
-One line is enough. The Plan-mode rules in the project folder tell Bob what a design has to let you judge, to show you the file, and to wait for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide; the rules are instructions to Bob, not to you.
+One line is enough. Plan mode is made for this: Bob asks for approval to write the file, writes it, and waits for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide.
 
 What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a short summary, ending "Waiting for your approval before building." Bob may mention using one of its own planning skills on the way.
 
@@ -126,7 +126,7 @@ What Bob's design covered on the run. The headings and the layout are Bob's choi
 
 Two fields of the proposed agent deserve a word, because every agent from here on has them.
 
-- The `llm` row, `groq/openai/gpt-oss-120b`, is the model the agent runs on. You did not name one and Bob did not ask: the value comes from the instructions file in the project, which lists it as the default model, along with the `react_core` style in the row above it. It is Orchestrate's default, available on every instance, and used throughout this guide. A definition without this line is incomplete.
+- The `llm` row, `groq/openai/gpt-oss-120b`, is the model the agent runs on. You did not name one and Bob did not ask: it chose Orchestrate's default, which is available on every instance and used throughout this guide, along with the `react_core` style in the row above it. A definition without this line is incomplete.
 - Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; the instruction text in the design is the second, and later chapters show why the first matters as much.
 
 The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
@@ -156,7 +156,7 @@ Mode: Agent, in a new conversation. Click the plus sign at the top of the chat t
 The design in @design/helpdesk-design.md is approved. Build it.
 ```
 
-That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Agent-mode rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
+That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Orchestrate skills loaded in chapter 2 say how Bob goes about it: file first, then the import, then a look at the instance, then the tests, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
 
 Now watch what Bob does, because this is the whole of Agent mode in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
@@ -248,7 +248,7 @@ Mode: Agent, same conversation as the build.
 
 Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you.
 
-Then look at the agent outside the chat. Click the watsonx Orchestrate icon in Bob's left bar; the Explorer section of its panel lists what is on your instance, read from the instance itself and not from your files. Refresh it and find `lumen_helpdesk_agent` under Agents, next to the stock agents. An agent that appears there has really been imported, whatever the chat said, and this is the check the rules make the assistant do after every import. On a tenant you can also open the Orchestrate web interface, Manage agents, and find "Lumen Logistics helpdesk" among the draft agents, with the welcome message and the two starter prompts from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
+Then look at the agent outside the chat. Click the watsonx Orchestrate icon in Bob's left bar; the Explorer section of its panel lists what is on your instance, read from the instance itself and not from your files. Refresh it and find `lumen_helpdesk_agent` under Agents, next to the stock agents. An agent that appears there has really been imported, whatever the chat said; make this check after every import. On a tenant you can also open the Orchestrate web interface, Manage agents, and find "Lumen Logistics helpdesk" among the draft agents, with the welcome message and the two starter prompts from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
 
 [Placeholder: one screenshot of the Explorer section with the agent listed, to be decided.]
 
@@ -286,7 +286,7 @@ have that information. Import the agent again and ask the badge question
 followed by "And what are their opening hours?" in the same conversation.
 ```
 
-Two things happen that are worth understanding. First, the assistant edits the file and imports it again with the same name, and the import replaces the draft on the instance in place: there is still one `lumen_helpdesk_agent`, not two, which you can confirm by asking for the list of agents. Importing the same name again is how you update an agent, and there is no warning when it happens, which is why the rules from chapter 2 make the assistant say so before doing it in the later chapters. Second, the answers change:
+Two things happen that are worth understanding. First, the assistant edits the file and imports it again with the same name, and the import replaces the draft on the instance in place: there is still one `lumen_helpdesk_agent`, not two, which you can confirm by asking for the list of agents. Importing the same name again is how you update an agent, and there is no warning when it happens. Second, the answers change:
 
 ```
 Your badge issue should be routed to Facilities. You can email

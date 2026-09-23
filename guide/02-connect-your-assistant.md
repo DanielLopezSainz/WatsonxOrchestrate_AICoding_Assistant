@@ -40,7 +40,7 @@ Step 1. Clone the repository.
 3. Choose where to save it. Bob creates a folder named `WatsonxOrchestrate_AICoding_Assistant` there.
 4. When Bob offers to open the cloned repository, click Open.
 
-You should see: the folder name at the top of the panel. If Bob's chat is in front, click the files icon to see the files, among them `AGENTS.md`, `guide` and empty folders such as `agents` and `tools`.
+You should see: the folder name at the top of the panel. If Bob's chat is in front, click the files icon to see the files: `README.md`, the `guide` folder with the chapters, and the `walkthroughs` folder.
 
 Step 2. Install the extension.
 
@@ -121,7 +121,7 @@ Bob's left bar now has two icons that matter for this guide, and they show two d
 
 | Icon | What it shows | Use it to |
 |---|---|---|
-| Files, at the top | The project folder on your disk: the repository's files, `AGENTS.md`, `guide`, `agents`, `tools` and the other folders, plus what the extension added | Read and edit the files Bob writes, definitions and designs, and keep them in git |
+| Files, at the top | The project folder on your disk: the guide, the walkthrough files, and the folders the extension created, `agents`, `tools`, `connections`, `knowledge-bases`, `toolkits` and `models` | Read and edit the files Bob writes, definitions and designs, and keep them in git |
 | watsonx Orchestrate | What is on your instance, read live from it: the Explorer lists its agents, tools, connections, knowledge bases and toolkits; the Environment Manager shows the environments and the local server | Check what really exists after Bob imports something, switch environment, start or stop the Developer Edition |
 
 The two are connected by Bob's work: a definition is a file in the project folder until Bob imports it, and only then does it appear in the Orchestrate view. When the two disagree, the Orchestrate view is the truth about the instance and the file is the truth about what you decided. Chapter 4 uses both.
@@ -149,23 +149,20 @@ Bob asks your permission before it acts, and two settings decide how often.
 
 That is the intended balance: reading is free, changing asks. Do not mark every operation to save clicks. An assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
 
-One more Bob setting. Do not run Bob's `/init` command in this folder. It generates an `AGENTS.md` by scanning the project and would offer to overwrite the one that came with the repository. Chapter 3 explains what that file does.
-
 ## 2.5 Other AI coding assistants
 
-The instructions and rules in the repository work for any assistant, and the server is the same. Cursor and VS Code with Copilot have the same extension and the same steps; their rule files are in the repository. Claude Code and Claude Desktop connect through a settings file that names the server and the folder; `CLAUDE.md` in the repository makes Claude Code read the same instructions. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide follows Bob only.
+The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide follows Bob only.
 
 ## 2.6 Checklist
 
 Answer every line with yes before moving on.
 
 1. The folder open in Bob is the cloned repository, and it is the one you initialised.
-2. `AGENTS.md` is visible at the top level of that folder, next to the `.bob` folder.
+2. The `guide` folder is visible at the top level of that folder, next to the folders the extension created.
 3. The MCP tab shows `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, both connected.
 4. Under the Permissions button, Read and MCP are on and Edit and Execute are off, and Always allow is on for the eleven reading operations.
 5. The Environment Manager shows an active environment.
 6. The agent list prompt returns the agents you expect, without an approval request.
-7. You have not run `/init`.
 
 ## 2.7 When something goes wrong
 
@@ -175,7 +172,7 @@ Five failures, each seen while preparing this guide, with the message and the fi
 |---|---|---|
 | `Attempting to access resources outside the working directory is forbidden.` | The folder open in Bob is not the one that was initialised, or Bob is pointing at a file elsewhere on your disk | Open the initialised folder. If you must change folders, run Update MCP Servers from the command palette with the right folder open |
 | Every operation fails with an authentication or authorization error after working earlier | The two-hour token expired | Activate the environment again in the Environment Manager; the next call works without a restart |
-| An artifact was imported, but the list of the instance does not show it | Some operations report success even when the platform logged an error; the knowledge base import with an unsupported document type does this | Trust the list, not the message. The rules make Bob check after every change for this reason |
+| An artifact was imported, but the list of the instance does not show it | Some operations report success even when the platform logged an error; the knowledge base import with an unsupported document type does this | Trust the list, not the message. After an import, ask Bob to list the artifacts of that kind and confirm the new one is there |
 | A Python tool import fails with `No module named '<tool>'` although the file exists | Bob tried to import from that folder before it existed, and the server remembers the failure while it runs | Restart the server with the restart control in the MCP tab, then import again |
 | The server command is not found, or the entry will not start | The environment the extension created is damaged or was moved | Run Initialise Workspace again; it repairs it |
 

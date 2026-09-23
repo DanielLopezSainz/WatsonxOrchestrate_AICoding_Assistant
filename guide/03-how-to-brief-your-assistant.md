@@ -12,7 +12,6 @@ After completing this chapter, you can:
 - Review a design before approving it.
 - Choose among three kinds of prompt and write each one.
 - Rewrite a vague prompt so that it states the expected result and the condition under which Bob must stop.
-- Describe the purpose of the files that Bob reads from the project folder.
 
 Skip this chapter if you already work with Bob in its three modes and your prompts state the expected result and the stopping condition. Section 3.3 describes the structured prompt that is used from chapter 5 onwards.
 
@@ -106,9 +105,9 @@ The design in @design/helpdesk-design.md is approved. Build it.
 
 This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the agent is visible to you and to nobody else.
 
-IMPORTANT: the instructions file in the project folder tells Bob never to deploy, switch environment, set a credential or remove anything without asking you first. If Bob performs one of these actions without asking, the file is not being read. Go through the checklist in section 2.6.
+IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings are not as chapter 2 describes. Go through the checklist in section 2.6.
 
-Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode; the rules in the project folder require Bob to verify each import and to read the agent's reasoning when testing.
+Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode. Two habits give you control instead: after an import, ask Bob to list the artifacts and confirm the new one is there, and when testing, ask for the reasoning and read it.
 
 ## 3.3 The types of prompts
 
@@ -232,7 +231,7 @@ Verify: the list of tools shows lab_get_order_status with order_id in its input
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when the rules in the project folder or an approved design already state it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
+Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when an approved design already states it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
 
 
 ## 3.4 Prompts, weak and better
@@ -260,17 +259,10 @@ Prompts to avoid:
 | "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob changes the first thing it finds | Request the reasoning of the failing test first |
 | "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
-| "Do not delete anything, ask before importing, verify afterwards" | Repeats what the rules in the project folder already require | Only what is specific to the task; the rules cover the rest |
 
-## 3.5 The files that Bob reads
+## 3.5 What Bob reads from the project folder
 
-Bob reads a few files from the project folder at the start of every conversation. These files are the reason the prompts in this guide are short. They are part of the repository cloned in chapter 2. You do not edit them. Later chapters open them when a walkthrough needs to explain what they do.
-
-| File | Purpose |
-|---|---|
-| `AGENTS.md`, at the top of the folder | Describes the project to Bob: how the folders are organised, the naming rules, how to work with the instance, and which actions require asking you first |
-| `.bob/rules-ask`, `.bob/rules-plan`, `.bob/rules-code` | One short file per mode, loaded when that mode is active: what an Ask-mode answer contains, what a design must include, how a build is verified |
-| `.bob/mcp.json` | Written by the extension in chapter 2: how Bob starts the Orchestrate server and the documentation server, and which folder Bob can work in |
+Bob reads two things from the project folder at the start of every conversation, both written by the watsonx Orchestrate ADK extension in chapter 2: the settings file `.bob/mcp.json`, which tells Bob how to start the Orchestrate server and the documentation server and which folder Bob can work in, and the Orchestrate skills in `.bob/skills`, which contain the procedures Bob follows for Orchestrate work. You do not edit either.
 
 One task per conversation. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation, with the design file referenced. In long conversations, Bob loses track of constraints that it accepted earlier.
 

@@ -6,12 +6,11 @@ The chapters follow one fictional company, Lumen Logistics, from a first questio
 
 ## How this repository is organised
 
-This repository is also the project folder you work in. Clone it, open it in your assistant, and follow chapter 2 to connect it to your Orchestrate instance.
+This repository is also the project folder you work in. Clone it, open it in Bob, and follow chapter 2 to connect it to your Orchestrate instance.
 
 - `guide/` the chapters, in reading order.
 - `walkthroughs/` the files each chapter produces, and the starting state for chapters that build on earlier ones.
-- `AGENTS.md` the instructions the assistant follows in this project, and `.bob/`, `.cursor/`, `.github/`, `CLAUDE.md` the same rules for each assistant. Chapter 2 explains them; nothing in them needs editing.
-- `agents/`, `tools/`, `knowledge-bases/`, `connections/`, `toolkits/`, `models/`, `design/`, `exports/` the working folders, empty until you build something.
+- The working folders, `agents`, `tools`, `connections`, `knowledge-bases`, `toolkits` and `models`, are created by the watsonx Orchestrate ADK extension when you initialise the folder in chapter 2; `design` is created by Bob when it writes the first design.
 - `.env.example` the two values chapter 2 asks you to keep in a local `.env` file, which git ignores.
 
 ## Where to start
