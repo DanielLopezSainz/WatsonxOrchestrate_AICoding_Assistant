@@ -8,7 +8,7 @@ This chapter builds one agent with Bob, from a request to a tested agent in draf
 
 The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
-Skip this chapter if you have already built an agent from a definition file through Bob, updated it by re-importing, and read the reasoning of a test chat. Chapter 5 starts from the agent built here, and the finished files are in `walkthroughs/ch04` for anyone who did not build it: copy `agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it, and you are where this chapter ends.
+Skip this chapter if you have already created an agent in watsonx Orchestrate with Bob. Chapter 5 continues with the agent built here; to start there without building it, copy `walkthroughs/ch04/agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it.
 
 The agent uses the smallest set of components that produces a working agent:
 
