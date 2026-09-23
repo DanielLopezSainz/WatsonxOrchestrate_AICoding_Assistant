@@ -4,7 +4,7 @@ Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checkl
 
 ## Overview
 
-This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using the three phases of chapter 3 with one prompt each.
+This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using the three phases of chapter 3, Discover, Design and Build, with one prompt each.
 
 The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
@@ -28,7 +28,7 @@ The consequence of that list is what makes the chapter useful: the agent's behav
 
 After completing this chapter, you can:
 
-- Take a request from a sentence to a tested agent on your instance with Bob, using the three phases of chapter 3 with one prompt each, and recognise the two moments where you approve.
+- Take a request from a sentence to a tested agent on your instance with Bob, using the three phases of chapter 3 with one prompt each, and approve the design before it is built.
 - Read an agent definition file and say what each of its parts is for: name, description, instructions, model, and the lists of tools, collaborators and knowledge that later chapters fill.
 - Tell from the reasoning of a test conversation whether the agent called anything or answered from its instructions alone.
 - Find a gap in an agent's instructions from a wrong answer, fix the file, and update the agent on the instance by importing it again.
@@ -131,7 +131,7 @@ Two fields of the proposed agent deserve a word, because every agent from here o
 
 The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
 
-## 4.4 The first gate
+## 4.4 Approve the design
 
 Mode: still Plan, same chat.
 
@@ -144,7 +144,7 @@ Add a welcome message and two starter prompts to the design: the badge
 question and the password question.
 ```
 
-Bob revises the file and waits again. That is the first gate at work. When the design says what you mean, go to 4.5; the approval is given there.
+Bob revises the file and waits again. That is the design approval in practice. When the design says what you mean, go to 4.5; the approval is given there.
 
 A question to keep in mind for later: the design says what happens with questions outside the three teams. Does it say what happens with a question about one of the three teams that the facts do not cover, such as the name of the HR manager? Section 4.8 shows why that matters.
 
@@ -156,7 +156,7 @@ Mode: Agent, in a new conversation. Click the plus sign at the top of the chat t
 The design in @design/helpdesk-design.md is approved. Build it.
 ```
 
-That is the whole prompt, and it is also the approval from the first gate. Bob reads the design from the mention; it says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
+That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
 
 Now watch what Bob does, because this is the whole Build phase in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
@@ -339,6 +339,6 @@ If the first answer has no hours, the fix from 4.8 was not imported; ask for the
 
 ## 4.11 What you learned
 
-The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, and two gates in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, with the design approval in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
 
 Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.
