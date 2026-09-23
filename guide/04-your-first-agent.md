@@ -8,23 +8,26 @@ This chapter builds one agent with Bob, from a request to a tested agent in draf
 
 The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
-Of everything an Orchestrate agent can be made of, this chapter uses the smallest set that still produces a working agent: one agent, one model, and a block of instructions. Every other component is deliberately absent, and each one is introduced by a later chapter, on the same agent or one next to it.
+The agent uses the smallest set of components that produces a working agent:
 
-| Component | In this chapter | Introduced in |
-|---|---|---|
-| Agents | One native agent, `lumen_helpdesk_agent`, defined in one YAML file | |
-| Collaborator agents | None. The agent answers every question itself and delegates nothing | Chapter 9 |
-| Tools | None. No Python tools, no OpenAPI tools; the agent cannot look anything up or act on anything | Chapter 5 |
-| Connections to external systems | None. Nothing leaves the Orchestrate instance | Chapter 6 |
-| MCP toolkits | None | Chapter 7 |
-| Knowledge base | None. The facts the agent knows are written into its instructions, not indexed from documents | Chapter 8 |
-| Flows | None. Every answer is produced by the model reasoning over the instructions | Chapter 10 |
-| Model and reasoning style | `groq/openai/gpt-oss-120b`, the instance default, with the `react_core` style | |
-| Instructions | About twenty lines: the facts for three teams, the tone, and the rule for questions the facts do not cover | |
-| Conversation surface | A welcome message and two starter prompts, shown before the user types | |
-| Environment | Draft only. The agent is never deployed in this chapter and no end user sees it | Chapter 11 |
+- One native agent, `lumen_helpdesk_agent`, defined in one file.
+- The instance's default model, `groq/openai/gpt-oss-120b`, with the `react_core` reasoning style.
+- About twenty lines of instructions: the facts for three teams, the tone, and the rule for questions the facts do not cover.
+- A welcome message and two starter prompts, shown before the user types.
 
-The consequence of that list is what makes the chapter useful: the agent's behaviour is entirely determined by the text of its instructions. When an answer is right, it is because the fact was there; when an answer is wrong, the gap is in that text and nowhere else. Later chapters add components one at a time, and each time the question "where did this answer come from" gets one more possible answer.
+It has no tools, no connections to external systems, no knowledge base, no collaborator agents and no flows, and it stays in draft. Each of those components is introduced by a later chapter, on this agent or on one next to it:
+
+| Component | Chapter |
+|---|---|
+| Tools | 5 |
+| Connections to external systems | 6 |
+| MCP toolkits | 7 |
+| Knowledge base | 8 |
+| Collaborator agents | 9 |
+| Flows | 10 |
+| Deployment | 11 |
+
+With nothing else present, the agent's behaviour is determined entirely by the text of its instructions. When an answer is right, the fact was there; when an answer is wrong, the gap is in that text. Later chapters add one component at a time, and each adds one more place an answer can come from.
 
 After completing this chapter, you can:
 
