@@ -4,7 +4,7 @@ Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checkl
 
 ## Overview
 
-This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using the three phases of chapter 3, Discover, Design and Build, with one prompt each.
+This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using Bob's three modes as chapter 3 describes, with one prompt in each.
 
 The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
 
@@ -28,7 +28,7 @@ The consequence of that list is what makes the chapter useful: the agent's behav
 
 After completing this chapter, you can:
 
-- Take a request from a sentence to a tested agent on your instance with Bob, using the three phases of chapter 3 with one prompt each, and approve the design before it is built.
+- Take a request from a sentence to a tested agent on your instance with Bob, using Bob's three modes with one prompt in each, and approve the design before it is built.
 - Read an agent definition file and say what each of its parts is for: name, description, instructions, model, and the lists of tools, collaborators and knowledge that later chapters fill.
 - Tell from the reasoning of a test conversation whether the agent called anything or answered from its instructions alone.
 - Find a gap in an agent's instructions from a wrong answer, fix the file, and update the agent on the instance by importing it again.
@@ -50,11 +50,11 @@ Check these three things. Each one takes a minute, and a missing one will cost y
 
 No starting-state pack is needed for this chapter, because it starts from nothing.
 
-## 4.2 Discover
+## 4.2 Ask mode: understand the request
 
 Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
 
-Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Discover rules in the project folder, described in section 3.7, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
+Prompt type: conversational (chapter 3, type 2), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.7, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -68,12 +68,12 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, because the Discover rules ask Bob for them; the wording and the layout vary from run to run.
+Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. The answer has four parts, because the Ask-mode rules ask Bob for them; the wording and the layout vary from run to run.
 
 1. What I understood. A restatement of the request in Bob's words, ending on the run with a nine-word version of the scope: "receive question, find the right fact, answer in plain English. Nothing else." Read it against what you meant. If it is wrong, this is the cheapest moment to say so.
 2. What already exists on your instance. A table with one row per category, agents, tools, knowledge bases, toolkits, connections, saying what is there and whether it can be reused. On the run it listed the two stock agents, one demo tool, no knowledge bases, no toolkits, three unconfigured voice connections it did not understand but reported anyway, and concluded that nothing would be replaced and that the name `lumen_helpdesk_agent` clashed with nothing. Bob read all of this from the instance, not from memory; the table answers whether there is anything to reuse and whether the chosen name is free.
 3. Questions I need answered before writing a design. Six on the run, numbered, all at once: whether the facts exist already or should be drafted as placeholders; whether answers should be short and conversational or laid out as team, contact and hours; what to say when a question is outside the facts; which languages; the agent's name and display name; and whether the facts should live in the instructions or in a knowledge base, with the two options and their trade-off spelled out. Each question is a gap in the prompt: it said what the agent does and gave three examples, and nothing about the users, the language, the format, the unknowns, the name or the source of the facts. A brief that covers the six items of chapter 3 pre-empts most of them; the short prompt was chosen here so that you would see the questions once. The last question is the first design decision of the guide; the answer is "instructions" because the facts fit on half a page, and chapter 8 is where a knowledge base becomes the right choice. Bob also proposed the name on its own, having seen the finished file in the walkthrough folder of the repository.
-4. The closing line, "Waiting for your answers before the Design phase." That is the Discover rules speaking, and it is also the check that they loaded: a design at this point, instead of that line, means they did not, and the checklist in section 2.6 is where to look.
+4. The closing line, "Waiting for your answers." That is the Ask-mode rules speaking, and it is also the check that they loaded: a design at this point, instead of that line, means they did not, and the checklist in section 2.6 is where to look.
 
 Answer the questions in a follow-up, in plain text and in order. Here is the answer given on the run, which is also the data every later chapter reuses:
 
@@ -96,11 +96,11 @@ access problems go to Facilities. Urgent building problems such as water, power
 or alarms go to extension 4444 at any time.
 ```
 
-Bob confirms the answers in a sentence or two, asks about anything still missing, and tells you to switch to Plan mode for the Design phase. That is the Discover rules again: they stop Bob from designing in this phase even once it has everything it needs, so that the design lands in a file you can approve rather than in a chat message.
+Bob confirms the answers in a sentence or two, asks about anything still missing, and tells you to switch to Plan mode to write the design. That is the Ask-mode rules again: they stop Bob from designing in Ask mode even once it has everything it needs, so that the design lands in a file you can approve rather than in a chat message.
 
 Note: keep the facts short and exact. Everything the agent will ever say comes from this text, and later in the chapter you will see what happens when a fact is missing.
 
-## 4.3 Design
+## 4.3 Plan mode: write the design
 
 Mode: Plan, in the same chat, so that Bob keeps your answers. Switch with `/plan`. Prompt type: structured, reduced to one Deliverable line.
 
@@ -108,16 +108,16 @@ Mode: Plan, in the same chat, so that Bob keeps your answers. Switch with `/plan
 Write the design for this agent into design/helpdesk-design.md.
 ```
 
-One line is enough. The Design rules in the project folder tell Bob what a design has to let you judge, to show you the file, and to wait for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide; the rules are instructions to Bob, not to you.
+One line is enough. The Plan-mode rules in the project folder tell Bob what a design has to let you judge, to show you the file, and to wait for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide; the rules are instructions to Bob, not to you.
 
-What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a short summary, ending "Waiting for your approval before the Build phase." Bob may mention using one of its own planning skills on the way.
+What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a short summary, ending "Waiting for your approval before building." Bob may mention using one of its own planning skills on the way.
 
 What Bob's design covered on the run. The headings and the layout are Bob's choice and will differ on yours; the content should not.
 
 | Part of the design | What it holds |
 |---|---|
 | What was asked | The scope in two sentences |
-| What exists on the instance | The inventory from Discover, every item marked unrelated and untouched; no name clash |
+| What exists on the instance | The inventory from Ask mode, every item marked unrelated and untouched; no name clash |
 | The proposed agent | A table of the agent's fields: name, display name, kind, style, model; tools, knowledge bases, collaborators all none |
 | Tools, connections, knowledge bases | None, with the reason: the facts fit in the instructions |
 | Behaviour | Tone, length, the rule for unknowns, language, and the full instruction text the agent will read, facts included |
@@ -148,7 +148,7 @@ Bob revises the file and waits again. That is the design approval in practice. W
 
 A question to keep in mind for later: the design says what happens with questions outside the three teams. Does it say what happens with a question about one of the three teams that the facts do not cover, such as the name of the HR manager? Section 4.8 shows why that matters.
 
-## 4.5 Build
+## 4.5 Agent mode: build and test
 
 Mode: Agent, in a new conversation. Click the plus sign at the top of the chat to start it, then choose Agent in the dropdown. IBM's workflow starts implementation in a fresh conversation so that the planning discussion does not weigh on it; the @ mention gives Bob the design.
 
@@ -156,9 +156,9 @@ Mode: Agent, in a new conversation. Click the plus sign at the top of the chat t
 The design in @design/helpdesk-design.md is approved. Build it.
 ```
 
-That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Build rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
+That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Agent-mode rules say how Bob goes about it: file first, then the import, then a look at the instance, then the tests with their reasoning, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
 
-Now watch what Bob does, because this is the whole Build phase in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
+Now watch what Bob does, because this is the whole of Agent mode in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
 
 These are the three answers from the run, exactly as the agent gave them:
 
@@ -303,7 +303,7 @@ I'm sorry, I don't have that information. You may want to contact HR at
 09:00-17:00).
 ```
 
-That loop, read the answer, find the gap in the instructions, change the file, import again, ask again, is the Build phase for every agent in this guide. The only thing that changes in later chapters is where the gap turns out to be.
+That loop, read the answer, find the gap in the instructions, change the file, import again, ask again, is the Agent-mode work for every agent in this guide. The only thing that changes in later chapters is where the gap turns out to be.
 
 ## 4.9 Round trip
 
@@ -339,6 +339,6 @@ If the first answer has no hours, the fix from 4.8 was not imported; ask for the
 
 ## 4.11 What you learned
 
-The three phases in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, with the design approval in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+The three modes in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, with the design approval in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
 
 Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.

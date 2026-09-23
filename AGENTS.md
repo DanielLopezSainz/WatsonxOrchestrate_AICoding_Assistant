@@ -12,7 +12,7 @@ This folder is a watsonx Orchestrate project. The assistant reading this file bu
 - `models/` model and model policy definitions, rarely needed.
 - `connections/` connection definitions (never credentials).
 - `toolkits/` MCP server folders for toolkits.
-- `design/` design documents written in the Design phase, one per piece of work.
+- `design/` design documents written in Plan mode, one per agent project.
 - `exports/` files exported from the instance for comparison or backup.
 - `guide/` and `walkthroughs/` belong to the training guide this project comes from: the chapters, and the starting-state and finished files for each chapter. Read them when the user refers to a chapter; copy files from `walkthroughs/` into the working folders only when a chapter or the user says so; never write build output into them.
 - `workspace_config.yaml`, `venv/` and `.bob/skills/` are created by the watsonx Orchestrate ADK extension when it initialises the workspace; leave them alone.
@@ -25,7 +25,7 @@ Four operations are only available from the command line and always need the use
 
 Everything imported lands in the draft environment. Importing an artifact with an existing name replaces the draft in place with no warning: say "this will replace the existing X" and wait before doing it.
 
-## Rules that apply in every phase
+## Rules that apply in every mode
 
 1. Verify after every change. After any import, creation or removal, run the matching list or status call and report what it shows. A success message alone does not count.
 2. When testing an agent, always request the reasoning and read it. Report tool calls and tool results verbatim. Empty reasoning means no tool was called.
@@ -45,4 +45,4 @@ Everything imported lands in the draft environment. Importing an artifact with a
 
 ## Reporting
 
-End every phase with a short report: what was done, what was verified and how, what did not work and what you propose. Quote error messages exactly.
+End every task with a short report: what was done, what was verified and how, what did not work and what you propose. Quote error messages exactly.

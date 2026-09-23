@@ -1,4 +1,4 @@
-# Build phase (Agent mode)
+# Agent mode
 
 Owner: Daniel Lopez Sainz, IBM. Last reviewed: 2026-09-18.
 
