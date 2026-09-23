@@ -10,7 +10,7 @@ After completing this chapter, you can:
 
 - Run an agent project through Bob's Ask, Plan and Agent modes.
 - Review a design before approving it.
-- Choose among five kinds of prompt and write each one.
+- Choose among six kinds of prompt and write each one.
 - Rewrite a vague prompt so that it states the expected result and the condition under which Bob must stop.
 - Describe the purpose of the files that Bob reads from the project folder.
 
@@ -97,7 +97,7 @@ Between these two approvals, let Bob work. Approving every file in Agent mode re
 
 ## 3.3 The types of prompts
 
-A prompt is the text that you type in the chat. There is no official classification of prompts. The five kinds described here are the ones most commonly used with Bob in this guide, grouped by what they ask Bob to do; the names are descriptive, not terms that Bob recognises.
+A prompt is the text that you type in the chat. There is no official classification of prompts. The six kinds described here are the ones most commonly used with Bob in this guide, grouped by what they ask Bob to do; the names are descriptive, not terms that Bob recognises.
 
 The following practices apply to every prompt:
 
@@ -122,7 +122,28 @@ Which tools does lab_order_agent have, and what does each one do?
 Why did lab_order_agent answer that order LL-1001 was unknown in the last test?
 ```
 
-### Type 2: the use case description
+### Type 2: the instruction
+
+An instruction tells Bob to perform one action. It is the most common prompt in daily use, and it is written as a plain imperative sentence. Examples:
+
+```
+Import agents/lumen_helpdesk_agent.yaml into my instance.
+```
+
+```
+Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_agent,
+with reasoning, and show the answers next to the expected ones.
+```
+
+```
+Export lumen_helpdesk_agent to exports/lumen_helpdesk_agent.yaml.
+```
+
+Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file edit. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation.
+
+Limitations: an instruction states an action, not a result. Bob decides what "done" means; if the action can be interpreted in more than one way, Bob chooses one without saying so. For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt.
+
+### Type 3: the use case description
 
 A use case description states what you want the agent to do, in your own words, when you start a project. It can be free text. Two structures are in use. The watsonx Orchestrate accelerator for Bob starts a project with a title, a description, example prompts and the business value:
 
@@ -155,7 +176,7 @@ Use a use case description to start an agent project, in Ask mode. Neither struc
 
 Limitations: the result depends on the completeness of the description. Bob does not report the assumptions it makes. The closing sentence depends on the mode. In Agent mode, the closing sentence is the only thing that prevents Bob from building immediately. In Ask mode, the mode prevents building and the Ask-mode rules already request questions rather than a design, so the closing sentence only states what you want in the answer.
 
-### Type 3: the structured prompt
+### Type 4: the structured prompt
 
 A structured prompt is divided into labelled parts, each answering one question that Bob would otherwise have to guess. The six parts below are the ones this guide uses. They are not defined by Bob and none of them is mandatory: you can use your own labels, other parts, or none, because Bob reads the content and not the labels. Verify and Stop are recommended for any prompt that changes the instance.
 
@@ -188,7 +209,7 @@ Use a structured prompt in Agent mode, for any task that creates or changes some
 
 Limitations: a structured prompt takes longer to write, and it requires the names of the files, agents and tools involved. It is not suitable while the requirements are still being explored.
 
-### Type 4: the request for a single file
+### Type 5: the request for a single file
 
 This prompt requests one file and lists the properties that the file must have. It differs from the structured prompt in what it asks for: a file and nothing else, with no import, no test and no verification. The form below is the one used in the Planning Analytics workshop for Bob to write agent definitions; the list of properties is free, and there are no mandatory parts:
 
@@ -206,7 +227,7 @@ Use this prompt for small artifacts whose design is already approved and whose p
 
 Limitations: the prompt produces the file and nothing else. Importing and testing require separate prompts. It skips the design conversation, so it is not suitable for a new agent.
 
-### Type 5: the correction of a previous answer
+### Type 6: the correction of a previous answer
 
 A correction is a short message in a conversation that is already in progress, asking Bob to change something in its last answer. Examples: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back".
 
@@ -214,7 +235,7 @@ Use a correction to adjust a result that is mostly correct. It is the fastest ty
 
 Limitations: corrections work while the conversation is short. After many corrections, Bob loses track of earlier constraints. Start a new conversation with a complete prompt and references to the current files. Three corrections on the same problem indicate that the original prompt was incomplete; rewrite the prompt instead of sending a fourth correction.
 
-Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The use case description states them in its last lines, the structured prompt in the Verify and Stop parts, and the request for a single file in "Return only the file". Most unexpected results come from prompts that omit them.
+Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The instruction states the result implicitly, in the action itself; the use case description states them in its last lines, the structured prompt in the Verify and Stop parts, and the request for a single file in "Return only the file". Most unexpected results come from prompts that omit them.
 
 ## 3.4 Prompts, weak and better
 
@@ -223,6 +244,7 @@ A weak prompt and a better prompt for the same situation, one pair per type.
 | Situation | Weak | Better | Why |
 |---|---|---|---|
 | Starting an agent project (use case description) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes.", typed in Agent mode | The use case description with its six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
+| Running a test (instruction) | "Test the agent." | "Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
 | Adding one tool (structured) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
 | Investigating a failure (question) | "The agent does not work, fix it." | "Why did lab_order_agent answer that order LL-1001 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
 | Requesting a single file | "Write me an agent YAML for order tracking." | The request for a single file shown in 3.3 | Every property is listed and the schema is named. The weak prompt produces a plausible file with an invented name |
