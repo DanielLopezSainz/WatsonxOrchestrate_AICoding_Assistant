@@ -54,7 +54,7 @@ No starting-state pack is needed for this chapter, because it starts from nothin
 
 Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
 
-Prompt type: use case description (chapter 3, type 3), in Ask mode. Your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.5, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
+Prompt type: structured prompt (chapter 3, type 3) written as running text, in Ask mode: your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building, or from answering with a finished design instead of questions: Ask mode prevents the first, and the Ask-mode rules in the project folder, described in section 3.5, prevent the second. This is the first prompt in the guide where those rules are at work, and Bob's answer shows whether they are being read.
 
 ```
 I would like to build an internal helpdesk agent for Lumen Logistics employees
@@ -273,9 +273,9 @@ anytime by emailing **facilities@lumen-logistics.example** or calling
 
 Read that against the facts. The facts gave no opening hours for Facilities, and the instruction said "do not guess" about other teams, not about missing details of the three teams. So the agent did what language models do with a gap: it filled it, and "anytime" is not true. This is the most useful thing that happened in the whole run, because it shows the two rules that govern every agent you will build: the agent knows exactly what its instructions say and nothing more, and the rule about what to do with missing information has to be explicit.
 
-The fix is a correction of the previous answer.
+The fix is an instruction that corrects the previous answer.
 
-Prompt type: correction (chapter 3, type 6), in the same Agent-mode conversation. It says what was wrong, what to change, and how to check it.
+Prompt type: instruction (chapter 3, type 2), in the same Agent-mode conversation. It says what was wrong, what to change, and how to check it.
 
 ```
 The agent invented opening hours for Facilities. Add "Monday to Friday 07:00

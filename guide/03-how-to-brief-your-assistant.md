@@ -10,7 +10,7 @@ After completing this chapter, you can:
 
 - Run an agent project through Bob's Ask, Plan and Agent modes.
 - Review a design before approving it.
-- Choose among six kinds of prompt and write each one.
+- Choose among three kinds of prompt and write each one.
 - Rewrite a vague prompt so that it states the expected result and the condition under which Bob must stop.
 - Describe the purpose of the files that Bob reads from the project folder.
 
@@ -97,7 +97,7 @@ Between these two approvals, let Bob work. Approving every file in Agent mode re
 
 ## 3.3 The types of prompts
 
-A prompt is the text that you type in the chat. There is no official classification of prompts. The six kinds described here are the ones most commonly used with Bob in this guide, grouped by what they ask Bob to do; the names are descriptive, not terms that Bob recognises.
+A prompt is the text that you type in the chat. There is no official classification of prompts. This guide distinguishes three kinds by what they ask Bob to do: a question asks for information, an instruction asks for one action, and a structured prompt asks for a piece of work and states how to check it. The names are descriptive, not terms that Bob recognises.
 
 The following practices apply to every prompt:
 
@@ -108,11 +108,7 @@ The following practices apply to every prompt:
 
 ### Type 1: the question
 
-A question asks Bob for information. Examples: "Which agents exist on my instance?", "Why did the last test answer that the order was unknown?"
-
-Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
-
-Limitations: the answer is based on what Bob has read. Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
+A question asks Bob for information. Examples:
 
 ```
 Which tools does lab_order_agent have, and what does each one do?
@@ -122,9 +118,15 @@ Which tools does lab_order_agent have, and what does each one do?
 Why did lab_order_agent answer that order LL-1001 was unknown in the last test?
 ```
 
+Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
+
+Limitations: the answer is based on what Bob has read. Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
+
 ### Type 2: the instruction
 
-An instruction tells Bob to perform one action. It is the most common prompt in daily use, and it is written as a plain imperative sentence. Examples:
+An instruction tells Bob to perform one action, in a plain imperative sentence. It is the most common prompt in daily use. It has three typical uses.
+
+To perform an action on the project or the instance:
 
 ```
 Import agents/lumen_helpdesk_agent.yaml into my instance.
@@ -135,17 +137,44 @@ Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_ag
 with reasoning, and show the answers next to the expected ones.
 ```
 
+To request a file, listing what the file must contain. This form is used in the Planning Analytics workshop for Bob to obtain agent definitions:
+
 ```
-Export lumen_helpdesk_agent to exports/lumen_helpdesk_agent.yaml.
+Write the definition file for an agent named lab_order_agent that answers
+questions about the shipping status of customer orders, with no tools yet.
+Return only the file.
 ```
 
-Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file edit. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation.
+To correct Bob's previous answer, in a conversation that is already in progress:
 
-Limitations: an instruction states an action, not a result. Bob decides what "done" means; if the action can be interpreted in more than one way, Bob chooses one without saying so. For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt.
+```
+Use LL-1003 as the example instead.
+```
 
-### Type 3: the use case description
+```
+You changed the agent's name; put it back.
+```
 
-A use case description states what you want the agent to do, in your own words, when you start a project. It can be free text. Two structures are in use. The watsonx Orchestrate accelerator for Bob starts a project with a title, a description, example prompts and the business value:
+Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file, a change to the last answer. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation. When requesting a file, the instruction "Return only the file" prevents an explanation that you do not need.
+
+Limitations: an instruction states an action, not a result. Bob decides what "done" means; if the action can be interpreted in more than one way, Bob chooses one without saying so. For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt. Corrections work while the conversation is short; after many corrections, Bob loses track of earlier constraints, and three corrections on the same problem indicate that the original prompt was incomplete. In that case, start a new conversation with a complete prompt and references to the current files.
+
+### Type 3: the structured prompt
+
+A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer: Bob does not define them, none of their parts is mandatory, and Bob reads the content and not the labels. The same content can be written as labelled lines or as running text.
+
+To describe what you want at the start of an agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
+
+```
+Users:        who will talk to the agent, and in which language
+Purpose:      what the agent does, in one sentence, plus three example questions
+Reached from: the Orchestrate chat, a web page, a messaging channel, the phone
+Draws on:     the facts, documents or systems it needs, and which exist already
+Out of scope: what it must not do, and what must not be built yet
+Done when:    the questions it must answer correctly, and what a correct answer contains
+```
+
+The watsonx Orchestrate accelerator for Bob uses a shorter form of the same idea, with a title, a description, example prompts and the business value:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
@@ -161,24 +190,9 @@ Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
-The Bob training course for demo builders uses a fuller structure, a use case brief that answers six questions, and states that for any question left unanswered Bob makes an assumption. Adapted to an Orchestrate agent, the six questions are:
+A description that answers the six questions receives few questions back from Bob. A description that answers two or three, like the first prompt of chapter 4, receives the others as questions, which is appropriate when the requirements are not yet settled.
 
-```
-Users:        who will talk to the agent, and in which language
-Purpose:      what the agent does, in one sentence, plus three example questions
-Reached from: the Orchestrate chat, a web page, a messaging channel, the phone
-Draws on:     the facts, documents or systems it needs, and which exist already
-Out of scope: what it must not do, and what must not be built yet
-Done when:    the questions it must answer correctly, and what a correct answer contains
-```
-
-Use a use case description to start an agent project, in Ask mode. Neither structure is mandatory; both are checklists of what to include. A description that answers the six questions receives few questions back. A description that answers two or three, like the first prompt of chapter 4, receives the others as questions from Bob, which is appropriate when the requirements are not yet settled.
-
-Limitations: the result depends on the completeness of the description. Bob does not report the assumptions it makes. The closing sentence depends on the mode. In Agent mode, the closing sentence is the only thing that prevents Bob from building immediately. In Ask mode, the mode prevents building and the Ask-mode rules already request questions rather than a design, so the closing sentence only states what you want in the answer.
-
-### Type 4: the structured prompt
-
-A structured prompt is divided into labelled parts, each answering one question that Bob would otherwise have to guess. The six parts below are the ones this guide uses. They are not defined by Bob and none of them is mandatory: you can use your own labels, other parts, or none, because Bob reads the content and not the labels. Verify and Stop are recommended for any prompt that changes the instance.
+To specify a task in Agent mode, when the task creates or changes something on the instance and the check is specific to the task. The template has six parts:
 
 ```
 Goal:        what must exist when the task is done, in one sentence
@@ -188,8 +202,6 @@ Deliverable: what Bob must return: a file, an import, a chat transcript, a repor
 Verify:      how Bob proves that the task worked, in a way that you can repeat
 Stop:        the condition under which Bob must ask you instead of continuing
 ```
-
-The labels are a checklist for the writer, so that the expected result and the stopping condition are not forgotten. Omit a part when the rules in the project folder or an approved design already state it. In chapter 4, the Agent-mode prompt is a single line for this reason.
 
 Example, from the Agent-mode step of chapter 5:
 
@@ -205,37 +217,11 @@ Verify: the list of tools shows lab_get_order_status with order_id in its input
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-Use a structured prompt in Agent mode, for any task that creates or changes something on the instance, when the check is specific to the task. Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask.
+Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when the rules in the project folder or an approved design already state it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
 
-Limitations: a structured prompt takes longer to write, and it requires the names of the files, agents and tools involved. It is not suitable while the requirements are still being explored.
+Limitations: a structured prompt takes longer to write, and the task template requires the names of the files, agents and tools involved. The closing line of a use case description depends on the mode: in Agent mode it is the only thing that prevents Bob from building immediately; in Ask mode the mode prevents building and the Ask-mode rules already request questions rather than a design, so the closing line only states what you want in the answer.
 
-### Type 5: the request for a single file
-
-This prompt requests one file and lists the properties that the file must have. It differs from the structured prompt in what it asks for: a file and nothing else, with no import, no test and no verification. The form below is the one used in the Planning Analytics workshop for Bob to write agent definitions; the list of properties is free, and there are no mandatory parts:
-
-```
-Generate a ready-to-import agent YAML with these properties:
-- name: lab_order_agent
-- description: answers questions about the shipping status of customer orders
-- llm: groq/openai/gpt-oss-120b
-- style: react_core
-- no tools or collaborators yet, they are added in the next step
-Follow the spec_version v1, kind native schema. Return only the YAML.
-```
-
-Use this prompt for small artifacts whose design is already approved and whose properties are known. The instruction "Return only the YAML" prevents an explanation that you do not need.
-
-Limitations: the prompt produces the file and nothing else. Importing and testing require separate prompts. It skips the design conversation, so it is not suitable for a new agent.
-
-### Type 6: the correction of a previous answer
-
-A correction is a short message in a conversation that is already in progress, asking Bob to change something in its last answer. Examples: "Use LL-1003 as the example instead", "Shorter, under 100 words", "You changed the agent's name; put it back".
-
-Use a correction to adjust a result that is mostly correct. It is the fastest type, because the context is already in the conversation.
-
-Limitations: corrections work while the conversation is short. After many corrections, Bob loses track of earlier constraints. Start a new conversation with a complete prompt and references to the current files. Three corrections on the same problem indicate that the original prompt was incomplete; rewrite the prompt instead of sending a fourth correction.
-
-Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The instruction states the result implicitly, in the action itself; the use case description states them in its last lines, the structured prompt in the Verify and Stop parts, and the request for a single file in "Return only the file". Most unexpected results come from prompts that omit them.
+Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The instruction states the result implicitly, in the action itself; the structured prompt states both in its last parts. Most unexpected results come from prompts that omit them.
 
 ## 3.4 Prompts, weak and better
 
@@ -243,12 +229,12 @@ A weak prompt and a better prompt for the same situation, one pair per type.
 
 | Situation | Weak | Better | Why |
 |---|---|---|---|
-| Starting an agent project (use case description) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes.", typed in Agent mode | The use case description with its six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
+| Starting an agent project (structured prompt) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
 | Running a test (instruction) | "Test the agent." | "Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
-| Adding one tool (structured) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
+| Adding one tool (structured prompt) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
 | Investigating a failure (question) | "The agent does not work, fix it." | "Why did lab_order_agent answer that order LL-1001 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
-| Requesting a single file | "Write me an agent YAML for order tracking." | The request for a single file shown in 3.3 | Every property is listed and the schema is named. The weak prompt produces a plausible file with an invented name |
-| Correcting a previous answer | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
+| Requesting a file (instruction) | "Write me an agent definition for order tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
+| Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
 
 The better prompts have two properties in common: they reference real files instead of describing them, and they state what Bob must return and when it must stop. With these two properties, the rest of the wording can be informal.
 
@@ -256,7 +242,7 @@ Prompts to avoid:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
-| "Build me a customer service agent" | Bob invents the users, the facts, the tools and the names | The use case description with its six questions, in Ask mode |
+| "Build me a customer service agent" | Bob invents the users, the facts, the tools and the names | The structured prompt with the six questions, in Ask mode |
 | "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob changes the first thing it finds | Request the reasoning of the failing test first |
 | "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
