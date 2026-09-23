@@ -115,9 +115,11 @@ Use a question to understand the project or the instance, to find out why someth
 Limitations: the answer is based on what Bob has read. Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
 
 ```
-Chat with lab_order_agent asking "Where is order LL-1001?" with reasoning included.
-Show every tool call and every tool result from the reasoning, exactly as
-returned. If a result contains an error, quote it and say what caused it.
+Which tools does lab_order_agent have, and what does each one do?
+```
+
+```
+Why did lab_order_agent answer that order LL-1001 was unknown in the last test?
 ```
 
 ### Type 2: the use case description
@@ -222,7 +224,7 @@ A weak prompt and a better prompt for the same situation, one pair per type.
 |---|---|---|---|
 | Starting an agent project (use case description) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes.", typed in Agent mode | The use case description with its six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
 | Adding one tool (structured) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
-| Investigating a failure (question) | "The agent does not work, fix it." | "Chat with lab_order_agent asking 'Where is order LL-1001?' with reasoning included. Show every tool call and result exactly as returned before proposing any change. Do not modify anything yet." | "Fix it" leads Bob to change the first thing it finds. The evidence is in the reasoning |
+| Investigating a failure (question) | "The agent does not work, fix it." | "Why did lab_order_agent answer that order LL-1001 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
 | Requesting a single file | "Write me an agent YAML for order tracking." | The request for a single file shown in 3.3 | Every property is listed and the schema is named. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
 
