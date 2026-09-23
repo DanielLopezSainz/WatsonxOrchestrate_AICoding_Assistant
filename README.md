@@ -1,6 +1,6 @@
 # Building watsonx Orchestrate agents with an AI coding assistant
 
-A training guide for people who want to create agents on IBM watsonx Orchestrate by working with an AI coding assistant rather than by hand. The guide is written for IBM Bob, and every step works with any assistant that can connect to the watsonx Orchestrate ADK MCP server: Cursor, VS Code with Copilot, Claude Code or Claude Desktop.
+A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 says where their setup is documented.
 
 The chapters follow one fictional company, Lumen Logistics, from a first question-answering agent to a multi-agent solution, one working session at a time. Each chapter states its level, its prerequisites and a checkpoint, so that readers with experience can start at the chapter they need.
 
