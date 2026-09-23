@@ -1,6 +1,6 @@
 # Chapter 4. Your first agent
 
-Level: beginner. Time: about 45 minutes. Prerequisites: every line of the checklist at the end of chapter 2 answered yes, and chapter 3 read.
+Level: beginner. Time: about 45 minutes. Prerequisites: chapter 2 completed, chapter 3 read or skipped according to its reading table.
 
 ## Overview
 
@@ -42,7 +42,15 @@ Everything shown in this chapter, Bob's answers and the agent's answers, was cap
 
 ## 4.1 Before you start
 
-Check these three things. Each one takes a minute, and a missing one will cost you far more later.
+This chapter requires the setup from chapter 2, completed in full:
+
+- The guide's repository cloned and open in Bob (chapter 2, step 1).
+- The watsonx Orchestrate ADK extension installed and the workspace initialised in that folder (steps 2 and 3).
+- Bob's starting message sent, so that the Orchestrate skills are loaded (step 4).
+- An environment active in the Environment Manager, connected to your Developer Edition or your tenant (step 5).
+- The approvals set as in step 7: Read and MCP on, Edit and Execute off. With Edit and Execute on, Bob writes files and runs commands without the approval requests this chapter mentions.
+
+Then check these three things. Each one takes a minute.
 
 - The folder open in Bob is the one you cloned and initialised in chapter 2. The `guide` folder is visible at the top of Bob's file list, next to the `agents` folder the extension created, and the MCP tab of Bob's settings shows the two Orchestrate servers as connected. If any of that is not so, go through the checklist in section 2.6 before continuing.
 - Bob can reach your instance. Start a new chat in Ask mode and ask "Which agents exist on my instance?" On a new Developer Edition Bob lists two stock agents, DocProcessing and AskOrchestrate; on a new tenant it lists one. Bob should not ask for approval to do this, because listing was pre-approved in step 7 of chapter 2; if it does ask, approve it and revisit that step afterwards. Any answer that mentions a working directory, a forbidden path or an authentication problem is one of the failures described in section 2.7. If the list already contains `lumen_helpdesk_agent`, someone has run this chapter on the instance before you. Ask Bob to remove it and list the agents again; Bob asks for your approval first, because removing anything without asking is forbidden by the instructions file, and that approval request is the first sign in this guide that the file is being read.

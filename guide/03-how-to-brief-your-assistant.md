@@ -13,7 +13,15 @@ After completing this chapter, you can:
 - Choose among three kinds of prompt and write each one.
 - Rewrite a vague prompt so that it states the expected result and the condition under which Bob must stop.
 
-Skip this chapter if you already work with Bob in its three modes and your prompts state the expected result and the stopping condition. Section 3.3 describes the structured prompt that is used from chapter 5 onwards.
+Prerequisites: none. Chapter 2 is not required to read this chapter, but the examples refer to the project folder it sets up.
+
+What to read, by experience:
+
+| If you | Read | Skip |
+|---|---|---|
+| Have not used an AI assistant for work before | The whole chapter | Nothing |
+| Use ChatGPT, Claude or a similar assistant, but not Bob | 3.1, 3.2 and 3.5, which are specific to Bob and to Orchestrate | 3.3 and 3.4, on writing prompts, and 3.6 if you know git |
+| Use Bob in its three modes already | 3.2, the approvals specific to Orchestrate, and 3.5 | The rest |
 
 ## 3.1 Bob proposed workflow
 
