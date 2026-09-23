@@ -91,6 +91,21 @@ The design approval takes place between Plan mode and Agent mode. You approve a 
 
 The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative; chapter 11 describes it. Before that command, the active environment might have to be switched to the target tenant. The switch affects every assistant on the machine, which is one more reason to make it an explicit decision.
 
+Example. In chapter 4, Bob writes the design for the helpdesk agent and ends with "Waiting for your approval before building." You read the file and notice that it says nothing about what an employee sees before typing a question. You write, in the same Plan-mode conversation:
+
+```
+Add a welcome message and two starter prompts to the design: the badge
+question and the password question.
+```
+
+Bob revises the file and waits again. When the design is complete, you start a new conversation in Agent mode and write:
+
+```
+The design in @design/helpdesk-design.md is approved. Build it.
+```
+
+This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the agent is visible to you and to nobody else.
+
 IMPORTANT: the instructions file in the project folder tells Bob never to deploy, switch environment, set a credential or remove anything without asking you first. If Bob performs one of these actions without asking, the file is not being read. Go through the checklist in section 2.6.
 
 Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode; the rules in the project folder require Bob to verify each import and to read the agent's reasoning when testing.
@@ -120,7 +135,7 @@ Why did lab_order_agent answer that order LL-1001 was unknown in the last test?
 
 Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
 
-Limitations: the answer is based on what Bob has read. Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
+Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
 
 ### Type 2: the instruction
 
@@ -157,7 +172,7 @@ You changed the agent's name; put it back.
 
 Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file, a change to the last answer. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation. When requesting a file, the instruction "Return only the file" prevents an explanation that you do not need.
 
-Limitations: an instruction states an action, not a result. Bob decides what "done" means; if the action can be interpreted in more than one way, Bob chooses one without saying so. For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt. Corrections work while the conversation is short; after many corrections, Bob loses track of earlier constraints, and three corrections on the same problem indicate that the original prompt was incomplete. In that case, start a new conversation with a complete prompt and references to the current files.
+For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt. After many corrections in one conversation, Bob loses track of earlier constraints; in that case, start a new conversation with a complete prompt and references to the current files.
 
 ### Type 3: the structured prompt
 
@@ -219,13 +234,12 @@ Stop: if the import returns an error, show me the exact text and wait.
 
 Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when the rules in the project folder or an approved design already state it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
 
-Limitations: a structured prompt takes longer to write, and the task template requires the names of the files, agents and tools involved. The closing line of a use case description depends on the mode: in Agent mode it is the only thing that prevents Bob from building immediately; in Ask mode the mode prevents building and the Ask-mode rules already request questions rather than a design, so the closing line only states what you want in the answer.
-
-Every prompt that asks Bob to do something must state two things: the expected result, and the condition under which Bob must stop and ask. The instruction states the result implicitly, in the action itself; the structured prompt states both in its last parts. Most unexpected results come from prompts that omit them.
 
 ## 3.4 Prompts, weak and better
 
-A weak prompt and a better prompt for the same situation, one pair per type.
+A weak prompt leaves Bob to make assumptions: it does not name the files, the agent or the data involved, and it does not state the expected result. Bob completes the missing information with its own choices and does not report them. A better prompt supplies that information: it references the files with @ mentions, names the agent and the data, and states what Bob must return and, where the change matters, how to check it.
+
+The following table shows a weak prompt and a better prompt for the same situation.
 
 | Situation | Weak | Better | Why |
 |---|---|---|---|
