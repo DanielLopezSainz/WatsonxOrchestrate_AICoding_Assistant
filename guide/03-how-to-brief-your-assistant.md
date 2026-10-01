@@ -113,7 +113,7 @@ The design in @design/helpdesk-design.md is approved. Build it.
 
 This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the agent is visible to you and to nobody else.
 
-IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings are not as chapter 2 describes. Go through the checklist in section 2.6.
+IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings are not as chapter 2 describes. Go through the checklist in section 2.7.
 
 Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode. Two habits give you control instead: after an import, ask Bob to list the artifacts and confirm the new one is there, and when testing, ask for the reasoning and read it.
 
@@ -301,4 +301,4 @@ After that, the following requests cover daily use. Each one is a plain instruct
 | Work on a change without touching the main version | `Create a branch named helpdesk-hours and switch to it.` |
 | Bring a finished branch back | `Switch to the main branch and merge helpdesk-hours into it, then push.` |
 
-Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control icon in the left bar provides the same operations by clicking, if you prefer.
+Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control view, described in section 2.3, provides the same operations by clicking.

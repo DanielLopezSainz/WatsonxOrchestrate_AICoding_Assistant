@@ -12,7 +12,7 @@ After completing this chapter, you can:
 - Decide which operations Bob may run without asking you.
 - Recognise the common setup failures and fix them.
 
-Skip this chapter if the checklist in 2.6 answers yes on every line for the folder you have open in Bob.
+Skip this chapter if the checklist in 2.7 answers yes on every line for the folder you have open in Bob.
 
 ## 2.1 Before you start
 
@@ -98,7 +98,7 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-Bob asks your permission before every action unless you tell it otherwise. Left as it is, that means a click for each file Bob reads and each time it looks at your instance, dozens per chapter, and readers stop reading what they approve. Switched on entirely, Bob could write files, run commands and remove agents without a word. The settings below sit in between: Bob reads and looks without asking, and asks before anything that changes a file or the instance. Section 2.4 explains the two settings in more detail.
+Bob asks your permission before every action unless you tell it otherwise. Left as it is, that means a click for each file Bob reads and each time it looks at your instance, dozens per chapter, and readers stop reading what they approve. Switched on entirely, Bob could write files, run commands and remove agents without a word. The settings below sit in between: Bob reads and looks without asking, and asks before anything that changes a file or the instance. Section 2.5 explains the two settings in more detail.
 
 1. At the bottom of the chat input box, next to the dropdown where you choose the mode, click the Permissions button. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
@@ -111,24 +111,70 @@ Step 8. Prove the connection. Start a new chat, choose Ask mode in the dropdown 
 Which agents exist on my instance? List their names and one line each.
 ```
 
-You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 7 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.7.
+You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 7 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.8.
 
 The setup is complete. What each step installed is explained next; the chapters that build things start at chapter 3.
 
-## 2.3 The two views, and what was installed
+## 2.3 The Bob views used in this guide
 
-Bob's left bar now has two icons that matter for this guide, and they show two different things.
+Bob shows different views depending on the icon selected in the left bar. This guide uses five of them. Each later chapter refers to them by the names given here.
 
-| Icon | What it shows | Use it to |
+### File Explorer
+
+Open it with the files icon at the top of the left bar. It shows the project folder on your disk: the `guide` and `walkthroughs` folders from the repository, the folders that the extension created (`agents`, `tools`, `connections`, `knowledge-bases`, `toolkits`, `models`), and every file that Bob writes. Click a file to open it in the editor.
+
+Use the File Explorer to read a design or an agent definition that Bob has written, and to open the chapters of this guide.
+
+[Screenshot: the File Explorer with the project folder open]
+
+### watsonx Orchestrate panel
+
+Open it with the watsonx Orchestrate icon in the left bar. It has two sections.
+
+- Explorer lists what exists on your instance: Agents, Tools, Connections, Knowledge Bases and Toolkits. The lists are read from the instance, not from the files in the project folder.
+- Environment Manager shows the environments in a dropdown, with the active one marked "(active)", an Add button to register another instance, and, for the Developer Edition, the status of the local server with a button to start or stop it.
+
+Use the Explorer to confirm that an import took place: an agent that appears under Agents exists on the instance. Use the Environment Manager to activate an environment again when its token has expired, or to switch to another instance.
+
+[Screenshot: the watsonx Orchestrate panel after initialisation, with Explorer and Environment Manager]
+
+### Source Control
+
+Open it with the branch icon in the left bar. It lists the files that changed since the last commit. From this view you can stage files, type a commit message, commit, and synchronise with the remote repository, by clicking.
+
+Use Source Control to see what Bob changed in the project folder and to keep your work in git. Chapter 3, section 3.6, describes how to do the same operations by asking Bob.
+
+[Screenshot: the Source Control view with changed files]
+
+### Bob chat panel
+
+Open it with the Bob icon. It is where you write prompts and read Bob's answers. Five controls in this panel are used throughout the guide.
+
+| Control | Location | Purpose |
 |---|---|---|
-| Files, at the top | The project folder on your disk: the guide, the walkthrough files, and the folders the extension created, `agents`, `tools`, `connections`, `knowledge-bases`, `toolkits` and `models` | Read and edit the files Bob writes, definitions and designs, and keep them in git |
-| watsonx Orchestrate | What is on your instance, read live from it: the Explorer lists its agents, tools, connections, knowledge bases and toolkits; the Environment Manager shows the environments and the local server | Check what really exists after Bob imports something, switch environment, start or stop the Developer Edition |
+| Mode dropdown | Left of the chat input | Selects Ask, Plan or Agent mode |
+| Permissions button | Next to the mode dropdown | Opens the list of actions that Bob can perform without asking: Read, Edit, Execute, MCP and others |
+| New conversation | The plus sign at the top of the panel | Starts a conversation with an empty context |
+| @ mention | Typed in the chat input | References a file or folder, so that Bob reads it |
+| Approve and reject buttons | Above the chat input, when Bob requests an action | Allow or refuse the action that Bob proposes |
 
-The two are connected by Bob's work: a definition is a file in the project folder until Bob imports it, and only then does it appear in the Orchestrate view. When the two disagree, the Orchestrate view is the truth about the instance and the file is the truth about what you decided. Chapter 4 uses both.
+[Screenshot: the Bob chat panel with the mode dropdown and the Permissions button]
 
-What connects Bob to the instance. Three pieces do the work whenever Bob touches the instance or looks something up; you never run them yourself, but their names appear in Bob's messages and in the MCP tab you checked in step 6.
+### Bob settings, MCP tab
 
-| Piece | What it does |
+Open Bob's settings with the settings icon in the Bob chat panel, then select the MCP tab. It lists the servers that Bob is connected to, with their status. Expanding a server shows its operations, each with an Always allow switch, and a control to restart the server.
+
+Use the MCP tab to check that the two Orchestrate servers are connected, to set the Always allow switches, and to restart a server when an operation fails for no apparent reason.
+
+### How the views relate
+
+An agent definition is a file in the File Explorer until Bob imports it. After the import, the agent appears in the Explorer section of the watsonx Orchestrate panel. If the two differ, the watsonx Orchestrate panel shows what is on the instance, and the file shows what you decided. Source Control shows which files changed since the last commit.
+
+## 2.4 What was installed
+
+Three components do the work whenever Bob acts on the instance or looks something up. You never run them yourself, but their names appear in Bob's messages and in the MCP tab.
+
+| Component | What it does |
 |---|---|
 | The watsonx Orchestrate Agent Development Kit, the ADK | Defines agents, tools and everything around them as files, and pushes those files to an instance. Installed in step 3 |
 | The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
@@ -140,7 +186,7 @@ Three things to remember for the whole guide.
 2. The token lasts two hours. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. When it does, everything Bob tries fails with an authentication error until you activate the environment again from the Environment Manager. If Bob suddenly cannot do what it did an hour ago, this is the first thing to check.
 3. The active environment is shared. The ADK keeps one active environment per machine, and every assistant on the machine uses it. Switching it in the Environment Manager switches it for all of them. Only chapter 11 switches environments, on purpose.
 
-## 2.4 The approvals, explained
+## 2.5 The approvals, explained
 
 Bob asks your permission before it acts, and two settings decide how often.
 
@@ -149,11 +195,11 @@ Bob asks your permission before it acts, and two settings decide how often.
 
 That is the intended balance: reading is free, changing asks. Do not mark every operation to save clicks. An assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
 
-## 2.5 Other AI coding assistants
+## 2.6 Other AI coding assistants
 
 The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide follows Bob only.
 
-## 2.6 Checklist
+## 2.7 Checklist
 
 Answer every line with yes before moving on.
 
@@ -164,7 +210,7 @@ Answer every line with yes before moving on.
 5. The Environment Manager shows an active environment.
 6. The agent list prompt returns the agents you expect, without an approval request.
 
-## 2.7 When something goes wrong
+## 2.8 When something goes wrong
 
 Five failures, each seen while preparing this guide, with the message and the fix.
 
