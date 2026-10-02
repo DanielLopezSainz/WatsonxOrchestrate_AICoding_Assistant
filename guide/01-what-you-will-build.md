@@ -20,7 +20,7 @@ You write prompts. Bob writes the code.
 
 This chapter introduces the two products, the scenario and the chapters. If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
-## 1.1 The two products
+## 1.1 The 2 main characters
 
 The guide uses two IBM products. Each one has a different job.
 

@@ -4,34 +4,36 @@ Level: beginner. Time: about 30 minutes. Prerequisites: IBM Bob installed, and a
 
 ## Overview
 
-This chapter connects Bob to your watsonx Orchestrate instance and prepares the project folder that every later chapter uses. At the end, Bob lists what is on your instance on request.
+Before Bob can create anything in watsonx Orchestrate, it must be connected to your instance. IBM provides an extension for Bob that does most of this work: it installs the toolkit that Bob uses, connects Bob to the instance, and prepares the project folder. This chapter takes you through the installation click by click, without typing a command.
 
-After completing this chapter, you can:
+At the end of the chapter:
 
-- Clone the guide's repository from inside Bob and connect it to your instance with the watsonx Orchestrate ADK extension, without typing a command.
-- Decide which operations Bob may run without asking you.
-- Recognise the common setup failures and fix them.
+- The guide's repository is open in Bob as your project folder.
+- Bob is connected to your watsonx Orchestrate instance and can list what exists on it.
+- Bob reads from the instance without asking, and asks for your approval before any change.
 
-Skip this chapter if the checklist in 2.7 answers yes on every line for the folder you have open in Bob.
+The installation is section 2.2. The sections after it explain what you installed and the views of Bob that the guide uses.
+
+Skip this chapter if every line of the checklist in section 2.7 is already true for the folder that you have open in Bob.
 
 ## 2.1 Before you start
 
-Have these at hand.
+You need the following.
 
 | You need | Where it comes from |
 |---|---|
 | IBM Bob 2.1 or later | Installed and open |
 | Git | Installed on your machine; Bob uses it to clone. You will not type git commands |
 | An Orchestrate instance | A SaaS tenant on IBM Cloud or AWS, or the Developer Edition running on your machine |
-| For a tenant: its URL and an API key | In the Orchestrate interface: your user icon, Settings, API details. The key is shown once; copy it into a file named `.env` in the project folder once you have cloned it (2.2, step 1), using `.env.example` as the model. Git ignores that file |
+| For a tenant: its URL and an API key | In the Orchestrate interface: your user icon, Settings, API details. The key is displayed only once. After cloning the repository (2.2, step 1), copy the URL and the key into a file named `.env` in the project folder, using `.env.example` as the model. Git ignores this file |
 
 Nothing from IBM needs to be installed in advance. The extension installs what it needs inside the project folder.
 
-Never paste the API key into a chat with Bob, and never write it into any other file.
+Do not paste the API key into a chat with Bob, and do not write it into any other file.
 
 ## 2.2 Installation, step by step
 
-Do the steps in this order. Each one says what you should see before going to the next.
+Perform the steps in this order. Each step states what you should see before you continue.
 
 Step 1. Clone the repository.
 
@@ -61,12 +63,12 @@ You should see: the panel now has two sections. Explorer lists Agents, Tools, Co
 
 Step 4. Send Bob its starting message.
 
-When initialisation ends, the extension quietly types a message into the box at the bottom of Bob's chat, where you normally write, and does not send it. It is easy to miss: no notification announces it, and the box looks as if you had typed something yourself. Look at the box before doing anything else.
+When the initialisation ends, the extension places a message in the chat input box of Bob and does not send it. No notification is displayed, so the message is easy to overlook. Check the chat input box before you continue.
 
 1. Find the text headed "SYSTEM PROMPT - IBM watsonx Orchestrate" in the chat input box.
 2. Press Enter to send it as it is.
 
-Its three lines tell Bob to switch to Agent mode, to load IBM's Orchestrate skills, and to use the Orchestrate server for all agent, tool and environment operations and the documentation server for reference. If the box is empty because the text was cleared, paste this and send it:
+The message tells Bob to switch to Agent mode, to load the Orchestrate skills, and to use the Orchestrate server for all agent, tool and environment operations and the documentation server for reference. If the box is empty, paste the following text and send it:
 
 ```
 # SYSTEM PROMPT - IBM watsonx Orchestrate
@@ -76,20 +78,20 @@ Its three lines tell Bob to switch to Agent mode, to load IBM's Orchestrate skil
 3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
 ```
 
-You should see: Bob answering that the skills are loaded, with a table of eight of them, and that it is in Agent mode. The skills now sit in `.bob/skills` in the folder; nothing before chapter 12 uses them. Bob may also ask how you want to proceed with the guide's example agent: it read that name from the walkthrough files in the repository, and no agent exists yet.
+You should see: Bob answering that the skills are loaded, with a table of eight skills, and that it is in Agent mode. The skills are stored in `.bob/skills` in the project folder. Chapter 12 uses them.
 
 Step 5. Connect to your instance.
 
-Your instance is the watsonx Orchestrate service where your agents will live: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
+Your instance is the watsonx Orchestrate service where your agents run: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
 
 - Developer Edition running on your machine: nothing to do. The dropdown already reads `local (active)`, and below it "Local server: Started".
-- SaaS tenant: the dropdown is empty. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, say yes.
+- SaaS tenant: the dropdown is empty. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, confirm.
 
 You should see: in Environment Manager, the dropdown reading your environment's name followed by "(active)". In Explorer, expand Agents: the list is read from the instance, so it shows the agents that exist there. A new tenant has one, `AskOrchestrate`. A new Developer Edition has two, shown as "Try Document Processing Agent (DocProcessing)" and "AskOrchestrate".
 
 Step 6. Check that Bob reaches the two servers.
 
-The extension gave Bob two connections: the Orchestrate server, through which Bob acts on your instance, and the documentation server, through which it looks up IBM's documentation. If either is down, nothing in the later chapters works.
+The extension gave Bob two connections: the Orchestrate server, through which Bob acts on your instance, and the documentation server, through which it looks up IBM's documentation. Both must be connected for the later chapters to work.
 
 1. Open Bob's settings with the settings icon in the Bob panel, then the MCP tab.
 2. Find the two entries `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`.
@@ -98,22 +100,22 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-Bob asks your permission before every action unless you tell it otherwise. Left as it is, that means a click for each file Bob reads and each time it looks at your instance, dozens per chapter, and readers stop reading what they approve. Switched on entirely, Bob could write files, run commands and remove agents without a word. The settings below sit in between: Bob reads and looks without asking, and asks before anything that changes a file or the instance. Section 2.5 explains the two settings in more detail.
+By default, Bob asks for approval before every action, including each file that it reads and each query to your instance. This produces dozens of approval requests per chapter. With every action approved automatically, Bob could write files, run commands and remove agents without asking. The following settings are a balance: Bob reads files and queries the instance without asking, and asks for approval before any action that changes a file or the instance. Section 2.5 describes the two settings in more detail.
 
 1. At the bottom of the chat input box, next to the dropdown where you choose the mode, click the Permissions button. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
 
-You should see: nothing yet. The effect shows in the next step, where Bob lists agents without asking you first.
+You should see: no change yet. The effect is visible in the next step, where Bob lists the agents without requesting approval.
 
-Step 8. Prove the connection. Start a new chat, choose Ask mode in the dropdown at the bottom of the chat, and send:
+Step 8. Test the connection. Start a new conversation, select Ask mode in the mode dropdown, and send:
 
 ```
 Which agents exist on my instance? List their names and one line each.
 ```
 
-You should see: Bob calling the server, visible above its answer, and the same agents the Explorer showed. If Bob asks for approval first, step 7 was skipped. If the answer mentions a working directory, a forbidden path or an authentication problem, go to 2.8.
+You should see: Bob calling the Orchestrate server, shown above its answer, and the same agents that the Explorer lists. If Bob requests approval first, the settings of step 7 are not in place. If the answer mentions a working directory, a forbidden path or an authentication problem, see section 2.8.
 
-The setup is complete. What each step installed is explained next; the chapters that build things start at chapter 3.
+The setup is complete. The following sections describe the views of Bob and what was installed.
 
 ## 2.3 The Bob views used in this guide
 
@@ -172,36 +174,36 @@ An agent definition is a file in the File Explorer until Bob imports it. After t
 
 ## 2.4 What was installed
 
-Three components do the work whenever Bob acts on the instance or looks something up. You never run them yourself, but their names appear in Bob's messages and in the MCP tab.
+Three components operate whenever Bob acts on the instance or searches the documentation. You do not run them yourself, but their names appear in Bob's messages and in the MCP tab.
 
 | Component | What it does |
 |---|---|
 | The watsonx Orchestrate Agent Development Kit, the ADK | Defines agents, tools and everything around them as files, and pushes those files to an instance. Installed in step 3 |
-| The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard by which coding assistants talk to programs like this one; nothing more about it is needed |
-| IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and gives Bob a search over the Orchestrate documentation, so that it looks things up instead of guessing |
+| The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard protocol that coding assistants use to communicate with such programs |
+| IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and gives Bob a search over the Orchestrate documentation, so that Bob consults the documentation instead of relying on its general knowledge |
 
-Three things to remember for the whole guide.
+Three facts apply to the whole guide.
 
-1. One folder. Bob works inside the cloned repository and nowhere else. The server refuses to read or write outside it, and the extension recorded that folder when you initialised it. Always open this folder in Bob; do not initialise another one and then work here.
-2. The token lasts two hours. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. When it does, everything Bob tries fails with an authentication error until you activate the environment again from the Environment Manager. If Bob suddenly cannot do what it did an hour ago, this is the first thing to check.
-3. The active environment is shared. The ADK keeps one active environment per machine, and every assistant on the machine uses it. Switching it in the Environment Manager switches it for all of them. Only chapter 11 switches environments, on purpose.
+1. One folder. Bob works inside the cloned repository only. The Orchestrate server does not read or write outside the folder that was open when you initialised the workspace. Always open this folder in Bob.
+2. The token lasts two hours. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. After that, every operation fails with an authentication error until you activate the environment again in the Environment Manager. If operations that worked earlier start to fail, check this first.
+3. The active environment is shared. The ADK keeps one active environment per machine, and every assistant on the machine uses it. Switching the environment in the Environment Manager switches it for all of them. Chapter 11 is the only chapter that switches environments.
 
 ## 2.5 The approvals, explained
 
-Bob asks your permission before it acts, and two settings decide how often.
+Two settings determine when Bob asks for approval.
 
-- The Permissions button below the chat input opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands; leave them off while learning, so that Bob asks before either.
-- The Always allow switch on each operation in the MCP tab marks that operation as safe. Step 7 marked the eleven that only read from the instance or send a test message. Every other operation, importing, creating, removing, setting credentials, still asks.
+- The Permissions button below the chat input opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands. Leave them off, so that Bob asks before either.
+- The Always allow switch on each operation in the MCP tab approves that operation permanently. Step 7 approved the eleven operations that only read from the instance or send a test message. Every other operation, such as importing, creating, removing or setting credentials, still requires approval.
 
-That is the intended balance: reading is free, changing asks. Do not mark every operation to save clicks. An assistant that can remove agents and set credentials without a prompt is not something to run against an instance you care about.
+With these settings, read operations are approved automatically and changes require approval. Do not switch on Always allow for every operation: Bob would then be able to remove agents and set credentials without asking.
 
 ## 2.6 Other AI coding assistants
 
-The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide follows Bob only.
+The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. IBM documents the installation for each at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. This guide covers Bob only.
 
 ## 2.7 Checklist
 
-Answer every line with yes before moving on.
+Every line must be true before you continue.
 
 1. The folder open in Bob is the cloned repository, and it is the one you initialised.
 2. The `guide` folder is visible at the top level of that folder, next to the folders the extension created.
@@ -212,14 +214,14 @@ Answer every line with yes before moving on.
 
 ## 2.8 When something goes wrong
 
-Five failures, each seen while preparing this guide, with the message and the fix.
+The following failures occurred while this guide was prepared.
 
 | Bob reports | Cause | Fix |
 |---|---|---|
 | `Attempting to access resources outside the working directory is forbidden.` | The folder open in Bob is not the one that was initialised, or Bob is pointing at a file elsewhere on your disk | Open the initialised folder. If you must change folders, run Update MCP Servers from the command palette with the right folder open |
 | Every operation fails with an authentication or authorization error after working earlier | The two-hour token expired | Activate the environment again in the Environment Manager; the next call works without a restart |
-| An artifact was imported, but the list of the instance does not show it | Some operations report success even when the platform logged an error; the knowledge base import with an unsupported document type does this | Trust the list, not the message. After an import, ask Bob to list the artifacts of that kind and confirm the new one is there |
+| An artifact was imported, but the list of the instance does not show it | Some operations report success even when the platform logged an error; the knowledge base import with an unsupported document type does this | Rely on the list, not on the message. After an import, ask Bob to list the artifacts of that kind and confirm the new one is there |
 | A Python tool import fails with `No module named '<tool>'` although the file exists | Bob tried to import from that folder before it existed, and the server remembers the failure while it runs | Restart the server with the restart control in the MCP tab, then import again |
 | The server command is not found, or the entry will not start | The environment the extension created is damaged or was moved | Run Initialise Workspace again; it repairs it |
 
-One more that is not a failure: after Bob chats with an agent that has no tools, it reports that the reasoning came back empty. That is expected; chapter 4 explains it.
+The following is not a failure: when Bob tests an agent that has no tools, it reports that the reasoning is empty. This is expected, and chapter 4 explains it.
