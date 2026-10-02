@@ -80,7 +80,7 @@ Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, impor
 
 ### Switching modes
 
-You can switch modes in four ways: the mode dropdown at the bottom of the chat input; the shortcut `⌘ .` on a Mac or `Ctrl .` on Windows and Linux; accepting a switch that Bob proposes when a request requires another mode; and an automatic switch by Bob during a task when the work requires it. The commands `/ask`, `/plan` and `/agent`, typed in the chat, have the same effect as the dropdown.
+You can switch modes in four ways: the mode dropdown at the bottom of the chat input; the shortcut `⌘ .` on a Mac or `Ctrl .` on Windows and Linux; accepting a switch that Bob proposes when a request requires another mode; and a switch that Bob performs itself during a task, which happens without a request only if Mode is switched on under the Permissions button. The commands `/ask`, `/plan` and `/agent`, typed in the chat, have the same effect as the dropdown.
 
 The three modes as this guide uses them:
 
@@ -96,7 +96,7 @@ You approve twice in every agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the build order. If the list is not clear enough to explain to a colleague, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative; chapter 11 describes it. Before that command, the active environment might have to be switched to the target tenant. The switch affects Bob and any other coding assistant on the machine, which is one more reason to make it an explicit decision.
+The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative; chapter 11 describes it. If you built the agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, which is one more reason to make it an explicit decision.
 
 Example. In chapter 4, Bob writes the design for the city information agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -159,7 +159,7 @@ Send the test questions from design/civic-info-design.md to civic_info_agent,
 with reasoning, and show the answers next to the expected ones.
 ```
 
-To request a file, listing what the file must contain. This form is used in the Planning Analytics workshop for Bob to obtain agent definitions:
+To request a file, listing what the file must contain:
 
 ```
 Write the definition file for an agent named permits_agent that answers
@@ -196,7 +196,7 @@ Out of scope: what it must not do, and what must not be built yet
 Done when:    the questions it must answer correctly, and what a correct answer contains
 ```
 
-The watsonx Orchestrate accelerator for Bob uses a shorter form of the same idea, with a title, a description, example prompts and the business value:
+A shorter form of the same template is also common, with a title, a description, example prompts and the business value:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
@@ -269,19 +269,21 @@ Prompts to avoid:
 
 ## 3.5 What Bob reads from the project folder
 
-Bob reads two things from the project folder at the start of every conversation, both written by the watsonx Orchestrate ADK extension in chapter 2: the settings file `.bob/mcp.json`, which tells Bob how to start the Orchestrate server and the documentation server and which folder Bob can work in, and the Orchestrate skills in `.bob/skills`, which contain the procedures Bob follows for Orchestrate work. You do not edit either.
+Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. You do not edit either.
+
+Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
 Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation, with the design file referenced. In long conversations, Bob loses track of constraints that it accepted earlier.
 
 ## 3.6 Bob with Git
 
-The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them. You do not need to know the git command line: Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. Bob composes commit messages itself.
+The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them. You do not need to know the git command line: Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. When you do not specify a commit message, Bob writes one from the files that changed.
 
 The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
 
 ```
 Rename the remote named origin to guide. Add <the address you copied> as the
-new origin and push the current branch to it.
+new origin and push the current branch to it, setting it as the upstream.
 ```
 
 After this, your work is saved to your own repository, named `origin`, and the guide's repository remains available under the name `guide`, so that you can still receive updates to the chapters. The first push asks for your git credentials, once.
@@ -294,10 +296,12 @@ After that, the following requests cover daily use. Each one is a plain instruct
 | Save only some files | `Commit the files in the design folder with the message "City information agent design v2" and push.` |
 | See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
 | See the history | `List the last ten commits with their dates and messages.` |
-| Get the latest version of the guide | `Pull the latest changes from the remote named guide.` |
+| Get the latest version of the guide | `Pull the latest changes of the main branch from the remote named guide.` |
 | Undo the last change to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
 | Go back to an earlier version | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
 | Work on a change without touching the main version | `Create a branch named roads-hours and switch to it.` |
 | Bring a finished branch back | `Switch to the main branch and merge roads-hours into it, then push.` |
+
+If a merge or a pull produces conflicts, Bob stops and reports them instead of continuing.
 
 Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control view, described in section 2.3, provides the same operations by clicking.
