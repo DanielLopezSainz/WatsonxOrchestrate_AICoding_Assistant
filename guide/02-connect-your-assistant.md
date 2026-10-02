@@ -136,7 +136,7 @@ Open it with the watsonx Orchestrate icon in the left bar. It has two sections.
 - Explorer lists what exists on your instance: Agents, Tools, Connections, Knowledge Bases and Toolkits. The lists are read from the instance, not from the files in the project folder.
 - Environment Manager shows the environments in a dropdown, with the active one marked "(active)", an Add button to register another instance, and, for the Developer Edition, the status of the local server with a button to start or stop it.
 
-Use the Explorer to confirm that an import took place: an agent that appears under Agents exists on the instance. Use the Environment Manager to activate an environment again when its token has expired, or to switch to another instance.
+Use the Explorer to confirm that an import took place: an agent that appears under Agents exists on the instance. To refresh a list, move the pointer over its row, for example Agents, and click the refresh icon that appears on it. Use the Environment Manager to activate an environment again when its token has expired, or to switch to another instance.
 
 [Screenshot: the watsonx Orchestrate panel after initialisation, with Explorer and Environment Manager]
 

@@ -66,7 +66,7 @@ Bob queries the instance, which takes a few seconds, and answers. The answer usu
 2. What already exists on the instance: the agents, tools, knowledge bases and connections, and whether the name of the new agent is free. Bob reads this from the instance.
 3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the agent.
 
-The questions vary from one run to another. Answer them in the same conversation. The following answer covers what Bob needs, whatever the wording of its questions:
+The questions vary from one run to another. Answer them in the same conversation. The following answer supplies the facts and also settles points that Bob is likely to ask about, such as the name of the agent, so that it can be used whatever the wording of Bob's questions:
 
 ```
 Use these facts as they are.
@@ -114,7 +114,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. The lay
 
 Two entries in the description of the agent apply to every agent in this guide:
 
-- The model. You did not name one, so the design uses the default model of the instance, `groq/openai/gpt-oss-120b`, which is available on every instance. If the design names another model, ask Bob to use the default.
+- The model. You did not name one, so the design uses the default model of the instance. The identifier of the default model depends on the instance and its version; on the instance used to prepare this guide, it is `groq/openai/gpt-oss-120b`.
 - The description and the instructions. The description says what the agent is for; other agents and the Orchestrate interface read it to decide when to use this agent. The instructions say how the agent behaves; the agent reads them in every conversation.
 
 ## 4.4 Approve the design
@@ -151,6 +151,8 @@ Bob reads the design and performs the build steps:
 3. It lists the agents on the instance to confirm that `civic_info_agent` exists.
 4. It sends the test questions from the design to the agent and reports the answers.
 
+Two approval requests are expected during the build: one to write the file and one to import it. Both actions change the project or the instance, which is why the settings from chapter 2 require approval for them.
+
 Compare each answer with the facts in 4.2. A correct answer names the right department and gives its contact.
 
 If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
@@ -166,12 +168,16 @@ Open `agents/civic_info_agent.yaml` in the File Explorer. This file defines the 
 | Description | What the agent is for. Other agents and the Orchestrate interface read it |
 | Instructions | How the agent behaves, and in this chapter, the facts that it knows |
 | Model | The language model that the agent runs on |
+| Kind | The type of agent. It is `native` for every agent in this guide |
+| Style | The reasoning strategy of the agent. The guide uses the one that Bob selects by default |
 | Tools, collaborators, knowledge base | Empty in this chapter. Chapters 5, 6 and 9 fill them |
 | Welcome message and starter prompts | What a user sees before typing |
 
+The file can contain other fields. The table lists the ones that this guide refers to.
+
 ## 4.7 Check the agent on the instance
 
-Open the watsonx Orchestrate panel. In the Explorer section, expand Agents and refresh the list. `civic_info_agent` appears next to the agents that were already there. An agent that appears in this list exists on the instance.
+Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` appears next to the agents that were already there. An agent that appears in this list exists on the instance.
 
 Then test the agent with two questions of your own, one that the facts cover and one that they do not. In the Agent-mode conversation, send for example:
 
@@ -222,12 +228,12 @@ and tell me which fields the export contains that agents/civic_info_agent.yaml
 does not.
 ```
 
-The exported file is longer than the file that Bob wrote. The instance adds fields with their default values, such as settings for memory and for the display of reasoning. Nothing from the original file is lost.
+Bob creates the `exports` folder if it does not exist, and asks for approval to write the file. The exported file is longer than the file that Bob wrote. The instance adds fields with their default values, such as settings for memory and for the display of reasoning. Nothing from the original file is lost.
 
 Keep both files for different purposes:
 
 - `agents/civic_info_agent.yaml` contains what you decided. Ask Bob to edit this file when the agent must change.
-- The exported file is the complete definition as the instance holds it. Use it as a record of a finished agent.
+- The exported file is the complete definition as the instance holds it. Use it as a record of a finished agent. It is not updated when you import the agent again; repeat the export to record the change.
 
 ## 4.10 Check the result
 
