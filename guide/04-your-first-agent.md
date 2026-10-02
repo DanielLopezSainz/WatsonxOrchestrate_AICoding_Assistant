@@ -4,37 +4,20 @@ Level: beginner. Time: about 45 minutes. Prerequisites: chapter 2 completed, cha
 
 ## Overview
 
-This chapter builds one agent with Bob, from a request to a tested agent in draft on your instance, using Bob's three modes as chapter 3 describes, with one prompt in each.
+The first agent of CivicPulse answers one kind of question: which city department handles this, and how do I reach it? A resident writes "there is a pothole on my street", and the agent answers with the department, its contact and its opening hours.
 
-The agent is an internal helpdesk for Lumen Logistics employees. People ask it who to call for a badge that does not work, how to reset a password, or when HR is open, and it answers with the right team, contact and hours. Small, but real enough that the questions you ask it are questions a colleague would ask.
+In this chapter, you create that agent with three prompts to Bob, one in each mode. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. You then find an answer that is wrong, correct the agent, and confirm the correction. At the end, the agent runs in draft on your instance.
 
-Skip this chapter if you have already created an agent in watsonx Orchestrate with Bob. Chapter 5 continues with the agent built here; to start there without building it, copy `walkthroughs/ch04/agents/lumen_helpdesk_agent.yaml` into your `agents` folder and ask Bob to import it.
+The agent is kept simple on purpose. It consists of:
 
-The agent uses the smallest set of components that produces a working agent:
+- One agent, `civic_info_agent`, defined in one file.
+- The default model of the instance.
+- About twenty lines of instructions: the facts about three departments, the tone, and what to answer when a question is outside those facts.
+- A welcome message and two starter prompts, shown before the resident types.
 
-- One native agent, `lumen_helpdesk_agent`, defined in one file.
-- The instance's default model, `groq/openai/gpt-oss-120b`, with the `react_core` reasoning style.
-- About twenty lines of instructions: the facts for three teams, the tone, and the rule for questions the facts do not cover.
-- A welcome message and two starter prompts, shown before the user types.
+It has no knowledge base, no tools and no connection to any other system, so every answer can be traced to its instructions. The other components are added from chapter 5 onwards; section 1.2 describes them.
 
-It has no tools, no connections to external systems, no knowledge base, no collaborator agents and no flows, and it stays in draft. Each of those components is introduced by a later chapter, on this agent or on one next to it:
-
-| Component | What it is | Chapter |
-|---|---|---|
-| Tools | Functions the agent can call to look something up or act: a Python function or an API operation. With a tool, the agent stops answering from its instructions alone and starts using data | 5 |
-| Connections | Credentials and endpoints for the external systems that tools reach, such as an order database or a ticketing service, kept apart from the tool code | 6 |
-| MCP toolkits | Groups of tools provided by an external MCP server and attached to the agent as a set, without writing tool code | 7 |
-| Knowledge base | A set of documents, such as policies or manuals, that the agent searches when a question needs information too large for its instructions | 8 |
-| Collaborator agents | Other agents that this agent delegates to, so that each one keeps a small set of tools and a clear purpose | 9 |
-| Flows | Fixed sequences of steps that run the same way every time, for work that must not depend on the model's judgement | 10 |
-| Deployment | The move from the draft environment, visible to you only, to the live environment, visible to users | 11 |
-
-With nothing else present, the agent's behaviour is determined entirely by the text of its instructions. When an answer is right, the fact was there; when an answer is wrong, the gap is in that text. Later chapters add one component at a time, and each adds one more place an answer can come from.
-
-
-Everything shown in this chapter, Bob's answers and the agent's answers, was captured from a real run on a Developer Edition, with the folder from chapter 2 open in Bob. Your wording will differ a little; the substance should not.
-
- Your wording will differ a little; the substance should not.
+Skip this chapter if you have already created an agent in watsonx Orchestrate with Bob. To continue with chapter 5 without building the agent, send Bob this instruction in Agent mode: `Import walkthroughs/ch04/agents/civic_info_agent.yaml into my instance.`
 
 ## 4.1 Before you start
 
@@ -44,305 +27,224 @@ This chapter requires the setup from chapter 2, completed in full:
 - The watsonx Orchestrate ADK extension installed and the workspace initialised in that folder (steps 2 and 3).
 - Bob's starting message sent, so that the Orchestrate skills are loaded (step 4).
 - An environment active in the Environment Manager, connected to your Developer Edition or your tenant (step 5).
-- The approvals set as in step 7: Read and MCP on, Edit and Execute off. With Edit and Execute on, Bob writes files and runs commands without the approval requests this chapter mentions.
+- The approvals set as in step 7: Read and MCP on, Edit and Execute off. With Edit and Execute on, Bob writes files and runs commands without the approval requests that this chapter mentions.
 
-Then check these three things. Each one takes a minute.
+Check that Bob reaches your instance. Start a new conversation in Ask mode and send:
 
-- The folder open in Bob is the one you cloned and initialised in chapter 2. The `guide` folder is visible at the top of Bob's file list, next to the `agents` folder the extension created, and the MCP tab of Bob's settings shows the two Orchestrate servers as connected. If any of that is not so, go through the checklist in section 2.7 before continuing.
-- Bob can reach your instance. Start a new chat in Ask mode and ask "Which agents exist on my instance?" On a new Developer Edition Bob lists two stock agents, DocProcessing and AskOrchestrate; on a new tenant it lists one. Bob should not ask for approval to do this, because listing was pre-approved in step 7 of chapter 2; if it does ask, approve it and revisit that step afterwards. Any answer that mentions a working directory, a forbidden path or an authentication problem is one of the failures described in section 2.8. If the list already contains `lumen_helpdesk_agent`, someone has run this chapter on the instance before you. Ask Bob to remove it and list the agents again; Bob asks for your approval first, because removing anything without asking is forbidden by the instructions file, and that approval request is the first sign in this guide that the file is being read.
-- You have about an hour of uninterrupted time. The chapter is short, but the reading between steps is where the learning happens.
+```
+Which agents exist on my instance?
+```
 
-No starting-state pack is needed for this chapter, because it starts from nothing.
+On a new Developer Edition, Bob lists two agents, DocProcessing and AskOrchestrate. On a new tenant, it lists AskOrchestrate. If the answer mentions a working directory, a forbidden path or an authentication problem, see section 2.8.
+
+If the list already contains `civic_info_agent`, someone has run this chapter on the instance before. Ask Bob to remove it and to list the agents again. Bob asks for your approval before removing it.
 
 ## 4.2 Ask mode: understand the request
 
-Mode: Ask, in a new chat. Switch with the dropdown at the bottom of the chat or by typing `/ask`. Then give Bob this prompt.
+Mode: Ask, in a new conversation.
 
-Prompt type: structured prompt (chapter 3, type 3) written as running text, in Ask mode: your own words, a few example questions, and a closing sentence that says what you want back. Nothing in the prompt needs to stop Bob from building: Ask mode prevents it. The closing sentence says what the answer must contain.
+Send this prompt. It is a structured prompt written as running text (chapter 3, type 3): what the agent is for, example questions, what it must not do, and what you want in the answer.
 
 ```
-I would like to build an internal helpdesk agent for Lumen Logistics employees
-with watsonx Orchestrate. It should answer questions like "my badge does not
-open the warehouse door, who do I call?", "how do I reset my password?" and
-"when is HR open?". It answers from a fixed set of facts about three teams,
-IT, HR and Facilities; it does not look anything up in other systems and it
-does not create tickets.
+I would like to build an information agent for the residents of the City of
+Utopia with watsonx Orchestrate. It should answer questions like "there is a
+pothole on my street, who do I contact?", "how do I apply for a building
+permit?" and "when is the waste office open?". It answers from a fixed set of
+facts about three city departments: Permits and Planning, Roads and
+Infrastructure, and Waste and Recycling. It does not look anything up in other
+systems and it does not create requests.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob starts with a line such as "Let me look at your instance and workspace before asking questions" and pauses for a few seconds. That pause is Bob querying the instance, and it is the reason the answer that follows is about your instance and not about Orchestrate in general. On the run behind this chapter, the answer had four parts; the wording and the layout vary from run to run.
+Bob queries the instance, which takes a few seconds, and answers. The answer normally has three parts:
 
-1. What I understood. A restatement of the request in Bob's words, ending on the run with a nine-word version of the scope: "receive question, find the right fact, answer in plain English. Nothing else." Read it against what you meant. If it is wrong, this is the cheapest moment to say so.
-2. What already exists on your instance. A table with one row per category, agents, tools, knowledge bases, toolkits, connections, saying what is there and whether it can be reused. On the run it listed the two stock agents, one demo tool, no knowledge bases, no toolkits, three unconfigured voice connections it did not understand but reported anyway, and concluded that nothing would be replaced and that the name `lumen_helpdesk_agent` clashed with nothing. Bob read all of this from the instance, not from memory; the table answers whether there is anything to reuse and whether the chosen name is free.
-3. Questions I need answered before writing a design. Six on the run, numbered, all at once: whether the facts exist already or should be drafted as placeholders; whether answers should be short and conversational or laid out as team, contact and hours; what to say when a question is outside the facts; which languages; the agent's name and display name; and whether the facts should live in the instructions or in a knowledge base, with the two options and their trade-off spelled out. Each question is a gap in the prompt: it said what the agent does and gave three examples, and nothing about the users, the language, the format, the unknowns, the name or the source of the facts. A brief that covers the six items of chapter 3 pre-empts most of them; the short prompt was chosen here so that you would see the questions once. The last question is the first design decision of the guide; the answer is "instructions" because the facts fit on half a page, and chapter 8 is where a knowledge base becomes the right choice. Bob also proposed the name on its own, having seen the finished file in the walkthrough folder of the repository.
-4. A closing line saying that Bob waits for your answers.
+1. What Bob understood. Read it against what you meant. If it is wrong, correct it now.
+2. What already exists on the instance: the agents, tools, knowledge bases and connections, and whether the name of the new agent is free. Bob reads this from the instance.
+3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the agent.
 
-Answer the questions in a follow-up, in plain text and in order. Here is the answer given on the run, which is also the data every later chapter reuses:
+The questions vary from one run to another. Answer them in the same conversation. The following answer covers what Bob needs, whatever the wording of its questions:
 
 ```
-1. The facts are below; use them as they are.
-2. Short conversational replies, two or three sentences, always with the contact.
-3. If a question is outside the three teams, say you do not have that
-   information and point to the team most likely to help. Never invent an answer.
-4. English only.
-5. Name lumen_helpdesk_agent, display name "Lumen Logistics helpdesk".
-6. Facts in the agent's instructions; there are only a handful per team.
+Use these facts as they are.
 
-IT service desk: it-help@lumen-logistics.example, extension 4100, Monday to
-Friday 08:00 to 18:00. Password resets are self-service at
-https://it.lumen-logistics.example/reset.
-HR: hr@lumen-logistics.example, extension 4200, Monday to Friday 09:00 to 17:00.
-Payslips are in the HR portal, not by email.
-Facilities: facilities@lumen-logistics.example, extension 4300. Badge and door
-access problems go to Facilities. Urgent building problems such as water, power
-or alarms go to extension 4444 at any time.
+Permits and Planning: permits@utopia.example, 555 0110, Monday to Friday 09:00
+to 17:00. Building permit applications are submitted online at
+https://services.utopia.example/permits.
+Roads and Infrastructure: roads@utopia.example, 555 0120. Potholes, street
+lights and damaged signs. Urgent hazards on a public road, such as a burst
+water main or a fallen tree: 555 0199 at any time.
+Waste and Recycling: waste@utopia.example, 555 0130, Monday to Friday 08:00 to
+16:00. Bulky item collection is booked online at
+https://services.utopia.example/bulky.
+
+Answers: two or three sentences, plain language, always with the contact.
+English only.
+If a question is outside the three departments, say so and name the department
+most likely to help. Never invent an answer.
+Name the agent civic_info_agent, with the display name "Utopia city information".
+Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and may already outline a design in the chat. Ask mode prevents it from writing the file; that happens in Plan mode, where the design lands in a file you can approve.
-
-Note: keep the facts short and exact. Everything the agent will ever say comes from this text, and later in the chapter you will see what happens when a fact is missing.
+Bob confirms the answers. It might outline a design in the chat. In Ask mode, Bob cannot write the design file; that is the next step.
 
 ## 4.3 Plan mode: write the design
 
-Mode: Plan, in the same conversation, so that Bob keeps your answers. Switch with `/plan`. Prompt type: instruction (chapter 3, type 2).
+Mode: Plan, in the same conversation, so that Bob keeps your answers.
+
+Send this instruction (chapter 3, type 2):
 
 ```
-Write the design for this agent into design/helpdesk-design.md.
+Write the design for this agent into design/civic-info-design.md.
 ```
 
-One line is enough. Plan mode is made for this: Bob asks for approval to write the file, writes it, and waits for your approval. The prompt adds only the file name. You write nothing in any particular format, here or anywhere in this guide.
+Bob asks for approval to write the file, writes it, and shows a summary. The layout of the design is Bob's choice and varies. Check that the file contains the following:
 
-What Bob does: says the requirements are settled, asks your approval to write the file, since writing files is not pre-approved in the chapter 2 setup, writes it, and answers with a short summary, ending "Waiting for your approval before building." Bob may mention using one of its own planning skills on the way.
-
-What Bob's design covered on the run. The headings and the layout are Bob's choice and will differ on yours; the content should not.
-
-| Part of the design | What it holds |
+| Content | What to check |
 |---|---|
-| What was asked | The scope in two sentences |
-| What exists on the instance | The inventory from Ask mode, every item marked unrelated and untouched; no name clash |
-| The proposed agent | A table of the agent's fields: name, display name, kind, style, model; tools, knowledge bases, collaborators all none |
-| Tools, connections, knowledge bases | None, with the reason: the facts fit in the instructions |
-| Behaviour | Tone, length, the rule for unknowns, language, and the full instruction text the agent will read, facts included |
-| Build order | Write the file, import, check the agent list, test |
-| Tests | Four questions with what each correct answer must contain, the fourth an out-of-scope probe |
+| What was asked | It matches your request |
+| What exists on the instance | Nothing is reused or replaced |
+| The agent | Its name, display name, model, and that it has no tools, no knowledge base and no collaborators |
+| The instructions | The full text that the agent will read, with the facts for the three departments |
+| The build steps | Write the file, import it, check the instance, test |
+| The test questions | Each with what a correct answer contains |
 
-Two fields of the proposed agent deserve a word, because every agent from here on has them.
+Two entries in the description of the agent apply to every agent in this guide:
 
-- The `llm` row, `groq/openai/gpt-oss-120b`, is the model the agent runs on. You did not name one and Bob did not ask: it chose Orchestrate's default, which is available on every instance and used throughout this guide, along with the `react_core` style in the row above it. A definition without this line is incomplete.
-- Description versus instructions. The description is read by other agents and by the Orchestrate interface to decide when this agent is the right one to ask. The instructions are read by the agent itself on every conversation. Different readers, different texts; the instruction text in the design is the second, and later chapters show why the first matters as much.
-
-The file is in `design/` in your project and, from the run, in the walkthrough folder of the repository.
+- The model. You did not name one. Bob uses the default model of the instance, `groq/openai/gpt-oss-120b`, which is available on every instance.
+- The description and the instructions. The description says what the agent is for; other agents and the Orchestrate interface read it to decide when to use this agent. The instructions say how the agent behaves; the agent reads them in every conversation.
 
 ## 4.4 Approve the design
 
-Mode: still Plan, same chat.
+Mode: Plan, same conversation.
 
-Read the design as if a colleague had written it. Can you say, from the file alone, what the agent will and will not answer? Anything you want built has to be in the design before you approve it; the Build prompt is not the place to add things.
+Read the design. Everything that you want built must be in the design before you approve it.
 
-The design from 4.3 has one gap of that kind: it says nothing about what an employee sees before typing. Ask for it, in plain words:
+The design has one gap: it does not say what a resident sees before typing a question. Request it:
 
 ```
-Add a welcome message and two starter prompts to the design: the badge
-question and the password question.
+Add a welcome message and two starter prompts to the design: the pothole
+question and the building permit question.
 ```
 
-Bob revises the file and waits again. That is the design approval in practice. When the design says what you mean, go to 4.5; the approval is given there.
+Bob revises the file and waits again. When the design is complete, continue with 4.5. The approval is given there.
 
-A question to keep in mind for later: the design says what happens with questions outside the three teams. Does it say what happens with a question about one of the three teams that the facts do not cover, such as the name of the HR manager? Section 4.8 shows why that matters.
+Keep one question in mind for section 4.8: the facts give opening hours for two departments and none for Roads and Infrastructure. What will the agent answer if a resident asks for them?
 
 ## 4.5 Agent mode: build and test
 
-Mode: Agent, in a new conversation. Click the plus sign at the top of the chat to start it, then choose Agent in the dropdown. Implementation starts in a new conversation so that the planning discussion does not consume the context; the @ mention gives Bob the design. Prompt type: instruction (chapter 3, type 2).
+Mode: Agent, in a new conversation. Click the plus sign at the top of the chat panel, then select Agent in the mode dropdown. The build starts in a new conversation so that the planning discussion does not consume the context.
+
+Send this instruction (chapter 3, type 2). It is also the approval of the design.
 
 ```
-The design in @design/helpdesk-design.md is approved. Build it.
+The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-That is the whole prompt, and it is also the design approval. Bob reads the design from the mention; it says what to build and how it will be tested. The Orchestrate skills loaded in chapter 2 say how Bob goes about it: file first, then the import, then a look at the instance, then the tests, then a report. Nothing is left for the prompt to add. Chapter 5 is where a Build prompt needs more, because the checks there depend on how a tool behaves, which no design can know in advance.
+Bob reads the design and performs the build steps:
 
-Now watch what Bob does, because this is the whole of Agent mode in miniature. It reads the design. It writes the definition file. It imports the file into your instance; Bob shows this as an approval request, since importing is not among the operations pre-approved in chapter 2, and it is the first time in the guide that something is created on the instance. Approve it. It looks at the instance to confirm the agent is there. Then it runs the tests from the design, asking for the reasoning each time, and reports the answers.
+1. It writes the definition of the agent to `agents/civic_info_agent.yaml` and asks for approval to write the file.
+2. It imports the file into your instance and asks for approval. This is the first operation in the guide that creates something on the instance.
+3. It lists the agents on the instance to confirm that `civic_info_agent` exists.
+4. It sends the test questions from the design to the agent and reports the answers.
 
-These are the three answers from the run, exactly as the agent gave them:
+Compare each answer with the facts in 4.2. A correct answer names the right department and gives its contact.
 
-Badge question:
+Bob requests the reasoning of the agent with each test, and the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answered from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
 
-```
-Your badge issue should be handled by Facilities. You can email
-**facilities@lumen-logistics.example** or call **extension 4300**. If it's an
-urgent building problem (e.g., water, power, alarm), call **extension 4444**
-at any time.
-```
+## 4.6 Read the definition
 
-Password question:
+Open `agents/civic_info_agent.yaml` in the File Explorer. This file is the agent. Bob wrote it; you read it and, later, ask Bob to change it.
 
-```
-You can reset your password yourself at the self-service portal:
-[https://it.lumen-logistics.example/reset](https://it.lumen-logistics.example/reset).
-If you run into any issues, contact the IT service desk at
-**it-help@lumen-logistics.example** or extension **4100** (Monday–Friday, 08:00-18:00).
-```
+| Field | Purpose |
+|---|---|
+| Name | The identifier of the agent: lower case, with underscores. Everything else refers to the agent by this name |
+| Display name | The name that users see |
+| Description | What the agent is for. Other agents and the Orchestrate interface read it |
+| Instructions | How the agent behaves, and in this chapter, the facts that it knows |
+| Model | The language model that the agent runs on |
+| Tools, collaborators, knowledge base | Empty in this chapter. Chapters 5, 6 and 9 fill them |
+| Welcome message and starter prompts | What a user sees before typing |
 
-Working-from-home question:
+## 4.7 Check the agent on the instance
 
-```
-I'm sorry, but I don't have that information. Please contact **HR** at
-hr@lumen-logistics.example or extension 4200 (Mon-Fri 09:00-17:00) for details
-on the work-from-home policy.
-```
+Open the watsonx Orchestrate panel. In the Explorer section, expand Agents and refresh the list. `civic_info_agent` appears next to the agents that were already there. An agent that appears in this list exists on the instance.
 
-All three are right. The agent also added bold to the contacts on its own; nobody asked for that, and it is harmless.
-
-One more thing to notice in the assistant's report. Each test conversation was asked for reasoning, and each time the reasoning came back empty. That is not a fault. The reasoning of an agent lists the tools it called and what they returned, and this agent has no tools, so there is nothing to list. From chapter 5 on, the reasoning is where you will look first when an answer is wrong, so it is useful to have seen the empty case now: empty reasoning means the agent answered from its instructions and the model alone.
-
-## 4.6 Reading the definition
-
-Mode: none; this section is reading only.
-
-Open `agents/lumen_helpdesk_agent.yaml`, the file the assistant wrote. It is about fifty lines, and this is the moment to read it once from top to bottom. The version from the run is in the walkthrough files that accompany this guide; the parts that matter are these.
-
-```yaml
-spec_version: v1
-kind: native
-name: lumen_helpdesk_agent
-display_name: Lumen Logistics helpdesk
-description: >
-  Answers Lumen Logistics employees' questions about how to contact the IT
-  service desk, HR and Facilities, including opening hours and what each team
-  handles. Use it for "who do I call for..." questions. It does not create
-  tickets or look up personal data.
-llm: groq/openai/gpt-oss-120b
-style: react_core
-instructions: |
-  You are the Lumen Logistics employee helpdesk, operating within watsonx Orchestrate.
-  Answer only from the facts below. Keep answers to two or three sentences and always
-  include the contact the employee should use.
-
-  IT service desk: it-help@lumen-logistics.example, extension 4100, ...
-  HR: hr@lumen-logistics.example, extension 4200, ...
-  Facilities: facilities@lumen-logistics.example, extension 4300. ...
-
-  If a question is about anything other than these three teams, say that you do
-  not have that information and suggest the team most likely to help. Do not guess.
-collaborators: []
-tools: []
-knowledge_base: []
-starter_prompts:
-  ...
-welcome_content:
-  ...
-```
-
-Line by line, what each part is for:
-
-- `spec_version` and `kind` say what kind of file this is. They are always `v1` and `native` for the agents in this guide.
-- `name` is the identifier: lower case, underscores, no spaces. It is how everything else refers to the agent. `display_name` is what people see.
-- `description` is for other agents and for the interface, as explained in 4.3.
-- `llm` is the model, and `style` is how the agent reasons; `react_core` is the current recommended style and the only one this guide uses. If you list the agent on the instance you may see it reported as `react_intrinsic`, which is the same style under an older name.
-- `instructions` is the agent's operating manual, and in this chapter also its only source of facts.
-- `collaborators`, `tools` and `knowledge_base` are empty lists here. Chapter 5 fills `tools`, chapter 8 `knowledge_base` and chapter 9 `collaborators`.
-- `starter_prompts` and `welcome_content` are what a user sees in the chat window before typing: a greeting and two clickable example questions.
-
-You will not write this file by hand in this guide; the assistant does it. But you will read files like it often, and you will change lines in them, as the next sections show.
-
-## 4.7 Try it yourself
-
-Mode: Agent, same conversation as the build.
-
-Ask the assistant to chat with the agent with two questions of your own. Choose one that the facts cover and one that they do not, and read the answers with the facts next to you.
-
-Then look at the agent outside the chat. Click the watsonx Orchestrate icon in Bob's left bar; the Explorer section of its panel lists what is on your instance, read from the instance itself and not from your files. Refresh it and find `lumen_helpdesk_agent` under Agents, next to the stock agents. An agent that appears there has really been imported, whatever the chat said; make this check after every import. On a tenant you can also open the Orchestrate web interface, Manage agents, and find "Lumen Logistics helpdesk" among the draft agents, with the welcome message and the two starter prompts from the definition file. Nothing is deployed in this chapter; the agent exists in draft, visible to you and not to end users.
-
-[Placeholder: one screenshot of the Explorer section with the agent listed, to be decided.]
-
-## 4.8 When an answer is not quite right
-
-Mode: Agent, same conversation as the build.
-
-On the run behind this chapter, the badge conversation was continued with one more question in the same thread:
+Then test the agent with two questions of your own, one that the facts cover and one that they do not. In the Agent-mode conversation, send for example:
 
 ```
-And what are their opening hours?
+Ask civic_info_agent: "My recycling bin was not collected this morning. Who do I contact?"
 ```
 
-The agent answered:
+Nothing is deployed in this chapter. The agent is in draft: you can use it, and residents cannot.
+
+## 4.8 Correct a wrong answer
+
+Mode: Agent, same conversation.
+
+Ask the agent for information that the facts do not contain:
 
 ```
-Facilities does not have listed opening-hour restrictions; you can reach them
-anytime by emailing **facilities@lumen-logistics.example** or calling
-**extension 4300**. If the problem is urgent (e.g., water, power, alarm), use
-**extension 4444**, which is staffed 24/7.
+Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 ```
 
-Read that against the facts. The facts gave no opening hours for Facilities, and the instruction said "do not guess" about other teams, not about missing details of the three teams. So the agent did what language models do with a gap: it filled it, and "anytime" is not true. This is the most useful thing that happened in the whole run, because it shows the two rules that govern every agent you will build: the agent knows exactly what its instructions say and nothing more, and the rule about what to do with missing information has to be explicit.
+The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: the agent might answer that the department can be reached at any time, because the urgent line is, or give hours that are not in the facts. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
 
-The fix is an instruction that corrects the previous answer.
-
-Prompt type: instruction (chapter 3, type 2), in the same Agent-mode conversation. It says what was wrong, what to change, and how to check it.
+An agent knows what its instructions say and nothing else. When an answer is wrong, the correction is made in the instructions. Send:
 
 ```
-The agent invented opening hours for Facilities. Add "Monday to Friday 07:00
-to 19:00" to the Facilities line in agents/lumen_helpdesk_agent.yaml, and
-change the last rule so that it also covers details not in the facts: if a
-question asks for a detail that is not in the facts above, say you do not
-have that information. Import the agent again and ask the badge question
-followed by "And what are their opening hours?" in the same conversation.
+The facts gave no opening hours for Roads and Infrastructure. Add "Monday to
+Friday 07:00 to 19:00" to that department in agents/civic_info_agent.yaml, and
+change the last rule so that it also covers details that are not in the facts:
+if a question asks for a detail that is not in the facts, the agent says that
+it does not have that information. Import the agent again and ask it the same
+question.
 ```
 
-Two things happen that are worth understanding. First, the assistant edits the file and imports it again with the same name, and the import replaces the draft on the instance in place: there is still one `lumen_helpdesk_agent`, not two, which you can confirm by asking for the list of agents. Importing the same name again is how you update an agent, and there is no warning when it happens. Second, the answers change:
+Bob edits the file and imports it again. An import with the name of an existing agent replaces that agent on the instance; no second agent is created, and no warning is shown. The agent now answers with the hours.
+
+Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent says that it does not have that information and gives the department's contact.
+
+Every correction in this guide follows the same steps: read the answer, find what is missing in the instructions, ask Bob to change the file, import again, and ask again.
+
+## 4.9 Export the agent
+
+Mode: Agent, same conversation.
+
+Send this instruction:
 
 ```
-Your badge issue should be routed to Facilities. You can email
-**facilities@lumen-logistics.example** or call extension **4300**
-(Monday-Friday 07:00-19:00). If it's an urgent building problem (e.g., water,
-power, alarm), use extension **4444** at any time.
+Export civic_info_agent from the instance to exports/civic_info_agent.yaml,
+and tell me which fields the export contains that agents/civic_info_agent.yaml
+does not.
 ```
 
-And to a question that the facts still do not cover, "What is the name of the HR manager?":
+The exported file is longer than the file that Bob wrote. The instance adds fields with their default values, such as settings for memory and for the display of reasoning. Nothing from the original file is lost.
 
-```
-I'm sorry, I don't have that information. You may want to contact HR at
-**hr@lumen-logistics.example** or call extension **4200** (Monday-Friday,
-09:00-17:00).
-```
+Keep both files for different purposes:
 
-That loop, read the answer, find the gap in the instructions, change the file, import again, ask again, is the Agent-mode work for every agent in this guide. The only thing that changes in later chapters is where the gap turns out to be.
+- `agents/civic_info_agent.yaml` contains what you decided. Ask Bob to edit this file when the agent must change.
+- The exported file is the complete definition as the instance holds it. Use it as a record of a finished agent.
 
-## 4.9 Round trip
+## 4.10 Check the result
 
-Mode: Agent, same conversation as the build.
-
-One last prompt for this chapter, to learn something about the files you will be keeping.
-
-Prompt type: instruction (chapter 3, type 2), in Agent mode because a file is written. Nothing on the instance changes.
-
-```
-Export lumen_helpdesk_agent from the instance as a definition file to
-agents/lumen_helpdesk_agent.exported.yaml, and tell me which fields the
-export contains that my original file does not.
-```
-
-The exported file is about twice as long as the one the assistant wrote. On the run it added thirteen fields, all with their default values: things like `memory_enabled: false`, `hide_reasoning: false`, empty lists for `guidelines`, `toolkits` and `skills`, and a long `chat_with_docs` block that is switched off. It also moved `spec_version` to the last line and wrote `style: react_core` back exactly as it was. Nothing from the original was lost.
-
-Two practical conclusions. The exported file is the complete truth about the agent as the instance holds it, so it is the one to keep in version control once an agent is finished. And the short file the assistant wrote is the one to edit, because it contains only what you decided; the defaults will be added again on import.
-
-## 4.10 Checkpoint
-
-Mode: Agent, same conversation as the build.
-
-Before moving on, ask the agent these three questions through the assistant and compare.
+Ask the agent these three questions through Bob, and compare the answers.
 
 | Question | A correct answer contains |
 |---|---|
-| My badge does not open the warehouse door, who do I call? | Facilities, extension 4300, the 07:00 to 19:00 hours, and extension 4444 for emergencies |
-| How do I reset my password? | The self-service link, and IT at extension 4100 as the fallback |
-| What is the name of the HR manager? | A statement that it does not have that information, and HR's contact |
+| There is a pothole on my street. Who do I contact? | Roads and Infrastructure, roads@utopia.example or 555 0120, the opening hours added in 4.8 |
+| How do I apply for a building permit? | Permits and Planning, the online application address, the contact |
+| Who is the head of the Permits department? | A statement that the agent does not have that information, and the contact of Permits and Planning |
 
-If the first answer has no hours, the fix from 4.8 was not imported; ask for the list of agents and check the instructions. If the third answer contains a name, the last rule of the instructions is missing or was weakened; read the file. If an answer mentions a team or a number that is not in the facts, the model is guessing, and the remedy is always the same: make the instruction explicit and import again.
+If the first answer has no hours, the correction from 4.8 was not imported; ask Bob to import the file again. If the third answer contains a name, the last rule of the instructions is missing; ask Bob to show the instructions and to restore the rule.
 
-## 4.11 What you learned
+## 4.11 Summary
 
-The three modes in practice: a conversational prompt in Ask mode that asks for understanding and questions rather than a proposal, a design file in Plan mode, one line in Agent mode that approves the design and starts the build, with the design approval in between. An agent definition is a short file with a name, a description for other agents, instructions for itself, a model, and lists of tools, collaborators and knowledge that are empty for now. Everything the assistant creates lands in draft, and importing the same name again is how it is updated. Empty reasoning means no tool was called. And the agent knows exactly what its instructions say, and nothing more, which is why the first fix you made was to the instructions.
+- An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
+- You approve the design before Bob builds. Anything that you want built must be in the design.
+- An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
+- An agent without tools has empty reasoning.
+- An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
 
-Chapter 5 gives this agent something to do beyond reciting facts: tools that look up orders, and with them the first reasoning you will actually have to read.
+Chapter 5 gives the agent more information than its instructions can hold: the city's guides and regulations, as a knowledge base.

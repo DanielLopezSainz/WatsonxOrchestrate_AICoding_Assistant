@@ -39,16 +39,17 @@ Ask mode is for asking questions and getting explanations. In this mode, Bob can
 
 In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide adds a read-only step before it, because Plan mode can write files and the first exchange about a request must not change anything.
 
-Example. The same agent is used in all three modes below: a helpdesk agent that tells Lumen Logistics employees whom to contact for IT, HR and Facilities questions. In Ask mode, you write:
+Example. The same agent is used in all three modes below: an agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
 ```
-I would like to build an internal helpdesk agent for Lumen Logistics employees.
-It answers questions like "my badge does not open the door, who do I call?"
-from a fixed set of facts about three teams. Tell me what you understood,
-what you need to know from me, and what already exists on my instance.
+I would like to build an information agent for the residents of the City of
+Utopia. It answers questions like "there is a pothole on my street, who do I
+contact?" from a fixed set of facts about three city departments. Tell me what
+you understood, what you need to know from me, and what already exists on my
+instance.
 ```
 
-Bob queries the instance, then answers with three parts: what it understood, a table of the agents, tools and connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three teams. Nothing is written and nothing is created. You answer the questions in the same conversation.
+Bob queries the instance, then answers with three parts: what it understood, a table of the agents, tools and connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three departments. Nothing is written and nothing is created. You answer the questions in the same conversation.
 
 ### Plan mode
 
@@ -59,7 +60,7 @@ In this guide, the plan is a design document written into the `design` folder. T
 Example, continued. In the same conversation, you switch to Plan mode and write:
 
 ```
-Write the design for this agent into design/helpdesk-design.md.
+Write the design for this agent into design/civic-info-design.md.
 ```
 
 Bob asks for approval to write the file, writes it, and shows a summary: what was asked, what exists on the instance, the proposed agent with its name and model, the facts it will know, how it behaves, the build order, and the test questions with the expected answers. You read the file and, if something is missing, request a change in the same conversation; Bob revises the file and waits again.
@@ -73,10 +74,10 @@ In this guide, Agent mode is where Bob writes the definition and tool files, imp
 Example, continued. You start a new conversation, switch to Agent mode, and write:
 
 ```
-The design in @design/helpdesk-design.md is approved. Build it.
+The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob writes `agents/lumen_helpdesk_agent.yaml`, asks for approval to import it, imports it, checks that the agent appears on the instance, sends the test questions from the design to the agent, and reports the answers. The agent now exists in draft on your instance. Chapter 4 runs this example in full.
+Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, imports it, checks that the agent appears on the instance, sends the test questions from the design to the agent, and reports the answers. The agent now exists in draft on your instance. Chapter 4 runs this example in full.
 
 ### Switching modes
 
@@ -98,17 +99,17 @@ The design approval takes place between Plan mode and Agent mode. You approve a 
 
 The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative; chapter 11 describes it. Before that command, the active environment might have to be switched to the target tenant. The switch affects every assistant on the machine, which is one more reason to make it an explicit decision.
 
-Example. In chapter 4, Bob writes the design for the helpdesk agent and ends with "Waiting for your approval before building." You read the file and notice that it says nothing about what an employee sees before typing a question. You write, in the same Plan-mode conversation:
+Example. In chapter 4, Bob writes the design for the city information agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
 ```
-Add a welcome message and two starter prompts to the design: the badge
-question and the password question.
+Add a welcome message and two starter prompts to the design: the pothole
+question and the building permit question.
 ```
 
 Bob revises the file and waits again. When the design is complete, you start a new conversation in Agent mode and write:
 
 ```
-The design in @design/helpdesk-design.md is approved. Build it.
+The design in @design/civic-info-design.md is approved. Build it.
 ```
 
 This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the agent is visible to you and to nobody else.
@@ -133,11 +134,11 @@ The following practices apply to every prompt:
 A question asks Bob for information. Examples:
 
 ```
-Which tools does lab_order_agent have, and what does each one do?
+Which tools does civic_info_agent have, and what does each one do?
 ```
 
 ```
-Why did lab_order_agent answer that order LL-1001 was unknown in the last test?
+Why did civic_info_agent answer that permit BP-2041 was unknown in the last test?
 ```
 
 Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
@@ -151,26 +152,26 @@ An instruction tells Bob to perform one action, in a plain imperative sentence. 
 To perform an action on the project or the instance:
 
 ```
-Import agents/lumen_helpdesk_agent.yaml into my instance.
+Import agents/civic_info_agent.yaml into my instance.
 ```
 
 ```
-Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_agent,
+Send the test questions from design/civic-info-design.md to civic_info_agent,
 with reasoning, and show the answers next to the expected ones.
 ```
 
 To request a file, listing what the file must contain. This form is used in the Planning Analytics workshop for Bob to obtain agent definitions:
 
 ```
-Write the definition file for an agent named lab_order_agent that answers
-questions about the shipping status of customer orders, with no tools yet.
+Write the definition file for an agent named permits_agent that answers
+questions about the status of building permit applications, with no tools yet.
 Return only the file.
 ```
 
 To correct Bob's previous answer, in a conversation that is already in progress:
 
 ```
-Use LL-1003 as the example instead.
+Use permit BP-2043 as the example instead.
 ```
 
 ```
@@ -225,17 +226,17 @@ Verify:      how Bob proves that the task worked, in a way that you can repeat
 Stop:        the condition under which Bob must ask you instead of continuing
 ```
 
-Example, from the Agent-mode step of chapter 5:
+Example, from the Agent-mode step of chapter 6:
 
 ```
-Goal: the order status tool exists on the instance and lab_order_agent can call it.
-Context: @lab/tools/lab_get_order_status.py and @agents/lab_order_agent.yaml.
-Constraints: import the tool from that file. Keep the name lab_get_order_status.
+Goal: the permit status tool exists on the instance and civic_info_agent can call it.
+Context: @tools/get_permit_status.py and @agents/civic_info_agent.yaml.
+Constraints: import the tool from that file. Keep the name get_permit_status.
   Do not change the agent's instructions.
 Deliverable: the tool imported, the agent re-imported, and one chat asking
-  "Where is order LL-1001?" with reasoning included.
-Verify: the list of tools shows lab_get_order_status with order_id in its input
-  schema, and the chat reasoning shows one call to it returning "in transit".
+  "What is the status of permit BP-2041?" with reasoning included.
+Verify: the list of tools shows get_permit_status with permit_id in its input
+  schema, and the chat reasoning shows one call to it returning "under review".
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
@@ -250,11 +251,11 @@ The following table shows a weak prompt and a better prompt for the same situati
 
 | Situation | Weak | Better | Why |
 |---|---|---|---|
-| Starting an agent project (structured prompt) | "Build me a customer service agent for Lumen Logistics that can track orders, answer policy questions and give shipping quotes.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
-| Running a test (instruction) | "Test the agent." | "Send the four test questions from design/helpdesk-design.md to lumen_helpdesk_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
-| Adding one tool (structured prompt) | "Add the order status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
-| Investigating a failure (question) | "The agent does not work, fix it." | "Why did lab_order_agent answer that order LL-1001 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
-| Requesting a file (instruction) | "Write me an agent definition for order tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
+| Starting an agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing tool referenced with @, the ten-tool limit, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
+| Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
+| Adding one tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
+| Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
+| Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
 
 The better prompts have two properties in common: they reference real files instead of describing them, and they state what Bob must return and when it must stop. With these two properties, the rest of the wording can be informal.
@@ -263,7 +264,7 @@ Prompts to avoid:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
-| "Build me a customer service agent" | Bob invents the users, the facts, the tools and the names | The structured prompt with the six questions, in Ask mode |
+| "Build me a citizen services agent" | Bob invents the users, the facts, the tools and the names | The structured prompt with the six questions, in Ask mode |
 | "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob changes the first thing it finds | Request the reasoning of the failing test first |
 | "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
@@ -292,13 +293,13 @@ After that, the following requests cover daily use. Each one is a plain instruct
 | You want to | Send |
 |---|---|
 | Save your work | `Commit everything I changed with a short message saying what was built, and push.` |
-| Save only some files | `Commit the files in the design folder with the message "Helpdesk design v2" and push.` |
+| Save only some files | `Commit the files in the design folder with the message "City information agent design v2" and push.` |
 | See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
 | See the history | `List the last ten commits with their dates and messages.` |
 | Get the latest version of the guide | `Pull the latest changes from the repository.` |
-| Undo the last change to a file | `Restore agents/lumen_helpdesk_agent.yaml to the version in the last commit.` |
-| Go back to an earlier version | `Show me what agents/lumen_helpdesk_agent.yaml looked like three commits ago.` |
-| Work on a change without touching the main version | `Create a branch named helpdesk-hours and switch to it.` |
-| Bring a finished branch back | `Switch to the main branch and merge helpdesk-hours into it, then push.` |
+| Undo the last change to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
+| Go back to an earlier version | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
+| Work on a change without touching the main version | `Create a branch named roads-hours and switch to it.` |
+| Bring a finished branch back | `Switch to the main branch and merge roads-hours into it, then push.` |
 
 Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control view, described in section 2.3, provides the same operations by clicking.
