@@ -8,7 +8,7 @@ The first agent of CivicPulse answers one kind of question: which city departmen
 
 In this chapter, you create that agent with three prompts to Bob, one in each mode. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. You then find an answer that is wrong, correct the agent, and confirm the correction. At the end, the agent runs in draft on your instance.
 
-The agent is kept simple on purpose. It consists of:
+The agent is intentionally simple. It consists of:
 
 - One agent, `civic_info_agent`, defined in one file.
 - The default model of the instance.
@@ -58,7 +58,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance, which takes a few seconds, and answers. The answer normally has three parts:
+Bob queries the instance, which takes a few seconds, and answers. The answer usually has three parts:
 
 1. What Bob understood. Read it against what you meant. If it is wrong, correct it now.
 2. What already exists on the instance: the agents, tools, knowledge bases and connections, and whether the name of the new agent is free. Bob reads this from the instance.
@@ -87,7 +87,7 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers. It might outline a design in the chat. In Ask mode, Bob cannot write the design file; that is the next step.
+Bob confirms the answers and can outline a design in the chat. In Ask mode, Bob cannot write the design file. Writing the design is the next step.
 
 ## 4.3 Plan mode: write the design
 
@@ -112,7 +112,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. The lay
 
 Two entries in the description of the agent apply to every agent in this guide:
 
-- The model. You did not name one. Bob uses the default model of the instance, `groq/openai/gpt-oss-120b`, which is available on every instance.
+- The model. You did not name one, so the design uses the default model of the instance, `groq/openai/gpt-oss-120b`, which is available on every instance. If the design names another model, ask Bob to use the default.
 - The description and the instructions. The description says what the agent is for; other agents and the Orchestrate interface read it to decide when to use this agent. The instructions say how the agent behaves; the agent reads them in every conversation.
 
 ## 4.4 Approve the design
@@ -130,7 +130,7 @@ question and the building permit question.
 
 Bob revises the file and waits again. When the design is complete, continue with 4.5. The approval is given there.
 
-Keep one question in mind for section 4.8: the facts give opening hours for two departments and none for Roads and Infrastructure. What will the agent answer if a resident asks for them?
+Note one point for section 4.8: the facts give opening hours for two departments and none for Roads and Infrastructure. Section 4.8 tests what the agent answers when a resident asks for them.
 
 ## 4.5 Agent mode: build and test
 
@@ -151,11 +151,11 @@ Bob reads the design and performs the build steps:
 
 Compare each answer with the facts in 4.2. A correct answer names the right department and gives its contact.
 
-Bob requests the reasoning of the agent with each test, and the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answered from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
+If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
 
 ## 4.6 Read the definition
 
-Open `agents/civic_info_agent.yaml` in the File Explorer. This file is the agent. Bob wrote it; you read it and, later, ask Bob to change it.
+Open `agents/civic_info_agent.yaml` in the File Explorer. This file defines the agent. Bob wrote it. You read it and, when the agent must change, ask Bob to edit it.
 
 | Field | Purpose |
 |---|---|
@@ -189,7 +189,7 @@ Ask the agent for information that the facts do not contain:
 Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 ```
 
-The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: the agent might answer that the department can be reached at any time, because the urgent line is, or give hours that are not in the facts. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
+The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: the agent can answer that the department is reachable at any time, because the urgent line is, or give hours that are not in the facts. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
 
 An agent knows what its instructions say and nothing else. When an answer is wrong, the correction is made in the instructions. Send:
 
