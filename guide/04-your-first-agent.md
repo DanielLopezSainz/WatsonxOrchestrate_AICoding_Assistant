@@ -45,28 +45,32 @@ If the list already contains `civic_info_agent`, someone has run this chapter on
 
 Mode: Ask, in a new conversation.
 
-Send this prompt. It is a structured prompt written as running text (chapter 3, type 3): what the agent is for, example questions, what it must not do, and what you want in the answer.
+This is the first time that you tell Bob about the project, and the purpose of this first prompt is not to get anything built. It is to make sure that Bob has understood what you want, and to let Bob tell you what it still needs to know, before a single file exists. A misunderstanding found now takes one sentence to correct. Found after the build, it means building again.
+
+Ask mode is the right place for this conversation: Bob can read your project and look at your instance, and it cannot change anything.
+
+The prompt describes the agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob for three things in return. It is a structured prompt written as running text (chapter 3, type 3).
 
 ```
 I would like to build an information agent for the residents of the City of
 Utopia with watsonx Orchestrate. It should answer questions like "the street
 light on my street has been out for a week, who do I tell?", "how do I apply
-for a building permit?" and "when is the waste office open?". It answers from a fixed set of
-facts about three city departments: Permits and Planning, Roads and
-Infrastructure, and Waste and Recycling. It does not look anything up in other
-systems and it does not create requests.
+for a building permit?" and "when is the waste office open?". It answers from
+a fixed set of facts about three city departments: Permits and Planning, Roads
+and Infrastructure, and Waste and Recycling. It does not look anything up in
+other systems and it does not create requests.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance, which takes a few seconds, and answers. The answer usually has three parts:
+Bob does not answer immediately. It first looks at your instance, which takes a few seconds, so that its answer is about your instance and not about watsonx Orchestrate in general. The answer usually has three parts:
 
 1. What Bob understood. Read it against what you meant. If it is wrong, correct it now.
 2. What already exists on the instance: the agents, tools, knowledge bases and connections, and whether the name of the new agent is free. Bob reads this from the instance.
 3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the agent.
 
-The questions vary from one run to another. Answer them in the same conversation. The following answer supplies the facts and also settles points that Bob is likely to ask about, such as the name of the agent, so that it can be used whatever the wording of Bob's questions:
+Now it is your turn to answer. Bob's questions vary from one run to another, but they come down to the same points: the facts, the tone, the limits of the agent, and its name. The following answer gives Bob all of them at once, so you can use it whatever the wording of Bob's questions. Send it in the same conversation.
 
 ```
 Use these facts as they are.
@@ -89,19 +93,21 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and can outline a design in the chat. In Ask mode, Bob cannot write the design file. Writing the design is the next step.
+Bob confirms the answers and can outline a design in the chat. Nothing has been created so far, and that is the result of this step: you and Bob now agree on what the agent is. Writing it down is the next step.
 
 ## 4.3 Plan mode: write the design
 
-Mode: Plan, in the same conversation, so that Bob keeps your answers.
+Mode: Plan, in the same conversation.
 
-Send this instruction (chapter 3, type 2):
+You and Bob agree on what the agent must do. This step turns that agreement into a design: a document that states exactly what will be built, which you can read, question and correct while it is still only a document.
+
+Stay in the same conversation, so that Bob keeps everything that you have told it, and switch to Plan mode. The prompt is one line, an instruction (chapter 3, type 2). Bob already has the facts; the only thing missing is where to write the design.
 
 ```
 Write the design for this agent into design/civic-info-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary. The layout of the design is Bob's choice and varies. Check that the file contains the following:
+Bob asks for approval to write the file, writes it, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another, but the file must contain the following:
 
 | Content | What to check |
 |---|---|
@@ -121,7 +127,7 @@ Two entries in the description of the agent apply to every agent in this guide:
 
 Mode: Plan, same conversation.
 
-Read the design. Everything that you want built must be in the design before you approve it.
+The design is a proposal, and this is the moment to change it. Changing a paragraph in a document takes one prompt. Changing an agent that is already built means building it again. Everything that you want built must be in the design before you approve it.
 
 The design has one gap: it does not say what a resident sees before typing a question. Request it:
 
@@ -136,9 +142,13 @@ Note one point for section 4.8: the facts give opening hours for two departments
 
 ## 4.5 Agent mode: build and test
 
-Mode: Agent, in a new conversation. Click the plus sign at the top of the chat panel, then select Agent in the mode dropdown. The build starts in a new conversation so that the planning discussion does not consume the context.
+Mode: Agent, in a new conversation.
 
-Send this instruction (chapter 3, type 2). It is also the approval of the design.
+Everything so far was preparation. In this step, Bob builds the agent.
+
+Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. A new conversation gives Bob a clear context: it works from the design file, not from the discussion that produced it.
+
+The prompt has two sentences. The first is your approval of the design. The second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
 
 ```
 The design in @design/civic-info-design.md is approved. Build it.
@@ -159,7 +169,7 @@ If Bob reports the reasoning of the agent for a test, the reasoning is empty. Th
 
 ## 4.6 Read the definition
 
-Open `agents/civic_info_agent.yaml` in the File Explorer. This file defines the agent. Bob wrote it. You read it and, when the agent must change, ask Bob to edit it.
+The agent now exists, and one file defines it. Open `agents/civic_info_agent.yaml` in the File Explorer. Bob wrote this file, and you will never need to write one yourself. Read it once all the same: every agent in this guide is defined by a file like this one, and when an agent must change, this is the file that you ask Bob to edit.
 
 | Field | Purpose |
 |---|---|
@@ -177,9 +187,11 @@ The file can contain other fields. The table lists the ones that this guide refe
 
 ## 4.7 Check the agent on the instance
 
+A file in the project folder shows what Bob wrote. It does not show what exists on the instance, where the agent runs. Check the instance itself.
+
 Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` appears next to the agents that were already there. An agent that appears in this list exists on the instance.
 
-Then test the agent with two questions of your own, one that the facts cover and one that they do not. In the Agent-mode conversation, send for example:
+Then talk to the agent. Bob tested it with the questions from the design; now ask it two questions of your own, one that the facts cover and one that they do not. In the Agent-mode conversation, send for example:
 
 ```
 Ask civic_info_agent: "My recycling bin was not collected this morning. Who do I contact?"
@@ -191,7 +203,7 @@ Nothing is deployed in this chapter. The agent is in draft: you can use it, and 
 
 Mode: Agent, same conversation.
 
-Ask the agent for information that the facts do not contain:
+So far the agent has answered correctly. In this section, you make it fail, because a wrong answer shows how an agent works more clearly than a correct one. Ask the agent for information that the facts do not contain:
 
 ```
 Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
@@ -220,7 +232,7 @@ Every correction in this guide follows the same steps: read the answer, find wha
 
 Mode: Agent, same conversation.
 
-Send this instruction:
+The file that Bob wrote contains what you decided. The instance stores more than that. The last step of the chapter asks Bob to bring back the agent as the instance holds it, so that you can compare the two.
 
 ```
 Export civic_info_agent from the instance to exports/civic_info_agent.yaml,
