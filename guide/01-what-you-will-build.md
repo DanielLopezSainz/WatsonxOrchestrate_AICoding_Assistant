@@ -4,9 +4,21 @@ Level: beginner. Time: about 10 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-This guide teaches how to create agents in IBM watsonx Orchestrate with IBM Bob. This chapter introduces the two products and what each one does, the scenario that the guide uses, and the content of each chapter.
+Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do, and Bob writes the files, sends them to your instance, and tests the result. This guide teaches that way of working, from a first agent to a complete system.
 
-Skip this chapter if you already know watsonx Orchestrate and Bob. Section 1.3 describes the scenario, and section 1.4 lists the chapters.
+The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a pothole, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
+
+At the end of the guide, you have built:
+
+- A front desk agent and three department agents that work together.
+- A knowledge base of city guides and regulations that the agents search.
+- Tools that read the status of requests and permits, and report new issues to an external system.
+- A permit application that follows fixed steps, with an approval by a city clerk.
+- A chat window that residents use on a web page.
+
+You write prompts. Bob writes the code.
+
+This chapter introduces the two products, the scenario and the chapters. If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
 ## 1.1 The two products
 
@@ -18,8 +30,6 @@ The guide uses two IBM products. Each one has a different job.
 | IBM Bob | An AI coding assistant that works inside a development environment. You describe what you want in a chat; Bob writes the files, runs the operations, and reports the result | You create the agents here. You do not write code or configuration files by hand |
 
 The two products are connected by the watsonx Orchestrate ADK extension for Bob, which chapter 2 installs. With the extension, Bob can list what exists on your instance, send new agents to it, and test them.
-
-You work in Bob. The agents run in watsonx Orchestrate.
 
 ## 1.2 What an agent is made of
 
