@@ -1,27 +1,28 @@
 # Chapter 3. How to work with Bob
 
-Level: beginner. Time: about 30 minutes of reading. Prerequisites: none. The examples refer to the project folder from chapter 2.
+Level: beginner. Time: about 30 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-This chapter describes how to create agents in watsonx Orchestrate with Bob. The work follows Bob's three modes in turn: Ask mode to understand the request, Plan mode to write the design, and Agent mode to build and test the agent. You approve the design before Bob builds it, and you approve the deployment before an agent reaches its users. The chapter describes this workflow and the prompts to use in each mode. The walkthroughs from chapter 4 onwards apply the workflow without repeating it. In this guide, "the assistant" means Bob.
+Bob can build an agent from a single sentence, and the result is rarely what you wanted. The quality of what Bob builds depends on how you work with it: which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
 
-After completing this chapter, you can:
+The workflow has three steps, one per Bob mode:
 
-- Run an agent project through Bob's Ask, Plan and Agent modes.
-- Review a design before approving it.
-- Choose among three kinds of prompt and write each one.
-- Rewrite a vague prompt so that it states the expected result and the condition under which Bob must stop.
+- Ask mode, to make sure that Bob has understood what you want before anything is written.
+- Plan mode, to obtain a design that you read and approve.
+- Agent mode, to build the agent from the approved design and test it.
 
-Prerequisites: none. Chapter 2 is not required to read this chapter, but the examples refer to the project folder it sets up.
+The chapter then describes the three kinds of prompt that the guide uses, with examples of weak and better prompts, and how to keep your work in git through Bob.
 
-What to read, by experience:
+What to read, depending on your experience:
 
 | If you | Read | Skip |
 |---|---|---|
 | Have not used an AI assistant for work before | The whole chapter | Nothing |
-| Use ChatGPT, Claude or a similar assistant, but not Bob | 3.1, 3.2 and 3.5, which are specific to Bob and to Orchestrate | 3.3 and 3.4, on writing prompts, and 3.6 if you know git |
-| Use Bob in its three modes already | 3.2, the approvals specific to Orchestrate, and 3.5 | The rest |
+| Use ChatGPT, Claude or a similar assistant, but not Bob | 3.1, 3.2 and 3.5, which are specific to Bob and to watsonx Orchestrate | 3.3 and 3.4, on writing prompts, and 3.6 if you know git |
+| Already use Bob in its three modes | 3.2 and 3.5 | The other sections |
+
+In this guide, "the assistant" means Bob.
 
 ## 3.1 Bob proposed workflow
 
