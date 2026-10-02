@@ -2,7 +2,7 @@
 
 A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 says where their setup is documented.
 
-The chapters follow one fictional company, Lumen Logistics, from a first question-answering agent to a multi-agent solution, one working session at a time. Each chapter states its level, its prerequisites and a checkpoint, so that readers with experience can start at the chapter they need.
+The chapters build one system, CivicPulse, the citizen services platform of the fictional City of Utopia, from a first question-answering agent to several agents working together, one component at a time. Each chapter states its level, its prerequisites and a checkpoint, so that readers with experience can start at the chapter they need.
 
 ## How this repository is organised
 
@@ -19,6 +19,7 @@ Read chapter 2 first if you want to see the assistant talk to your instance with
 
 Chapters available so far:
 
+- `guide/01-what-you-will-build.md`
 - `guide/02-connect-your-assistant.md`
 - `guide/03-how-to-brief-your-assistant.md`
 - `guide/04-your-first-agent.md`
