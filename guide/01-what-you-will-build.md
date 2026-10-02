@@ -6,7 +6,7 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do, and Bob writes the files, sends them to your instance, and tests the result. This guide teaches that way of working, from a first agent to a complete system.
 
-The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a pothole, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
+The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
 
 At the end of the guide, you have built:
 

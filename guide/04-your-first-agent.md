@@ -4,9 +4,11 @@ Level: beginner. Time: about 45 minutes. Prerequisites: chapter 2 completed, cha
 
 ## Overview
 
-The first agent of CivicPulse answers one kind of question: which city department handles this, and how do I reach it? A resident writes "there is a pothole on my street", and the agent answers with the department, its contact and its opening hours.
+Suppose that the street light outside your house has been dark for a week. It is seven in the evening and the city offices are closed. You open the website of the City of Utopia and type: "The street light on my street has been out for a week. Who do I tell?" A few seconds later you have the answer: the Roads and Infrastructure department, the address to write to, and the hours when someone answers the phone.
 
-In this chapter, you create that agent with three prompts to Bob, one in each mode. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. You then find an answer that is wrong, correct the agent, and confirm the correction. At the end, the agent runs in draft on your instance.
+That answer comes from the agent that you create in this chapter, the first agent of CivicPulse. It knows three city departments, what each one handles, and how to reach them. It also knows what to say when a resident asks about something that it was never told.
+
+You create the agent in three steps, one in each of Bob's modes. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. Then you make the agent fail: you ask it for a detail that is missing from its facts, read the answer that it invents, and correct it. That correction demonstrates the rule that every later chapter relies on: an agent knows what it was told, and nothing else.
 
 The agent is intentionally simple. It consists of:
 
@@ -47,9 +49,9 @@ Send this prompt. It is a structured prompt written as running text (chapter 3, 
 
 ```
 I would like to build an information agent for the residents of the City of
-Utopia with watsonx Orchestrate. It should answer questions like "there is a
-pothole on my street, who do I contact?", "how do I apply for a building
-permit?" and "when is the waste office open?". It answers from a fixed set of
+Utopia with watsonx Orchestrate. It should answer questions like "the street
+light on my street has been out for a week, who do I tell?", "how do I apply
+for a building permit?" and "when is the waste office open?". It answers from a fixed set of
 facts about three city departments: Permits and Planning, Roads and
 Infrastructure, and Waste and Recycling. It does not look anything up in other
 systems and it does not create requests.
@@ -124,7 +126,7 @@ Read the design. Everything that you want built must be in the design before you
 The design has one gap: it does not say what a resident sees before typing a question. Request it:
 
 ```
-Add a welcome message and two starter prompts to the design: the pothole
+Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
@@ -233,7 +235,7 @@ Ask the agent these three questions through Bob, and compare the answers.
 
 | Question | A correct answer contains |
 |---|---|
-| There is a pothole on my street. Who do I contact? | Roads and Infrastructure, roads@utopia.example or 555 0120, the opening hours added in 4.8 |
+| The street light on my street has been out for a week. Who do I tell? | Roads and Infrastructure, roads@utopia.example or 555 0120, the opening hours added in 4.8 |
 | How do I apply for a building permit? | Permits and Planning, the online application address, the contact |
 | Who is the head of the Permits department? | A statement that the agent does not have that information, and the contact of Permits and Planning |
 

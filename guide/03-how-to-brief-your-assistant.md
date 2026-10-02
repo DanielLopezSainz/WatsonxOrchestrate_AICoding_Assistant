@@ -42,8 +42,8 @@ Example. The same agent is used in all three modes below: an agent that tells th
 
 ```
 I would like to build an information agent for the residents of the City of
-Utopia. It answers questions like "there is a pothole on my street, who do I
-contact?" from a fixed set of facts about three city departments. Tell me what
+Utopia. It answers questions like "the street light on my street has been out
+for a week, who do I tell?" from a fixed set of facts about three city departments. Tell me what
 you understood, what you need to know from me, and what already exists on my
 instance.
 ```
@@ -101,7 +101,7 @@ The deployment approval takes place when the agent is built and tested. Everythi
 Example. In chapter 4, Bob writes the design for the city information agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
 ```
-Add a welcome message and two starter prompts to the design: the pothole
+Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
