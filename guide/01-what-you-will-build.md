@@ -1,6 +1,6 @@
 # Chapter 1. What you will build
 
-Level: beginner. Time: about 10 minutes of reading. Prerequisites: none.
+Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 ## Overview
 
@@ -33,7 +33,7 @@ The two products are connected by the watsonx Orchestrate ADK extension for Bob,
 
 ## 1.2 What an agent is made of
 
-An agent in watsonx Orchestrate is defined by a small set of components. The guide starts with the first two and adds one component per chapter.
+An agent in watsonx Orchestrate is built from a small set of components. The guide starts with the first two and adds one component per chapter.
 
 | Component | What it is |
 |---|---|
@@ -45,12 +45,13 @@ An agent in watsonx Orchestrate is defined by a small set of components. The gui
 | MCP toolkits | Groups of tools provided by an external server and attached to the agent as a set |
 | Collaborator agents | Other agents that an agent delegates to, so that each agent has a clear purpose |
 | Flows | Fixed sequences of steps that run the same way every time |
+| Channels | The interfaces through which users reach an agent, such as a chat window on a web page |
 
-Everything that you create is stored first in the draft environment of the instance, where only you can use it. Deployment makes an agent available to its users. A channel, such as a chat window on a web page, is how users reach a deployed agent.
+Everything that you create is stored first in the draft environment of the instance, where only you can use it. Deployment makes an agent available to its users.
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. Residents use CivicPulse to find out which city department handles their question, to check the status of a request or a permit, to report a problem, and to apply for a permit.
+The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The scenario was chosen for two reasons. It needs no explanation, because everyone has asked a city office a question or reported a problem in the street. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
 
@@ -59,8 +60,6 @@ The city, its departments, its residents and all its data are fictional. Three d
 | Permits and Planning | Building permits and planning applications |
 | Roads and Infrastructure | Potholes, street lights, damaged signs, urgent hazards on public roads |
 | Waste and Recycling | Collection days, bulky item collection, recycling rules |
-
-The scenario was chosen because it needs no explanation, and because each component of an agent has an obvious use in it.
 
 ## 1.4 The chapters
 
