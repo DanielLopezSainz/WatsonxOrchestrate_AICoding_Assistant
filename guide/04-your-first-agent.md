@@ -147,7 +147,11 @@ Mode: Agent, in a new conversation.
 
 Everything so far was preparation. In this step, Bob builds the agent.
 
-Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. A new conversation gives Bob a clear context: it works from the design file, not from the discussion that produced it.
+Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would work too, so the new conversation deserves an explanation.
+
+Think of what Bob has in front of it in that conversation: your request, its first proposal, the facts, a complete agent it drafted before you asked for a design, the design, and your revision. Some of that you approved; some of that you did not. If Bob builds in the same conversation, all of it is in view, and Bob may take a detail from its early draft rather than from the design you approved. In a new conversation, Bob has one source of truth: the design file, which the @ mention in the prompt tells it to read. What you approved is exactly what gets built, which is the point of approving it.
+
+For an agent this small, the difference would rarely show. The habit pays off from chapter 9 onwards, where a design covers four agents and the discussion that produced it runs to pages. It is also how Bob's own documentation recommends moving from a plan to its implementation.
 
 The prompt has two sentences. The first is your approval of the design. The second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
 
