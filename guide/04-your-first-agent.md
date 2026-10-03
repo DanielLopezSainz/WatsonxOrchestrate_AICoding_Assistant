@@ -169,10 +169,6 @@ What happens next takes Bob a minute or two, and it is the whole of this guide i
 4. **Tested it.** Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and a second question in the same conversation to check that the agent remembers the first. It wrote the answers and its verdicts into a test report. Every test passed.
 5. **Reported.** A table of the files it wrote, and a list of ways to try the agent yourself.
 
-Compare each test answer with the facts in 4.2. A correct answer names the right department and gives its contact.
-
-If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
-
 ## 4.6 Read the definition
 
 The agent now exists, and one file defines it. Open `agents/civic_info_agent.yaml` in the File Explorer. Bob wrote this file, and you will never need to write one yourself. Read it once all the same: every agent in this guide is defined by a file like this one, and when an agent must change, this is the file that you ask Bob to edit.
@@ -271,12 +267,11 @@ If the first answer has no hours, the correction from 4.8 was not imported; ask 
 
 ## 4.11 Summary
 
-A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
+A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Four things from this chapter apply to every agent that follows:
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
 - An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
-- An agent without tools has empty reasoning.
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
 
 The agent's knowledge is twenty lines of facts, and a city has more to say than that: regulations, procedures, opening hours for every service. In chapter 5, the agent gets the city's guides and regulations as a knowledge base, and starts answering questions that no instruction could hold.
