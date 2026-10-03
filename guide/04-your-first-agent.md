@@ -135,9 +135,11 @@ Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
-Bob revises the file and waits again. When the design is complete, continue with 4.5. The approval is given there.
+Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust: open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. This habit, reading what Bob changed rather than what Bob says it changed, costs a few seconds here and saves hours later, when the changes are to agents on an instance rather than to a document.
 
-Note one point for section 4.8: the facts give opening hours for two departments and none for Roads and Infrastructure. Section 4.8 tests what the agent answers when a resident asks for them.
+When the design says what you mean, it is approved. The approval itself is the first line of the next section, so there is nothing more to send here.
+
+Before you leave the design, notice one thing about the facts: two departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.8 finds out what the agent does with the gap.
 
 ## 4.5 Agent mode: build and test
 
@@ -248,7 +250,9 @@ Keep both files for different purposes:
 
 ## 4.10 Check the result
 
-Ask the agent these three questions through Bob, and compare the answers.
+Mode: Agent, same conversation.
+
+The agent has been built, corrected once and exported. Three questions confirm that it is in the state that chapter 5 expects: one that the facts cover, one that the correction from 4.8 fixed, and one that the facts will never cover. Ask them through Bob, as in 4.7, and compare the answers with the table.
 
 | Question | A correct answer contains |
 |---|---|
@@ -260,10 +264,12 @@ If the first answer has no hours, the correction from 4.8 was not imported; ask 
 
 ## 4.11 Summary
 
+A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
+
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
-- You approve the design before Bob builds. Anything that you want built must be in the design.
+- You approve the design before Bob builds, and anything that you want built must be in the design.
 - An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
 - An agent without tools has empty reasoning.
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
 
-Chapter 5 gives the agent more information than its instructions can hold: the city's guides and regulations, as a knowledge base.
+The agent's knowledge is twenty lines of facts, and a city has more to say than that: regulations, procedures, opening hours for every service. In chapter 5, the agent gets the city's guides and regulations as a knowledge base, and starts answering questions that no instruction could hold.
