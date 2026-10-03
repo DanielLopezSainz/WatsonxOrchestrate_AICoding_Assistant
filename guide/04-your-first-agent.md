@@ -189,19 +189,31 @@ The file can contain other fields. The table lists the ones that this guide refe
 
 Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.8 corrects this together with the other correction of the chapter.
 
-## 4.7 Check the agent on the instance
+## 4.7 Meet your agent
 
-A file in the project folder shows what Bob wrote. It does not show what exists on the instance, where the agent runs. Check the instance itself.
+Mode: Agent, same conversation.
 
-Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` appears next to the agents that were already there. An agent that appears in this list exists on the instance.
+Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the agents that were already on the instance. Ten minutes ago it was a paragraph in a design document.
 
-Then talk to the agent. Bob tested it with the questions from the design; now ask it two questions of your own, one that the facts cover and one that they do not. In the Agent-mode conversation, send for example:
+Now talk to it. Bob tested it with the questions from the design; this time the questions are yours. Ask through Bob, one question per message:
 
 ```
 Ask civic_info_agent: "My recycling bin was not collected this morning. Who do I contact?"
 ```
 
-Nothing is deployed in this chapter. The agent is in draft: you can use it, and residents cannot.
+Then try to catch it out. Residents do not write like a design document, and the agent should cope:
+
+- The same question, written badly: "bin not collected today who do i call".
+- A question with two departments in it: "I want to build a garden shed and I also need to get rid of the old one. Who do I contact?"
+- A question in the middle of the night: "There is water flooding the street from a broken pipe. It is 2 am. What do I do?"
+- A question that is none of its business: "What time does the public swimming pool open?"
+- A follow-up in the same conversation, after the recycling question: "And what if it happens again next week?"
+
+Read each answer with the facts of 4.2 next to you. For the first four, the right department and its contact should be there, the flooded street should get the urgent line, and the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up shows whether the agent remembers what you were talking about.
+
+Keep a note of any answer that contains something not in the facts. Section 4.8 shows what to do about it.
+
+The agent is in draft: you can use it, and residents cannot. Nothing is deployed in this chapter.
 
 ## 4.8 Correct a wrong answer
 
