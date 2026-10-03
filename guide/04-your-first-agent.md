@@ -227,17 +227,18 @@ Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 
 The facts give no hours for this department. Inspect the answer. On the run behind this chapter, the agent replied with Monday to Friday 09:00 to 17:00, which are the hours of Permits and Planning. A language model fills a gap with the most plausible content, and the rule "never invent an answer" was written for questions outside the three departments, not for a missing detail inside one of them.
 
-The correction is made in the instructions, by asking Bob:
+Tell Bob what was wrong and how the agent must behave. Bob knows where the agent is defined; you do not need to name the file.
 
 ```
-In agents/civic_info_agent.yaml: add the opening hours "Monday to Friday
-07:00 to 19:00" to Roads and Infrastructure. Change the rules so that, when a
-question asks for a detail that is not in the facts, the agent says that it
-does not have that information. Also add the display name from the design,
-"Utopia city information". Import the agent again and ask it the same question.
+civic_info_agent gave opening hours for Roads and Infrastructure that are not
+in its facts. The hours of Roads and Infrastructure are Monday to Friday 07:00
+to 19:00. When a question asks for a detail that is not in the facts, the agent
+must say that it does not have that information. Also give the agent the
+display name "Utopia city information", as in the design. Import the agent
+again and ask it the same question.
 ```
 
-Bob edits the file, imports it again, and asks the question. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent; no second agent is created.
+Bob changes the definition file, imports it again, and asks the question. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent; no second agent is created.
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
@@ -249,7 +250,7 @@ The file that Bob wrote contains what you decided. The instance stores more than
 
 ```
 Export civic_info_agent from the instance to exports/civic_info_agent.yaml,
-and tell me which fields the export contains that agents/civic_info_agent.yaml
+and tell me which fields the export contains that @agents/civic_info_agent.yaml
 does not.
 ```
 
