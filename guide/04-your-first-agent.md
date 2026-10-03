@@ -111,11 +111,10 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 
 | Content | What to check |
 |---|---|
-| What was asked | It matches your request |
-| What exists on the instance | Nothing is reused or replaced |
+| The purpose of the agent | It matches your request |
 | The agent | Its name, display name, model, and that it has no tools, no knowledge base and no collaborators |
-| The instructions | The full text that the agent will read, with the facts for the three departments |
-| The build steps | Write the file, import it, check the instance, test |
+| The facts | The three departments, with the contacts, hours and addresses exactly as you gave them |
+| The instructions | The full text that the agent will read: the facts and the rules for answering |
 | The test questions | Each with what a correct answer contains |
 
 Two entries in the description of the agent apply to every agent in this guide:
