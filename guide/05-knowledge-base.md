@@ -26,13 +26,29 @@ An agent's instructions can hold a page of facts. A city's regulations run to hu
 
 A knowledge base is a set of documents that watsonx Orchestrate indexes, so that an agent can search them. When a resident asks a question, the agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nobody rewrites a regulation into instructions.
 
-Three things to know before building one:
+**When a knowledge base is the right component**
+
+The question to ask about any information that an agent must know is where it lives and who maintains it. Instructions are right for a small, stable set of facts that the agent's builder owns, like the three departments of chapter 4. A knowledge base is right when the information:
+
+- Is too large for instructions. A permit guide, a product catalogue, an employee handbook.
+- Already exists as documents, written and maintained by other people. The legal department updates the regulation; the HR team updates the handbook; the agent must follow without anyone touching its definition.
+- Must be quoted, not paraphrased. A resident who asks about a fee or a deadline wants the official wording and the document it comes from.
+
+Typical knowledge bases in real deployments: the policies and procedures of a company for an employee assistant; product documentation and troubleshooting guides for a support agent; contracts, terms and tariffs for a customer service agent; regulations and forms for a public service, which is this chapter's case. In each one, the documents exist before the agent does, and they keep changing after the agent is built.
+
+A knowledge base is not the right component for information about one person or one case, such as the status of a permit application or a customer's last order. That information lives in a system, changes by the minute, and is fetched with a tool, the subject of chapter 6.
+
+**What to know before building one**
 
 - Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A knowledge base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
 - Indexing takes time. After the import, the knowledge base is not ready at once; the platform processes the documents in the background, and an agent can use the knowledge base only when its status is ready. Bob checks the status for you.
 - A knowledge base belongs to the instance, not to one state of an agent. It is shared by the draft and the live copies of every agent that uses it, so a change to the documents reaches residents at once, without a deployment.
 
 An agent uses a knowledge base when its definition names it. The agent's instructions decide when to search: in this chapter, for every question about a rule or a procedure, while the contacts and hours stay in the instructions.
+
+**The documents of this chapter**
+
+In a real project, the city's documents would exist and you would give them to Bob. The City of Utopia is fictional, so in this chapter you give Bob the rules and Bob writes the documents. Everything else, the knowledge base, the agent, the questions, works exactly as it would with real documents.
 
 ## 5.3 Ask mode: describe the knowledge
 
