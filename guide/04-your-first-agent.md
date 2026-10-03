@@ -242,30 +242,11 @@ Bob changes the definition file, imports it again, and asks the question. The ag
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
-## 4.9 Export the agent
+## 4.9 Check the result
 
 Mode: Agent, same conversation.
 
-The file that Bob wrote contains what you decided. The instance stores more than that. The last step of the chapter asks Bob to bring back the agent as the instance holds it, so that you can compare the two.
-
-```
-Export civic_info_agent from the instance to exports/civic_info_agent.yaml,
-and tell me which fields the export contains that @agents/civic_info_agent.yaml
-does not.
-```
-
-Bob creates the `exports` folder if it does not exist, and asks for approval to write the file. The exported file is longer than the file that Bob wrote. The instance adds fields with their default values, such as settings for memory and for the display of reasoning. Nothing from the original file is lost.
-
-Keep both files for different purposes:
-
-- `agents/civic_info_agent.yaml` contains what you decided. Ask Bob to edit this file when the agent must change.
-- The exported file is the complete definition as the instance holds it. Use it as a record of a finished agent. It is not updated when you import the agent again; repeat the export to record the change.
-
-## 4.10 Check the result
-
-Mode: Agent, same conversation.
-
-The agent has been built, corrected once and exported. Three questions confirm that it is in the state that chapter 5 expects: one that the facts cover, one that the correction from 4.8 fixed, and one that the facts will never cover. Ask them through Bob, as in 4.7, and compare the answers with the table.
+The agent has been built and corrected once. Three questions confirm that it is in the state that chapter 5 expects: one that the facts cover, one that the correction from 4.8 fixed, and one that the facts will never cover. Ask them through Bob, as in 4.7, and compare the answers with the table.
 
 | Question | A correct answer contains |
 |---|---|
@@ -275,7 +256,7 @@ The agent has been built, corrected once and exported. Three questions confirm t
 
 If the first answer has no hours, the correction from 4.8 was not imported; ask Bob to import the file again. If the third answer contains a name, the last rule of the instructions is missing; ask Bob to show the instructions and to restore the rule.
 
-## 4.11 Summary
+## 4.10 Summary
 
 A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Four things from this chapter apply to every agent that follows:
 
