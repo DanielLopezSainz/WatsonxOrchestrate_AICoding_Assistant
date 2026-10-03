@@ -172,11 +172,15 @@ Approve each request as it comes. If an import fails, Bob reads the error and co
 
 ## 5.7 Read what was built
 
-Open the `knowledge-bases` folder in the File Explorer. It holds the three documents and the knowledge base definition. The definition has five lines that matter: the kind, `knowledge_base`; the name; a description, which the agent reads to decide when the knowledge base is relevant; and the list of documents.
+Open the `knowledge-bases` folder in the File Explorer. It holds the three documents and the knowledge base definition.
 
-Open `agents/civic_info_agent.yaml`. Two things changed: the knowledge base is listed under `knowledge_base`, and the instructions have a new part about searching, naming the document, and what to say when a rule is not covered. The facts and the rules of chapter 4 are still there.
+The documents are short handouts, a page each, with a heading per topic and every rule from your answer. On the run behind this chapter, Bob added worked examples to the permit guide, a shed of 8 square metres and 2.2 metres high needs no permit, one of 9 square metres but 3 metres high does, which is what a resident needs and what makes the search find the right passage. Read them once: residents' answers come from these pages.
 
-Save your work, as in chapter 4: `Commit everything I changed with a short message saying what was built, and push.`
+The knowledge base definition is a dozen lines: the kind, `knowledge_base`; the name; a description, which the agent reads to decide when the knowledge base is relevant; the list of the three documents; and the name of the model that turns text into searchable form, which Bob set to the platform's default.
+
+Open `agents/civic_info_agent.yaml`. The knowledge base is listed under `knowledge_base`, and the instructions have a new block: search the knowledge base for any question about a rule, name the document in the answer, allow a short paragraph for answers taken from a document, and say "I do not have that information" when the documents do not cover a rule. The facts and rules of chapter 4 are still there.
+
+Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
 ## 5.8 Meet the agent again
 
@@ -196,32 +200,38 @@ Ask civic_info_agent: "Which bin does a broken mirror go in?"
 Ask civic_info_agent: "How loud can a party be after 10 pm on a Saturday?"
 ```
 
-Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is under 2.5 metres high. The mirror goes wrapped in the grey bin, not to the glass containers. The party on a Saturday must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Each answer should name its document.
+Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is under 2.5 metres high. The mirror goes wrapped in the grey bin, not to the glass containers. On a Saturday, music must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Each answer names its document, because the instructions ask for it.
 
 Then ask as residents do:
 
-- A question that mixes the facts and a document: "I want to build a 60 square metre extension. What does it cost, and who do I call?"
-- A question with a date in it: "Can the builders work on Sunday morning?"
-- A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent should say that it does not have that information.
+- A question that needs a document and the facts: "I want to build a 60 square metre extension. What does it cost, and who do I call?" The fee is 300, and the contact is Permits and Planning.
+- A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
+- A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent says that it does not have that information.
 
-Open your watsonx Orchestrate instance in the browser and ask the same shed question in the chat. The answer shows the document it came from; this is where residents will see it.
+Open your watsonx Orchestrate instance in the browser and ask the shed question in the chat. The answer names the document there too; this is where residents will read it.
 
-## 5.9 When the agent does not search
+## 5.9 Correct a wrong answer
 
 Mode: Agent, same conversation.
 
-Two things can go wrong with a knowledge base, and both show in the answers rather than in an error.
+Read the party answer and the chickens answer again, to the end. On the run behind this chapter, both were right about the rule and both added something that is in no document. The party answer sent the resident to Roads and Infrastructure "for further assistance", a department that has nothing to do with noise; the ordinance gives an online address and no department. The chickens answer said "I do not have that information" and then named a City of Utopia Animal Services Department, which does not exist.
 
-The agent answers a regulation question from general knowledge instead of from the documents. The sign is an answer that sounds plausible but contains a rule that is not in your documents, for example a permit fee that you never set. The cause is in the instructions: they do not tell the agent clearly enough when to search. Tell Bob:
+This is the habit you met in chapter 4: when the facts give no department, the agent supplies one. The documents made it visible again, because the noise ordinance names no department at all. The correction is the same as in chapter 4, a change to the instructions, and this time it also gives the agent somewhere to send residents when none of the three departments applies:
 
 ```
-civic_info_agent answered a question about <subject> without using the
-knowledge base. For every question about a rule, a procedure, a fee or a
-deadline, it must search city_regulations first and answer from the document.
-Import the agent again and ask the same question.
+civic_info_agent adds departments that are not in its facts: it sent a noise
+question to Roads and Infrastructure, and it named an Animal Services
+Department that does not exist. Add a general contact to its facts: City Hall
+information desk, info@utopia.example, 555 0100, Monday to Friday 09:00 to
+17:00. When a question is outside the three departments, or a document gives
+no department, the agent must give the City Hall contact and must not name any
+other department. Import the agent again and ask the party question and the
+chickens question again.
 ```
 
-The agent finds nothing although the rule is in a document. The usual cause is the document itself: the rule is phrased in a way that does not match how residents ask. Tell Bob what the resident asked and what the document says, and ask it to rewrite that passage of the document and import the knowledge base again; the knowledge base is re-indexed, and the agent does not need to change.
+Bob changes the instructions, imports the agent again, and asks both questions. The party answer now ends with the online address of the ordinance or the City Hall contact, and the chickens answer with "I do not have that information" and City Hall.
+
+A second kind of wrong answer can appear with a knowledge base: the agent finds nothing although the rule is in a document. The usual cause is the document, where the rule is phrased in a way that does not match how residents ask. Tell Bob what the resident asked and what the document says, and ask it to rewrite that passage and import the knowledge base again. The knowledge base is re-indexed; the agent does not change.
 
 ## 5.10 Make the change live
 
