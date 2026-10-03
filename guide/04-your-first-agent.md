@@ -93,7 +93,7 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and can outline a design in the chat. Nothing has been created so far, and that is the result of this step: you and Bob now agree on what the agent is. Writing it down is the next step.
+Bob confirms the answers and often goes further: it can lay out the complete agent in the chat, with its definition and example answers, and suggest switching to Agent mode to create it at once. Do not switch to Agent mode yet. Nothing has been created so far, and that is the result of this step: you and Bob now agree on what the agent is. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
 
 ## 4.3 Plan mode: write the design
 
