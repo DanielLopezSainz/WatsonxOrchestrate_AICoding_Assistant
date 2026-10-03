@@ -1,0 +1,227 @@
+# Chapter 5. Give the agent the city's regulations
+
+Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or its agent imported from the walkthrough folder as the chapter's Overview describes.
+
+## Overview
+
+Suppose that you want to build a garden shed. It is nine in the evening, and you do not want a phone number: you want to know whether you need a permit. You ask CivicPulse. The agent from chapter 4 can only tell you that Permits and Planning handles permits and when they open. It knows twenty lines of facts, and the answer to your question is on page three of the city's building permit guide.
+
+In this chapter, the agent gets the city's guides and regulations: the building permit guide, the waste sorting rules and the noise ordinance. Bob writes the three documents for the City of Utopia, puts them into a knowledge base, and connects the agent to it. The agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
+
+The component introduced in this chapter is the knowledge base. Everything else stays as in chapter 4: one agent, the same facts in its instructions, no tools.
+
+Skip this chapter if you have already connected a knowledge base to an agent with Bob. To continue with chapter 6 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch05/knowledge-bases/city_regulations.yaml into my instance, wait until the knowledge base is ready, then import walkthroughs/ch05/agents/civic_info_agent.yaml.`
+
+## 5.1 Before you start
+
+- The setup from chapter 2, complete.
+- The agent `civic_info_agent` from chapter 4 on your instance, in draft, with the correction of section 4.9. If you skipped chapter 4, import it as described in that chapter's Overview.
+- A new conversation in Bob for this chapter.
+
+Check that the agent is there: in Ask mode, ask `Which agents exist on my instance?` and confirm that `civic_info_agent` is listed.
+
+## 5.2 What a knowledge base is
+
+An agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages, change every year, and are written by people who will never see the agent's instructions. A knowledge base is how an agent uses documents like these.
+
+A knowledge base is a set of documents that watsonx Orchestrate indexes, so that an agent can search them. When a resident asks a question, the agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nobody rewrites a regulation into instructions.
+
+Three things to know before building one:
+
+- Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A knowledge base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
+- Indexing takes time. After the import, the knowledge base is not ready at once; the platform processes the documents in the background, and an agent can use the knowledge base only when its status is ready. Bob checks the status for you.
+- A knowledge base belongs to the instance, not to one state of an agent. It is shared by the draft and the live copies of every agent that uses it, so a change to the documents reaches residents at once, without a deployment.
+
+An agent uses a knowledge base when its definition names it. The agent's instructions decide when to search: in this chapter, for every question about a rule or a procedure, while the contacts and hours stay in the instructions.
+
+## 5.3 Ask mode: describe the knowledge
+
+Mode: Ask, in a new conversation.
+
+The purpose of this prompt is the same as in chapter 4: before anything is written, Bob must understand what you want, and tell you what it needs to know. This time the request has two parts, the documents and the change to the agent, and the documents do not exist yet. Bob will write them, and it needs to know what they must contain.
+
+The prompt says which documents the city needs, what each one covers, the questions that residents must get answered, and that the documents are fictional and Bob's to write.
+
+```
+I want civic_info_agent to answer questions from the City of Utopia's guides
+and regulations, not only from the facts in its instructions. Three documents
+to start with: the building permit guide (when a permit is needed, how to
+apply, fees and processing time), the waste sorting rules (which bin for which
+waste, glass, bulky items, hazardous waste), and the noise ordinance (quiet
+hours, construction work, private events, how to complain). The documents do
+not exist yet; they are fictional and you will write them. Residents must get
+answers to questions like "Do I need a permit for a garden shed?", "Which bin
+does a broken mirror go in?" and "How loud can a party be after 10 pm?".
+
+Tell me what you understood, what you need to know from me, and what already
+exists on my instance.
+```
+
+Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the content of the documents, their format, the name of the knowledge base, and how the agent should use it. The following answer settles all of them. The rules in it are the facts of this chapter; everything that the agent answers about regulations must come from them.
+
+```
+Use these rules as they are. Write each document as a plain text file.
+
+Building permit guide. A permit is required for any new building, extension
+or structure, except detached garden structures with a floor area under 10
+square metres and a height under 2.5 metres, which need no permit. Applications
+are submitted online at https://services.utopia.example/permits with a site
+plan and drawings. The fee is 120 for structures under 50 square metres and 300
+above. A decision is given within 30 days. Work must not start before the
+decision.
+
+Waste sorting rules. Four bins: green for food and garden waste, blue for paper
+and cardboard, yellow for plastic and metal packaging, grey for everything
+else. Glass bottles and jars go to the street containers, not to the bins.
+Broken mirrors, window glass and drinking glasses are not accepted as glass:
+wrap them and put them in the grey bin. Bulky items are collected on request,
+booked online at https://services.utopia.example/bulky, up to three items per
+booking, within ten working days. Paint, batteries and chemicals go to the
+recycling centre at 14 Mill Road, open Saturdays 08:00 to 13:00.
+
+Noise ordinance. Quiet hours are 22:00 to 07:00 from Sunday to Thursday and
+23:00 to 08:00 on Friday and Saturday. During quiet hours, music must not be
+audible outside the property. Construction work is allowed from 07:00 to
+19:00 on weekdays and 08:00 to 13:00 on Saturdays, and never on Sundays.
+A private event can get a one-night exemption, requested online at
+https://services.utopia.example/noise at least five days in advance. Noise
+complaints are reported at the same address.
+
+Knowledge base: name it city_regulations. The agent keeps its current facts and
+instructions, and searches the knowledge base for any question about a rule,
+a procedure, a fee or a deadline. When a question is about a rule that the
+documents do not cover, the agent says that it does not have that information.
+In every answer taken from a document, the agent names the document.
+```
+
+Bob confirms the answers. As in chapter 4, it might outline the documents or the design in the chat. The design is written in the next step.
+
+## 5.4 Plan mode: write the design
+
+Mode: Plan, in the same conversation.
+
+This design has more in it than the one in chapter 4: three documents to write, a knowledge base to define, and a change to an existing agent. That is why it is worth a document of its own that you read before anything is built.
+
+```
+Write the design for this change into design/city-regulations-design.md.
+```
+
+Bob asks for approval to write the file, writes it, and shows a summary. Open the file and check that it contains the following:
+
+| Content | What to check |
+|---|---|
+| The three documents | A name and an outline for each, covering every rule from your answer, as plain text files in the `knowledge-bases` folder |
+| The knowledge base | Its name, `city_regulations`, its description, and the three documents |
+| The change to the agent | The knowledge base attached to `civic_info_agent`, and the instructions extended: search for rules, say when a rule is not covered, name the document; the facts of chapter 4 unchanged |
+| The build order | Documents first, then the knowledge base, then wait for it to be ready, then the agent |
+| The tests | The three questions of the Overview at least, each with what a correct answer contains and which document it comes from |
+
+The build order matters here for the first time. The agent must not be imported with a knowledge base that is not ready; the design should say so, and Bob should wait.
+
+## 5.5 Approve the design
+
+Mode: Plan, same conversation.
+
+Read the design as in chapter 4: anything that you want built must be in it. Two things to look for in this one, because Bob leaves them out at times: that the agent keeps its chapter 4 facts and the correction of section 4.9, and that the test questions include one about a rule that the documents do not cover, so that the "does not have that information" behaviour is tested too. If either is missing, request it in the same conversation:
+
+```
+Add to the design a test question about a rule that the documents do not cover,
+for example whether chickens may be kept in a garden, with the expected answer
+that the agent does not have that information.
+```
+
+When the design says what you mean, continue with 5.6. The approval is given there.
+
+## 5.6 Agent mode: build and test
+
+Mode: Agent, in a new conversation, for the reason explained in chapter 4.
+
+```
+The design in @design/city-regulations-design.md is approved. Build it.
+```
+
+This build takes longer than the one in chapter 4, mostly because of the indexing. What Bob does:
+
+1. **Writes the three documents** as plain text files in the `knowledge-bases` folder. Open them while Bob continues: they are readable city documents, written from your rules, and residents' answers will come from them.
+2. **Writes the knowledge base definition**, a short file that names the knowledge base and lists the documents.
+3. **Imports the knowledge base** and waits. Bob checks the status until it is ready. On a tenant this takes a few minutes; the three documents are small.
+4. **Updates the agent**: the knowledge base is attached and the instructions extended, then the agent is imported again, which replaces the draft.
+5. **Tests**, with the questions from the design, and reports.
+
+With the approvals of chapter 2, Bob asks before writing each file and before each import. Approve each request. If the knowledge base status stays at processing for a long time, let Bob wait; if it reports a failure, Bob reads the error and corrects the documents, as it did with the welcome message in chapter 4.
+
+## 5.7 Read what was built
+
+Open the `knowledge-bases` folder in the File Explorer. It holds the three documents and the knowledge base definition. The definition has five lines that matter: the kind, `knowledge_base`; the name; a description, which the agent reads to decide when the knowledge base is relevant; and the list of documents.
+
+Open `agents/civic_info_agent.yaml`. Two things changed: the knowledge base is listed under `knowledge_base`, and the instructions have a new part about searching, naming the document, and what to say when a rule is not covered. The facts and the rules of chapter 4 are still there.
+
+Save your work, as in chapter 4: `Commit everything I changed with a short message saying what was built, and push.`
+
+## 5.8 Meet the agent again
+
+Mode: Agent, same conversation.
+
+Ask the agent the three questions from the Overview, through Bob, one per message:
+
+```
+Ask civic_info_agent: "Do I need a permit for a garden shed of 8 square metres?"
+```
+
+```
+Ask civic_info_agent: "Which bin does a broken mirror go in?"
+```
+
+```
+Ask civic_info_agent: "How loud can a party be after 10 pm on a Saturday?"
+```
+
+Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is under 2.5 metres high. The mirror goes wrapped in the grey bin, not to the glass containers. The party on a Saturday must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Each answer should name its document.
+
+Then ask as residents do:
+
+- A question that mixes the facts and a document: "I want to build a 60 square metre extension. What does it cost, and who do I call?"
+- A question with a date in it: "Can the builders work on Sunday morning?"
+- A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent should say that it does not have that information.
+
+Open your watsonx Orchestrate instance in the browser and ask the same shed question in the chat. The answer shows the document it came from; this is where residents will see it.
+
+## 5.9 When the agent does not search
+
+Mode: Agent, same conversation.
+
+Two things can go wrong with a knowledge base, and both show in the answers rather than in an error.
+
+The agent answers a regulation question from general knowledge instead of from the documents. The sign is an answer that sounds plausible but contains a rule that is not in your documents, for example a permit fee that you never set. The cause is in the instructions: they do not tell the agent clearly enough when to search. Tell Bob:
+
+```
+civic_info_agent answered a question about <subject> without using the
+knowledge base. For every question about a rule, a procedure, a fee or a
+deadline, it must search city_regulations first and answer from the document.
+Import the agent again and ask the same question.
+```
+
+The agent finds nothing although the rule is in a document. The usual cause is the document itself: the rule is phrased in a way that does not match how residents ask. Tell Bob what the resident asked and what the document says, and ask it to rewrite that passage of the document and import the knowledge base again; the knowledge base is re-indexed, and the agent does not need to change.
+
+## 5.10 Make the change live
+
+Mode: Agent, same conversation.
+
+The corrected agent is a draft. The live agent from chapter 4 still answers from its twenty lines of facts. Deploy again:
+
+```
+Deploy civic_info_agent from draft to live.
+```
+
+One difference from chapter 4: the knowledge base is already shared by draft and live, because it belongs to the instance. What the deployment changes is the agent, which now knows to search it. On the Developer Edition, skip this step.
+
+## 5.11 Summary
+
+The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule, not a phone number, with the document it came from. Bob wrote the documents, defined the knowledge base, waited for it to be ready, and changed the agent; you described the rules and approved the design.
+
+- A knowledge base is a set of documents that the platform indexes and an agent searches. It holds files, not instructions.
+- A knowledge base is not ready at once; the agent must wait until it is.
+- The agent's instructions decide when to search and what to say when the documents have no answer.
+- A knowledge base belongs to the instance. A change to its documents reaches the draft and the live agent at once.
+
+The agent knows what the city has written down. It still cannot look anything up about a particular resident: whether their permit application has been approved, or when their street's bins are collected. That information is not in a document; it is in the city's systems. In chapter 6, Bob gives the agent its first tools, and the answers start depending on who is asking.
