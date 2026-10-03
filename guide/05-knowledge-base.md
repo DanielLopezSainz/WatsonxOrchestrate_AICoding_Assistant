@@ -150,33 +150,25 @@ The build order matters here for the first time. The agent must not be imported 
 
 Mode: Plan, same conversation.
 
-Read the design as in chapter 4: anything that you want built must be in it. Two things to look for in this one, because Bob leaves them out at times: that the agent keeps its chapter 4 facts and the correction of section 4.9, and that the test questions include one about a rule that the documents do not cover, so that the "does not have that information" behaviour is tested too. If either is missing, request it in the same conversation:
-
-```
-Add to the design a test question about a rule that the documents do not cover,
-for example whether chickens may be kept in a garden, with the expected answer
-that the agent does not have that information.
-```
-
-When the design says what you mean, continue with 5.6. The approval is given there.
+Read the design once. If a rule is missing or a test question is wrong, ask Bob to change it, as in chapter 4. When it says what you mean, it is approved: the approval is the first line of the next prompt.
 
 ## 5.6 Agent mode: build and test
 
-Mode: Agent, in a new conversation, for the reason explained in chapter 4.
+Mode: Agent, in a new conversation.
 
 ```
 The design in @design/city-regulations-design.md is approved. Build it.
 ```
 
-This build takes longer than the one in chapter 4, mostly because of the indexing. What Bob does:
+This build creates more than the one in chapter 4, and part of it takes time. Bob:
 
-1. **Writes the three documents** as plain text files in the `knowledge-bases` folder. Open them while Bob continues: they are readable city documents, written from your rules, and residents' answers will come from them.
-2. **Writes the knowledge base definition**, a short file that names the knowledge base and lists the documents.
-3. **Imports the knowledge base** and waits. Bob checks the status until it is ready. On a tenant this takes a few minutes; the three documents are small.
-4. **Updates the agent**: the knowledge base is attached and the instructions extended, then the agent is imported again, which replaces the draft.
-5. **Tests**, with the questions from the design, and reports.
+1. **Writes the three documents**, the building permit guide, the waste sorting rules and the noise ordinance, as text files in the `knowledge-bases` folder. Open one while Bob continues: residents' answers will come from these pages.
+2. **Writes the knowledge base definition**, a short file that names `city_regulations` and lists the three documents.
+3. **Imports the knowledge base and waits.** The platform indexes the documents in the background; Bob checks the status until it is ready, which takes a few minutes on a tenant.
+4. **Updates the agent**: the knowledge base is attached, the instructions are extended, and the agent is imported again, replacing the draft.
+5. **Tests** the agent with the questions from the design and reports.
 
-With the approvals of chapter 2, Bob asks before writing each file and before each import. Approve each request. If the knowledge base status stays at processing for a long time, let Bob wait; if it reports a failure, Bob reads the error and corrects the documents, as it did with the welcome message in chapter 4.
+Approve each request as it comes. If an import fails, Bob reads the error and corrects the file before continuing.
 
 ## 5.7 Read what was built
 
