@@ -139,9 +139,21 @@ Bob revises the file, summarises what it changed, and waits again. Do not take t
 
 When the design says what you mean, it is approved. The approval itself is the first line of the next section, so there is nothing more to send here.
 
-Before you leave the design, notice one thing about the facts: two departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.8 finds out what the agent does with the gap.
+Before you leave the design, notice one thing about the facts: two departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.9 finds out what the agent does with the gap.
 
-## 4.5 Agent mode: build and test
+## 4.5 Draft and live: the two states of an agent
+
+Before Bob builds, one thing about watsonx Orchestrate decides where your agent will appear and who can talk to it.
+
+Every agent on an instance is in one of two states. Draft is the builder's state: a draft agent can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can see it, from the Manage agents page. Live is the users' state: a live agent is what residents find in the chat on the instance's landing page, and later on the city's website.
+
+The two states are two separate copies of the agent. When Bob imports the agent, or imports it again after a correction, it changes the draft copy. The live copy does not change until you deploy: one operation that takes the current draft and makes it the live version. Until then, residents keep talking to the previous live version, which is what you want: you test and repair in draft, and nobody meets an agent under repair. If a deployment turns out to be wrong, undeploying returns the agent to its previous live version.
+
+In this chapter, everything that Bob does happens in draft. The build in the next section imports the agent into draft, the tests run against the draft, and the correction in 4.9 replaces the draft. Making the agent live is one instruction to Bob at the end of the chapter.
+
+One restriction. The Developer Edition has only the draft state: its chat shows draft agents, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
+
+## 4.6 Agent mode: build and test
 
 Mode: Agent, in a new conversation.
 
@@ -169,7 +181,7 @@ What happens next takes Bob a minute or two, and it is the whole of this guide i
 4. **Tested it.** Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and a second question in the same conversation to check that the agent remembers the first. It wrote the answers and its verdicts into a test report. Every test passed.
 5. **Reported.** A table of the files it wrote, and a list of ways to try the agent yourself.
 
-## 4.6 Read the definition
+## 4.7 Read the definition
 
 The agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, this file was written by hand, field by field, from the product documentation; now Bob writes it from the design, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
 
@@ -189,15 +201,15 @@ The file can contain other fields. The table lists the ones that this guide refe
 
 This is a good moment to save your work, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
-Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.8 corrects this together with the other correction of the chapter.
+Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
 
-## 4.7 Meet your agent
+## 4.8 Meet your agent
 
 Mode: Agent, same conversation.
 
 Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the agents that were already on the instance. Ten minutes ago it was a paragraph in a design document.
 
-Do not click the agent's name. A click saves a copy of the agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. The content is the same either way, so nothing breaks if the file is replaced, but the file you read in 4.6 changes shape, and the restore request of section 3.6 brings it back.
+Do not click the agent's name. A click saves a copy of the agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. The content is the same either way, so nothing breaks if the file is replaced, but the file you read in 4.7 changes shape, and the restore request of section 3.6 brings it back.
 
 Now talk to it. Bob tested it with the questions from the design; this time the questions are yours. Ask through Bob, one question per message:
 
@@ -215,11 +227,11 @@ Then try to catch it out. Residents do not write like a design document, and the
 
 Read each answer with the facts of 4.2 next to you. For the first four, the right department and its contact should be there, the flooded street should get the urgent line, and the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up shows whether the agent remembers what you were talking about.
 
-Keep a note of any answer that contains something not in the facts. Section 4.8 shows what to do about it.
+Keep a note of any answer that contains something not in the facts. Section 4.9 shows what to do about it.
 
 The agent is in draft: you can use it, and residents cannot. Nothing is deployed in this chapter.
 
-## 4.8 Correct a wrong answer
+## 4.9 Correct a wrong answer
 
 Mode: Agent, same conversation.
 
@@ -246,15 +258,28 @@ Bob changes the definition file, imports it again, and asks the question. The ag
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
-## 4.9 Summary
+**Make the agent live**
 
-A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Four things from this chapter apply to every agent that follows:
+The agent is corrected and tested, and it is still a draft. Residents cannot see it. One instruction changes that:
+
+```
+Deploy civic_info_agent from draft to live.
+```
+
+Bob runs the deployment and reports that the agent was deployed. Open your watsonx Orchestrate instance in the browser: the agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
+
+From now on, the draft and the live agent are two copies. The next time you ask Bob to change the agent, the change goes to the draft, and the live agent keeps answering as before until you deploy again.
+
+## 4.10 Summary
+
+A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
 - An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
+- An agent is a draft until you deploy it. Deploying makes the current draft the live version, the one that users see.
 
-That is your first agent, built, tested, caught inventing an answer, and corrected, in under an hour and without a line of code written by you. Every agent in the rest of the guide is made the same way; only the components change.
+That is your first agent, built, tested, caught inventing an answer, corrected and made live, in under an hour and without a line of code written by you. Every agent in the rest of the guide is made the same way; only the components change.
 
 The agent knows twenty lines of facts, and a city has far more to say than that. Can I build a shed without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, pages of them, and no agent instruction can hold them. In chapter 5, Bob writes those documents for the City of Utopia, and the agent gets them as a knowledge base: a library it searches when a resident asks, so that it answers from the regulations themselves and can say which document the answer came from. The agent stops reciting and starts looking things up.

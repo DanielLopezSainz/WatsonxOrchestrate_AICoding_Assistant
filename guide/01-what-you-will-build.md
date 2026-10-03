@@ -69,14 +69,14 @@ Chapters 2 and 3 prepare the work. Chapters 4 to 11 each add one component to Ci
 |---|---|---|---|
 | 2 | Connect Bob to your watsonx Orchestrate instance | The instance and its environments | The extension, the views, the approvals |
 | 3 | Learn the working method | None | The Ask, Plan and Agent modes; prompts; git |
-| 4 | Create an agent that tells residents which department to contact | Instructions and model | The three modes in sequence |
+| 4 | Create an agent that tells residents which department to contact, and make it live | Instructions and model; draft and live | The three modes in sequence |
 | 5 | Give the agent the city's guides and regulations | Knowledge base | Bob writes the documents |
 | 6 | Let the agent look up the status of a request or a permit | Tools | Bob writes the tools; reading the agent's reasoning |
 | 7 | Let the agent report a new issue to the city service desk | Connections | Credentials kept out of the chat |
 | 8 | Add an address lookup provided by an external server | MCP toolkit | Bob's skill for building an MCP server |
 | 9 | Split the work between a front desk agent and one agent per department | Collaborator agents | Plan mode for a design with several agents |
 | 10 | Add a permit application that follows fixed steps | Flow | Agent mode on a build with several steps |
-| 11 | Make CivicPulse available to residents on the city's website | Deployment and the web chat channel | The deployment approval |
+| 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the web chat channel | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
 Each chapter from 4 onwards has the same structure: an overview that says what is built and who can skip the chapter, the prerequisites, the steps, and a set of questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
