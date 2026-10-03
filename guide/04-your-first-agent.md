@@ -149,7 +149,7 @@ Every agent on an instance is in one of two states. Draft is the builder's state
 
 The two states are two separate copies of the agent. When Bob imports the agent, or imports it again after a correction, it changes the draft copy. The live copy does not change until you deploy: one operation that takes the current draft and makes it the live version. Until then, residents keep talking to the previous live version, which is what you want: you test and repair in draft, and nobody meets an agent under repair. If a deployment turns out to be wrong, undeploying returns the agent to its previous live version.
 
-In this chapter, everything that Bob does happens in draft. The build in the next section imports the agent into draft, the tests run against the draft, and the correction in 4.9 replaces the draft. Making the agent live is one instruction to Bob at the end of the chapter.
+Everything that Bob does in the next sections happens in draft: the build imports the agent into draft, the tests run against the draft, and the correction in 4.9 replaces the draft. Making the agent live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full; here you perform it once.
 
 One restriction. The Developer Edition has only the draft state: its chat shows draft agents, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
 
@@ -161,9 +161,9 @@ Everything so far was preparation. In this step, Bob builds the agent.
 
 Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would work too, so the new conversation deserves an explanation.
 
-Think of what Bob has in front of it in that conversation: your request, its first proposal, the facts, a complete agent it drafted before you asked for a design, the design, and your revision. Some of that you approved; some of that you did not. If Bob builds in the same conversation, all of it is in view, and Bob may take a detail from its early draft rather than from the design you approved. In a new conversation, Bob has one source of truth: the design file, which the @ mention in the prompt tells it to read. What you approved is exactly what gets built, which is the point of approving it.
+Think of what Bob has in front of it in that conversation: your request, its first proposal, the facts, a complete agent it drafted before you asked for a design, the design, and your revision. Some of that you approved; some of that you did not. If Bob builds in the same conversation, all of it is in view, and Bob may take a detail from its early draft rather than from the design you approved. In a new conversation, Bob has one source of truth: the design file, which the @ mention in the prompt tells it to read. What you approved is exactly what gets built.
 
-For an agent this small, the difference would rarely show. The habit pays off from chapter 9 onwards, where a design covers four agents and the discussion that produced it runs to pages. It is also how Bob's own documentation recommends moving from a plan to its implementation.
+For an agent this small, the difference would rarely show. The habit pays off from chapter 9 onwards, where a design covers four agents and the discussion that produced it runs to pages. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
 
 The prompt has two sentences. The first is your approval of the design. The second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
 
@@ -175,10 +175,10 @@ What happens next takes Bob a minute or two, and it is the whole of this guide i
 
 **What Bob did on the run behind this chapter**
 
-1. **Read.** Bob read the design, and then one of the Orchestrate skills loaded in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
+1. **Read.** Bob read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
 2. **Wrote the agent.** The file `agents/civic_info_agent.yaml` is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
 3. **Imported it.** The agent now exists on your instance, in the draft environment, where only you can use it.
-4. **Tested it.** Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and a second question in the same conversation to check that the agent remembers the first. It wrote the answers and its verdicts into a test report. Every test passed.
+4. **Tested it.** Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and one of its own, a second question in the same conversation to check that the agent remembers the first. It reported each answer with its verdict; on the run, every test passed.
 5. **Reported.** A table of the files it wrote, and a list of ways to try the agent yourself.
 
 ## 4.7 Read the definition
@@ -193,7 +193,7 @@ The agent has been created in watsonx Orchestrate. What you see in Bob is its de
 | Instructions | How the agent behaves, and in this chapter, the facts that it knows |
 | Model | The language model that the agent runs on |
 | Kind | The type of agent. It is `native` for every agent in this guide |
-| Style | The reasoning strategy of the agent. The guide uses the one that Bob selects by default |
+| Style | The reasoning strategy of the agent. The guide uses the one that Bob selects by default. It appears under two names, `react_core` in the file and `react_intrinsic` on the instance, which are the same style |
 | Tools, collaborators, knowledge base | Empty in this chapter. Chapters 5, 6 and 9 fill them |
 | Welcome message and starter prompts | What a user sees before typing |
 
@@ -201,15 +201,15 @@ The file can contain other fields. The table lists the ones that this guide refe
 
 This is a good moment to save your work, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
-Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
+Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
 
 ## 4.8 Meet your agent
 
 Mode: Agent, same conversation.
 
-Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the agents that were already on the instance. Ten minutes ago it was a paragraph in a design document.
+Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the agents that were already on the instance. A few minutes ago it was a paragraph in a design document.
 
-Do not click the agent's name. A click saves a copy of the agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. The content is the same either way, so nothing breaks if the file is replaced, but the file you read in 4.7 changes shape, and the restore request of section 3.6 brings it back.
+Do not click the agent's name. A click saves a copy of the agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. If the file is replaced, it becomes a copy of the agent as the instance holds it: the agent itself is unchanged, but any change made to the file and not yet imported is lost, and the file you read in 4.7 changes shape. The restore request of section 3.6 brings the file back.
 
 Now talk to it. Bob tested it with the questions from the design; this time the questions are yours. Ask through Bob, one question per message:
 
@@ -225,11 +225,11 @@ Then try to catch it out. Residents do not write like a design document, and the
 - A question that is none of its business: "What time does the public swimming pool open?"
 - A follow-up in the same conversation, after the recycling question: "And what if it happens again next week?"
 
-Read each answer with the facts of 4.2 next to you. For the first four, the right department and its contact should be there, the flooded street should get the urgent line, and the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up shows whether the agent remembers what you were talking about.
+Read each answer with the facts of 4.2 next to you. For the first four, the right department and its contact should be there, the flooded street should get the urgent line, and the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up should be answered as a question about waste collection, with the Waste and Recycling contact, without the agent asking what "it" refers to.
 
 Keep a note of any answer that contains something not in the facts. Section 4.9 shows what to do about it.
 
-The agent is in draft: you can use it, and residents cannot. Nothing is deployed in this chapter.
+The agent is in draft: you can use it, and residents cannot, until the end of the next section.
 
 ## 4.9 Correct a wrong answer
 
