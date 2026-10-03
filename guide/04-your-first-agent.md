@@ -159,16 +159,22 @@ The prompt has two sentences. The first is your approval of the design. The seco
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob reads the design and performs the build steps:
+Bob reads the design and builds. The exact sequence depends on Bob and on the Orchestrate skills it has loaded; on the run behind this chapter, it went as follows.
 
-1. It writes the definition of the agent to `agents/civic_info_agent.yaml` and asks for approval to write the file.
-2. It imports the file into your instance and asks for approval. This is the first operation in the guide that creates something on the instance.
-3. It lists the agents on the instance to confirm that `civic_info_agent` exists.
-4. It sends the test questions from the design to the agent and reports the answers.
+1. Bob writes the definition of the agent to `agents/civic_info_agent.yaml`. The welcome message and the starter prompts, which the design wrote in a short form, come out in the full form that watsonx Orchestrate expects.
+2. Bob imports the file into your instance. On the run, it did this with the `orchestrate` command of the ADK, through a small script that it wrote into a `scripts` folder, rather than through the Orchestrate server; both ways import the same file. This is the first operation in the guide that creates something on the instance.
+3. Bob sends test questions to the agent, the ones from the design and one or two more, and writes a test report into a `tests` folder.
+4. Bob reports what it built.
 
-Two approval requests are expected during the build: one to write the file and one to import it. Both actions change the project or the instance, which is why the settings from chapter 2 require approval for them.
+With the approvals of chapter 2, Bob asks before writing each file and before running the import; approve each request.
 
-Compare each answer with the facts in 4.2. A correct answer names the right department and gives its contact.
+Two things on the run deserve attention, because you are likely to see them too.
+
+The import failed the first time. watsonx Orchestrate accepts at most 100 characters in a welcome message, and the one in the design was longer. Bob read the error, shortened the message, imported again, and reported the change. This is what a build looks like when something goes wrong: Bob corrects the file and continues, and you learn about a platform limit from the error rather than from the documentation.
+
+Bob's final report said that the agent was "deployed". It was not. The agent is in the draft environment, where only you can use it; deploying it, in chapter 11, is a separate decision. Bob uses the word loosely, and the chapter does not.
+
+Compare each test answer with the facts in 4.2. A correct answer names the right department and gives its contact. Bob's own verdict on each test checks what the design asked it to check, the department and the contact, and nothing more. On the run, every test passed, and the first answer already contained something that is not in the facts: opening hours for Roads and Infrastructure. Section 4.8 comes back to it.
 
 If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
 
@@ -189,6 +195,8 @@ The agent now exists, and one file defines it. Open `agents/civic_info_agent.yam
 | Welcome message and starter prompts | What a user sees before typing |
 
 The file can contain other fields. The table lists the ones that this guide refers to.
+
+Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.8 corrects this together with the other correction of the chapter.
 
 ## 4.7 Check the agent on the instance
 
@@ -214,17 +222,17 @@ So far the agent has answered correctly. In this section, you make it fail, beca
 Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 ```
 
-The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: the agent can answer that the department is reachable at any time, because the urgent line is, or give hours that are not in the facts. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
+The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: on the run behind this chapter, the agent answered with the opening hours of Permits and Planning, Monday to Friday 09:00 to 17:00, as if they applied to Roads. Another run might say that the department is reachable at any time, because the urgent line is. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
 
 An agent knows what its instructions say and nothing else. When an answer is wrong, the correction is made in the instructions. Send:
 
 ```
-The facts gave no opening hours for Roads and Infrastructure. Add "Monday to
-Friday 07:00 to 19:00" to that department in agents/civic_info_agent.yaml, and
-change the last rule so that it also covers details that are not in the facts:
-if a question asks for a detail that is not in the facts, the agent says that
-it does not have that information. Import the agent again and ask it the same
-question.
+In agents/civic_info_agent.yaml: the facts gave no opening hours for Roads and
+Infrastructure. Add "Monday to Friday 07:00 to 19:00" to that department, and
+change the rules so that they also cover details that are not in the facts: if
+a question asks for a detail that is not in the facts, the agent says that it
+does not have that information. Also add the display name from the design,
+"Utopia city information". Import the agent again and ask it the same question.
 ```
 
 Bob edits the file and imports it again. An import with the name of an existing agent replaces that agent on the instance; no second agent is created, and no warning is shown. The agent now answers with the hours.
