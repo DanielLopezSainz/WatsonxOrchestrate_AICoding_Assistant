@@ -242,21 +242,7 @@ Bob changes the definition file, imports it again, and asks the question. The ag
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
-## 4.9 Check the result
-
-Mode: Agent, same conversation.
-
-The agent has been built and corrected once. Three questions confirm that it is in the state that chapter 5 expects: one that the facts cover, one that the correction from 4.8 fixed, and one that the facts will never cover. Ask them through Bob, as in 4.7, and compare the answers with the table.
-
-| Question | A correct answer contains |
-|---|---|
-| The street light on my street has been out for a week. Who do I tell? | Roads and Infrastructure, roads@utopia.example or 555 0120, the opening hours added in 4.8 |
-| How do I apply for a building permit? | Permits and Planning, the online application address, the contact |
-| Who is the head of the Permits department? | A statement that the agent does not have that information, and the contact of Permits and Planning |
-
-If the first answer has no hours, the correction from 4.8 was not imported; ask Bob to import the file again. If the third answer contains a name, the last rule of the instructions is missing; ask Bob to show the instructions and to restore the rule.
-
-## 4.10 Summary
+## 4.9 Summary
 
 A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Four things from this chapter apply to every agent that follows:
 
