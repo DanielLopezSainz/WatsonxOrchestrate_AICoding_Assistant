@@ -74,12 +74,15 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the format and tone of the documents, the kind of knowledge base, the numbers to use in the rules, and how the agent's instructions should change. The following answer settles all of them. The rules in it are the facts of this chapter; everything that the agent answers about regulations must come from them.
+Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the format and tone of the documents, the kind of knowledge base, the numbers to use in the rules, and how the agent's instructions should change.
+
+The second prompt is your answer to those questions, as in chapter 4. Its purpose is to give Bob the content of the documents and your decisions, so that Bob can write the design in the next step. Nothing is created: Ask mode is still the right mode, and Bob only records the answers. The rules in the answer are the facts of this chapter; everything that the agent answers about regulations must come from them.
 
 ```
-Use these rules as they are. Write each document as a plain text file with
-the .txt extension, not Markdown, as a plain-language handout for residents
-with short sections. Use the built-in knowledge base of the instance.
+These are my answers. The documents are plain text files with the .txt
+extension, not Markdown, written as plain-language handouts for residents with
+short sections. The knowledge base is the built-in one of the instance. Use the
+following rules as they are.
 
 Building permit guide. A permit is required for any new building, extension
 or structure, except detached garden structures with a floor area under 10
@@ -106,12 +109,13 @@ A private event can get a one-night exemption, requested online at
 https://services.utopia.example/noise at least five days in advance. Noise
 complaints are reported at the same address.
 
-Knowledge base: name it city_regulations and attach it to the agent; do not
-enable the chat with documents feature. The agent keeps its current facts and
-instructions, and searches the knowledge base for any question about a rule,
-a procedure, a fee or a deadline. When a question is about a rule that the
-documents do not cover, the agent says that it does not have that information.
-In every answer taken from a document, the agent names the document.
+The knowledge base is named city_regulations and is attached to the agent;
+the chat with documents feature stays off. The agent keeps its current facts
+and instructions, and searches the knowledge base for any question about a
+rule, a procedure, a fee or a deadline. When a question is about a rule that
+the documents do not cover, the agent says that it does not have that
+information. In every answer taken from a document, the agent names the
+document.
 ```
 
 Bob confirms the answers. As in chapter 4, it might outline the documents or the design in the chat. The design is written in the next step.
