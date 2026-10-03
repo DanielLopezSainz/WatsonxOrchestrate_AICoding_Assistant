@@ -254,7 +254,7 @@ display name "Utopia city information", as in the design. Import the agent
 again and ask it the same question.
 ```
 
-Bob changes the definition file, imports it again, and asks the question. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent; no second agent is created.
+Bob changes the definition file, imports it again, and asks the question. It may also update the design with the new hours, which is correct: the design is meant to describe the agent as built. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent; no second agent is created.
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
