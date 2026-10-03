@@ -251,4 +251,6 @@ A resident of Utopia can now ask who to tell about a dark street light and get t
 - An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
 
-The agent's knowledge is twenty lines of facts, and a city has more to say than that: regulations, procedures, opening hours for every service. In chapter 5, the agent gets the city's guides and regulations as a knowledge base, and starts answering questions that no instruction could hold.
+That is your first agent, built, tested, caught inventing an answer, and corrected, in under an hour and without a line of code written by you. Every agent in the rest of the guide is made the same way; only the components change.
+
+The agent knows twenty lines of facts, and a city has far more to say than that. Can I build a shed without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, pages of them, and no agent instruction can hold them. In chapter 5, Bob writes those documents for the City of Utopia, and the agent gets them as a knowledge base: a library it searches when a resident asks, so that it answers from the regulations themselves and can say which document the answer came from. The agent stops reciting and starts looking things up.
