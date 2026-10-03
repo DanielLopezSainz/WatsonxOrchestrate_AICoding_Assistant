@@ -219,30 +219,27 @@ The agent is in draft: you can use it, and residents cannot. Nothing is deployed
 
 Mode: Agent, same conversation.
 
-So far the agent has answered correctly. In this section, you make it fail, because a wrong answer shows how an agent works more clearly than a correct one. Ask the agent for information that the facts do not contain:
+Now ask the agent for something that its facts do not contain:
 
 ```
 Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 ```
 
-The facts give no opening hours for this department. Read the answer. A language model tends to complete missing information: on the run behind this chapter, the agent answered with the opening hours of Permits and Planning, Monday to Friday 09:00 to 17:00, as if they applied to Roads. Another run might say that the department is reachable at any time, because the urgent line is. The instruction "never invent an answer" was written about questions outside the three departments, and does not clearly cover a missing detail about one of them.
+The facts give no hours for this department. Inspect the answer. On the run behind this chapter, the agent replied with Monday to Friday 09:00 to 17:00, which are the hours of Permits and Planning. A language model fills a gap with the most plausible content, and the rule "never invent an answer" was written for questions outside the three departments, not for a missing detail inside one of them.
 
-An agent knows what its instructions say and nothing else. When an answer is wrong, the correction is made in the instructions. Send:
+The correction is made in the instructions, by asking Bob:
 
 ```
-In agents/civic_info_agent.yaml: the facts gave no opening hours for Roads and
-Infrastructure. Add "Monday to Friday 07:00 to 19:00" to that department, and
-change the rules so that they also cover details that are not in the facts: if
-a question asks for a detail that is not in the facts, the agent says that it
+In agents/civic_info_agent.yaml: add the opening hours "Monday to Friday
+07:00 to 19:00" to Roads and Infrastructure. Change the rules so that, when a
+question asks for a detail that is not in the facts, the agent says that it
 does not have that information. Also add the display name from the design,
 "Utopia city information". Import the agent again and ask it the same question.
 ```
 
-Bob edits the file and imports it again. An import with the name of an existing agent replaces that agent on the instance; no second agent is created, and no warning is shown. The agent now answers with the hours.
+Bob edits the file, imports it again, and asks the question. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent; no second agent is created.
 
-Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent says that it does not have that information and gives the department's contact.
-
-Every correction in this guide follows the same steps: read the answer, find what is missing in the instructions, ask Bob to change the file, import again, and ask again.
+Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
 ## 4.9 Export the agent
 
