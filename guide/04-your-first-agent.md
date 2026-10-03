@@ -159,22 +159,23 @@ The prompt has two sentences. The first is your approval of the design. The seco
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob reads the design and builds. The exact sequence depends on Bob and on the Orchestrate skills it has loaded; on the run behind this chapter, it went as follows.
+What happens next takes Bob a minute or two, and it is the whole of this guide in miniature: from one approved document, Bob produces a working agent on your instance and proves that it works. Here is what Bob did on the run behind this chapter, in the order it did it.
 
-1. Bob writes the definition of the agent to `agents/civic_info_agent.yaml`. The welcome message and the starter prompts, which the design wrote in a short form, come out in the full form that watsonx Orchestrate expects.
-2. Bob imports the file into your instance. On the run, it did this with the `orchestrate` command of the ADK, through a small script that it wrote into a `scripts` folder, rather than through the Orchestrate server; both ways import the same file. This is the first operation in the guide that creates something on the instance.
-3. Bob sends test questions to the agent, the ones from the design and one or two more, and writes a test report into a `tests` folder.
-4. Bob reports what it built.
+Bob read the design, and then it read something else: one of the Orchestrate skills loaded in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
+
+Bob wrote the agent. The file `agents/civic_info_agent.yaml` is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires, where the design had written them in a short form.
+
+Bob imported the agent, and the first attempt failed. watsonx Orchestrate allows at most 100 characters in a welcome message, and the one from the design was longer. Bob read the error, shortened the message to fit, imported again, and noted the change in its report. Nothing was asked of you: a build in which something goes wrong looks exactly like this, and the platform limit is something you now know from an error rather than from the documentation.
+
+Bob tested the agent. It sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and a second question in the same conversation to see whether the agent remembers the first. It wrote the answers and its verdicts into a test report, and every test passed.
+
+Bob reported, with a table of the files it wrote and a list of ways to try the agent yourself.
+
+Two details of that run, because you are likely to see them too. Bob imported the agent with the `orchestrate` command of the ADK, through a small script it wrote into a `scripts` folder, rather than through the Orchestrate server; both import the same file, and the skill prefers the command. And Bob's report said that the agent was "deployed". It is not: the agent is in the draft environment, where only you can use it, and deploying it is a decision for chapter 11.
 
 With the approvals of chapter 2, Bob asks before writing each file and before running the import; approve each request.
 
-Two things on the run deserve attention, because you are likely to see them too.
-
-The import failed the first time. watsonx Orchestrate accepts at most 100 characters in a welcome message, and the one in the design was longer. Bob read the error, shortened the message, imported again, and reported the change. This is what a build looks like when something goes wrong: Bob corrects the file and continues, and you learn about a platform limit from the error rather than from the documentation.
-
-Bob's final report said that the agent was "deployed". It was not. The agent is in the draft environment, where only you can use it; deploying it, in chapter 11, is a separate decision. Bob uses the word loosely, and the chapter does not.
-
-Compare each test answer with the facts in 4.2. A correct answer names the right department and gives its contact. Bob's own verdict on each test checks what the design asked it to check, the department and the contact, and nothing more. On the run, every test passed, and the first answer already contained something that is not in the facts: opening hours for Roads and Infrastructure. Section 4.8 comes back to it.
+Now read the test answers against the facts in 4.2, and read them more carefully than Bob did. A correct answer names the right department and gives its contact, and that is all Bob's verdict checked, because that is what the design's tests asked for. On the run, the first answer, about the street light, told the resident to call Roads "during business hours, Monday to Friday 09:00 to 17:00". The facts give no hours for Roads. The agent borrowed them from Permits and Planning, and the test passed. Section 4.8 is about exactly this.
 
 If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
 
