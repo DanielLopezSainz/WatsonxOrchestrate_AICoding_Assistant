@@ -43,6 +43,7 @@ A knowledge base is not the right component for information about one person or 
 - Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A knowledge base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
 - Indexing takes time. After the import, the knowledge base is not ready at once; the platform processes the documents in the background, and an agent can use the knowledge base only when its status is ready. Bob checks the status for you.
 - A knowledge base belongs to the instance, not to one state of an agent. It is shared by the draft and the live copies of every agent that uses it, so a change to the documents reaches residents at once, without a deployment.
+- watsonx Orchestrate also has a feature called chat with documents, which lets a user attach a file to one conversation. It is not a knowledge base: the file is not indexed for other conversations, and this guide does not use it.
 
 An agent uses a knowledge base when its definition names it. The agent's instructions decide when to search: in this chapter, for every question about a rule or a procedure, while the contacts and hours stay in the instructions.
 
@@ -73,10 +74,12 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the content of the documents, their format, the name of the knowledge base, and how the agent should use it. The following answer settles all of them. The rules in it are the facts of this chapter; everything that the agent answers about regulations must come from them.
+Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the format and tone of the documents, the kind of knowledge base, the numbers to use in the rules, and how the agent's instructions should change. The following answer settles all of them. The rules in it are the facts of this chapter; everything that the agent answers about regulations must come from them.
 
 ```
-Use these rules as they are. Write each document as a plain text file.
+Use these rules as they are. Write each document as a plain text file with
+the .txt extension, not Markdown, as a plain-language handout for residents
+with short sections. Use the built-in knowledge base of the instance.
 
 Building permit guide. A permit is required for any new building, extension
 or structure, except detached garden structures with a floor area under 10
@@ -103,7 +106,8 @@ A private event can get a one-night exemption, requested online at
 https://services.utopia.example/noise at least five days in advance. Noise
 complaints are reported at the same address.
 
-Knowledge base: name it city_regulations. The agent keeps its current facts and
+Knowledge base: name it city_regulations and attach it to the agent; do not
+enable the chat with documents feature. The agent keeps its current facts and
 instructions, and searches the knowledge base for any question about a rule,
 a procedure, a fee or a deadline. When a question is about a rule that the
 documents do not cover, the agent says that it does not have that information.
