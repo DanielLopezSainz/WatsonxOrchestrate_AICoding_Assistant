@@ -76,7 +76,9 @@ exists on my instance.
 
 Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the format and tone of the documents, the kind of knowledge base, the numbers to use in the rules, and how the agent's instructions should change.
 
-The second prompt is your answer to those questions, as in chapter 4. Its purpose is to give Bob the content of the documents and your decisions, so that Bob can write the design in the next step. Nothing is created: Ask mode is still the right mode, and Bob only records the answers. The rules in the answer are the facts of this chapter; everything that the agent answers about regulations must come from them.
+Bob may end its answer with a set of suggested answers to click. They are Bob's own defaults, and some of them, such as Markdown for the documents, are not what this chapter needs. Do not click any of them; type the answer below instead.
+
+The second prompt is your answer to Bob's questions, as in chapter 4. Its purpose is to give Bob the content of the documents and your decisions, so that Bob can write the design in the next step. Nothing is created: Ask mode is still the right mode, and Bob only records the answers. The rules in the answer are the facts of this chapter; everything that the agent answers about regulations must come from them.
 
 ```
 These are my answers. The documents are plain text files with the .txt
@@ -112,7 +114,9 @@ complaints are reported at the same address.
 The knowledge base is named city_regulations and is attached to the agent;
 the chat with documents feature stays off. The agent keeps its current facts
 and instructions, and searches the knowledge base for any question about a
-rule, a procedure, a fee or a deadline. When a question is about a rule that
+rule, a procedure, a fee or a deadline. An answer taken from a document can be
+longer than three sentences, up to a short paragraph, and still ends with the
+contact of the department when one is involved. When a question is about a rule that
 the documents do not cover, the agent says that it does not have that
 information. In every answer taken from a document, the agent names the
 document.
