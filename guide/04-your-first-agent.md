@@ -165,22 +165,11 @@ What happens next takes Bob a minute or two, and it is the whole of this guide i
 
 1. **Read.** Bob read the design, and then one of the Orchestrate skills loaded in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
 2. **Wrote the agent.** The file `agents/civic_info_agent.yaml` is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
-3. **Imported it, and the first attempt failed.** watsonx Orchestrate allows at most 100 characters in a welcome message, and the one from the design was longer. Bob read the error, shortened the message, imported again, and noted the change in its report. A build in which something goes wrong looks exactly like this, and you now know a platform limit from an error rather than from the documentation.
+3. **Imported it.** The agent now exists on your instance, in the draft environment, where only you can use it.
 4. **Tested it.** Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and a second question in the same conversation to check that the agent remembers the first. It wrote the answers and its verdicts into a test report. Every test passed.
 5. **Reported.** A table of the files it wrote, and a list of ways to try the agent yourself.
 
-**Two details you are likely to see too**
-
-- Bob imported the agent with the `orchestrate` command of the ADK, through a small script that it wrote into a `scripts` folder, rather than through the Orchestrate server. Both import the same file; the skill prefers the command.
-- Bob's report said that the agent was "deployed". It is not. The agent is in the draft environment, where only you can use it. Deploying it is a decision for chapter 11.
-
-With the approvals of chapter 2, Bob asks before writing each file and before running the import. Approve each request.
-
-**Now read the test answers yourself**
-
-Read them against the facts in 4.2, and more carefully than Bob did. A correct answer names the right department and gives its contact, and that is all that Bob's verdict checked, because that is what the design's tests asked for.
-
-On the run, the first answer, about the street light, told the resident to call Roads "during business hours, Monday to Friday 09:00 to 17:00". The facts give no hours for Roads. The agent borrowed them from Permits and Planning, and the test passed. Section 4.8 is about exactly this.
+Compare each test answer with the facts in 4.2. A correct answer names the right department and gives its contact.
 
 If Bob reports the reasoning of the agent for a test, the reasoning is empty. This is expected. The reasoning lists the tools that an agent called and what they returned. This agent has no tools, so it answers from its instructions and the model alone. From chapter 6 onwards, the reasoning is the first place to look when an answer is wrong.
 
