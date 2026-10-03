@@ -172,7 +172,16 @@ Approve each request as it comes. If an import fails, Bob reads the error and co
 
 ## 5.7 Read what was built
 
-Open the `knowledge-bases` folder in the File Explorer. It holds the three documents and the knowledge base definition.
+The build left four kinds of file in the project. Their names and layout vary from run to run; what each one is for does not.
+
+| Where | What | Its role |
+|---|---|---|
+| `knowledge-bases` folder | Three text files, one per city document | The content that the agent searches. The only files in this chapter that a resident's answer is quoted from |
+| `knowledge-bases` folder | The knowledge base definition, `city_regulations.yaml` | Tells the instance which documents form the knowledge base and how to describe it to agents |
+| `agents` folder | `civic_info_agent.yaml`, changed | The agent, now attached to the knowledge base, with instructions on when to search it |
+| `scripts` and `tests` folders, if present | Import scripts and a test report | Bob's own working files. Useful to read, not needed by the guide |
+
+Open the `knowledge-bases` folder in the File Explorer first.
 
 The documents are short handouts, a page each, with a heading per topic and every rule from your answer. On the run behind this chapter, Bob added worked examples to the permit guide, a shed of 8 square metres and 2.2 metres high needs no permit, one of 9 square metres but 3 metres high does, which is what a resident needs and what makes the search find the right passage. Read them once: residents' answers come from these pages.
 
