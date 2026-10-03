@@ -187,6 +187,8 @@ The agent has been created in watsonx Orchestrate. What you see in Bob is its de
 
 The file can contain other fields. The table lists the ones that this guide refers to.
 
+This is a good moment to save your work, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
+
 Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file had none, so the agent appeared under its internal name. Section 4.8 corrects this together with the other correction of the chapter.
 
 ## 4.7 Meet your agent
@@ -194,6 +196,8 @@ Read the file against the design. Bob writes the file from the design, and most 
 Mode: Agent, same conversation.
 
 Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the agents that were already on the instance. Ten minutes ago it was a paragraph in a design document.
+
+Do not click the agent's name. A click saves a copy of the agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. The content is the same either way, so nothing breaks if the file is replaced, but the file you read in 4.6 changes shape, and the restore request of section 3.6 brings it back.
 
 Now talk to it. Bob tested it with the questions from the design; this time the questions are yours. Ask through Bob, one question per message:
 
