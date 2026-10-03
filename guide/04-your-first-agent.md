@@ -171,7 +171,7 @@ What happens next takes Bob a minute or two, and it is the whole of this guide i
 
 ## 4.6 Read the definition
 
-The agent now exists, and one file defines it. Open `agents/civic_info_agent.yaml` in the File Explorer. Bob wrote this file, and you will never need to write one yourself. Read it once all the same: every agent in this guide is defined by a file like this one, and when an agent must change, this is the file that you ask Bob to edit.
+The agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, this file was written by hand, field by field, from the product documentation; now Bob writes it from the design, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
 
 | Field | Purpose |
 |---|---|
