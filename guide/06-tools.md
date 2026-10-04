@@ -166,7 +166,7 @@ Each tool must be uploaded to the instance together with its record file.
 Change the design so that it says how.
 ```
 
-When the design says what you mean, it is approved.
+Bob adds the mechanism to the design and explains it: the import command names the `tools` folder as the package root, and the whole folder goes to the instance with the tool. When the design says what you mean, it is approved.
 
 ## 6.6 Agent mode: build and test
 
