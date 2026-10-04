@@ -228,7 +228,7 @@ Then ask as residents do:
 
 - Without a number: "Where is my permit application?" The agent asks for it.
 - With a number that does not exist: "Where is my permit application PP-2026-9999?" No record under that number, and the contact of Permits and Planning. Nothing is invented.
-- With a tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" Under review, and the building permit guide says that work must not start before the decision. One answer, two sources.
+- With a tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the building permit guide. Keep this question for the next part.
 - With a tool and the facts: "The grey bin on Elm Street was not collected today. Who do I call?" Monday was the day; call Waste and Recycling.
 
 Now read how the agent got there. Ask the first question again through Bob, with two more words:
@@ -237,9 +237,9 @@ Now read how the agent got there. Ask the first question again through Bob, with
 Ask civic_info_agent, with reasoning: "Where is my permit application PP-2026-0412?"
 ```
 
-Bob now shows the steps along with the answer: the agent called `get_permit_status` with the permit number `PP-2026-0412`, the tool returned the record from `permits.csv`, and the agent wrote the answer from it. Ask the shed question the same way: the same tool call, and an answer that quotes the Building Permit Guide.
+Bob now shows the steps along with the answer: the agent called `get_permit_status` with the permit number `PP-2026-0412`, the tool returned the record from `permits.csv`, and the agent wrote the answer from it. In the preview panel of watsonx Orchestrate, every answer has a Show Reasoning link next to it, which opens the same steps: the tool, its input, its output.
 
-In the preview panel of watsonx Orchestrate, every answer has a Show Reasoning link next to it. It opens the same steps: the tool, its input, its output.
+Now the shed question, with reasoning. The knowledge base appears in the steps as a tool named `city_regulations`, with the query the agent sent it and the passages it got back. The agent can answer this question by two routes, the record and the guide, and the steps show which it took. On the runs behind this chapter, it took both on one run and the guide alone on another, with a correct answer each time. The steps are the only place where you can see the difference, and that is why you read them.
 
 These steps are what to read whenever an agent with tools answers wrongly. Wrong tool: a tool description is unclear. Right tool, wrong value: a parameter description is unclear. No tool at all: the instructions do not say when to use one. Each is one sentence to Bob, as in 4.9.
 
