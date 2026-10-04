@@ -136,7 +136,7 @@ Bob confirms the answers and, as in chapter 4, goes further. Read its answer for
 
 Mode: Plan, in the same conversation.
 
-Three tools, three record files, a change to the agent and an import for each tool: this is the largest design so far, and one detail in it decides whether the tools work on the instance. Have Bob write it down.
+Three tools, three record files, a change to the agent and an import for each tool: this is the largest design so far. Have Bob write it down.
 
 ```
 Write the design for this change into design/city-services-tools-design.md.
@@ -179,7 +179,7 @@ Approve each request as it comes.
 
 ## 6.7 What Bob built
 
-Go to the `tools` folder in the File Explorer. A tool is the smallest thing Bob has built so far, and the one where every line matters.
+Go to the `tools` folder in the File Explorer.
 
 **A tool.** Open the permit tool: one Python function, about twenty lines. Three of them are written for the agent, not for the computer. `@tool`, above the function, marks it as a tool for watsonx Orchestrate. The text between triple quotes is the description, the exact words the agent reads when it decides whether to call it. And `permit_number`, the parameter: the agent must find a value for it in the question before it can call. The rest opens the CSV file next to it, finds the row, and returns it. When the city gets a real permit system one day, that is the part that changes; the agent does not.
 
@@ -239,7 +239,7 @@ Bob reports that the agent is deployed. Go to the watsonx Orchestrate chat and a
 The agent now gives answers that are different for every resident: the status of an application, the date of a repair, the collection day of a street. Bob wrote the records, the tools and the change to the agent; you described the lookups, fixed the records, and read the agent's reasoning for the first time.
 
 - A tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
-- The description and the parameter descriptions are written for the agent. They are the whole basis of its decision, and the first place to look when it decides wrongly.
+- The description and the parameter descriptions are written for the agent. The agent decides from them, so they are the first place to look when it decides wrongly.
 - One answer can combine the sources: a tool for the resident's record, the knowledge base for the rule, the instructions for the contact.
 - The agent's reasoning shows the steps between the question and the answer, every tool call included. Read it to check an answer and to diagnose a wrong one.
 
