@@ -240,4 +240,12 @@ The agent can now answer from the city's regulations: a question about a shed, a
 - The agent's instructions decide when to search and what to say when the documents have no answer.
 - A knowledge base belongs to the instance. A change to its documents reaches the draft and the live agent at once.
 
+**How it works, in a few lines**
+
+What you built in this chapter is what the industry calls retrieval-augmented generation, RAG for short: the agent retrieves passages from documents and the language model generates the answer from them. In watsonx Orchestrate it works like this.
+
+- At import, each document is split into passages, and each passage is converted into a list of numbers that captures its meaning, called an embedding. An embedding model does the conversion; the built-in knowledge base uses an IBM model named `slate-125m-english-rtrvr-v2` unless you choose another. The passages and their embeddings are stored in a vector database that comes with the platform, Milvus. This is the indexing that made Bob wait.
+- At question time, the resident's question is converted the same way, the database returns the passages whose embeddings are closest to it, and the language model writes the answer from those passages. The agent named the document in its answers because its instructions asked for it; the passages themselves carry the document they came from.
+- The built-in database is one option. If your organisation already keeps its documents in Milvus, Elasticsearch, OpenSearch or Astra DB, a knowledge base can point at that index instead of importing files, and the agent uses it the same way.
+
 The agent knows what the city has written down. It still cannot look anything up about a particular resident: whether their permit application has been approved, or when their street's bins are collected. That information is not in a document; it is in the city's systems. In chapter 6, Bob gives the agent its first tools, and the answers start depending on who is asking.
