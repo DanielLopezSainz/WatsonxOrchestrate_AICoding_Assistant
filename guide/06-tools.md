@@ -148,7 +148,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 |---|---|
 | The three tools | Name, parameter, result, and the sentence that describes it to the agent. The sentence says what the tool looks up and by what: "by its permit number", not just "a permit" |
 | The records | Three CSV files with your records, next to the tool that reads each one |
-| The import of each tool | The tool is imported with the `tools` folder as its package, so that the record file travels with the code. A command that names the Python file alone leaves the records behind |
+| The import of each tool | The design says that each tool is uploaded to the instance together with its record file. Without the file, the tool fails on the instance |
 | The change to the agent | The three tools attached; the instructions say when to use a tool, ask for a missing number, what to say when a record is unknown; the facts and the knowledge base unchanged |
 | The build order | Records and tools first, each tool imported, then the agent |
 | The tests | The three questions of the Overview at least, each with its expected record |
@@ -157,7 +157,16 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 
 Mode: Plan, same conversation.
 
-Read the design once. If a description is vague or a record is missing, ask Bob to change it. The most likely correction is the import: if the design imports each tool from its Python file alone, send `The record files must be uploaded with the tools. Import each tool with the tools folder as its package root, and put that in the design.` When the design says what you mean, it is approved.
+Read the design once. If something is missing or wrong, ask Bob to change it, as in chapter 4.
+
+Check one point in particular: the design must say that each tool is uploaded together with its record file. If it does not, send:
+
+```
+Each tool must be uploaded to the instance together with its record file.
+Change the design so that it says how.
+```
+
+When the design says what you mean, it is approved.
 
 ## 6.6 Agent mode: build and test
 
