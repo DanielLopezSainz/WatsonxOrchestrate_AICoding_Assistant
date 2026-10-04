@@ -208,20 +208,18 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 6.8 Try it, and read the reasoning
 
-A question sent through Bob reaches the agent in Draft, as in chapter 5. The agent deployed in Live knows nothing about permit numbers until 6.9.
-
-**Using Bob.** Ask the three questions from the Overview, one per message:
+Ask the agent the three questions from the Overview, through Bob or in the preview panel of watsonx Orchestrate. Through Bob, start each message with `Ask civic_info_agent:`.
 
 ```
-Ask civic_info_agent: "Where is my permit application PP-2026-0412?"
+Where is my permit application PP-2026-0412?
 ```
 
 ```
-Ask civic_info_agent: "Has my pothole report RQ-2026-1187 been scheduled?"
+Has my pothole report RQ-2026-1187 been scheduled?
 ```
 
 ```
-Ask civic_info_agent: "Which day is the grey bin collected on Elm Street?"
+Which day is the grey bin collected on Elm Street?
 ```
 
 Under review, decision due 12 October. Repair scheduled for 9 October. Monday. Each answer ends with the department's contact, because the instructions ask for it.
@@ -233,7 +231,7 @@ Then ask as residents do:
 - With a tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" Under review, and the building permit guide says that work must not start before the decision. One answer, two sources.
 - With a tool and the facts: "The grey bin on Elm Street was not collected today. Who do I call?" Monday was the day; call Waste and Recycling.
 
-**From watsonx Orchestrate, with the reasoning.** Open your instance in the browser, go to Manage agents, select Utopia city information, and use the preview panel, which talks to the agent in Draft. Ask about PP-2026-0412. With the answer, the chat offers to show how the agent got there. Open it: the agent decided to call `get_permit_status`, passed `PP-2026-0412`, received the record, and wrote the answer from it. Ask the shed question and open it again: a tool call, then a search of the knowledge base, then the answer.
+Now read how the agent got there. In the preview panel of watsonx Orchestrate, ask about PP-2026-0412 again. With the answer, the chat offers to show the steps behind it. Open it: the agent called `get_permit_status` with `PP-2026-0412`, received the record, and wrote the answer from it. Ask the shed question and open the steps again: a tool call, then a search of the knowledge base, then the answer.
 
 This is the view to come back to whenever an agent with tools answers wrongly. Wrong tool: a tool description is unclear. Right tool, wrong value: a parameter description is unclear. No tool at all: the instructions do not say when to use one. Each is one sentence to Bob, as in 4.9.
 
