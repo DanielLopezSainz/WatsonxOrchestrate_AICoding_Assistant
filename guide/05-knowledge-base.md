@@ -184,17 +184,17 @@ Bob may also have left files of its own, such as a scripts folder or a test repo
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
-## 5.8 Meet the agent again
+## 5.8 Ways to interact with watsonx Orchestrate agents
 
 Mode: Agent, same conversation in Bob.
 
-Until now you have talked to the agent through Bob: you asked Bob to pass a question on, and Bob came back with the answer. That is one of three ways to talk to an agent, and each one has its use. Try all three in this section.
+Until now you have talked to the agent through Bob: you asked Bob to pass a question on, and Bob came back with the answer. That is one of three ways to talk to an agent, and the difference between them is who sits between you and the agent.
 
-- **Through Bob.** You write "Ask civic_info_agent: ..." in the chat, Bob sends the question to the agent on the instance and shows you the answer. The advantage is what comes next: Bob has seen the answer, so if something is wrong you tell Bob in the next message and it corrects the agent. This is how the chapter asks its questions, and how you will test every agent you build.
-- **Directly, inside Bob.** In the watsonx Orchestrate panel, the row of `civic_info_agent` has a chat icon. Click it and a conversation with the agent itself opens in Bob, with no Bob in between: you type, the agent answers, as a resident would experience it. Use it when you want to try several questions quickly, without Bob's commentary.
-- **In the watsonx Orchestrate chat in your browser.** The place where residents will meet the agent once it is live, with the welcome message and the starter prompts you designed. The end of this section takes you there.
+- **Through Bob, the assistant.** You type in Bob's chat panel, the one where you give Bob its prompts: "Ask civic_info_agent: ...". Bob sends the question to the agent on your instance, receives the answer, and shows it to you in its reply. Bob is in the middle, and that is the point: it has seen the answer, it remembers it, and if something is wrong you say so in your next message and Bob corrects the agent. This is how the chapters test every agent.
+- **Directly, in a window of the Bob application.** In the watsonx Orchestrate panel, the row of `civic_info_agent` has a chat icon. Click it and the extension opens a chat window connected to the agent itself; the assistant is not involved. You type, the agent answers, exactly as a resident would experience it. Use it to try several questions quickly.
+- **In the watsonx Orchestrate chat in your browser.** The page where residents will meet the agent once it is live, with the welcome message and the starter prompts you designed. The end of this section takes you there.
 
-Start with the first, because the chapter's questions are followed by a correction that needs Bob.
+Try all three in this section. Start with the first, because the chapter's questions are followed by a correction that needs Bob.
 
 Ask the agent the three questions from the Overview through Bob, one per message:
 
