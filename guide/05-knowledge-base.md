@@ -191,9 +191,9 @@ There are two ways to talk to an agent.
 - **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
 - **From watsonx Orchestrate.** You open your instance in the browser and type the question yourself, in the chat that residents use for the live agent, or in the preview of the draft agent on the Manage agents page.
 
-Remember from chapter 4 that the agent exists in two copies, and keep in mind which one you are talking to. A question sent through Bob always reaches the draft, the copy you are developing. In watsonx Orchestrate you can reach both: the preview of the agent on the Manage agents page talks to the draft, and the chat on the landing page talks to the live copy. The two are not necessarily at the same level: right now the draft searches the documents and the live copy does not, and they stay different until you deploy in 5.10.
+Remember from chapter 4 that the agent exists in two copies, and keep in mind which one you are talking to. A question sent through Bob always reaches the draft, the copy you are developing. In watsonx Orchestrate you can reach both: the preview of the agent on the Manage agents page talks to the draft, and the chat on the landing page talks to the live copy. The two are not necessarily at the same level: right now the draft searches the documents and the live copy does not, and they stay different until you deploy in 5.9.
 
-In this section you try both. The documents in your knowledge base were written by your Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, the question is for section 5.9; if it is missing, ask Bob to add it to the document and import the knowledge base again.
+In this section you try both. The documents in your knowledge base were written by your Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, ask Bob to correct the agent as you did in chapter 4; if it is missing, ask Bob to add it to the document and import the knowledge base again.
 
 **Using Bob.** Ask the three questions from the Overview, one per message:
 
@@ -217,43 +217,13 @@ Then ask as residents do:
 - A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
 - A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent says that it does not have that information.
 
-**From watsonx Orchestrate.** The agent that searches the documents is still the draft; the live agent is the chapter 4 version until section 5.10. So do not use the chat on the landing page yet: it answers with contacts and hours and no documents. Open your instance in the browser, go to Manage agents, select Utopia city information, and use the preview panel, which talks to the draft. Type the shed question; the same answer comes back, with its document named.
+**From watsonx Orchestrate.** The agent that searches the documents is still the draft; the live agent is the chapter 4 version until section 5.9. So do not use the chat on the landing page yet: it answers with contacts and hours and no documents. Open your instance in the browser, go to Manage agents, select Utopia city information, and use the preview panel, which talks to the draft. Type the shed question; the same answer comes back, with its document named.
 
-## 5.9 Correct a wrong answer
-
-Mode: Agent, same conversation.
-
-Go back to two of the answers you received in 5.8: the party and the chickens. Read them to the end.
-
-Both are right about the rule. Both add something that is in no document. On the run behind this chapter:
-
-- The party answer ended by sending the resident to Roads and Infrastructure "for further assistance". Roads has nothing to do with noise. The ordinance gives an online address and no department.
-- The chickens answer said "I do not have that information", and then named a City of Utopia Animal Services Department. There is no such department.
-
-You saw this habit in chapter 4. When the facts give no department, the agent makes one up. The documents brought it back, because the noise ordinance names no department at all.
-
-The fix is the same as in chapter 4: a change to the instructions. This time, the agent also gets somewhere to send residents when none of the three departments applies.
-
-```
-civic_info_agent adds departments that are not in its facts: it sent a noise
-question to Roads and Infrastructure, and it named an Animal Services
-Department that does not exist. Add a general contact to its facts: City Hall
-information desk, info@utopia.example, 555 0100, Monday to Friday 09:00 to
-17:00. When a question is outside the three departments, or a document gives
-no department, the agent must give the City Hall contact and must not name any
-other department. Import the agent again and ask the party question and the
-chickens question again.
-```
-
-Bob changes the instructions, imports the agent again, and asks both questions. Now the party answer ends with the online address or with City Hall, and the chickens answer ends with "I do not have that information" and City Hall.
-
-One more thing can go wrong with a knowledge base: the agent finds nothing, although the rule is in a document. This happens when the document says it in words that are far from how residents ask. The fix is in the document, not in the agent: tell Bob what the resident asked and what the document says, and ask it to rewrite that passage and import the knowledge base again.
-
-## 5.10 Make the change live
+## 5.9 Make the change live
 
 Mode: Agent, same conversation.
 
-The corrected agent is a draft. The live agent from chapter 4 still answers from its twenty lines of facts. Deploy again:
+The agent that searches the documents is a draft. The live agent from chapter 4 still answers from its twenty lines of facts. Deploy again:
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -263,7 +233,7 @@ Now go back to the chat on the landing page and ask the shed question. The live 
 
 One difference from chapter 4: the knowledge base is already shared by draft and live, because it belongs to the instance. What the deployment changes is the agent, which now knows to search it. On the Developer Edition, skip this step.
 
-## 5.11 Summary
+## 5.10 Summary
 
 The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule, not a phone number, with the document it came from. Bob wrote the documents, defined the knowledge base, waited for it to be ready, and changed the agent; you described the rules and approved the design.
 
