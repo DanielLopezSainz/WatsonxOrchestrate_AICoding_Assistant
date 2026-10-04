@@ -79,7 +79,7 @@ exists on my instance.
 
 Bob queries the instance and answers with the three parts you know. Under what it understood, it says how it would implement the change: fictional record files, Python tools that read them, one per kind of record, and an addition to the agent's instructions. That is the right choice. If Bob proposes to put the records into the knowledge base instead, tell it that the records change and that a resident wants one exact record, not the closest passage; the answer below names the tools in any case.
 
-On the instance, Bob finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. Its questions are about the records: how many to write, which status words to use, which bin colours, and whether any resident may see any record. It may also propose a format of its own for the records, such as JSON.
+On the instance, Bob finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. It may also notice a line in the agent's instructions from chapter 4, "do not look anything up in other systems", and say that it must change. It must. Its questions vary from one run to another: one tool or three, how many records to write, which status words and bin colours to use, whether collection days are the same every week, what to say when a number is unknown, and whether any resident may see any record. The answer below settles all of them.
 
 Bob may again end with suggested answers to click. Do not click any of them; type the answer below.
 
@@ -91,9 +91,9 @@ permit number and returns the application's address, type of work, status,
 submission date and the date by which a decision is due; get_request_status,
 which receives a request number and returns the report's street, type of
 problem, status and scheduled date when there is one; and get_collection_days,
-which receives a street name and returns the collection day of each bin. Each
-tool reads its records from a CSV file kept with the tool, so that the file is
-uploaded with it.
+which receives a street name and returns the collection day of each bin, the
+same every week. Each tool reads its records from a CSV file kept with the
+tool, so that the file is uploaded with it.
 
 Use these records as they are, and add seven more of your own to each file,
 using only the status words that appear in these records. The bins are the four
@@ -120,8 +120,9 @@ does not check who is asking. When a question gives no number or street, the
 agent asks for it. When a number or street is unknown, the agent says that it has no
 record under that number and gives the contact of the department. The agent
 keeps its facts and its knowledge base; a question can need both a tool and a
-document. Answers from a tool stay within three sentences and end with the
-contact of the department, as before.
+document. The rule from chapter 4 that the agent does not look anything up in
+other systems is replaced by these tools. Answers from a tool stay within
+three sentences and end with the contact of the department, as before.
 ```
 
 Bob confirms the answers. It might sketch the tools in the chat; the design is written in the next step.
@@ -180,7 +181,7 @@ Go to the `tools` folder in the File Explorer. A tool is the smallest thing Bob 
 
 **The records.** Three CSV files next to the tools, one line per application, report or street. Find PP-2026-0412: under review, decision due 2026-10-12. This line is the answer that the resident of the Overview will get. The file travelled to the instance inside the tool's package, which is why it had to be kept next to the tool.
 
-**The agent.** Open `agents/civic_info_agent.yaml`. Under `tools`, three names. The instructions have a new paragraph: use a tool for any question about one resident's application, report or street; ask for the number when it is missing; say when a record is unknown. The facts of chapter 4 and the knowledge base of chapter 5 are still there, and the three ways of knowing now sit side by side in one file: what the agent is told, what it reads, and what it looks up.
+**The agent.** Open `agents/civic_info_agent.yaml`. Under `tools`, three names. The instructions have a new paragraph: use a tool for any question about one resident's application, report or street; ask for the number when it is missing; say when a record is unknown. The chapter 4 line that forbade looking anything up is gone. The facts of chapter 4 and the knowledge base of chapter 5 are still there, and the three ways of knowing now sit side by side in one file: what the agent is told, what it reads, and what it looks up.
 
 Bob may have added files of its own, such as a requirements file for each tool or a test report. They are not part of the agent on the instance; read them if you are curious, and ignore them otherwise.
 
