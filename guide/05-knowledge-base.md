@@ -200,7 +200,7 @@ There are two ways to talk to an agent.
 - **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
 - **From watsonx Orchestrate.** You open your instance in the browser and type the question yourself, in the chat that residents use for the live agent, or in the preview of the draft agent on the Manage agents page.
 
-Remember from chapter 4 that the agent exists in two copies, and keep in mind which one you are talking to. A question sent through Bob always reaches the draft, the copy you are developing. In watsonx Orchestrate you can reach both: the preview of the agent on the Manage agents page talks to the draft, and the chat on the landing page talks to the live copy when its switch in the top-right corner is on Live. The two are not necessarily at the same level: right now the draft searches the documents and the live copy does not, and they stay different until you deploy in 5.9.
+Remember from chapter 4 that the agent exists in two copies, and keep in mind which one you are talking to. A question sent through Bob always reaches the draft, the copy you are developing. In watsonx Orchestrate you can reach both: the preview of the agent on the Manage agents page talks to the draft, and the chat on the landing page talks to the live copy. The two are not necessarily at the same level: right now the draft searches the documents and the live copy does not, and they stay different until you deploy in 5.9.
 
 In this section you try both. The documents in your knowledge base were written by Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, ask Bob to correct the agent as you did in chapter 4; if it is missing, ask Bob to add it to the document and import the knowledge base again.
 
@@ -238,7 +238,7 @@ The agent that searches the documents is a draft. The live agent from chapter 4 
 Deploy civic_info_agent from draft to live.
 ```
 
-Bob reports that the agent is live and tells you where residents can find it: in the watsonx Orchestrate chat, with the environment switched to Live in the top-right corner, under its display name, Utopia city information. Go there and ask the shed question. The answer that was only in the draft an hour ago is now the one every resident gets. On the Developer Edition, skip this step.
+Bob reports that the agent is live and tells you where residents can find it: in the watsonx Orchestrate chat, under its display name, Utopia city information. Go there and ask the shed question. The answer that was only in the draft an hour ago is now the one every resident gets. On the Developer Edition, skip this step.
 
 ## 5.10 Summary
 
