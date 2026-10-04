@@ -188,13 +188,19 @@ Approve each request as it comes. Bob's report may say that the agent is deploye
 
 ## 6.7 What Bob built
 
-Go to the `tools` folder in the File Explorer.
+Open the `tools` folder in the File Explorer. It has six files: three Python files, one per tool, `get_permit_status.py`, `get_request_status.py` and `get_collection_days.py`, and three CSV files with the records, `permits.csv`, `requests.csv` and `collection_calendar.csv`.
 
-**A tool.** Open the permit tool: one Python function, about twenty lines. Three of them are written for the agent, not for the computer. `@tool`, above the function, marks it as a tool for watsonx Orchestrate. The text between triple quotes is the description, the exact words the agent reads when it decides whether to call it. And `permit_number`, the parameter: the agent must find a value for it in the question before it can call. The rest opens the CSV file next to it, finds the row, and returns it. When the city gets a real permit system one day, that is the part that changes; the agent does not.
+Open `get_permit_status.py`. Near the bottom of the file is the function `get_permit_status`. Three things around it are written for the agent:
 
-**The records.** Three CSV files, one line per application, report or street. Find PP-2026-0412: under review, decision due 2026-10-12. That line is the answer the resident of the Overview will get.
+- The line `@tool` above the function. It tells watsonx Orchestrate that this function is a tool.
+- The text between triple quotes just under the function name. This is the description: one sentence on what the tool does, one line on the parameter, one line on the result. These are the words the agent reads when it decides whether to call the tool.
+- The parameter `permit_number`. The agent must find a value for it in the resident's question before it can call the tool.
 
-**The agent.** Open `agents/civic_info_agent.yaml`. Under `tools`, three names. The instructions have a new paragraph on when to use a tool, and the chapter 4 line that forbade looking anything up is gone. The facts, the knowledge base and the tools now sit side by side in one file: what the agent is told, what it reads, and what it looks up.
+The rest of the file opens `permits.csv`, finds the line with that number, and returns it. If the city connects a real permit system, this is the part that changes; the agent does not.
+
+Open `permits.csv`. One line per application. The second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. That is the answer the resident of the Overview will get.
+
+Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three tool names. In the instructions, a new section says when to call each tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up is gone. The facts and the knowledge base are still there.
 
 Bob may have added files of its own, such as a requirements file or a test report. They are not part of the agent on the instance; ignore them unless you are curious.
 
