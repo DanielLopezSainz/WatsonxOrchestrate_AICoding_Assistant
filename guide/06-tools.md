@@ -231,9 +231,15 @@ Then ask as residents do:
 - With a tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" Under review, and the building permit guide says that work must not start before the decision. One answer, two sources.
 - With a tool and the facts: "The grey bin on Elm Street was not collected today. Who do I call?" Monday was the day; call Waste and Recycling.
 
-Now read how the agent got there. In the preview panel of watsonx Orchestrate, ask about PP-2026-0412 again. With the answer, the chat offers to show the steps behind it. Open it: the agent called `get_permit_status` with `PP-2026-0412`, received the record, and wrote the answer from it. Ask the shed question and open the steps again: a tool call, then a search of the knowledge base, then the answer.
+Now read how the agent got there. Ask the first question again through Bob, with two more words:
 
-This is the view to come back to whenever an agent with tools answers wrongly. Wrong tool: a tool description is unclear. Right tool, wrong value: a parameter description is unclear. No tool at all: the instructions do not say when to use one. Each is one sentence to Bob, as in 4.9.
+```
+Ask civic_info_agent, with reasoning: "Where is my permit application PP-2026-0412?"
+```
+
+Bob now shows the steps along with the answer: the agent called `get_permit_status` with the permit number `PP-2026-0412`, the tool returned the record from `permits.csv`, and the agent wrote the answer from it. Ask the shed question the same way: the same tool call, and an answer that quotes the Building Permit Guide. The preview panel in watsonx Orchestrate shows the steps of an answer too.
+
+These steps are what to read whenever an agent with tools answers wrongly. Wrong tool: a tool description is unclear. Right tool, wrong value: a parameter description is unclear. No tool at all: the instructions do not say when to use one. Each is one sentence to Bob, as in 4.9.
 
 ## 6.9 Deploy the change in Live
 
