@@ -4,7 +4,7 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do, and Bob writes the files, sends them to your instance, and tests the result. This guide teaches that way of working, from a first agent to a complete system.
+Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do. Bob writes the files, sends them to your instance, and tests the result. This guide teaches that way of working, from a first agent to a complete system.
 
 The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
 
@@ -16,13 +16,11 @@ At the end of the guide, you have built:
 - A permit application that follows fixed steps, with an approval by a city clerk.
 - A chat window that residents use on a web page.
 
-You write prompts. Bob writes the code.
-
 This chapter introduces the two products, the scenario and the chapters. If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
 ## 1.1 The 2 main characters
 
-The guide uses two IBM products. Each one has a different job.
+The guide uses two IBM products, each with a different job.
 
 | Product | What it is | Its job in this guide |
 |---|---|---|
@@ -51,7 +49,7 @@ Everything that you create is stored first in the draft environment of the insta
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The scenario was chosen for two reasons. It needs no explanation, because everyone has asked a city office a question or reported a problem in the street. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
+The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The guide uses this scenario for two reasons. It needs no explanation, because everyone has asked a city office a question or reported a problem in the street. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
 
@@ -63,7 +61,7 @@ The city, its departments, its residents and all its data are fictional. Three d
 
 ## 1.4 The chapters
 
-Chapters 2 and 3 prepare the work. Chapters 4 to 11 each add one component to CivicPulse. Chapter 12 is an exercise that uses all of them.
+Chapters 2 and 3 prepare the work. Each of chapters 4 to 11 adds one component to CivicPulse, and chapter 12 is an exercise that uses all of them.
 
 | Chapter | What you do | Orchestrate component | Bob capability |
 |---|---|---|---|
