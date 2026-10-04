@@ -296,12 +296,12 @@ After that, the following requests cover daily use. Each one is a plain instruct
 | Save only some files | `Commit the files in the design folder with the message "City information agent design v2" and push.` |
 | See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
 | See the history | `List the last ten commits with their dates and messages.` |
-| Get the latest version of the guide | `Pull the latest changes of the main branch from the remote named guide.` |
+| Get the latest version of the guide | `Merge the main branch of the remote named guide into my current branch. Do not rebase.` |
 | Undo the last change to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
 | Go back to an earlier version | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
 | Work on a change without touching the main version | `Create a branch named roads-hours and switch to it.` |
 | Bring a finished branch back | `Switch to the main branch and merge roads-hours into it, then push.` |
 
-If a merge or a pull produces conflicts, Bob stops and reports them instead of continuing.
+If a merge produces conflicts, Bob stops and reports them instead of continuing. The guide only ever changes the `guide` and `walkthroughs` folders and the README, and your work lives in the other folders, so a conflict arises only if you edit a chapter file in your clone. Keep notes outside the `guide` folder.
 
 Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control view, described in section 2.3, provides the same operations by clicking.
