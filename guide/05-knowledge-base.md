@@ -186,9 +186,11 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 5.8 Meet the agent again
 
-Mode: Agent, same conversation.
+Mode: Agent, same conversation in Bob.
 
-Ask the agent the three questions from the Overview, through Bob, one per message:
+There are two places to talk to the agent. In Bob, you ask Bob to pass a question to the agent, and Bob shows you the answer; this is where the chapter's questions are asked, in the same Agent-mode conversation as the build. The second place is the watsonx Orchestrate chat in your browser, where residents will meet the agent; the end of this section takes you there.
+
+In Bob, ask the agent the three questions from the Overview, one per message:
 
 ```
 Ask civic_info_agent: "Do I need a permit for a garden shed of 8 square metres?"
@@ -210,7 +212,7 @@ Then ask as residents do:
 - A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
 - A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent says that it does not have that information.
 
-Open your watsonx Orchestrate instance in the browser and ask the shed question in the chat. The answer names the document there too; this is where residents will read it.
+Now see the agent as a resident will. Open your watsonx Orchestrate instance in the browser, open the chat, select the agent by its display name, Utopia city information, and type the shed question yourself. The same answer comes back, with its document named. This chat is where residents will read it once the agent is live.
 
 ## 5.9 Correct a wrong answer
 
