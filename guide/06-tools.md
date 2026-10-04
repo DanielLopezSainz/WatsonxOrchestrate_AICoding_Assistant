@@ -136,7 +136,7 @@ Bob confirms the answers and, as in chapter 4, goes further. Read its answer for
 
 Mode: Plan, in the same conversation.
 
-For the first time, the design describes code. Before Bob writes a line of it, the design says what each tool receives, what it returns, and how it is described to the agent. That sentence of description decides more than the code does.
+Everything Bob proposed is in the chat, and a chat is not something you approve. As in chapters 4 and 5, the proposal goes into a design file: Bob writes it, you check it against the table below, and Bob builds from it in a new conversation.
 
 ```
 Write the design for this change into design/city-services-tools-design.md.
