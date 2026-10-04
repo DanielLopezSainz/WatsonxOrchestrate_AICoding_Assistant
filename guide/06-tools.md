@@ -61,23 +61,25 @@ Mode: Ask, in a new conversation.
 
 The purpose of this prompt is the same as in chapters 4 and 5: before anything is written, Bob must understand what you want and tell you what it needs to know. This time the request is about things the agent must look up, and Bob needs to know what systems exist. None do, and the prompt says so.
 
-The prompt says which questions residents ask that the agent cannot answer today, what the agent must look up to answer them, and that the records are fictional and Bob's to write.
+The prompt does not say the word tool. As in chapter 5, it describes what residents ask and where the answer is, and leaves the choice of the component to Bob. You know from 6.2 what the right choice is, so you can check Bob's proposal.
 
 ```
-I want civic_info_agent to answer questions that need a lookup of one resident's
-own record, not only questions about rules and contacts. Residents ask things
-like "Where is my permit application PP-2026-0412?", "Has my pothole report
-RQ-2026-1187 been scheduled?" and "Which day is the grey bin collected on Elm
-Street?". The city has three kinds of records for this: building permit
-applications, problem reports about roads, and the collection calendar by
-street. The City of Utopia has no systems to query: the records are fictional,
-you will write them, and the tools read them.
+I want civic_info_agent to answer questions about one resident's own record,
+not only questions about rules and contacts. Residents ask things like "Where
+is my permit application PP-2026-0412?", "Has my pothole report RQ-2026-1187
+been scheduled?" and "Which day is the grey bin collected on Elm Street?". The
+city keeps three kinds of records for this: building permit applications,
+problem reports about roads, and the collection calendar by street, each one
+found by its number or by the street name. The City of Utopia has no systems
+to query: the records are fictional, and you will write them.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know. It finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. Its questions are about the records rather than the tools: how many to write, which status words to use, which bin colours, and whether any resident may see any record. It may also propose a format of its own for the records, such as JSON.
+Bob queries the instance and answers with the three parts you know. Under what it understood, it says how it would implement the change: fictional record files, Python tools that read them, one per kind of record, and an addition to the agent's instructions. That is the right choice. If Bob proposes to put the records into the knowledge base instead, tell it that the records change and that a resident wants one exact record, not the closest passage; the answer below names the tools in any case.
+
+On the instance, Bob finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. Its questions are about the records: how many to write, which status words to use, which bin colours, and whether any resident may see any record. It may also propose a format of its own for the records, such as JSON.
 
 Bob may again end with suggested answers to click. Do not click any of them; type the answer below.
 
