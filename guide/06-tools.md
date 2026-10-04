@@ -53,7 +53,7 @@ In a real city, the permit tool would query the permit system, over its API, wit
 
 **Reading the agent's reasoning**
 
-An agent with tools has choices to make, and watsonx Orchestrate lets you see them. The agent's definition has a setting, `hide_reasoning`, which is `false` for `civic_info_agent`: with every answer, the chat can show the steps that the agent took, including the tool it called and the values it passed. Reading those steps is how you check that the agent chose the right tool for the right reason, and it is where a wrong answer is diagnosed. Section 6.8 shows you how.
+An agent with tools makes choices, and watsonx Orchestrate lets you see them. With every answer, the agent can show the steps it took: the tool it called, the values it passed, what the tool returned. In the watsonx Orchestrate chat, the steps are behind a Show Reasoning link next to the answer; through Bob, you ask for them with the words "with reasoning". The agent's definition has a setting for this, `hide_reasoning`, which is `false` for `civic_info_agent`. Reading the steps is how you check that the agent chose the right tool for the right reason. Section 6.8 shows you how.
 
 ## 6.3 Ask mode: describe the lookups
 
@@ -237,7 +237,9 @@ Now read how the agent got there. Ask the first question again through Bob, with
 Ask civic_info_agent, with reasoning: "Where is my permit application PP-2026-0412?"
 ```
 
-Bob now shows the steps along with the answer: the agent called `get_permit_status` with the permit number `PP-2026-0412`, the tool returned the record from `permits.csv`, and the agent wrote the answer from it. Ask the shed question the same way: the same tool call, and an answer that quotes the Building Permit Guide. The preview panel in watsonx Orchestrate shows the steps of an answer too.
+Bob now shows the steps along with the answer: the agent called `get_permit_status` with the permit number `PP-2026-0412`, the tool returned the record from `permits.csv`, and the agent wrote the answer from it. Ask the shed question the same way: the same tool call, and an answer that quotes the Building Permit Guide.
+
+In the preview panel of watsonx Orchestrate, every answer has a Show Reasoning link next to it. It opens the same steps: the tool, its input, its output.
 
 These steps are what to read whenever an agent with tools answers wrongly. Wrong tool: a tool description is unclear. Right tool, wrong value: a parameter description is unclear. No tool at all: the instructions do not say when to use one. Each is one sentence to Bob, as in 4.9.
 
