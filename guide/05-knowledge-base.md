@@ -1,4 +1,4 @@
-# Chapter 5. Give the agent the city's regulations
+# Chapter 5. Adding a Knowledge Base (RAG)
 
 Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or its agent imported from the walkthrough folder as the chapter's Overview describes.
 
