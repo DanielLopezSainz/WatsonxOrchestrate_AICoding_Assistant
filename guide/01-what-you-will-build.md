@@ -69,7 +69,7 @@ Chapters 2 and 3 prepare the work. Chapters 4 to 11 each add one component to Ci
 |---|---|---|---|
 | 2 | Connect Bob to your watsonx Orchestrate instance | The instance and its environments | The extension, the views, the approvals |
 | 3 | Learn the working method | None | The Ask, Plan and Agent modes; prompts; git |
-| 4 | Create an agent that tells residents which department to contact, and make it live | Instructions and model; draft and live | The three modes in sequence |
+| 4 | Create an agent that tells residents which department to contact, and deploy it in Live | Instructions and model; the Draft and Live environments | The three modes in sequence |
 | 5 | Give the agent the city's guides and regulations | Knowledge base | Bob writes the documents |
 | 6 | Let the agent look up the status of a request or a permit | Tools | Bob writes the tools; reading the agent's reasoning |
 | 7 | Let the agent report a new issue to the city service desk | Connections | Credentials kept out of the chat |

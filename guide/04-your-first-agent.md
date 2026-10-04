@@ -141,17 +141,17 @@ When the design says what you mean, it is approved. The approval itself is the f
 
 Before you leave the design, notice one thing about the facts: two departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.9 finds out what the agent does with the gap.
 
-## 4.5 Draft and live: the two states of an agent
+## 4.5 The Draft and Live environments
 
 Before Bob builds, one thing about watsonx Orchestrate decides where your agent will appear and who can talk to it.
 
-Every agent on an instance is in one of two states. Draft is the builder's state: a draft agent can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can see it, from the Manage agents page, where a preview panel lets you chat with the draft. Live is the users' state: a live agent is what residents find in the chat on the instance's landing page, and later on the city's website.
+An instance has two environments. Draft is the builders' environment: an agent in Draft can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can reach it, from the Manage agents page, where a preview panel lets you chat with it. Live is the residents' environment: the agent deployed in Live is what residents find in the chat on the instance's landing page, and later on the city's website.
 
-The two states are two separate copies of the agent. When Bob imports the agent, or imports it again after a correction, it changes the draft copy. The live copy does not change until you deploy: one operation that takes the current draft and makes it the live version. Until then, residents keep talking to the previous live version, which is what you want: you test and repair in draft, and nobody meets an agent under repair. If a deployment turns out to be wrong, undeploying returns the agent to its previous live version.
+When Bob imports the agent, or imports it again after a correction, it changes the agent in Draft. The agent in Live does not change until you deploy: one operation that takes the agent as it is in Draft and deploys it in Live. Until then, residents keep talking to the previous deployment, which is what you want: you test and repair in Draft, and nobody meets an agent under repair. If a deployment turns out to be wrong, undeploying returns the agent in Live to its previous deployment.
 
-Everything that Bob does in the next sections happens in draft: the build imports the agent into draft, the tests run against the draft, and the correction in 4.9 replaces the draft. Making the agent live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full; here you perform it once.
+Everything that Bob does in the next sections happens in Draft: the build imports the agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the agent in Live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full; here you perform it once.
 
-One restriction. The Developer Edition has only the draft state: its chat shows draft agents, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
+One restriction. The Developer Edition has only the Draft environment: its chat shows the agents in Draft, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
 
 ## 4.6 Agent mode: build and test
 
@@ -258,9 +258,9 @@ Bob changes the definition file, imports it again, and asks the question. It may
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
-**Make the agent live**
+**Deploy the agent in Live**
 
-The agent is corrected and tested, and it is still a draft. Residents cannot see it. One instruction changes that:
+The agent is corrected and tested, and it exists only in Draft. Residents cannot see it. One instruction changes that:
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -268,7 +268,7 @@ Deploy civic_info_agent from draft to live.
 
 Bob runs the deployment and reports that the agent was deployed. Open your watsonx Orchestrate instance in the browser: the agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
 
-From now on, the draft and the live agent are two copies, and it pays to know which one you are talking to. The next time you ask Bob to change the agent, the change goes to the draft, and the live agent keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the agent, it reaches the draft, because the operation that Bob uses to chat with an agent, `chat_with_agent` on the Orchestrate server, is built for the draft and has no option to point at the live copy. While you build, that is what you want: you test what you change, and residents never see it. To hear the live agent, the one residents hear, use the chat in watsonx Orchestrate.
+From now on, the agent exists in both environments, and it pays to know which one you are talking to. The next time you ask Bob to change the agent, the change goes to Draft, and the agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the agent, it reaches the agent in Draft, because the operation that Bob uses to chat with an agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. While you build, that is what you want: you test what you change, and residents never see it. To talk to the agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
 
 ## 4.10 Summary
 
@@ -276,10 +276,10 @@ A resident of Utopia can now ask who to tell about a dark street light and get t
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
-- An agent is defined by one file. Importing the file creates the agent in draft; importing it again replaces the agent.
+- An agent is defined by one file. Importing the file creates the agent in Draft; importing it again replaces the agent.
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
-- An agent is a draft until you deploy it. Deploying makes the current draft the live version, the one that users see.
+- An agent exists in Draft until you deploy it. Deploying puts the agent as it is in Draft into Live, the environment that users see.
 
-That is your first agent, built, tested, caught inventing an answer, corrected and made live, in under an hour and without a line of code written by you. Every agent in the rest of the guide is made the same way; only the components change.
+That is your first agent, built, tested, caught inventing an answer, corrected and deployed in Live, in under an hour and without a line of code written by you. Every agent in the rest of the guide is made the same way; only the components change.
 
 The agent knows twenty lines of facts, and a city has far more to say than that. Can I build a shed without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, pages of them, and no agent instruction can hold them. In chapter 5, Bob writes those documents for the City of Utopia, and the agent gets them as a knowledge base: a library it searches when a resident asks, so that it answers from the regulations themselves and can say which document the answer came from. The agent stops reciting and starts looking things up.
