@@ -145,7 +145,7 @@ Before you leave the design, notice one thing about the facts: two departments h
 
 Before Bob builds, one thing about watsonx Orchestrate decides where your agent will appear and who can talk to it.
 
-Every agent on an instance is in one of two states. Draft is the builder's state: a draft agent can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can see it, from the Manage agents page. Live is the users' state: a live agent is what residents find in the chat on the instance's landing page, and later on the city's website.
+Every agent on an instance is in one of two states. Draft is the builder's state: a draft agent can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can see it, from the Manage agents page, where a preview panel lets you chat with the draft. Live is the users' state: a live agent is what residents find in the chat on the instance's landing page, and later on the city's website.
 
 The two states are two separate copies of the agent. When Bob imports the agent, or imports it again after a correction, it changes the draft copy. The live copy does not change until you deploy: one operation that takes the current draft and makes it the live version. Until then, residents keep talking to the previous live version, which is what you want: you test and repair in draft, and nobody meets an agent under repair. If a deployment turns out to be wrong, undeploying returns the agent to its previous live version.
 

@@ -189,7 +189,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 There are two ways to talk to an agent.
 
 - **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
-- **From watsonx Orchestrate.** You open the chat of your instance in the browser, select the agent, and type the question yourself. This is how residents use the agent.
+- **From watsonx Orchestrate.** You open your instance in the browser and type the question yourself, in the chat that residents use for the live agent, or in the preview of the draft agent on the Manage agents page.
 
 In this section you try both. The documents in your knowledge base were written by your Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, the question is for section 5.9; if it is missing, ask Bob to add it to the document and import the knowledge base again.
 
@@ -215,7 +215,7 @@ Then ask as residents do:
 - A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
 - A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent says that it does not have that information.
 
-**From watsonx Orchestrate.** Open your instance in the browser, open the chat, select Utopia city information, and type the shed question yourself. The same answer comes back, with its document named.
+**From watsonx Orchestrate.** The agent that searches the documents is still the draft; the live agent is the chapter 4 version until section 5.10. So do not use the chat on the landing page yet: it answers with contacts and hours and no documents. Open your instance in the browser, go to Manage agents, select Utopia city information, and use the preview panel, which talks to the draft. Type the shed question; the same answer comes back, with its document named.
 
 ## 5.9 Correct a wrong answer
 
@@ -249,6 +249,8 @@ The corrected agent is a draft. The live agent from chapter 4 still answers from
 ```
 Deploy civic_info_agent from draft to live.
 ```
+
+Now go back to the chat on the landing page and ask the shed question. The live agent answers from the documents, as the draft did in 5.8. This is what deploying does: the copy that residents use becomes the copy you tested.
 
 One difference from chapter 4: the knowledge base is already shared by draft and live, because it belongs to the instance. What the deployment changes is the agent, which now knows to search it. On the Developer Edition, skip this step.
 
