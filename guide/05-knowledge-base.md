@@ -244,7 +244,7 @@ Bob reports that the agent is live and tells you where residents can find it: in
 The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule, not a phone number, with the document it came from. Bob wrote the documents, defined the knowledge base, waited for it to be ready, and changed the agent; you described the rules and approved the design.
 
 - A knowledge base is a set of documents that the platform indexes and an agent searches. It holds files, not instructions. An agent that answers this way is what the industry calls retrieval-augmented generation, RAG: when you hear that an agent "uses RAG", it has a knowledge base.
-- A knowledge base is not ready at once; the agent must wait until it is.
+- After the import, the platform needs a few minutes to index the documents. The knowledge base can be attached to an agent only when its status is ready.
 - The agent's instructions decide when to search and what to say when the documents have no answer.
 - A knowledge base belongs to the instance. A change to its documents reaches the draft and the live agent at once.
 
