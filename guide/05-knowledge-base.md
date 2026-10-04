@@ -191,6 +191,8 @@ There are two ways to talk to an agent.
 - **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
 - **From watsonx Orchestrate.** You open your instance in the browser and type the question yourself, in the chat that residents use for the live agent, or in the preview of the draft agent on the Manage agents page.
 
+One thing to know about the first way. When Bob sends a question to an agent, it always reaches the draft copy; the operation that Bob uses has no way to reach the live one. That is what you want while building: you test what you are changing. To talk to the live agent, the one residents use, go to the chat in watsonx Orchestrate. Programmers can also reach the live agent through the platform's programming interface; this guide does not use it.
+
 In this section you try both. The documents in your knowledge base were written by your Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, the question is for section 5.9; if it is missing, ask Bob to add it to the document and import the knowledge base again.
 
 **Using Bob.** Ask the three questions from the Overview, one per message:
