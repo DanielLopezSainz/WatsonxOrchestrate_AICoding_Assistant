@@ -1,0 +1,68 @@
+CITY OF UTOPIA
+BUILDING PERMIT GUIDE
+
+This guide tells residents when a building permit is required, how to apply,
+what the fees are, and how long a decision takes.
+
+
+WHEN A PERMIT IS REQUIRED
+
+A building permit is required before you start any new building, extension,
+or structure on your property.
+
+Exception: detached garden structures do not need a permit if both of the
+following conditions are met:
+  - The floor area is under 10 square metres.
+  - The height is under 2.5 metres.
+
+If your garden structure meets both conditions, no permit is needed.
+If your garden structure exceeds either limit, a permit is required even if
+it is detached and in the rear garden.
+
+Examples:
+  - A garden shed of 8 square metres and 2.2 metres high: no permit needed.
+  - A garden shed of 12 square metres: permit required.
+  - A garden structure of 9 square metres but 3 metres high: permit required.
+  - A home extension of any size: permit required.
+  - A new garage: permit required.
+
+
+HOW TO APPLY
+
+Applications are submitted online at:
+  https://services.utopia.example/permits
+
+You must include with your application:
+  - A site plan showing the location of the proposed structure on your plot.
+  - Drawings showing the dimensions and appearance of the structure.
+
+Incomplete applications will not be processed. The Permits and Planning
+department can advise you on what drawings are needed:
+  Phone: 555 0110
+  Email: permits@utopia.example
+  Hours: Monday to Friday, 09:00 to 17:00
+
+
+FEES
+
+The fee depends on the floor area of the structure you are applying for:
+  - Floor area under 50 square metres: fee is 120.
+  - Floor area of 50 square metres or above: fee is 300.
+
+The fee is paid at the time of application. It is not refunded if the
+application is refused.
+
+
+PROCESSING TIME AND DECISION
+
+A decision is given within 30 days of a complete application being received.
+
+You must not start work before you receive the decision. Starting work
+without a permit, or before the decision is issued, is a breach of planning
+law.
+
+If you have not received a decision after 30 days, contact the Permits and
+Planning department:
+  Phone: 555 0110
+  Email: permits@utopia.example
+  Hours: Monday to Friday, 09:00 to 17:00
