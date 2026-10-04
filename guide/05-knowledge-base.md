@@ -188,9 +188,15 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 Mode: Agent, same conversation in Bob.
 
-There are three ways to talk to the agent. The first is through Bob: you ask Bob to pass a question to the agent, and Bob shows you the answer; this is how the chapter's questions are asked, in the same Agent-mode conversation as the build, because Bob can then act on what you find. The second is direct, inside Bob: in the watsonx Orchestrate panel, the chat icon on the agent's row opens a conversation with the agent itself. The third is the watsonx Orchestrate chat in your browser, where residents will meet the agent; the end of this section takes you there.
+Until now you have talked to the agent through Bob: you asked Bob to pass a question on, and Bob came back with the answer. That is one of three ways to talk to an agent, and each one has its use. Try all three in this section.
 
-In Bob, ask the agent the three questions from the Overview, one per message:
+- **Through Bob.** You write "Ask civic_info_agent: ..." in the chat, Bob sends the question to the agent on the instance and shows you the answer. The advantage is what comes next: Bob has seen the answer, so if something is wrong you tell Bob in the next message and it corrects the agent. This is how the chapter asks its questions, and how you will test every agent you build.
+- **Directly, inside Bob.** In the watsonx Orchestrate panel, the row of `civic_info_agent` has a chat icon. Click it and a conversation with the agent itself opens in Bob, with no Bob in between: you type, the agent answers, as a resident would experience it. Use it when you want to try several questions quickly, without Bob's commentary.
+- **In the watsonx Orchestrate chat in your browser.** The place where residents will meet the agent once it is live, with the welcome message and the starter prompts you designed. The end of this section takes you there.
+
+Start with the first, because the chapter's questions are followed by a correction that needs Bob.
+
+Ask the agent the three questions from the Overview through Bob, one per message:
 
 ```
 Ask civic_info_agent: "Do I need a permit for a garden shed of 8 square metres?"
