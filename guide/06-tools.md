@@ -184,7 +184,7 @@ The @ mention tells Bob to read the design file. This is the first build with co
 4. **Updates the agent**: the three tools are attached, the instructions are extended, and the agent is imported again, replacing the agent in Draft.
 5. **Tests** the agent with the questions from the design and reports.
 
-Approve each request as it comes.
+Approve each request as it comes. Bob's report may say that the agent is deployed. It is imported into Draft; deploying in Live is section 6.9.
 
 ## 6.7 What Bob built
 
