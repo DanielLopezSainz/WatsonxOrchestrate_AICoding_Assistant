@@ -221,9 +221,16 @@ Then ask as residents do:
 
 Mode: Agent, same conversation.
 
-Read the party answer and the chickens answer again, to the end. On the run behind this chapter, both were right about the rule and both added something that is in no document. The party answer sent the resident to Roads and Infrastructure "for further assistance", a department that has nothing to do with noise; the ordinance gives an online address and no department. The chickens answer said "I do not have that information" and then named a City of Utopia Animal Services Department, which does not exist.
+Go back to two of the answers you received in 5.8: the party and the chickens. Read them to the end.
 
-This is the habit you met in chapter 4: when the facts give no department, the agent supplies one. The documents made it visible again, because the noise ordinance names no department at all. The correction is the same as in chapter 4, a change to the instructions, and this time it also gives the agent somewhere to send residents when none of the three departments applies:
+Both are right about the rule. Both add something that is in no document. On the run behind this chapter:
+
+- The party answer ended by sending the resident to Roads and Infrastructure "for further assistance". Roads has nothing to do with noise. The ordinance gives an online address and no department.
+- The chickens answer said "I do not have that information", and then named a City of Utopia Animal Services Department. There is no such department.
+
+You saw this habit in chapter 4. When the facts give no department, the agent makes one up. The documents brought it back, because the noise ordinance names no department at all.
+
+The fix is the same as in chapter 4: a change to the instructions. This time, the agent also gets somewhere to send residents when none of the three departments applies.
 
 ```
 civic_info_agent adds departments that are not in its facts: it sent a noise
@@ -236,9 +243,9 @@ other department. Import the agent again and ask the party question and the
 chickens question again.
 ```
 
-Bob changes the instructions, imports the agent again, and asks both questions. The party answer now ends with the online address of the ordinance or the City Hall contact, and the chickens answer with "I do not have that information" and City Hall.
+Bob changes the instructions, imports the agent again, and asks both questions. Now the party answer ends with the online address or with City Hall, and the chickens answer ends with "I do not have that information" and City Hall.
 
-A second kind of wrong answer can appear with a knowledge base: the agent finds nothing although the rule is in a document. The usual cause is the document, where the rule is phrased in a way that does not match how residents ask. Tell Bob what the resident asked and what the document says, and ask it to rewrite that passage and import the knowledge base again. The knowledge base is re-indexed; the agent does not change.
+One more thing can go wrong with a knowledge base: the agent finds nothing, although the rule is in a document. This happens when the document says it in words that are far from how residents ask. The fix is in the document, not in the agent: tell Bob what the resident asked and what the document says, and ask it to rewrite that passage and import the knowledge base again.
 
 ## 5.10 Make the change live
 
