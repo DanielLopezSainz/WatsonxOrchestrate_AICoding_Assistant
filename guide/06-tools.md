@@ -136,7 +136,7 @@ Bob confirms the answers and, as in chapter 4, goes further. Read its answer for
 
 Mode: Plan, in the same conversation.
 
-Everything Bob proposed is in the chat, and a chat is not something you approve. As in chapters 4 and 5, the proposal goes into a design file: Bob writes it, you check it against the table below, and Bob builds from it in a new conversation.
+Three tools, three record files, a change to the agent and an import for each tool: this is the largest design so far, and one detail in it decides whether the tools work on the instance. Have Bob write it down.
 
 ```
 Write the design for this change into design/city-services-tools-design.md.
