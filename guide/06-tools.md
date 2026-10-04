@@ -125,7 +125,7 @@ other systems is replaced by these tools. Answers from a tool stay within
 three sentences and end with the contact of the department, as before.
 ```
 
-Bob confirms the answers. It might sketch the tools in the chat; the design is written in the next step.
+Bob confirms the answers and, as in chapter 4, goes further: it lays out the complete implementation in the chat, the records in tables, the code of the three tools, the new paragraph of the instructions, and asks you to switch to Agent mode. It may even start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch. Nothing has been created, and the next step turns this proposal into a design that you read and approve.
 
 ## 6.4 Plan mode: write the design
 
@@ -143,6 +143,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 |---|---|
 | The three tools | For each: its name, the sentence that describes it to the agent, its parameter with a description, and what it returns, in the `tools` folder |
 | The records | The three CSV files, each with your records and the columns they need, stored next to the tool that reads them |
+| The import of each tool | The command that imports a tool uploads the `tools` folder as its package, so that the record file reaches the instance with the code. An import that names the Python file alone leaves the records behind, and the tool fails on the instance. |
 | The change to the agent | The three tools attached to `civic_info_agent`, and the instructions extended: when to use a tool, ask for a missing number, what to say when a record is unknown; the facts and the knowledge base unchanged |
 | The build order | Records and tools first, each tool imported, then the agent |
 | The tests | The three questions of the Overview at least, each with the expected record |
@@ -153,7 +154,7 @@ Read the three descriptions with care. They are what the agent reads when it dec
 
 Mode: Plan, same conversation.
 
-Read the design once. If a description is vague or a record is missing, ask Bob to change it, as in chapter 4. When it says what you mean, it is approved: the approval is the first line of the next prompt.
+Read the design once. If a description is vague or a record is missing, ask Bob to change it, as in chapter 4. The most likely correction is the import: if the design imports each tool from its Python file alone, send `The record files must be uploaded with the tools. Import each tool with the tools folder as its package root, and put that in the design.` When the design says what you mean, it is approved: the approval is the first line of the next prompt.
 
 ## 6.6 Agent mode: build and test
 
