@@ -170,24 +170,17 @@ This build creates more than the one in chapter 4, and part of it takes time. Bo
 
 Approve each request as it comes. If an import fails, Bob reads the error and corrects the file before continuing.
 
-## 5.7 Read what was built
+## 5.7 What Bob built
 
-The build left four kinds of file in the project. Their names and layout vary from run to run; what each one is for does not.
+Bob has just produced the three pieces of a knowledge base, and the easiest way to understand what a knowledge base is, is to open them. Go to the `knowledge-bases` folder in the File Explorer.
 
-| Where | What | Its role |
-|---|---|---|
-| `knowledge-bases` folder | Three text files, one per city document | The content that the agent searches. The only files in this chapter that a resident's answer is quoted from |
-| `knowledge-bases` folder | The knowledge base definition, `city_regulations.yaml` | Tells the instance which documents form the knowledge base and how to describe it to agents |
-| `agents` folder | `civic_info_agent.yaml`, changed | The agent, now attached to the knowledge base, with instructions on when to search it |
-| `scripts` and `tests` folders, if present | Import scripts and a test report | Bob's own working files. Useful to read, not needed by the guide |
+**The documents.** Three text files: the building permit guide, the waste sorting rules and the noise ordinance. Open the permit guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a shed of 8 square metres that needs no permit and one of 12 that does. These three pages are the agent's new knowledge. When a resident asks about a shed, the agent finds the right passage in this file and answers from it, and when the city changes the rule one day, this is the file that changes; the agent does not.
 
-Open the `knowledge-bases` folder in the File Explorer first.
+**The knowledge base definition.** A short file named `city_regulations.yaml`. It is the label on the box: the name of the knowledge base, a sentence describing what the documents cover, so that the agent knows when to look inside, and the list of the three documents. Nothing in it is a rule; it only says which files belong together.
 
-The documents are short handouts, a page each, with a heading per topic and every rule from your answer. On the run behind this chapter, Bob added worked examples to the permit guide, a shed of 8 square metres and 2.2 metres high needs no permit, one of 9 square metres but 3 metres high does, which is what a resident needs and what makes the search find the right passage. Read them once: residents' answers come from these pages.
+**The agent.** Open `agents/civic_info_agent.yaml` and look for two changes. The name `city_regulations` now appears under `knowledge_base`: the agent has access to the box. And the instructions have a new paragraph that tells the agent what to do with it: search the documents for any question about a rule, say which document the answer comes from, and admit it when the documents do not cover a question. Everything from chapter 4, the three departments and their contacts, is still there.
 
-The knowledge base definition is a dozen lines: the kind, `knowledge_base`; the name; a description, which the agent reads to decide when the knowledge base is relevant; the list of the three documents; and the name of the model that turns text into searchable form, which Bob set to the platform's default.
-
-Open `agents/civic_info_agent.yaml`. The knowledge base is listed under `knowledge_base`, and the instructions have a new block: search the knowledge base for any question about a rule, name the document in the answer, allow a short paragraph for answers taken from a document, and say "I do not have that information" when the documents do not cover a rule. The facts and rules of chapter 4 are still there.
+Bob may also have left files of its own, such as a scripts folder or a test report. They are Bob's working notes, not part of the agent; read them if you are curious, and ignore them otherwise.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
