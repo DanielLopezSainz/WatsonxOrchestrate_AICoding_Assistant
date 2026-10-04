@@ -77,7 +77,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know. Its questions are about the tools: how many, what each one receives and returns, where the records live, what the identifiers look like, and what the agent should say when a number is unknown.
+Bob queries the instance and answers with the three parts you know. It finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. Its questions are about the records rather than the tools: how many to write, which status words to use, which bin colours, and whether any resident may see any record. It may also propose a format of its own for the records, such as JSON.
 
 Bob may again end with suggested answers to click. Do not click any of them; type the answer below.
 
@@ -93,7 +93,9 @@ which receives a street name and returns the collection day of each bin. Each
 tool reads its records from a CSV file kept with the tool, so that the file is
 uploaded with it.
 
-Use these records as they are, and add seven more of your own to each file.
+Use these records as they are, and add seven more of your own to each file,
+using only the status words that appear in these records. The bins are the four
+of the waste sorting rules: grey, green, blue and yellow.
 
 Permit applications. PP-2026-0412, 18 Elm Street, garden shed of 12 square
 metres, status Under review, submitted 2026-09-12, decision due 2026-10-12.
@@ -111,8 +113,9 @@ yellow Wednesday. Mill Road: grey Monday, green Thursday, blue and yellow
 Friday.
 
 The agent uses a tool for any question about one resident's application,
-report or street. When a question gives no number or street, the agent asks
-for it. When a number or street is unknown, the agent says that it has no
+report or street. Any resident who gives a number sees the record; the agent
+does not check who is asking. When a question gives no number or street, the
+agent asks for it. When a number or street is unknown, the agent says that it has no
 record under that number and gives the contact of the department. The agent
 keeps its facts and its knowledge base; a question can need both a tool and a
 document. Answers from a tool stay within three sentences and end with the
