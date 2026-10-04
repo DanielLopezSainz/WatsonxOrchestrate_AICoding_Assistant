@@ -229,9 +229,7 @@ The agent that searches the documents is a draft. The live agent from chapter 4 
 Deploy civic_info_agent from draft to live.
 ```
 
-Now go back to the chat on the landing page and ask the shed question. The live agent answers from the documents, as the draft did in 5.8. This is what deploying does: the copy that residents use becomes the copy you tested.
-
-One difference from chapter 4: the knowledge base is already shared by draft and live, because it belongs to the instance. What the deployment changes is the agent, which now knows to search it. On the Developer Edition, skip this step.
+Bob reports that the agent is live and tells you where residents can find it: in the watsonx Orchestrate chat, with the environment switched to Live in the top-right corner, under its display name, Utopia city information. Go there and ask the shed question. The answer that was only in the draft an hour ago is now the one every resident gets. On the Developer Edition, skip this step.
 
 ## 5.10 Summary
 
