@@ -186,14 +186,12 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 5.8 Ways to interact with watsonx Orchestrate agents
 
-Mode: Agent, same conversation in Bob.
-
 There are two ways to talk to an agent.
 
 - **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
 - **From watsonx Orchestrate.** You open the chat of your instance in the browser, select the agent, and type the question yourself. This is how residents use the agent.
 
-In this section you try both.
+In this section you try both. The documents in your knowledge base were written by your Bob, in its own words, but from the rules you gave in 5.3, so the answers to the questions below are in them whatever the wording. If an answer differs from what the rules say, open the document: if the rule is there, the question is for section 5.9; if it is missing, ask Bob to add it to the document and import the knowledge base again.
 
 **Using Bob.** Ask the three questions from the Overview, one per message:
 
