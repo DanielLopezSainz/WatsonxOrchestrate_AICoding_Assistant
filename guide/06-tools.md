@@ -77,13 +77,14 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know. Under what it understood, it says how it would implement the change: fictional record files, Python tools that read them, one per kind of record, and an addition to the agent's instructions. That is the right choice. If Bob proposes to put the records into the knowledge base instead, tell it that the records change and that a resident wants one exact record, not the closest passage; the answer below names the tools in any case.
+Read Bob's answer for four things:
 
-On the instance, Bob finds the agent and the knowledge base, no tools, and an empty `tools` folder, created by the extension in chapter 2. It may also notice a line in the agent's instructions from chapter 4, "do not look anything up in other systems", and say that it must change. It must. Its questions vary from one run to another: one tool or three, how many records to write, which status words and bin colours to use, whether collection days are the same every week, what to say when a number is unknown, and whether any resident may see any record. The answer below settles all of them.
+- How Bob would implement it. Under what it understood, Bob proposes record files and Python tools that read them, one per kind of record. Nobody said the word tool; Bob chose it, and 6.2 says why it is the right choice.
+- What it found on the instance: the agent, the knowledge base, no tools.
+- The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that it has to go. It does.
+- Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
-Bob may again end with suggested answers to click. Do not click any of them; type the answer below.
-
-The second prompt is your answer. Its purpose is to fix the records that the chapter relies on, so that the questions in 6.8 have known answers on your instance as on anyone else's, and to take the decisions that Bob asked about. Nothing is created: Ask mode is still the right mode.
+Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports, three streets, with numbers and dates that this chapter uses from here to the end, so that your agent and every other reader's agent give the same answers. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet; Ask mode is still the right mode.
 
 ```
 These are my answers. Three Python tools: get_permit_status, which receives a
