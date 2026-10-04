@@ -188,15 +188,14 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 Mode: Agent, same conversation in Bob.
 
-Until now you have talked to the agent through Bob: you asked Bob to pass a question on, and Bob came back with the answer. That is one of three ways to talk to an agent, and the difference between them is who sits between you and the agent.
+There are two ways to talk to an agent.
 
-- **Through Bob, the assistant.** You type in Bob's chat panel, the one where you give Bob its prompts: "Ask civic_info_agent: ...". Bob sends the question to the agent on your instance, receives the answer, and shows it to you in its reply. Bob is in the middle, and that is the point: it has seen the answer, it remembers it, and if something is wrong you say so in your next message and Bob corrects the agent. This is how the chapters test every agent.
-- **Directly, in a window of the Bob application.** In the watsonx Orchestrate panel, the row of `civic_info_agent` has a chat icon. Click it and the extension opens a chat window connected to the agent itself; the assistant is not involved. You type, the agent answers, exactly as a resident would experience it. Use it to try several questions quickly.
-- **In the watsonx Orchestrate chat in your browser.** The page where residents will meet the agent once it is live, with the welcome message and the starter prompts you designed. The end of this section takes you there.
+- **Using Bob.** You send the question to the agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the agent in your next message. This is how the chapters test every agent.
+- **From watsonx Orchestrate.** You open the chat of your instance in the browser, select the agent, and type the question yourself. This is how residents use the agent.
 
-Try all three in this section. Start with the first, because the chapter's questions are followed by a correction that needs Bob.
+In this section you try both.
 
-Ask the agent the three questions from the Overview through Bob, one per message:
+**Using Bob.** Ask the three questions from the Overview, one per message:
 
 ```
 Ask civic_info_agent: "Do I need a permit for a garden shed of 8 square metres?"
@@ -218,7 +217,7 @@ Then ask as residents do:
 - A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
 - A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The agent says that it does not have that information.
 
-Now see the agent as a resident will. Open your watsonx Orchestrate instance in the browser, open the chat, select the agent by its display name, Utopia city information, and type the shed question yourself. The same answer comes back, with its document named. This chat is where residents will read it once the agent is live.
+**From watsonx Orchestrate.** Open your instance in the browser, open the chat, select Utopia city information, and type the shed question yourself. The same answer comes back, with its document named.
 
 ## 5.9 Correct a wrong answer
 
