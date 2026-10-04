@@ -229,7 +229,7 @@ Then ask as residents do:
 - Without a number: "Where is my permit application?" The agent asks for it.
 - With a number that does not exist: "Where is my permit application PP-2026-9999?" No record under that number, and the contact of Permits and Planning. Nothing is invented.
 - With a tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the building permit guide. Keep this question for the next part.
-- With a tool and the facts: "The grey bin on Elm Street was not collected today. Who do I call?" Monday was the day; call Waste and Recycling.
+- With a street name but no need for a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The agent answers with the Waste and Recycling contact and does not call the calendar tool: the question names a street, but nothing in it needs the collection day.
 
 Now read how the agent got there. Ask the first question again through Bob, with two more words:
 
