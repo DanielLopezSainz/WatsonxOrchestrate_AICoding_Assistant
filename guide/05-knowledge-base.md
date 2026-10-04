@@ -188,7 +188,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 Mode: Agent, same conversation in Bob.
 
-There are two places to talk to the agent. In Bob, you ask Bob to pass a question to the agent, and Bob shows you the answer; this is where the chapter's questions are asked, in the same Agent-mode conversation as the build. The second place is the watsonx Orchestrate chat in your browser, where residents will meet the agent; the end of this section takes you there.
+There are three ways to talk to the agent. The first is through Bob: you ask Bob to pass a question to the agent, and Bob shows you the answer; this is how the chapter's questions are asked, in the same Agent-mode conversation as the build, because Bob can then act on what you find. The second is direct, inside Bob: in the watsonx Orchestrate panel, the chat icon on the agent's row opens a conversation with the agent itself. The third is the watsonx Orchestrate chat in your browser, where residents will meet the agent; the end of this section takes you there.
 
 In Bob, ask the agent the three questions from the Overview, one per message:
 
