@@ -262,6 +262,6 @@ The agent now gives answers that are different for every resident: the status of
 - A tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
 - The description and the parameter descriptions are written for the agent. The agent decides from them, so they are the first place to look when it decides wrongly.
 - One answer can combine the sources: a tool for the resident's record, the knowledge base for the rule, the instructions for the contact.
-- The agent's reasoning shows the steps between the question and the answer, every tool call included. Read it to check an answer and to diagnose a wrong one.
+- The agent's reasoning shows the steps between the question and the answer, every tool call included. Ask Bob for it with the words "with reasoning", or open Show Reasoning next to an answer in watsonx Orchestrate. Read it to check an answer and to diagnose a wrong one.
 
 The three tools read records; none of them changes anything. The next thing residents ask for is to report a pothole, not to check on one. That takes a tool that creates a record in the city's service desk, a service reached over an API with a key, and that key must never appear in a chat, in git or in a tool's code. In chapter 7, the agent gets a tool that reports an issue, and watsonx Orchestrate keeps the key for it: a connection.
