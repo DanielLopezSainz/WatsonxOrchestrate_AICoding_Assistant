@@ -268,7 +268,7 @@ Deploy civic_info_agent from draft to live.
 
 Bob runs the deployment and reports that the agent was deployed. Open your watsonx Orchestrate instance in the browser: the agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
 
-From now on, the draft and the live agent are two copies. The next time you ask Bob to change the agent, the change goes to the draft, and the live agent keeps answering as before until you deploy again.
+From now on, the draft and the live agent are two copies, and it pays to know which one you are talking to. The next time you ask Bob to change the agent, the change goes to the draft, and the live agent keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the agent, it reaches the draft, because the operation that Bob uses to chat with an agent, `chat_with_agent` on the Orchestrate server, is built for the draft and has no option to point at the live copy. While you build, that is what you want: you test what you change, and residents never see it. To hear the live agent, the one residents hear, use the chat in watsonx Orchestrate.
 
 ## 4.10 Summary
 
