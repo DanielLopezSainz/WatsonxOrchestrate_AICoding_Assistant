@@ -24,7 +24,7 @@ What to read, depending on your experience:
 
 ## 3.1 Bob proposed workflow
 
-Bob is designed to do the work rather than to be supervised line by line. You describe the problem and take the decisions. Bob writes the files, imports and tests them, and reports the result, including failures. Three recommendations follow from this design.
+Bob is designed so that you do not supervise it line by line. You describe the problem and take the decisions. Bob writes the files, imports and tests them, and reports the result, including failures. Three recommendations follow from this design.
 
 - Plan first. Start new projects and complex features in Plan mode, so that a plan exists before anything is built. A plan prevents breaking changes and gives the work a clear direction.
 - One task per conversation. Start a new conversation for each task, with a specific aim, and reference files with @ mentions instead of pasting their content. Before implementing a plan, start a new conversation, so that the planning discussion does not consume the context and Bob does not mix planning and implementation.
@@ -48,11 +48,11 @@ you understood, what you need to know from me, and what already exists on my
 instance.
 ```
 
-Bob queries the instance, then answers with three parts: what it understood, a table of the agents, tools and connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three departments. Nothing is written and nothing is created. You answer the questions in the same conversation.
+Bob queries the instance, then answers with three parts: what it understood, a table of the agents, tools and connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three departments. Nothing is written or created, and you answer the questions in the same conversation.
 
 ### Plan mode
 
-Plan mode is for planning a task: Bob analyses the requirements, researches the project, and designs the implementation steps. In this mode, Bob can do everything that Ask mode allows and can also write files. Bob cannot run commands. Bob asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files rather than using vague language, and nothing is missing. Request revisions in the same conversation.
+Plan mode is for planning a task: Bob analyses the requirements, researches the project, and designs the implementation steps. In this mode, Bob can do everything that Ask mode allows and can also write files, but it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
 
 In this guide, the plan is a design document written into the `design` folder. This document is what you approve before Bob builds.
 
@@ -119,11 +119,11 @@ Between these two approvals, let Bob work. Approving every file in Agent mode re
 
 ## 3.3 The types of prompts
 
-A prompt is the text that you type in the chat. There is no official classification of prompts. This guide distinguishes three kinds by what they ask Bob to do: a question asks for information, an instruction asks for one action, and a structured prompt describes a task with several parts and states how to check the result. The names are descriptive, not terms that Bob recognises.
+A prompt is the text that you type in the chat. There is no official classification of prompts. This guide distinguishes three kinds by what they ask Bob to do: a question asks for information, an instruction asks for one action, and a structured prompt describes a task with several parts and states how to check the result. The names are for this guide; Bob does not know them.
 
 The following practices apply to every prompt:
 
-- Be specific. Vague prompts produce vague output.
+- Be specific, because Bob fills any gap with its own assumptions.
 - Show an example of the output when its format matters.
 - Refer to files with @ mentions instead of pasting their content.
 - Plan before building.
@@ -183,7 +183,7 @@ For an action with several steps, or one whose result must be checked in a parti
 
 ### Type 3: the structured prompt
 
-A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer: Bob does not define them, none of their parts is mandatory, and Bob reads the content and not the labels. The same content can be written as labelled lines or as running text.
+A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer: Bob does not define them, none of their parts is mandatory, and Bob reads the content and ignores the labels. The same content can be written as labelled lines or as running text.
 
 To describe what you want at the start of an agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
 
@@ -251,7 +251,7 @@ The following table shows a weak prompt and a better prompt for the same situati
 |---|---|---|---|
 | Starting an agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing tool referenced with @, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
 | Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
-| Adding one tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names no file, no agent and no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
+| Adding one tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names neither a file nor an agent, and gives no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
 | Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
 | Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
