@@ -4,11 +4,11 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or 
 
 ## Overview
 
-A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one. Reporting a pothole means writing a record into the city's service desk, and the service desk, like every real system, asks who is calling: it wants an API key with every request.
+A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one.
 
-In this chapter, Bob creates an Orchestrate Tool that reports the issue to the city's service desk. To report it, the agent sends the resident's data to an external system, a database or an application, through a tool of the kind you built in chapter 6. The address of that system and the credentials that it requires are not written in the tool: watsonx Orchestrate stores them in a separate asset, the Orchestrate Connection, and gives them to the tool when the agent calls it.
+In this chapter, Bob creates an Orchestrate Tool that sends reports to the city's service desk. The Orchestrate Agent sends the resident's data to an external system, a database or an application, using an Orchestrate Tool (you built one in chapter 6). The address of that external system and the credentials that it requires are not written in the tool: watsonx Orchestrate stores them in a separate asset, the Orchestrate Connection, and gives them to the tool when the agent calls it.
 
-The Orchestrate Connection is the component introduced in this chapter. Bob writes the connection and the tool; the credential itself you set in watsonx Orchestrate, the way an operations team sets production credentials, so that it never passes through Bob. With Orchestrate Tools and Orchestrate Connections, the agent can update external systems, not only read them.
+The Orchestrate Connection is the component introduced in this chapter. Bob creates both the Orchestrate Connection and the Orchestrate Tool. With Orchestrate Tools and Orchestrate Connections, the agent can update external systems, not only read them.
 
 Skip this chapter if you have already given a tool a credential through a connection with Bob. To continue with chapter 8 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_service_desk.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, then import walkthroughs/ch07/agents/civic_info_agent.yaml.` Then set the credential of the connection as section 7.6 describes.
 
