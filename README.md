@@ -21,10 +21,10 @@ To connect your assistant to watsonx Orchestrate, start with chapter 2. Read cha
 ## Chapters
 
 - [Chapter 1. What you will build](guide/01-what-you-will-build.md)
-- [Chapter 2. Connect your assistant](guide/02-connect-your-assistant.md)
-- [Chapter 3. How to brief your assistant](guide/03-how-to-brief-your-assistant.md)
+- [Chapter 2. Connect Bob to watsonx Orchestrate](guide/02-connect-your-assistant.md)
+- [Chapter 3. How to work with Bob](guide/03-how-to-brief-your-assistant.md)
 - [Chapter 4. Your first agent](guide/04-your-first-agent.md)
-- [Chapter 5. Adding a knowledge base (RAG)](guide/05-knowledge-base.md)
+- [Chapter 5. Adding a Knowledge Base (RAG)](guide/05-knowledge-base.md)
 - [Chapter 6. Adding tools](guide/06-tools.md)
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
