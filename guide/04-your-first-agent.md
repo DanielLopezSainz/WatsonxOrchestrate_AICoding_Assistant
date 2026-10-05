@@ -135,15 +135,13 @@ Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
-Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. Read the file, not the summary: a detail that is wrong in the design is wrong in the agent.
+Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. A detail that is wrong in the design is wrong in the agent.
 
 When the design says what you mean, it is approved. The approval itself is the first line of the next section, so there is nothing more to send here.
 
 Two of the departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.9 shows what the agent does with the gap.
 
 ## 4.5 The Draft and Live environments
-
-Before Bob builds, you need to know which environments an agent runs in, because they decide where it appears and who can talk to it.
 
 An instance has two environments. Draft is the builders' environment: an agent in Draft can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can reach it, from the Manage agents page, where a preview panel lets you chat with it. Live is the residents' environment: the agent deployed in Live is what residents find in the chat on the instance's landing page, and later on the city's website.
 
@@ -159,7 +157,7 @@ Mode: Agent, in a new conversation.
 
 In this step, Bob builds the agent from the approved design.
 
-Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would also work, but a new conversation is better, for the following reason.
+Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would also work, but a new conversation is better.
 
 In the current conversation, Bob has your request, its first proposal, the facts, a complete agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
@@ -266,7 +264,7 @@ Deploy civic_info_agent from draft to live.
 
 Bob runs the deployment and reports that the agent was deployed. Open your watsonx Orchestrate instance in the browser: the agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
 
-From now on, the agent exists in both environments, and you need to know which one you are talking to. The next time you ask Bob to change the agent, the change goes to Draft, and the agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the agent, it reaches the agent in Draft, because the operation that Bob uses to chat with an agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. While you build, that is what you want: you test what you change, and residents never see it. To talk to the agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
+From now on, the agent exists in both environments, and you need to know which one you are talking to. The next time you ask Bob to change the agent, the change goes to Draft, and the agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the agent, it reaches the agent in Draft, because the operation that Bob uses to chat with an agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. While you build, you test what you change, and residents never see it. To talk to the agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
 
 ## 4.10 Summary
 
