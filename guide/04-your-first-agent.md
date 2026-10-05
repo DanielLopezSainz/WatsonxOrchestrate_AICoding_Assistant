@@ -45,9 +45,9 @@ If the list already contains `civic_info_agent`, someone has run this chapter on
 
 Mode: Ask, in a new conversation.
 
-This first prompt tells Bob about the project for the first time. Its purpose is to confirm that Bob has understood what you want and to let Bob say what it still needs to know before a single file exists. A misunderstanding found now takes one sentence to correct; found after the build, it means building again.
+This first prompt tells Bob about the project for the first time. Its purpose is to confirm that Bob has understood what you want and to let Bob say what it still needs to know before a single file exists. A misunderstanding found now takes one sentence to correct. After the build, it means building the agent again.
 
-Ask mode is the right place for this conversation: Bob can read your project and look at your instance, and it cannot change anything.
+Use Ask mode for this conversation: Bob can read your project and your instance, and cannot change anything.
 
 The prompt describes the agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob for three things in return. It is a structured prompt written as running text (chapter 3, type 3).
 
@@ -93,15 +93,15 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and often goes further: it can lay out the complete agent in the chat, with its definition and example answers, and suggest switching to Agent mode to create it at once. Do not switch to Agent mode yet. Nothing has been created so far. The result of this step is that you and Bob agree on what the agent is. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
+Bob confirms the answers and often goes further: it can lay out the complete agent in the chat, with its definition and example answers, and suggest switching to Agent mode to create it at once. Do not switch to Agent mode yet; nothing has been created. At the end of this step, you and Bob agree on what the agent is. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
 
 ## 4.3 Plan mode: write the design
 
 Mode: Plan, in the same conversation.
 
-You and Bob agree on what the agent must do. This step turns that agreement into a design: a document that states exactly what will be built, which you can read and correct while it is still only a document.
+You and Bob agree on what the agent must do. This step turns that agreement into a design: a document that states exactly what will be built, which you read and correct before anything is built.
 
-Stay in the same conversation, so that Bob keeps everything that you have told it, and switch to Plan mode. The prompt is one line, an instruction (chapter 3, type 2). Bob already has the facts; the only thing missing is where to write the design.
+Stay in the same conversation, so that Bob keeps everything that you have told it, and switch to Plan mode. The prompt is one line, an instruction (chapter 3, type 2).
 
 ```
 Write the design for this agent into design/civic-info-design.md.
@@ -135,7 +135,7 @@ Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
-Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. Reading the changes yourself costs a few seconds here and saves hours later, when the changes are to agents on an instance.
+Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. Read the file, not the summary: a detail that is wrong in the design is wrong in the agent.
 
 When the design says what you mean, it is approved. The approval itself is the first line of the next section, so there is nothing more to send here.
 
@@ -157,13 +157,13 @@ The Developer Edition has only the Draft environment: its chat shows the agents 
 
 Mode: Agent, in a new conversation.
 
-Everything so far was preparation; in this step, Bob builds the agent.
+In this step, Bob builds the agent from the approved design.
 
 Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would also work, but a new conversation is better, for the following reason.
 
-In the current conversation, Bob has your request, its first proposal, the facts, a complete agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob has a single source: the design file. It builds what you approved.
+In the current conversation, Bob has your request, its first proposal, the facts, a complete agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
-For an agent this small, the difference would rarely show. The habit pays off from chapter 9 onwards, where a design covers four agents and the discussion that produced it runs to pages. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
+For an agent this small, the difference would rarely show. From chapter 9 onwards, where a design covers four agents and the discussion behind it is long, it does. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
 
 The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
 
@@ -197,7 +197,7 @@ The agent has been created in watsonx Orchestrate. What you see in Bob is its de
 
 The file can contain other fields.
 
-This is a good moment to save your work, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
+Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
 Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
 
