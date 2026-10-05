@@ -6,7 +6,7 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or 
 
 A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one. Reporting a pothole means writing a record into the city's service desk, and the service desk, like every real system, asks who is calling: it wants an API key with every request.
 
-That key is the subject of this chapter. The agent needs it to report the pothole; nobody else should ever see it. Not the resident, not the chat, not the project folder in git, not the code of the tool, and not Bob. In watsonx Orchestrate, a credential like this lives in a connection: a named place on the instance where the key is stored, and from which a tool receives it at the moment it calls the service.
+The agent needs that key to report the pothole, and nobody else should see it: not the resident, not the chat, not the project folder in git, not the code of the tool, and not Bob. In watsonx Orchestrate, a credential like this lives in a connection: a named place on the instance where the key is stored, and from which a tool receives it at the moment it calls the service.
 
 In this chapter, Bob writes a tool that reports an issue to the service desk and a connection that holds the service desk's key. Bob never sees the key: you set it yourself, in watsonx Orchestrate, the way an operations team sets production credentials. Then the agent reports the pothole and gives the resident a request number.
 
@@ -24,7 +24,7 @@ Check that the tools are there: in Ask mode, ask `Which tools exist on my instan
 
 ## 7.2 What a connection is
 
-A tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the tool. The credential cannot: a key in the code is a key in git, in every copy of the project, and in every chat where the file is shown.
+A tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the tool. The credential cannot, because a key written in the code is copied into git, into every copy of the project and into every chat that shows the file.
 
 A connection is where watsonx Orchestrate keeps the credential instead. It has a name, the kind of credential (an API key, a user and password, a token, an OAuth login), the address of the service, and the credential itself. A tool names the connection it needs. When the agent calls the tool, the platform hands the tool the credential; the tool uses it and never stores it.
 
@@ -42,7 +42,7 @@ A connection is either shared by everyone, `team`, with one credential that an a
 
 **The service desk of this chapter**
 
-The City of Utopia has no service desk, so this chapter uses a public test service, Postman Echo, which answers every request by sending back what it received, including the headers. That is enough for the mechanism to be real: the tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key is a value you invent. A real service desk would also return a request number; the test service does not, so the tool creates one in the format of chapter 6, and the chapter says so where it matters.
+The City of Utopia has no service desk, so this chapter uses a public test service, Postman Echo, which answers every request by sending back what it received, including the headers. The mechanism is the same as with a real service desk: the tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key is a value you invent. A real service desk would also return a request number; the test service does not, so the tool creates one in the format of chapter 6.
 
 ## 7.3 Ask mode: describe the report
 
@@ -66,7 +66,7 @@ exists on my instance.
 
 Read Bob's answer for three things:
 
-- How Bob keeps the key out of everything: it proposes a connection on the instance, with the tool reading the key from it at run time. That is the right choice, and 7.2 says why.
+- How Bob keeps the key out of everything: it proposes a connection on the instance, with the tool reading the key from it at run time. Section 7.2 explains why.
 - What it found on the instance: the agent, the knowledge base, the three tools, and no connection.
 - Its questions: what the report contains, how the request number is made, what the agent says back, and whether the connection is shared or personal.
 
@@ -166,7 +166,7 @@ The agent reports it and answers with a request number in the RQ-2026 format, an
 
 - Without a street: "I want to report a broken street light." The agent asks where.
 - With everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." One report, one number.
-- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The agent looks it up with the chapter 6 tool and finds no record, because the test service keeps nothing. A real service desk would have the record, and the chapter 6 tool would find it. The agent says that it has no record under that number and gives the contact, which is the right answer for a number that is not in its records.
+- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The agent looks it up with the chapter 6 tool and finds no record, because the test service keeps nothing. A real service desk would have the record, and the chapter 6 tool would find it. The agent says that it has no record under that number and gives the contact.
 
 Ask the first question again with reasoning. The steps show the call to `report_issue` with the street and the description, and the tool's result with the request number. The key is not in the steps: the tool received it from the connection and did not return it.
 

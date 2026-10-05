@@ -8,7 +8,7 @@ Three weeks ago you applied for a building permit. The confirmation email gives 
 
 So far, the agent has answered from what it knows, and every answer was the same for every resident: the hours of a department, the rule for a shed. The answers in this chapter differ for every resident who asks. Residents want to know where their application is, whether their pothole report has been scheduled, and which day the grey bin is collected on their street. To answer, the agent must look up one record in one system, at the moment the question is asked.
 
-A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. You watch it decide: for the first time, you read the agent's reasoning, the steps it took between the question and the answer.
+A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. You watch it decide by reading the agent's reasoning, the steps it took between the question and the answer.
 
 The component introduced in this chapter is the tool. Everything else stays as in chapter 5: one agent, its instructions, its knowledge base.
 
@@ -34,7 +34,7 @@ In watsonx Orchestrate, a tool has three parts, and the agent uses each one in t
 | The parameters | The values the tool needs, each with a name and a description, for example a permit number | Finds them in the question, or asks the resident for them |
 | The result | What the tool returns, for example the record of one application | Writes the answer from it |
 
-The agent calls a tool the way it searches the knowledge base: nobody tells it to. The model reads the question, the instructions and the descriptions of its tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit tool and contains a permit number, so the agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the agent asks for it. This is why the description and the parameter names are written with care: they are all the agent has to decide with.
+The agent calls a tool the way it searches the knowledge base: nobody tells it to. The model reads the question, the instructions and the descriptions of its tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit tool and contains a permit number, so the agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the agent asks for it. The agent decides only from the description and the parameter names, so write them clearly.
 
 **Kinds of tools**
 
@@ -79,12 +79,12 @@ exists on my instance.
 
 Read Bob's answer for four things:
 
-- How Bob would implement it. Under what it understood, Bob proposes record files and Python tools that read them, one per kind of record. Nobody said the word tool; Bob chose it, and 6.2 says why it is the right choice.
+- How Bob would implement it. Under what it understood, Bob proposes record files and Python tools that read them, one per kind of record. Nobody said the word tool; Bob chose it, and 6.2 explains why.
 - What it found on the instance: the agent, the knowledge base, no tools.
 - The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
-Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports, three streets, with numbers and dates that this chapter uses from here to the end, so that your agent and every other reader's agent give the same answers. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
+Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports and three streets, with fixed numbers and dates, so that your agent gives the same answers as every other reader's agent. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
 
 ```
 These are my answers. Three Python tools: get_permit_status, which receives a
@@ -136,7 +136,7 @@ Bob accepts the answers and again goes further than asked. Read its answer for t
 
 Mode: Plan, in the same conversation.
 
-Three tools, three record files, a change to the agent and an import for each tool: this is the largest design so far. Have Bob write it down.
+The design covers three tools, three record files, a change to the agent and an import for each tool. Have Bob write it down.
 
 ```
 Write the design for this change into design/city-services-tools-design.md.
@@ -176,7 +176,7 @@ Mode: Agent, in a new conversation.
 The design in @design/city-services-tools-design.md is approved. Build it.
 ```
 
-This is the first build with code in it. Bob:
+This build includes code. Bob:
 
 1. Writes the three record files, one CSV per kind of record.
 2. Writes the three tools, one Python file each, in the `tools` folder. Open one of them while Bob continues.
@@ -196,7 +196,7 @@ Open `get_permit_status.py`. Near the bottom of the file is the function `get_pe
 - The text between triple quotes just under the function name. This is the description: one sentence on what the tool does, one line on the parameter, one line on the result. These are the words the agent reads when it decides whether to call the tool.
 - The parameter `permit_number`. The agent must find a value for it in the resident's question before it can call the tool.
 
-The rest of the file opens `permits.csv`, finds the line with that number, and returns it. If the city connects a real permit system, this is the part that changes; the agent does not.
+The rest of the file opens `permits.csv`, finds the line with that number, and returns it. If the city connects a real permit system, only this part changes.
 
 Open `permits.csv`, which has one line per application. The second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
 

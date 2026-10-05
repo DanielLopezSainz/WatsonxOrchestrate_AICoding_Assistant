@@ -36,7 +36,7 @@ A mode determines what Bob is allowed to do in a conversation. Bob provides thre
 
 Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands. Use Ask mode when you need information without making changes.
 
-In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide adds a read-only step before it, because Plan mode can write files and the first exchange about a request must not change anything.
+In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode, because Plan mode can write files and nothing should be written yet.
 
 Example. The same agent is used in all three modes below: an agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
@@ -96,7 +96,7 @@ You approve twice in every agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the build order. If the list is not clear enough to explain to a colleague, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, which is one more reason to make it an explicit decision.
+The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
 
 Example. In chapter 4, Bob writes the design for the city information agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -212,7 +212,7 @@ Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
-A description that answers the six questions receives few questions back from Bob. A description that answers two or three, like the first prompt of chapter 4, receives the others as questions, which is appropriate when the requirements are not yet settled.
+A description that answers the six questions receives few questions back from Bob. A description that answers only two or three, like the first prompt of chapter 4, makes Bob ask the rest.
 
 To specify a task in Agent mode, when the task creates or changes something on the instance and the check is specific to the task. The template has six parts:
 

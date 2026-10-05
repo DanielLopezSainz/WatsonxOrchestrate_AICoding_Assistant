@@ -49,7 +49,7 @@ Everything that you create is stored first in the draft environment of the insta
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The guide uses this scenario for two reasons. It needs no explanation, because everyone has asked a city office a question or reported a problem in the street. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
+The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. Everyone has asked a city office a question or reported a problem in the street, so the scenario needs no explanation. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
 
