@@ -4,13 +4,13 @@ Level: beginner. Time: about 20 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-What Bob builds depends on which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
+What Bob builds depends on which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one Agent of the City of Utopia as the example throughout.
 
 The workflow has three steps, one per Bob mode:
 
 - Ask mode, to make sure that Bob has understood what you want before anything is written.
 - Plan mode, to obtain a design that you read and approve.
-- Agent mode, to build the agent from the approved design and test it.
+- Agent mode, to build the Agent from the approved design and test it.
 
 Sections 3.3 and 3.4 cover the three kinds of prompt; section 3.6 covers git.
 
@@ -36,9 +36,9 @@ A mode determines what Bob is allowed to do in a conversation. Bob has three mod
 
 Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands. Use Ask mode when you need information without making changes.
 
-In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode so that no file is written before the design is reviewed.
+In this guide, every Agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode so that no file is written before the design is reviewed.
 
-Example. The same agent is used in all three modes below: an agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
+Example. The same Agent is used in all three modes below: an Agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
 ```
 I would like to build an information agent for the residents of the City of
@@ -48,7 +48,7 @@ you understood, what you need to know from me, and what already exists on my
 instance.
 ```
 
-Bob queries the instance, then answers with three parts: what it understood, a table of the agents, tools and connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three departments. Nothing is written or created, and you answer the questions in the same conversation.
+Bob queries the instance, then answers with three parts: what it understood, a table of the Agents, Tools and Connections that already exist, and a numbered list of questions, for example which facts it must know and what to answer when a question is outside the three departments. Nothing is written or created, and you answer the questions in the same conversation.
 
 ### Plan mode
 
@@ -62,13 +62,13 @@ Example, continued. In the same conversation, you switch to Plan mode and write:
 Write the design for this agent into design/civic-info-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary: what was asked, what exists on the instance, the proposed agent with its name and model, the facts it will know, how it behaves, the build order, and the test questions with the expected answers. You read the file and, if something is missing, request a change in the same conversation; Bob revises the file and waits again.
+Bob asks for approval to write the file, writes it, and shows a summary: what was asked, what exists on the instance, the proposed Agent with its name and model, the facts it will know, how it behaves, the build order, and the test questions with the expected answers. You read the file and, if something is missing, request a change in the same conversation; Bob revises the file and waits again.
 
 ### Agent mode
 
 Agent mode is for implementing an idea or a plan. In this mode, Bob can read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
 
-In this guide, Agent mode is where Bob writes the definition and tool files, imports them, tests the agent, reads the agent's reasoning, corrects what failed, and reports.
+In this guide, Agent mode is where Bob writes the definition and Tool files, imports them, tests the Agent, reads the Agent's reasoning, corrects what failed, and reports.
 
 Example, continued. You start a new conversation, switch to Agent mode, and write:
 
@@ -76,7 +76,7 @@ Example, continued. You start a new conversation, switch to Agent mode, and writ
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, imports it, checks that the agent appears on the instance, sends the test questions from the design to the agent, and reports the answers. The agent now exists in draft on your instance. Chapter 4 runs this example in full.
+Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, imports it, checks that the Agent appears on the instance, sends the test questions from the design to the Agent, and reports the answers. The Agent now exists in draft on your instance. Chapter 4 runs this example in full.
 
 ### Switching modes
 
@@ -97,13 +97,13 @@ The three modes as this guide uses them:
 
 ## 3.2 What you approve, and when
 
-You approve twice in every agent project: the design, before Bob builds it, and the deployment, before an agent reaches its users.
+You approve twice in every Agent project: the design, before Bob builds it, and the deployment, before an Agent reaches its users.
 
-The design approval takes place between Plan mode and Agent mode. You approve a list: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
+The design approval takes place between Plan mode and Agent mode. You approve a list: which Agents exist and what each one is for, which Tools each Agent has, which external systems need a Connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
+The deployment approval takes place when the Agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an Agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
 
-Example. In chapter 4, Bob writes the design for the city information agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
+Example. In chapter 4, Bob writes the design for the city information Agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
 ```
 Add a welcome message and two starter prompts to the design: the street light
@@ -116,7 +116,7 @@ Bob revises the file and waits again. When the design is complete, you start a n
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, only you can see the agent.
+This line is the design approval. Bob builds and tests the Agent, and the Agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, only you can see the Agent.
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 
@@ -190,7 +190,7 @@ For an action with several steps, or one whose result must be checked in a parti
 
 A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer; Bob reads the content, whatever the labels. The same content can be written as labelled lines or as running text.
 
-To describe what you want at the start of an agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
+To describe what you want at the start of an Agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
 
 ```
 Users:        who will talk to the agent, and in which language
@@ -248,26 +248,26 @@ Each part removes one reason for Bob to guess. Verify and Stop are recommended f
 
 ## 3.4 Prompts, weak and better
 
-A weak prompt leaves Bob to make assumptions: it does not name the files, the agent or the data involved, and it does not state the expected result. Bob completes the missing information with its own choices and does not report them. A better prompt supplies that information: it references the files with @ mentions, names the agent and the data, and states what Bob must return and, where the change matters, how to check it.
+A weak prompt leaves Bob to make assumptions: it does not name the files, the Agent or the data involved, and it does not state the expected result. Bob completes the missing information with its own choices and does not report them. A better prompt supplies that information: it references the files with @ mentions, names the Agent and the data, and states what Bob must return and, where the change matters, how to check it.
 
 The following table shows a weak prompt and a better prompt for the same situation.
 
 | Situation | Weak | Better | Why |
 |---|---|---|---|
-| Starting an agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing tool referenced with @, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent tools and import before you have seen a name |
-| Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the agent and the form of the answer |
-| Adding one tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names neither a file nor an agent, and gives no proof of success. Bob might create the tool from scratch, rename it, or report success as soon as the import returns |
+| Starting an Agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing Tool referenced with @, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent Tools and import before you have seen a name |
+| Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the Agent and the form of the answer |
+| Adding one Tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names neither a file nor an Agent, and gives no proof of success. Bob might create the Tool from scratch, rename it, or report success as soon as the import returns |
 | Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
-| Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
+| Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the Agent's name, purpose and Tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
 
-The better prompts name the real files, agents and data instead of describing them, and they state what Bob must return.
+The better prompts name the real files, Agents and data instead of describing them, and they state what Bob must return.
 
 Prompts to avoid:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
-| "Build me a citizen services agent" | Bob invents the users, the facts, the tools and the names | The structured prompt with the six questions, in Ask mode |
+| "Build me a citizen services agent" | Bob invents the users, the facts, the Tools and the names | The structured prompt with the six questions, in Ask mode |
 | "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob changes the first thing it finds | Request the reasoning of the failing test first |
 | "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |

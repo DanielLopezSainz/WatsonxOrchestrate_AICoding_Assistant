@@ -1,8 +1,8 @@
 # Building watsonx Orchestrate Agents with an AI coding assistant
 
-A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 points to their setup instructions.
+A training guide for people who want to create Agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 points to their setup instructions.
 
-The guide builds CivicPulse, a citizen services platform for the fictional City of Utopia, starting with a single question-answering agent and ending with several agents working together. Each chapter lists its level, its prerequisites and a checkpoint. Follow the chapters in sequence, or begin at any chapter whose prerequisites you meet.
+The guide builds CivicPulse, a citizen services platform for the fictional City of Utopia, starting with a single question-answering Agent and ending with several Agents working together. Each chapter lists its level, its prerequisites and a checkpoint. Follow the chapters in sequence, or begin at any chapter whose prerequisites you meet.
 
 ## How this repository is organised
 
@@ -16,16 +16,16 @@ To use this guide, clone this repository, which is also the project folder you w
 
 ## Where to start
 
-To connect your assistant to watsonx Orchestrate, start with chapter 2. Read chapter 3 before creating agents or tools; it defines the three-phase workflow that every later chapter follows.
+To connect your assistant to watsonx Orchestrate, start with chapter 2. Read chapter 3 before creating Agents or Tools; it defines the three-phase workflow that every later chapter follows.
 
 ## Chapters
 
 - [Chapter 1. What you will build](guide/01-what-you-will-build.md)
 - [Chapter 2. Connect Bob to watsonx Orchestrate](guide/02-connect-your-assistant.md)
 - [Chapter 3. How to work with Bob](guide/03-how-to-brief-your-assistant.md)
-- [Chapter 4. Your first Orchestrate Agent](guide/04-your-first-agent.md)
+- [Chapter 4. Your first Orchestrate Agent](guide/04-your-first-Agent.md)
 - [Chapter 5. Adding an Orchestrate Knowledge Base (RAG)](guide/05-knowledge-base.md)
-- [Chapter 6. Adding Orchestrate Tools](guide/06-tools.md)
+- [Chapter 6. Adding Orchestrate Tools](guide/06-Tools.md)
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 
