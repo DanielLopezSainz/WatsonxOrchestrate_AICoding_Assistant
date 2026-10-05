@@ -1,0 +1,11 @@
+permit_number,address,work_type,status,submitted,decision_date,notes
+PP-2026-0412,18 Elm Street,garden shed 12 sqm,Under review,2026-09-12,2026-10-12,
+PP-2026-0398,7 Harbour Lane,two-storey extension,Approved,2026-08-20,2026-09-30,
+PP-2026-0433,42 Mill Road,garage,Additional documents requested,2026-09-25,2026-10-25,site plan missing
+PP-2026-0445,3 Station Road,loft conversion,Under review,2026-10-01,2026-10-31,
+PP-2026-0389,55 Oak Avenue,single-storey side extension,Approved,2026-07-14,2026-08-13,
+PP-2026-0421,19 River Close,detached garden studio 18 sqm,Additional documents requested,2026-09-18,2026-10-18,elevation drawings missing
+PP-2026-0460,8 Maple Drive,rear extension,Under review,2026-10-07,2026-11-06,
+PP-2026-0374,101 High Street,outbuilding conversion to home office,Approved,2026-06-30,2026-07-30,
+PP-2026-0438,27 Birch Lane,front porch,Additional documents requested,2026-09-28,2026-10-28,structural calculations missing
+PP-2026-0415,14 Cedar Way,two-car garage,Approved,2026-09-10,2026-10-10,

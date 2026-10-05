@@ -24,6 +24,7 @@ Chapters available so far:
 - `guide/03-how-to-brief-your-assistant.md`
 - `guide/04-your-first-agent.md`
 - `guide/05-knowledge-base.md`
+- `guide/06-tools.md`
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 

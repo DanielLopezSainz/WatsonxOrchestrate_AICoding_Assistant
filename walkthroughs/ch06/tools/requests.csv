@@ -1,0 +1,11 @@
+request_number,street,problem_type,status,scheduled_date
+RQ-2026-1187,Elm Street,pothole,Scheduled,2026-10-09
+RQ-2026-1203,Harbour Lane,street light out,Closed,
+RQ-2026-1210,Station Road,damaged sign,Received,
+RQ-2026-1215,Oak Avenue,pothole,Received,
+RQ-2026-1199,Station Road,street light out,Scheduled,2026-10-14
+RQ-2026-1221,Cedar Way,damaged sign,Closed,
+RQ-2026-1228,Maple Drive,pothole,Scheduled,2026-10-16
+RQ-2026-1195,High Street,street light out,Closed,
+RQ-2026-1234,River Close,pothole,Received,
+RQ-2026-1241,Birch Lane,damaged sign,Scheduled,2026-10-20
