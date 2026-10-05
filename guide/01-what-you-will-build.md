@@ -4,7 +4,7 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do. Bob writes the files, sends them to your instance, and tests the result. This guide teaches that way of working, from a first agent to a complete system.
+Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do. Bob writes the files, sends them to your instance, and tests the result.
 
 The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
 
@@ -16,7 +16,7 @@ At the end of the guide, you have built:
 - A permit application that follows fixed steps, with an approval by a city clerk.
 - A chat window that residents use on a web page.
 
-This chapter introduces the two products, the scenario and the chapters. If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
+If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
 ## 1.1 The 2 main characters
 
@@ -27,15 +27,15 @@ The guide uses two IBM products, each with a different job.
 | IBM watsonx Orchestrate | A platform that runs AI agents. An agent answers questions and performs tasks for its users, using instructions, documents, and connections to other systems | The agents that you create run here. Your copy of the platform is called an instance: a SaaS tenant, or the Developer Edition on your own machine |
 | IBM Bob | An AI coding assistant that works inside a development environment. You describe what you want in a chat; Bob writes the files, runs the operations, and reports the result | You create the agents here. You do not write code or configuration files by hand |
 
-The two products are connected by the watsonx Orchestrate ADK extension for Bob, which chapter 2 installs. With the extension, Bob can list what exists on your instance, send new agents to it, and test them.
+Chapter 2 installs the watsonx Orchestrate ADK extension for Bob, which connects the two products: with it, Bob can list what exists on your instance, send new agents to it, and test them.
 
 ## 1.2 What an agent is made of
 
-An agent in watsonx Orchestrate is built from a small set of components. The guide starts with the first two and adds one component per chapter.
+An agent in watsonx Orchestrate is built from a small set of components.
 
 | Component | What it is |
 |---|---|
-| Instructions | Text that tells the agent what it does, how it answers, and what it must not do |
+| Instructions | The text that defines the agent: its role, the facts it knows, how it answers, and what it must not do |
 | Model | The language model that the agent runs on. The guide uses the default model of the instance. Each agent can use a different model |
 | Knowledge base | A set of documents that the agent searches when a question needs more information than its instructions hold |
 | Tools | Functions that the agent calls to look up data or to perform an action |
@@ -45,11 +45,11 @@ An agent in watsonx Orchestrate is built from a small set of components. The gui
 | Flows | Fixed sequences of steps that run the same way every time |
 | Channels | The interfaces through which users reach an agent, such as a chat window on a web page |
 
-Everything that you create is stored first in the draft environment of the instance, where only you can use it. Deployment makes an agent available to its users.
+Everything that you create is stored first in the Draft environment of the instance, where only you can use it; deployment in Live makes it available to its users.
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. Everyone has asked a city office a question or reported a problem in the street, so the scenario needs no explanation. And each component of an agent has an obvious use in it: regulations to search, the status of a permit to look up, a service desk to report to, departments to route between.
+The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. Each component of an agent has a clear use in a city: regulations to search, a permit status to look up, a service desk to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
 
@@ -77,4 +77,4 @@ Chapters 2 and 3 prepare the work. Each of chapters 4 to 11 adds one component t
 | 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the web chat channel | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
-Each chapter from 4 onwards has the same structure: an overview that says what is built and who can skip the chapter, the prerequisites, the steps, and a set of questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
+From chapter 4 onwards, each chapter opens with an overview that says what is built and who can skip it, states its prerequisites, lists its steps, and ends with questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
