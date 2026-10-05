@@ -1,6 +1,6 @@
 # Building watsonx Orchestrate agents with an AI coding assistant
 
-A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 says where their setup is documented.
+A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 points to their setup instructions.
 
 The guide builds CivicPulse, a citizen services platform for the fictional City of Utopia, starting with a single question-answering agent and ending with several agents working together. Each chapter lists its level, its prerequisites and a checkpoint. Follow the chapters in sequence, or begin at any chapter whose prerequisites you meet.
 
