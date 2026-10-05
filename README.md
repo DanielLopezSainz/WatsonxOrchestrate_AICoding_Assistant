@@ -31,4 +31,4 @@ To connect your assistant to watsonx Orchestrate, start with chapter 2. Read cha
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 
-Daniel Lopez Sainz, IBM
+IBM CSM Team, France
