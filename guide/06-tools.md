@@ -81,7 +81,7 @@ Read Bob's answer for four things:
 
 - How Bob would implement it. Under what it understood, Bob proposes record files and Python tools that read them, one per kind of record. Nobody said the word tool; Bob chose it, and 6.2 says why it is the right choice.
 - What it found on the instance: the agent, the knowledge base, no tools.
-- The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that this line has to be removed, and it does.
+- The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
 Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports, three streets, with numbers and dates that this chapter uses from here to the end, so that your agent and every other reader's agent give the same answers. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet; Ask mode is still the right mode.
@@ -200,9 +200,9 @@ The rest of the file opens `permits.csv`, finds the line with that number, and r
 
 Open `permits.csv`, which has one line per application. The second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
 
-Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three tool names. In the instructions, a new section says when to call each tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up is gone. The facts and the knowledge base are still there.
+Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three tool names. In the instructions, a new section says when to call each tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three tools. The facts and the knowledge base are still there, and Bob may have added starter prompts of its own for the new questions.
 
-Bob may have added files of its own, such as a requirements file or a test report. They are not part of the agent on the instance; ignore them unless you are curious.
+Bob may have added files of its own, such as a requirements file or a test report. They are not part of the agent on the instance. Read them if you want to, or ignore them.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
