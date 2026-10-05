@@ -62,28 +62,37 @@ exists on my instance.
 
 Three things to find in Bob's answer:
 
-- The credential. Nobody mentioned one, and Bob raises it: the service desk will require an API key, the key must not be written in the code or the prompts, and an Orchestrate Connection is where the key is kept and handed to the Tool when it runs. Section 7.2 explains why. If your Bob does not raise it, the answer below does.
-- What it found on the instance: the Agent, the Knowledge Base, the three Tools, and no Connection.
-- Its questions: the name, kind and scope of the Connection and the header for the key; the Tool's parameters; whether to generate a request number, since the test service returns none; what the Agent must collect before reporting and what it says on success and on failure.
+- The Connection. Nobody mentioned credentials, and Bob raises them: the test service needs none, but the real service desk will need an address and an API key, so Bob asks whether to create a Connection now, so that the Tool is wired correctly when the city gives access. Section 7.2 explains what a Connection is. If your Bob does not raise it, the answer below does.
+- What it found on the instance: the Agent, the Knowledge Base, the three Tools, an empty `connections` folder, and the line in the Agent's instructions from chapter 4 that forbids creating requests, which Bob says must change.
+- Its questions: what the report contains, whether residents identify themselves, whether the Agent confirms the details before sending or sends at once, and what reference number to return, since the test service gives none.
 
 The second prompt answers them. It names the Connection and the header, so that the chapter and the walkthrough files agree.
 
 ```
-These are my answers. The connection is named utopia_service_desk, shared by
-the whole team, with the key sent in the header x-api-key. One tool,
-report_issue, which receives the street and a description of the problem,
-sends them to the service desk with the key from the connection, and returns a
-request number in the format RQ-2026-NNNN that the Tool generates, since the
-test service returns none. The Tool treats a report as accepted only if the
-service echoes the key header back; otherwise it reports a failure, and the
-Agent says that the report could not be sent and gives the contact of Roads
-and Infrastructure.
+These are my answers. Create the connection now: the real service desk will
+require an API key with every request, and the tool must send it from the
+start, so that only the address and the key change when the city gives
+access. The connection is named utopia_service_desk, shared by the whole team,
+with the key sent in the header x-api-key. The key must never appear in the
+chat, in the project files or in the tool's code; I will set it in watsonx
+Orchestrate myself.
 
-The agent uses the tool when a resident asks to report a road problem. Before
-calling it, the agent makes sure it has the street and a description; it asks
-for whatever is missing. After a successful report, the agent gives the
-resident the request number and says that the status can be checked with it.
-The facts, the knowledge base and the three lookup tools stay as they are.
+One tool, report_issue, which receives the street and a free-text description
+of the problem, with no category and no resident details, since reports are
+anonymous. It sends them to the service desk with the key from the connection
+and returns a request number in the format RQ-2026-NNNN that the tool
+generates, since the test service returns none. The tool treats a report as
+accepted only if the service echoes the key header back; otherwise it reports
+a failure, and the agent says that the report could not be sent and gives the
+contact of Roads and Infrastructure.
+
+The agent uses the tool when a resident asks to report a road problem. It
+sends the report as soon as it has the street and a description, without a
+confirmation step, and asks for whatever is missing. After a successful
+report, the agent gives the resident the request number and says that the
+status can be checked with it. The line that forbids creating requests is
+replaced by this tool. The facts, the knowledge base and the three lookup
+tools stay as they are.
 ```
 
 Bob confirms the answers and lays out the implementation in the chat, as in chapter 6: the Connection file, the Tool, the change to the Agent. Do not switch to Agent mode yet.
