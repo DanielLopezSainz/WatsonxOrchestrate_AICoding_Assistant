@@ -1,4 +1,4 @@
-# Building watsonx Orchestrate agents with an AI coding assistant
+# Building watsonx Orchestrate Agents with an AI coding assistant
 
 A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 points to their setup instructions.
 
@@ -23,9 +23,9 @@ To connect your assistant to watsonx Orchestrate, start with chapter 2. Read cha
 - [Chapter 1. What you will build](guide/01-what-you-will-build.md)
 - [Chapter 2. Connect Bob to watsonx Orchestrate](guide/02-connect-your-assistant.md)
 - [Chapter 3. How to work with Bob](guide/03-how-to-brief-your-assistant.md)
-- [Chapter 4. Your first agent](guide/04-your-first-agent.md)
-- [Chapter 5. Adding a Knowledge Base (RAG)](guide/05-knowledge-base.md)
-- [Chapter 6. Adding tools](guide/06-tools.md)
+- [Chapter 4. Your first Orchestrate Agent](guide/04-your-first-agent.md)
+- [Chapter 5. Adding an Orchestrate Knowledge Base (RAG)](guide/05-knowledge-base.md)
+- [Chapter 6. Adding Orchestrate Tools](guide/06-tools.md)
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 
