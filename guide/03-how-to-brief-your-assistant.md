@@ -52,7 +52,7 @@ Bob queries the instance, then answers with three parts: what it understood, a t
 
 ### Plan mode
 
-Plan mode is for planning a task: Bob analyses the requirements, researches the project, and designs the implementation steps. In this mode, Bob can do everything that Ask mode allows and can also write files, but it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
+Plan mode is for planning a task. Bob analyses the requirements, researches the project and designs the implementation steps. It can do everything that Ask mode allows, and it can also write files; it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
 
 In this guide, the plan is a design document written into the `design` folder. This document is what you approve before Bob builds.
 

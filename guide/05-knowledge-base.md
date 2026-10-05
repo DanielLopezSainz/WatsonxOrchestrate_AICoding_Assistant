@@ -4,7 +4,7 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or 
 
 ## Overview
 
-Suppose that you want to build a garden shed. It is nine in the evening and you want to know whether you need a permit, so you ask CivicPulse. The agent from chapter 4 can only tell you that Permits and Planning handles permits and when they open. It knows twenty lines of facts, and the answer to your question is on page three of the city's building permit guide.
+You want to build a garden shed and need to know whether it requires a permit. The city offices are closed, so you ask CivicPulse. The agent from chapter 4 can only tell you that Permits and Planning handles permits and when they open. It knows twenty lines of facts, and the answer to your question is on page three of the city's building permit guide.
 
 In this chapter, the agent gets the city's guides and regulations: the building permit guide, the waste sorting rules and the noise ordinance. Bob writes the three documents for the City of Utopia, puts them into a knowledge base, and connects the agent to it. The agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
 
@@ -22,7 +22,7 @@ Check that the agent is there: in Ask mode, ask `Which agents exist on my instan
 
 ## 5.2 What a knowledge base is
 
-An agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year. The people who write them will never see the agent's instructions. A knowledge base is how an agent uses documents like these.
+An agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year, and the people who write them will never see the agent's instructions. A knowledge base is how an agent uses documents like these.
 
 A knowledge base is a set of documents that watsonx Orchestrate indexes, so that an agent can search them. When a resident asks a question, the agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nobody rewrites a regulation into instructions.
 
@@ -54,7 +54,7 @@ In a real project, the city's documents would exist and you would give them to B
 
 **How it works, in a few lines**
 
-What you built in this chapter is what the industry calls retrieval-augmented generation, RAG for short: the agent retrieves passages from documents and the language model generates the answer from them. In watsonx Orchestrate the process is as follows.
+What you build in this chapter is what the industry calls retrieval-augmented generation, RAG for short: the agent retrieves passages from documents and the language model generates the answer from them. In watsonx Orchestrate the process is as follows.
 
 - At import, each document is split into passages, and each passage is converted into a list of numbers that captures its meaning, called an embedding. An embedding model does the conversion; the built-in knowledge base uses an IBM model named `ibm/slate-125m-english-rtrvr-v2` unless you choose another. The passages and their embeddings are stored in a vector database that comes with the platform, Milvus. This is the indexing that made Bob wait.
 - At question time, the resident's question is converted the same way, the database returns the passages whose embeddings are closest to it, and the language model writes the answer from those passages. The agent named the document in its answers because its instructions asked for it; the passages themselves carry the document they came from.
@@ -242,7 +242,7 @@ Bob reports that the agent is deployed and tells you where residents can find it
 
 ## 5.10 Summary
 
-The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule and the document it came from. Bob wrote the documents, defined the knowledge base, waited for it to be ready, and changed the agent; you described the rules and approved the design.
+The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule and the document it came from. The documents, the knowledge base definition and the change to the agent are files in your project folder. You decided the rules and approved the design.
 
 - A knowledge base is a set of documents that the platform indexes and an agent searches. It is made of files, kept apart from the agent's instructions. An agent that answers this way is what the industry calls retrieval-augmented generation, RAG: when you hear that an agent "uses RAG", it has a knowledge base.
 - After the import, the platform needs a few minutes to index the documents. The knowledge base can be attached to an agent only when its status is ready.

@@ -6,7 +6,7 @@ Level: beginner. Time: about 45 minutes. Prerequisites: chapter 2 completed, cha
 
 Suppose that the street light outside your house has been dark for a week. It is seven in the evening and the city offices are closed. You open the website of the City of Utopia and type: "The street light on my street has been out for a week. Who do I tell?" A few seconds later you have the answer: the Roads and Infrastructure department, the address to write to, and the hours when someone answers the phone.
 
-That answer comes from the agent that you create in this chapter, the first agent of CivicPulse. It knows three city departments, what each one handles, and how to reach them. It also knows what to say when a resident asks about something that it was never told.
+That answer comes from the agent that you create in this chapter, the first agent of CivicPulse. It knows three city departments, what each one handles and how to reach them, and it knows what to say when a resident asks about something that it was never told.
 
 You create the agent in three steps, one in each of Bob's modes. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. Then you make the agent fail: you ask it for a detail that is missing from its facts, read the answer that it invents, and correct it. The correction shows a rule that the later chapters rely on: an agent knows only what it was told.
 
@@ -199,7 +199,7 @@ The file can contain other fields.
 
 Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
-Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. On the run behind this chapter, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
+Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. In the run, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
 
 ## 4.8 Meet your agent
 
@@ -239,7 +239,7 @@ Now ask the agent for something that its facts do not contain:
 Ask civic_info_agent: "What are the opening hours of Roads and Infrastructure?"
 ```
 
-The facts give no hours for this department. Inspect the answer. On the run behind this chapter, the agent replied with Monday to Friday 09:00 to 17:00, which are the hours of Permits and Planning. A language model fills a gap with the most plausible content, and the rule "never invent an answer" was written for questions outside the three departments and does not cover a missing detail inside one of them.
+The facts give no hours for this department. Inspect the answer. In the run, the agent replied with Monday to Friday 09:00 to 17:00, which are the hours of Permits and Planning. A language model fills a gap with the most plausible content, and the rule "never invent an answer" was written for questions outside the three departments and does not cover a missing detail inside one of them.
 
 Tell Bob what was wrong and how the agent must behave. Bob knows where the agent is defined; you do not need to name the file.
 

@@ -4,7 +4,7 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or 
 
 ## Overview
 
-Suppose that there is a pothole outside 18 Elm Street, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one. Reporting a pothole means writing a record into the city's service desk, and the service desk, like every real system, asks who is calling: it wants an API key with every request.
+A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one. Reporting a pothole means writing a record into the city's service desk, and the service desk, like every real system, asks who is calling: it wants an API key with every request.
 
 That key is the subject of this chapter. The agent needs it to report the pothole; nobody else should ever see it. Not the resident, not the chat, not the project folder in git, not the code of the tool, and not Bob. In watsonx Orchestrate, a credential like this lives in a connection: a named place on the instance where the key is stored, and from which a tool receives it at the moment it calls the service.
 

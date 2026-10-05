@@ -4,7 +4,7 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 5 completed, or 
 
 ## Overview
 
-Suppose that you applied for a building permit three weeks ago. You have a confirmation email with a number on it, PP-2026-0412, and nothing since. You ask CivicPulse: "Where is my permit application PP-2026-0412?" The agent of chapter 5 has the city's regulations in its knowledge base. It can tell you that a decision is given within 30 days, and that is all it can tell you, because it has never seen your application. Your file is in the city's permit system, not in a document.
+Three weeks ago you applied for a building permit. The confirmation email gives a number, PP-2026-0412, and nothing has arrived since. You ask CivicPulse: "Where is my permit application PP-2026-0412?" The agent of chapter 5 has the city's regulations in its knowledge base. It can tell you that a decision is given within 30 days, and that is all it can tell you, because it has never seen your application. Your file is in the city's permit system, not in a document.
 
 So far, the agent has answered from what it knows, and every answer was the same for every resident: the hours of a department, the rule for a shed. The answers in this chapter differ for every resident who asks. Residents want to know where their application is, whether their pothole report has been scheduled, and which day the grey bin is collected on their street. To answer, the agent must look up one record in one system, at the moment the question is asked.
 
@@ -59,7 +59,7 @@ An agent with tools makes choices, and watsonx Orchestrate lets you see them. Wi
 
 Mode: Ask, in a new conversation.
 
-The purpose of this prompt is the same as in chapters 4 and 5: before anything is written, Bob must understand what you want and tell you what it needs to know. This time the request is about things the agent must look up, and Bob needs to know what systems exist. None do, and the prompt says so.
+As in the two previous chapters, Bob must understand the request before it writes anything. This time the request is about things the agent must look up, and Bob needs to know what systems exist. None do, and the prompt says so.
 
 The prompt does not say the word tool. As in chapter 5, it describes what residents ask and where the answer is, and leaves the choice of the component to Bob. You know from 6.2 what the right choice is, so you can check Bob's proposal.
 
@@ -84,7 +84,7 @@ Read Bob's answer for four things:
 - The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
-Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports, three streets, with numbers and dates that this chapter uses from here to the end, so that your agent and every other reader's agent give the same answers. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet; Ask mode is still the right mode.
+Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports, three streets, with numbers and dates that this chapter uses from here to the end, so that your agent and every other reader's agent give the same answers. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
 
 ```
 These are my answers. Three Python tools: get_permit_status, which receives a
@@ -126,7 +126,7 @@ other systems is replaced by these tools. Answers from a tool stay within
 three sentences and end with the contact of the department, as before.
 ```
 
-Bob confirms the answers and, as in chapter 4, goes further. Read its answer for three things:
+Bob accepts the answers and again goes further than asked. Read its answer for three things:
 
 - The whole implementation is already there: the records in tables, the code of the three tools, the new paragraph of the instructions. Bob may even start as if it were going to write the files, and stop because Ask mode does not allow it.
 - The three descriptions, one sentence above each tool. "Look up the status of a building permit application by its permit number" is what the agent will read when it decides.
@@ -142,7 +142,7 @@ Three tools, three record files, a change to the agent and an import for each to
 Write the design for this change into design/city-services-tools-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary. Open the file and check that it contains the following:
+Bob requests approval, writes the file and summarises it. Check that the file contains the following:
 
 | Content | What to check |
 |---|---|
@@ -157,7 +157,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 
 Mode: Plan, same conversation.
 
-Read the design once. If something is missing or wrong, ask Bob to change it, as in chapter 4.
+Compare the design with the table in 6.4. If a tool, a record or a test is missing, ask Bob to change it in the same conversation.
 
 Check one point in particular: the design must say that each tool is uploaded together with its record file. If it does not, send:
 
@@ -176,10 +176,10 @@ Mode: Agent, in a new conversation.
 The design in @design/city-services-tools-design.md is approved. Build it.
 ```
 
-The @ mention tells Bob to read the design file. This is the first build with code in it. Bob:
+This is the first build with code in it. Bob:
 
 1. Writes the three record files, one CSV per kind of record.
-2. Writes the three tools, one Python file each, in the `tools` folder. Open one while Bob continues.
+2. Writes the three tools, one Python file each, in the `tools` folder. Open one of them while Bob continues.
 3. Imports the tools. Each one is packaged with its record file and uploaded; the instance checks the code and the description, and Bob corrects a file if the instance refuses it.
 4. Updates the agent: the three tools are attached, the instructions are extended, and the agent is imported again, replacing the agent in Draft.
 5. Tests the agent with the questions from the design and reports.
@@ -202,7 +202,7 @@ Open `permits.csv`, which has one line per application. The second line is PP-20
 
 Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three tool names. In the instructions, a new section says when to call each tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three tools. The facts and the knowledge base are still there, and Bob may have added starter prompts of its own for the new questions.
 
-Bob may have added files of its own, such as a requirements file or a test report. They are not part of the agent on the instance. Read them if you want to, or ignore them.
+The folder may also contain a requirements file or a test report. Bob added them for its own use; they are not part of the agent on the instance.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
@@ -224,7 +224,7 @@ Which day is the grey bin collected on Elm Street?
 
 The answers are, in order: under review with a decision due 12 October, a repair scheduled for 9 October, and Monday. Each answer ends with the department's contact, because the instructions ask for it.
 
-Then ask as residents do:
+Then try questions that test the limits of the tools:
 
 - Without a number: "Where is my permit application?" The agent asks for it.
 - With a number that does not exist: "Where is my permit application PP-2026-9999?" The agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
@@ -247,17 +247,17 @@ Read the same steps whenever an agent with tools answers wrongly. If it called t
 
 Mode: Agent, same conversation.
 
-The agent that looks up records exists in Draft. The agent deployed in Live still answers that a decision is given within 30 days. Deploy again:
+On the Developer Edition, skip this section. In Live, the agent still answers that a decision is given within 30 days; the agent in Draft looks up records. Send the deployment instruction again:
 
 ```
 Deploy civic_info_agent from draft to live.
 ```
 
-Bob reports that the agent is deployed. Go to the watsonx Orchestrate chat and ask about PP-2026-0412: the resident of the Overview now gets the status of their application. On the Developer Edition, skip this step.
+Bob confirms the deployment. Go to the watsonx Orchestrate chat and ask about PP-2026-0412: the resident of the Overview now gets the status of their application.
 
 ## 6.10 Summary
 
-The agent now gives answers that are different for every resident: the status of an application, the date of a repair, the collection day of a street. Bob wrote the records, the tools and the change to the agent; you described the lookups, fixed the records, and read the agent's reasoning for the first time.
+The agent now gives answers that are different for every resident: the status of an application, the date of a repair, the collection day of a street. You approved the design and supplied the records; the tools, the records and the new instructions are files in your project folder, and you have read the agent's reasoning.
 
 - A tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
 - The description and the parameter descriptions are written for the agent. The agent decides from them, so they are the first place to look when it decides wrongly.
