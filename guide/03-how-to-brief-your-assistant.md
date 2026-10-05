@@ -4,7 +4,7 @@ Level: beginner. Time: about 20 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-Bob can build an agent from a single sentence, and the result is rarely what you wanted. The quality of what Bob builds depends on how you work with it: which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
+Bob can build an agent from a single sentence, and the result is rarely what you wanted. What Bob builds depends on which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
 
 The workflow has three steps, one per Bob mode:
 
@@ -12,7 +12,7 @@ The workflow has three steps, one per Bob mode:
 - Plan mode, to obtain a design that you read and approve.
 - Agent mode, to build the agent from the approved design and test it.
 
-The chapter then describes the three kinds of prompt that the guide uses, with examples of weak and better prompts, and how to keep your work in git through Bob.
+The chapter then covers the three kinds of prompt, with weak and better examples, and git through Bob.
 
 What to read, depending on your experience:
 
@@ -24,9 +24,9 @@ What to read, depending on your experience:
 
 ## 3.1 Bob proposed workflow
 
-Bob is designed so that you do not supervise it line by line. You describe the problem and take the decisions. Bob writes the files, imports and tests them, and reports the result, including failures. Three recommendations follow from this design.
+You describe the problem and take the decisions; Bob writes the files, imports and tests them, and reports the result, including failures. Follow these practices when you work with Bob:
 
-- Plan first. Start new projects and complex features in Plan mode, so that a plan exists before anything is built. A plan prevents breaking changes and gives the work a clear direction.
+- Plan first. Start new projects and complex features in Plan mode, so that a plan exists before anything is built.
 - One task per conversation. Start a new conversation for each task, with a specific aim, and reference files with @ mentions instead of pasting their content. Before implementing a plan, start a new conversation, so that the planning discussion does not consume the context and Bob does not mix planning and implementation.
 - Approve according to risk. Three approval strategies are available: manual approval of every action, auto-approval of specific actions, and a hybrid that auto-approves low-risk actions and requires approval for the rest. Chapter 2 configured the hybrid.
 
@@ -54,7 +54,7 @@ Bob queries the instance, then answers with three parts: what it understood, a t
 
 Plan mode is for planning a task. Bob analyses the requirements, researches the project and designs the implementation steps. It can do everything that Ask mode allows, and it can also write files; it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
 
-In this guide, the plan is a design document written into the `design` folder. This document is what you approve before Bob builds.
+In this guide, the plan is a design document in the `design` folder, which you approve before Bob builds.
 
 Example, continued. In the same conversation, you switch to Plan mode and write:
 
@@ -66,7 +66,7 @@ Bob asks for approval to write the file, writes it, and shows a summary: what wa
 
 ### Agent mode
 
-Agent mode is for implementing an idea or a plan. In this mode, Bob has every capability: read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
+Agent mode is for implementing an idea or a plan. In this mode, Bob can read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
 
 In this guide, Agent mode is where Bob writes the definition and tool files, imports them, tests the agent, reads the agent's reasoning, corrects what failed, and reports.
 
@@ -80,7 +80,12 @@ Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, impor
 
 ### Switching modes
 
-You can switch modes in four ways: the mode dropdown at the bottom of the chat input; the shortcut `⌘ .` on a Mac or `Ctrl .` on Windows and Linux; accepting a switch that Bob proposes when a request requires another mode; and a switch that Bob performs itself during a task, which happens without a request only if Mode is switched on under the Permissions button. The commands `/ask`, `/plan` and `/agent`, typed in the chat, have the same effect as the dropdown.
+You can switch modes in four ways:
+
+- The mode dropdown at the bottom of the chat input, or the commands `/ask`, `/plan` and `/agent` typed in the chat.
+- The shortcut `⌘ .` on a Mac or `Ctrl .` on Windows and Linux.
+- Accepting a switch that Bob proposes when a request requires another mode.
+- A switch that Bob performs itself during a task, which happens without a request only if Mode is switched on under the Permissions button.
 
 The three modes as this guide uses them:
 
@@ -94,7 +99,7 @@ The three modes as this guide uses them:
 
 You approve twice in every agent project: the design, before Bob builds it, and the deployment, before an agent reaches its users.
 
-The design approval takes place between Plan mode and Agent mode. You approve a list: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the build order. If the list is not clear enough to explain to a colleague, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
+The design approval takes place between Plan mode and Agent mode. You approve a list: which agents exist and what each one is for, which tools each agent has, which external systems need a connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
 The deployment approval takes place when the agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
 
@@ -111,11 +116,11 @@ Bob revises the file and waits again. When the design is complete, you start a n
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the agent is visible to you and to nobody else.
+This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, only you can see the agent.
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings are not as chapter 2 describes. Go through the checklist in section 2.7.
 
-Between these two approvals, let Bob work. Approving every file in Agent mode removes the benefit of the mode. Two habits give you control instead: after an import, ask Bob to list the artifacts and confirm the new one is there, and when testing, ask for the reasoning and read it.
+Between these two approvals, let Bob work; approving every file in Agent mode slows the work without adding control. Two habits give control: after an import, ask Bob to list the artifacts and confirm that the new one is there; when testing, ask for the reasoning and read it.
 
 ## 3.3 The types of prompts
 
@@ -177,7 +182,7 @@ Use permit BP-2043 as the example instead.
 You changed the agent's name; put it back.
 ```
 
-Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file, a change to the last answer. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation. When requesting a file, the instruction "Return only the file" prevents an explanation that you do not need.
+Use an instruction for a single action whose expected result is obvious from the action itself: an import, a test run, an export, a file, a change to the last answer. Instructions that change the instance belong in Agent mode, where Bob asks for approval before the operation. When requesting a file, add "Return only the file", so that Bob returns the file without an explanation.
 
 For an action with several steps, or one whose result must be checked in a particular way, use a structured prompt. After many corrections in one conversation, Bob loses track of earlier constraints; in that case, start a new conversation with a complete prompt and references to the current files.
 
@@ -273,11 +278,11 @@ Two items in the project folder, both written by the watsonx Orchestrate ADK ext
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
-Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation, with the design file referenced. In long conversations, Bob loses track of constraints that it accepted earlier.
+Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation with the design file referenced, because in a long conversation Bob loses track of constraints that it accepted earlier.
 
 ## 3.6 Bob with Git
 
-The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them. You do not need to know the git command line: Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. When you do not specify a commit message, Bob writes one from the files that changed.
+The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them, and Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. When you do not specify a commit message, Bob writes one from the files that changed.
 
 The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
 
