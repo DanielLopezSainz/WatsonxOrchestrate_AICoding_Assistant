@@ -122,7 +122,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 Mode: Plan, same conversation.
 
-Read the design against the table in 7.4 and ask Bob to change what is missing. Check one point in particular: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
+Read the design against the table in 7.4 and ask Bob to change what is missing. The most likely gap is the Live environment: Bob tends to define the Connection for Draft only. If so, send `Define the connection for the Live environment as well, with the same kind and type.` Check one more point: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
 
 ## 7.6 Agent mode: build, set the credential, test
 
