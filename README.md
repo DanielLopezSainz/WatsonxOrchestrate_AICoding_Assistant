@@ -6,7 +6,7 @@ The guide builds CivicPulse, a citizen services platform for the fictional City 
 
 ## How this repository is organised
 
-To use this guide, clone this repository, open it in IBM Bob, and complete the setup steps in chapter 2. The repository is also the project folder you work in.
+To use this guide, clone this repository, which is also the project folder you work in, open it in IBM Bob, and complete the setup steps in chapter 2.
 
 - `guide/` contains the chapters, in reading order.
 - `walkthroughs/` contains the files that each chapter produces, and the starting state for the chapters that build on earlier ones.

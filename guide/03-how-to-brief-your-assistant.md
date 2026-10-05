@@ -4,7 +4,7 @@ Level: beginner. Time: about 20 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-Bob can build an agent from a single sentence, and the result is rarely what you wanted. What Bob builds depends on which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
+What Bob builds depends on which mode you use for each step, when you approve, and what you write in a prompt. This chapter describes the workflow that the guide follows in every later chapter, with one agent of the City of Utopia as the example throughout.
 
 The workflow has three steps, one per Bob mode:
 
@@ -12,7 +12,7 @@ The workflow has three steps, one per Bob mode:
 - Plan mode, to obtain a design that you read and approve.
 - Agent mode, to build the agent from the approved design and test it.
 
-The chapter then covers the three kinds of prompt, with weak and better examples, and git through Bob.
+Sections 3.3 and 3.4 cover the three kinds of prompt; section 3.6 covers git.
 
 What to read, depending on your experience:
 
@@ -26,17 +26,17 @@ What to read, depending on your experience:
 
 You describe the problem and take the decisions; Bob writes the files, imports and tests them, and reports the result, including failures. Follow these practices when you work with Bob:
 
-- Plan first. Start new projects and complex features in Plan mode, so that a plan exists before anything is built.
-- One task per conversation. Start a new conversation for each task, with a specific aim, and reference files with @ mentions instead of pasting their content. Before implementing a plan, start a new conversation, so that the planning discussion does not consume the context and Bob does not mix planning and implementation.
-- Approve according to risk. Three approval strategies are available: manual approval of every action, auto-approval of specific actions, and a hybrid that auto-approves low-risk actions and requires approval for the rest. Chapter 2 configured the hybrid.
+- Start new projects and complex features in Plan mode, so that a plan exists before anything is built.
+- Start a new conversation for each task, with a specific aim, and reference files with @ mentions instead of pasting their content. Before implementing a plan, start a new conversation, so that the planning discussion does not consume the context and Bob does not mix planning and implementation.
+- Approve according to risk. Three strategies are available: manual approval of every action, auto-approval of specific actions, and a hybrid that auto-approves low-risk actions and requires approval for the rest. Chapter 2 configured the hybrid.
 
-A mode determines what Bob is allowed to do in a conversation. Bob provides three modes.
+A mode determines what Bob is allowed to do in a conversation. Bob has three modes.
 
 ### Ask mode
 
 Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands. Use Ask mode when you need information without making changes.
 
-In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode, because Plan mode can write files and nothing should be written yet.
+In this guide, every agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode so that no file is written before the design is reviewed.
 
 Example. The same agent is used in all three modes below: an agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
@@ -118,13 +118,13 @@ The design in @design/civic-info-design.md is approved. Build it.
 
 This line is the design approval. Bob builds and tests the agent, and the agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, only you can see the agent.
 
-IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings are not as chapter 2 describes. Go through the checklist in section 2.7.
+IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 
-Between these two approvals, let Bob work; approving every file in Agent mode slows the work without adding control. Two habits give control: after an import, ask Bob to list the artifacts and confirm that the new one is there; when testing, ask for the reasoning and read it.
+Between these two approvals, Bob works without an approval for each file; approving every file in Agent mode slows the work without adding control. After each import, ask Bob to list the artifacts on the instance and confirm that the new one appears. When testing, ask for the reasoning and read it.
 
 ## 3.3 The types of prompts
 
-A prompt is the text that you type in the chat. There is no official classification of prompts. This guide distinguishes three kinds by what they ask Bob to do: a question asks for information, an instruction asks for one action, and a structured prompt describes a task with several parts and states how to check the result. The names are for this guide; Bob does not know them.
+A prompt is the text that you type in the chat. This guide distinguishes three kinds by what they ask Bob to do: a question asks for information, an instruction asks for one action, and a structured prompt describes a task with several parts and states how to check the result. The names are for this guide; Bob does not know them.
 
 The following practices apply to every prompt:
 
@@ -151,7 +151,7 @@ Name the file or the test that Bob must examine; otherwise, Bob answers from its
 
 ### Type 2: the instruction
 
-An instruction tells Bob to perform one action, in a plain imperative sentence. It is the most common prompt in daily use. It has three typical uses.
+An instruction tells Bob to perform one action, in a plain imperative sentence. It has three typical uses.
 
 To perform an action on the project or the instance:
 
@@ -188,7 +188,7 @@ For an action with several steps, or one whose result must be checked in a parti
 
 ### Type 3: the structured prompt
 
-A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer: Bob does not define them, none of their parts is mandatory, and Bob reads the content and ignores the labels. The same content can be written as labelled lines or as running text.
+A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer; Bob reads the content, whatever the labels. The same content can be written as labelled lines or as running text.
 
 To describe what you want at the start of an agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
 
@@ -244,7 +244,7 @@ Verify: the list of tools shows get_permit_status with permit_id in its input
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-Each part removes one reason for Bob to guess: Goal limits the work, Context names the data, Constraints preserve names and settings, Deliverable states what to return, Verify provides a repeatable check, and Stop defines when to ask. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when an approved design already states it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
+Each part removes one reason for Bob to guess. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when an approved design already states it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
 
 ## 3.4 Prompts, weak and better
 
@@ -261,7 +261,7 @@ The following table shows a weak prompt and a better prompt for the same situati
 | Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the agent's name, purpose and tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
 
-The better prompts have two properties in common: they name the real files, agents and data instead of describing them, and they state what Bob must return. With these two properties, the rest of the wording can be informal.
+The better prompts name the real files, agents and data instead of describing them, and they state what Bob must return.
 
 Prompts to avoid:
 
@@ -274,7 +274,7 @@ Prompts to avoid:
 
 ## 3.5 What Bob reads from the project folder
 
-Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. You do not edit either.
+Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. Neither file needs editing.
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
@@ -282,7 +282,7 @@ Use one conversation per task. Ask mode and Plan mode share one conversation, be
 
 ## 3.6 Bob with Git
 
-The files that Bob writes into the project folder, the designs and the definitions, are the result of your work. Git keeps every version of them, and Bob runs git for you. You describe the operation in a sentence, in Agent mode; Bob shows the git command it is about to run and asks for your approval; you approve. When you do not specify a commit message, Bob writes one from the files that changed.
+Git keeps every version of the files that Bob writes into the project folder, the designs and the definitions. Bob runs the git commands: you describe the operation in a sentence, in Agent mode, and Bob shows the command it is about to run and asks for your approval. When you do not specify a commit message, Bob writes one from the files that changed.
 
 The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
 
