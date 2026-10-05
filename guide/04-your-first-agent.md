@@ -49,7 +49,7 @@ This first prompt tells Bob about the project for the first time. Its purpose is
 
 Use Ask mode for this conversation: Bob can read your project and your instance, and cannot change anything.
 
-The prompt describes the agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob for three things in return. It is a structured prompt written as running text (chapter 3, type 3).
+The prompt is a structured prompt written as running text (chapter 3, type 3). It describes the agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob for three things in return.
 
 ```
 I would like to build an information agent for the residents of the City of
@@ -157,25 +157,25 @@ Mode: Agent, in a new conversation.
 
 In this step, Bob builds the agent from the approved design.
 
-Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Switching to Agent mode in the conversation you have been using would also work, but a new conversation is better.
+Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Do not switch to Agent mode in the conversation you have been using.
 
 In the current conversation, Bob has your request, its first proposal, the facts, a complete agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
 For an agent this small, the difference rarely shows. It matters from chapter 9 onwards, where a design covers four agents and the discussion behind it is long. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
 
-The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
+The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read.
 
 ```
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-The build takes Bob a minute or two. This is what Bob did in the run:
+The build takes Bob a minute or two. In the run, Bob:
 
-1. Bob read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
-2. Bob wrote the agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
-3. The agent was imported. It now exists on your instance, in the draft environment, where only you can use it.
-4. Bob sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and one of its own, a second question in the same conversation to check that the agent remembers the first. It reported each answer with its verdict; on the run, every test passed.
-5. Bob reported a table of the files it wrote, and a list of ways to try the agent yourself.
+1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
+2. Wrote the agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
+3. Imported it. The agent now exists on your instance, in Draft, where only you can use it.
+4. Sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and one of its own, a second question in the same conversation to check that the agent remembers the first. It reported each answer with its verdict; every test passed.
+5. Reported a table of the files it wrote, and a list of ways to try the agent yourself.
 
 ## 4.7 Read the definition
 
@@ -225,7 +225,7 @@ Read each answer with the facts of 4.2 next to you. For the first four, the righ
 
 Keep a note of any answer that contains something not in the facts. Section 4.9 shows what to do about it.
 
-The agent is in draft: you can use it, and residents cannot, until the end of the next section.
+The agent exists in Draft only: you can use it, and residents cannot, until the end of the next section.
 
 ## 4.9 Correct a wrong answer
 
@@ -272,9 +272,9 @@ A resident of Utopia can now ask who to tell about a dark street light and get t
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
-- An agent is defined by one file. Importing the file creates the agent in Draft; importing it again replaces the agent.
-- An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
-- An agent exists in Draft until you deploy it. Deploying puts the agent as it is in Draft into Live, the environment that users see.
+- One file defines the agent. Importing the file creates the agent in Draft; importing it again replaces the agent.
+- The instructions are all that the agent knows, so a wrong answer is corrected there.
+- Until you deploy, the agent exists in Draft only. Deploying puts the agent as it is in Draft into Live, the environment that users see.
 
 You built the first agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in about one hour and without writing code. Every agent in the rest of the guide is made the same way, and only the components change.
 
