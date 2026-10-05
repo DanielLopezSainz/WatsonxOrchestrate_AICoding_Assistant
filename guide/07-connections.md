@@ -73,8 +73,10 @@ These are my answers. Create the connection now: the real service desk will
 require an API key with every request, and the tool must send it from the
 start, so that only the address and the key change when the city gives
 access. The connection is named utopia_service_desk, shared by the whole team,
-with the key sent in the header x-api-key. The key must never appear in the
-chat, in the project files or in the tool's code; I will set it in watsonx
+with the key sent in the header x-api-key. For now the key is a test value
+that I invent, since the test service accepts anything, but it is stored and
+used exactly as the real key will be. The key must never appear in the chat,
+in the project files or in the tool's code; I will set it in watsonx
 Orchestrate myself.
 
 One tool, report_issue, which receives the street and a free-text description
