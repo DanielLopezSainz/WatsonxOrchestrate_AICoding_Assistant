@@ -46,15 +46,13 @@ The City of Utopia has no service desk, so this chapter uses a public test servi
 
 Mode: Ask, in a new conversation.
 
-The request has a new element, a service that needs a key, and the prompt says where the key must never appear. As before, Bob must understand the request before anything is written.
+The prompt describes what residents need and which system is involved, and says nothing about how that system is reached or secured. As before, Bob must understand the request before anything is written, and this time the question of credentials is Bob's to raise.
 
 ```
 I want civic_info_agent to report a road problem to the city's service desk
 when a resident asks it to, for example "There is a pothole outside 18 Elm
-Street. Can you report it?". The service desk is an external system reached
-over an API that requires an API key with every request. The key must never
-appear in the chat, in the project files or in the Tool's code. The City of
-Utopia has no service desk, so the public test service at
+Street. Can you report it?". The service desk is an external system, and the
+city has not given us access yet, so for now the public test service at
 https://postman-echo.com/post, which returns what it receives, stands in for
 it.
 
@@ -64,11 +62,11 @@ exists on my instance.
 
 Three things to find in Bob's answer:
 
-- How Bob keeps the key out of everything: it proposes a Connection on the instance, with the Tool reading the key from it at run time. Section 7.2 explains why.
+- The credential. Nobody mentioned one, and Bob raises it: the service desk will require an API key, the key must not be written in the code or the prompts, and an Orchestrate Connection is where the key is kept and handed to the Tool when it runs. Section 7.2 explains why. If your Bob does not raise it, the answer below does.
 - What it found on the instance: the Agent, the Knowledge Base, the three Tools, and no Connection.
-- Its questions: what the report contains, how the request number is made, what the Agent says back, and whether the Connection is shared or personal.
+- Its questions: the name, kind and scope of the Connection and the header for the key; the Tool's parameters; whether to generate a request number, since the test service returns none; what the Agent must collect before reporting and what it says on success and on failure.
 
-The second prompt answers them. It also names the Connection, so that the chapter and the walkthrough files agree.
+The second prompt answers them. It names the Connection and the header, so that the chapter and the walkthrough files agree.
 
 ```
 These are my answers. The connection is named utopia_service_desk, shared by
