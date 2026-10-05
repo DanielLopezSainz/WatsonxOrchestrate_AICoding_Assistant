@@ -2,29 +2,30 @@
 
 A training guide for people who want to create agents on IBM watsonx Orchestrate with IBM Bob, using Bob and the watsonx Orchestrate ADK extension as shipped. Other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps; chapter 2 says where their setup is documented.
 
-The chapters build one system, CivicPulse, the citizen services platform of the fictional City of Utopia, from a first question-answering agent to several agents working together, one component at a time. Each chapter states its level and prerequisites and gives a checkpoint, so readers with experience can start at the chapter they need.
+The guide builds CivicPulse, a citizen services platform for the fictional City of Utopia, starting with a single question-answering agent and ending with several agents working together. Each chapter lists its level, its prerequisites and a checkpoint. Follow the chapters in sequence, or begin at any chapter whose prerequisites you meet.
 
 ## How this repository is organised
 
-This repository is also the project folder you work in. Clone it, open it in Bob, and follow chapter 2 to connect it to your Orchestrate instance.
+To use this guide, clone this repository, open it in IBM Bob, and complete the setup steps in chapter 2. The repository is also the project folder you work in.
 
-- `guide/` the chapters, in reading order.
-- `walkthroughs/` the files each chapter produces, and the starting state for chapters that build on earlier ones.
-- The working folders, `agents`, `tools`, `connections`, `knowledge-bases`, `toolkits` and `models`, are created by the watsonx Orchestrate ADK extension when you initialise the folder in chapter 2; `design` is created by Bob when it writes the first design.
-- `.env.example` the two values chapter 2 asks you to keep in a local `.env` file, which git ignores.
+- `guide/` contains the chapters, in reading order.
+- `walkthroughs/` contains the files that each chapter produces, and the starting state for the chapters that build on earlier ones.
+- `agents/`, `tools/`, `connections/`, `knowledge-bases/`, `toolkits/` and `models/` are working folders, created by the watsonx Orchestrate ADK extension when you initialise the project in chapter 2.
+- `design/` is a working folder, created by Bob when it writes the first design.
+- `.env.example` is the model for the local `.env` file that chapter 2 asks you to create; git ignores `.env`.
 
 ## Where to start
 
-Read chapter 2 first if you want to see the assistant talk to your instance within half an hour. Read chapter 3 before building anything. It explains how the assistant is briefed in three phases.
+To connect your assistant to watsonx Orchestrate, start with chapter 2. Read chapter 3 before creating agents or tools; it defines the three-phase workflow that every later chapter follows.
 
-Chapters available so far:
+## Chapters
 
-- `guide/01-what-you-will-build.md`
-- `guide/02-connect-your-assistant.md`
-- `guide/03-how-to-brief-your-assistant.md`
-- `guide/04-your-first-agent.md`
-- `guide/05-knowledge-base.md`
-- `guide/06-tools.md`
+- [Chapter 1. What you will build](guide/01-what-you-will-build.md)
+- [Chapter 2. Connect your assistant](guide/02-connect-your-assistant.md)
+- [Chapter 3. How to brief your assistant](guide/03-how-to-brief-your-assistant.md)
+- [Chapter 4. Your first agent](guide/04-your-first-agent.md)
+- [Chapter 5. Adding a knowledge base (RAG)](guide/05-knowledge-base.md)
+- [Chapter 6. Adding tools](guide/06-tools.md)
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 
