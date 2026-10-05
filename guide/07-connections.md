@@ -24,11 +24,11 @@ Check that the tools are there: in Ask mode, ask `Which tools exist on my instan
 
 ## 7.2 What a connection is
 
-A tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the tool. The credential cannot, because a key written in the code is copied into git, into every copy of the project and into every chat that shows the file.
+A tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the tool. A key written in the code would be copied into git, into every copy of the project and into every chat that shows the file, so the credential is kept elsewhere.
 
 A connection is where watsonx Orchestrate keeps the credential instead. It has a name, the kind of credential (an API key, a user and password, a token, an OAuth login), the address of the service, and the credential itself. A tool names the connection it needs. When the agent calls the tool, the platform hands the tool the credential; the tool uses it and never stores it.
 
-**Two parts, two owners**
+**The definition and the credential**
 
 A connection is defined in a file, like an agent or a tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the connection, and you set the credential yourself in watsonx Orchestrate.
 
@@ -48,7 +48,7 @@ The City of Utopia has no service desk, so this chapter uses a public test servi
 
 Mode: Ask, in a new conversation.
 
-The purpose of this prompt is the same as in the earlier chapters: before anything is written, Bob must understand what you want and tell you what it needs to know. The request has a new element, a service that needs a key, and the prompt says what the key must never touch.
+The request has a new element, a service that needs a key, and the prompt says where the key must never appear. As before, Bob must understand the request before anything is written.
 
 ```
 I want civic_info_agent to report a road problem to the city's service desk
@@ -64,7 +64,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Read Bob's answer for three things:
+Three things to find in Bob's answer:
 
 - How Bob keeps the key out of everything: it proposes a connection on the instance, with the tool reading the key from it at run time. Section 7.2 explains why.
 - What it found on the instance: the agent, the knowledge base, the three tools, and no connection.
@@ -99,7 +99,7 @@ Mode: Plan, in the same conversation.
 Write the design for this change into design/report-issue-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary. Open the file and check that it contains the following:
+Bob writes the file after your approval and summarises it. Open it and check the following:
 
 | Content | What to check |
 |---|---|
@@ -114,7 +114,7 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 
 Mode: Plan, same conversation.
 
-Read the design once. If something is missing or wrong, ask Bob to change it, as in chapter 4. Check one point in particular: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design says what you mean, it is approved.
+Read the design against the table in 7.4 and ask Bob to change what is missing. Check one point in particular: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
 
 ## 7.6 Agent mode: build, set the credential, test
 
@@ -125,14 +125,14 @@ The design in @design/report-issue-design.md is approved. Build it. Stop
 before the tests and tell me when the connection is ready for its credential.
 ```
 
-The second sentence is new. Bob can build everything, but it cannot set the credential, because it must not have it. Bob:
+The second sentence is new: Bob builds everything except the credential, which it must not have. Bob:
 
 1. Writes the connection file in the `connections` folder and imports it, for Draft and for Live.
 2. Writes the tool in the `tools` folder and imports it, packaged with its folder.
 3. Updates the agent: the tool is attached, the instructions are extended, and the agent is imported again, replacing the agent in Draft.
 4. Stops and tells you that the connection `utopia_service_desk` is waiting for its credential.
 
-Now set it. Open your watsonx Orchestrate instance in the browser, go to the Connections page, and find `utopia_service_desk`. Enter the key for the Draft environment: any value you invent, for example a word and a number. Save it. Nothing in Bob's conversation has seen it.
+Open your watsonx Orchestrate instance in the browser, go to the Connections page, find `utopia_service_desk`, and enter the key for the Draft environment: any value you invent, for example a word and a number. Save it. The value never passes through Bob.
 
 Tell Bob to continue:
 
@@ -146,7 +146,7 @@ If the test fails with an authentication error, the credential was saved under t
 
 ## 7.7 What Bob built
 
-Open the `connections` folder in the File Explorer and the file `utopia_service_desk.yaml`. It is a few lines: the name, and for each environment, Draft and Live, the kind of credential, `api_key`, the header name, `x-api-key`, the address of the service, and the type, `team`. Read it twice: there is no key in it. This file can be shared with anyone.
+Open the `connections` folder in the File Explorer and the file `utopia_service_desk.yaml`. It is a few lines: the name, and for each environment, Draft and Live, the kind of credential, `api_key`, the header name, `x-api-key`, the address of the service, and the type, `team`. It contains no key, so it can be shared and committed.
 
 Open `tools/report_issue.py`. Two things are new compared with the tools of chapter 6. The `@tool` line names the connection the tool expects, `utopia_service_desk`. And near the top of the function, one line asks the platform for the credential, and the key arrives in a variable that the function uses in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
@@ -162,11 +162,11 @@ Ask the agent, through Bob with `Ask civic_info_agent:` in front, or in the prev
 There is a pothole outside 18 Elm Street. Can you report it?
 ```
 
-The agent reports it and answers with a request number in the RQ-2026 format, and says that the status can be checked with that number. Then ask as residents do:
+The agent reports it and answers with a request number in the RQ-2026 format, and says that the status can be checked with that number. Then try three more:
 
 - Without a street: "I want to report a broken street light." The agent asks where.
-- With everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." One report, one number.
-- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The agent looks it up with the chapter 6 tool and finds no record, because the test service keeps nothing. A real service desk would have the record, and the chapter 6 tool would find it. The agent says that it has no record under that number and gives the contact.
+- With everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." The agent makes one report and returns one number.
+- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The agent looks it up with the chapter 6 tool and finds no record, because the test service keeps nothing; a real service desk would have it. The agent answers that it has no record under that number and gives the contact.
 
 Ask the first question again with reasoning. The steps show the call to `report_issue` with the street and the description, and the tool's result with the request number. The key is not in the steps: the tool received it from the connection and did not return it.
 
@@ -182,11 +182,11 @@ In the Connections page of watsonx Orchestrate, enter the key for the Live envir
 Deploy civic_info_agent from draft to live.
 ```
 
-Bob reports that the agent is deployed. Go to the watsonx Orchestrate chat and report the pothole: the resident of the Overview gets a request number. On the Developer Edition, skip this step.
+When Bob reports the deployment, go to the watsonx Orchestrate chat and report the pothole: the resident of the Overview gets a request number. On the Developer Edition, skip this step.
 
 ## 7.10 Summary
 
-The agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. Bob wrote the tool, the connection and the change to the agent; you set the credential, in Draft and in Live, and Bob never saw it.
+The agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. You set the credential in watsonx Orchestrate, in Draft and in Live; it is the one thing in this chapter that is not a file in your project, and Bob never saw it.
 
 - A connection is where watsonx Orchestrate keeps a credential for a service. A tool names the connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
 - The connection is defined by the developer and imported with the project. The credential is set on the instance by the person who holds it, once per environment, Draft and Live.
