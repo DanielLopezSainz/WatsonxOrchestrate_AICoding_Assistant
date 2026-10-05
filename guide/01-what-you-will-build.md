@@ -65,14 +65,14 @@ The city, its departments, its residents and all its data are fictional. Three d
 |---|---|---|---|
 | 2 | Connect Bob to your watsonx Orchestrate instance | The instance and its environments | The extension, the views, the approvals |
 | 3 | Learn the working method | None | The Ask, Plan and Agent modes; prompts; git |
-| 4 | Create an agent that tells residents which department to contact, and deploy it in Live | Instructions and model; the Draft and Live environments | The three modes in sequence |
-| 5 | Give the agent the city's guides and regulations | Knowledge base | Bob writes the documents |
-| 6 | Let the agent look up the status of a request or a permit | Tools | Bob writes the tools; reading the agent's reasoning |
-| 7 | Let the agent report a new issue to the city service desk | Connections | Credentials kept out of the chat |
-| 8 | Add an address lookup provided by an external server | MCP toolkit | Bob's skill for building an MCP server |
-| 9 | Split the work between a front desk agent and one agent per department | Collaborator agents | Plan mode for a design with several agents |
-| 10 | Add a permit application that follows fixed steps | Flow | Agent mode on a build with several steps |
-| 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the web chat channel | The deployment approval |
+| 4 | Create an Orchestrate Agent that tells residents which department to contact, and deploy it in Live | Instructions and model; the Draft and Live environments | The three modes in sequence |
+| 5 | Give the agent the city's guides and regulations | Orchestrate Knowledge Base | Bob writes the documents |
+| 6 | Let the agent look up the status of a request or a permit | Orchestrate Tools | Bob writes the tools; reading the agent's reasoning |
+| 7 | Let the agent report a new issue to the city service desk | Orchestrate Connections | Credentials kept out of the chat |
+| 8 | Add an address lookup provided by an external server | Orchestrate Toolkit | Bob's skill for building an MCP server |
+| 9 | Split the work between a front desk agent and one agent per department | Collaborator Agents | Plan mode for a design with several agents |
+| 10 | Add a permit application that follows fixed steps | Orchestrate Flow | Agent mode on a build with several steps |
+| 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the Orchestrate Channel for web chat | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
 From chapter 4 onwards, each chapter opens with an overview that says what is built and whether you can skip it, states its prerequisites, lists its steps, and ends with questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
