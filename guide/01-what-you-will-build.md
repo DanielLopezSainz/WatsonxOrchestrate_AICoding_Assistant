@@ -6,7 +6,7 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 Creating an agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the agent must do. Bob writes the files, sends them to your instance, and tests the result.
 
-The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. In the last step, you put it on the city's website.
+The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, tools to look up data, a connection to the city's service desk, a team of specialised agents and a permit workflow. Chapter 11 puts it on the city's website.
 
 At the end of the guide, you have built:
 
@@ -49,7 +49,7 @@ Everything that you create is stored first in the Draft environment of the insta
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. Each component of an agent has a clear use in a city: regulations to search, a permit status to look up, a service desk to report to, departments to route between.
+The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The scenario gives every component of an agent a use: regulations to search, a permit status to look up, a service desk to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
 
@@ -60,8 +60,6 @@ The city, its departments, its residents and all its data are fictional. Three d
 | Waste and Recycling | Collection days, bulky item collection, recycling rules |
 
 ## 1.4 The chapters
-
-Chapters 2 and 3 prepare the work. Each of chapters 4 to 11 adds one component to CivicPulse, and chapter 12 is an exercise that uses all of them.
 
 | Chapter | What you do | Orchestrate component | Bob capability |
 |---|---|---|---|
@@ -77,4 +75,4 @@ Chapters 2 and 3 prepare the work. Each of chapters 4 to 11 adds one component t
 | 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the web chat channel | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
-From chapter 4 onwards, each chapter opens with an overview that says what is built and who can skip it, states its prerequisites, lists its steps, and ends with questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
+From chapter 4 onwards, each chapter opens with an overview that says what is built and whether you can skip it, states its prerequisites, lists its steps, and ends with questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
