@@ -93,7 +93,7 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and may propose to switch to Agent mode and create the agent at once. Do not switch yet; nothing has been created. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
+Bob confirms the answers and may propose to switch to Agent mode and create the agent at once. Do not switch yet; nothing has been created. The next step, in Plan mode, writes the design into a file that you approve.
 
 ## 4.3 Plan mode: write the design
 
@@ -137,7 +137,7 @@ question and the building permit question.
 
 Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the agent covers before typing, and the two starter prompts should be the two questions you asked for. A detail that is wrong in the design is wrong in the agent.
 
-When the design says what you mean, it is approved. The approval itself is the first line of the next section, so there is nothing more to send here.
+When the design says what you mean, it is approved. There is nothing to send: the approval is the first line of the prompt in 4.6.
 
 Two of the departments have opening hours and Roads and Infrastructure has none. The design does not say what the agent should do about that, and neither did you. Section 4.9 shows what the agent does with the gap.
 
@@ -161,7 +161,7 @@ Start a new conversation with the plus sign at the top of the chat panel, then s
 
 In the current conversation, Bob has your request, its first proposal, the facts, a complete agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
-For an agent this small, the difference would rarely show. From chapter 9 onwards, where a design covers four agents and the discussion behind it is long, it does. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
+For an agent this small, the difference rarely shows. It matters from chapter 9 onwards, where a design covers four agents and the discussion behind it is long. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
 
 The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read. It is an instruction (chapter 3, type 2).
 
@@ -169,7 +169,7 @@ The prompt has two sentences: the first approves the design and the second start
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-The build takes Bob a minute or two. From one approved document, Bob produces a working agent on your instance and tests it. This is what Bob did on the run behind this chapter:
+The build takes Bob a minute or two. This is what Bob did in the run:
 
 1. Bob read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
 2. Bob wrote the agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
@@ -197,7 +197,7 @@ The file can contain other fields.
 
 Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
-Read the file against the design. Bob writes the file from the design, and most of the time the two match, but not always. In the run, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
+Read the file against the design. The two usually match, but not always. In the run, the design named a display name, Utopia city information, and the file did not carry it, so the agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
 
 ## 4.8 Meet your agent
 
