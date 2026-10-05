@@ -8,7 +8,7 @@ Suppose that the street light outside your house has been dark for a week. It is
 
 That answer comes from the agent that you create in this chapter, the first agent of CivicPulse. It knows three city departments, what each one handles and how to reach them, and it knows what to say when a resident asks about something that it was never told.
 
-You create the agent in three steps, one in each of Bob's modes. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. Then you make the agent fail: you ask it for a detail that is missing from its facts, read the answer that it invents, and correct it. The correction shows a rule that the later chapters rely on: an agent knows only what it was told.
+You create the agent in three steps, one in each of Bob's modes. Bob asks you what it needs to know, writes a design for your approval, builds the agent, and tests it. Then you make the agent fail: you ask it for a detail that is missing from its facts, read the answer that it invents, and correct it.
 
 The agent is intentionally simple. It consists of:
 
@@ -45,7 +45,7 @@ If the list already contains `civic_info_agent`, someone has run this chapter on
 
 Mode: Ask, in a new conversation.
 
-This first prompt tells Bob about the project for the first time. Its purpose is to confirm that Bob has understood what you want and to let Bob say what it still needs to know before a single file exists. A misunderstanding found now takes one sentence to correct. After the build, it means building the agent again.
+This first prompt tells Bob about the project for the first time. Its purpose is to confirm that Bob has understood what you want and to let Bob say what it still needs to know before a single file exists. It is much easier to correct a misunderstanding now than after the agent is built.
 
 Use Ask mode for this conversation: Bob can read your project and your instance, and cannot change anything.
 
@@ -93,13 +93,13 @@ Name the agent civic_info_agent, with the display name "Utopia city information"
 Keep the facts in the agent's instructions. Do not use a knowledge base.
 ```
 
-Bob confirms the answers and often goes further: it can lay out the complete agent in the chat, with its definition and example answers, and suggest switching to Agent mode to create it at once. Do not switch to Agent mode yet; nothing has been created. At the end of this step, you and Bob agree on what the agent is. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
+Bob confirms the answers and may propose to switch to Agent mode and create the agent at once. Do not switch yet; nothing has been created. The next step writes the design into a file that you approve, in Plan mode, before anything is built.
 
 ## 4.3 Plan mode: write the design
 
 Mode: Plan, in the same conversation.
 
-You and Bob agree on what the agent must do. This step turns that agreement into a design: a document that states exactly what will be built, which you read and correct before anything is built.
+In Plan mode, in the same conversation, Bob writes a design document that defines the agent.
 
 Stay in the same conversation, so that Bob keeps everything that you have told it, and switch to Plan mode. The prompt is one line, an instruction (chapter 3, type 2).
 
@@ -126,7 +126,7 @@ Two entries in the description of the agent apply to every agent in this guide:
 
 Mode: Plan, same conversation.
 
-The design is a proposal, and this is the time to change it. A paragraph in a document changes with one prompt, whereas an agent that is already built has to be built again. Everything that you want built must be in the design before you approve it.
+The design is a proposal, and this is the time to change it. Changing the design takes one prompt. Changing the agent after the build takes much longer. Everything that you want built must be in the design before you approve it.
 
 The design has one gap: it does not say what a resident sees before typing a question. Request it:
 
@@ -145,7 +145,7 @@ Two of the departments have opening hours and Roads and Infrastructure has none.
 
 An instance has two environments. Draft is the builders' environment: an agent in Draft can be changed as often as you like, tested, corrected and imported again, and only the builders who work on the instance can reach it, from the Manage agents page, where a preview panel lets you chat with it. Live is the residents' environment: the agent deployed in Live is what residents find in the chat on the instance's landing page, and later on the city's website.
 
-When Bob imports the agent, or imports it again after a correction, it changes the agent in Draft. The agent in Live does not change until you deploy: one operation that takes the agent as it is in Draft and deploys it in Live. Until then, residents keep talking to the previous deployment, which is what you want: you test and repair in Draft, and no resident reaches an agent that is under repair. If a deployment turns out to be wrong, undeploying returns the agent in Live to its previous deployment.
+When Bob imports the agent, or imports it again after a correction, it changes the agent in Draft. The agent in Live does not change until you deploy: one operation that takes the agent as it is in Draft and deploys it in Live. Until then, residents keep talking to the previous deployment, so nobody meets an agent that is being repaired. If a deployment turns out to be wrong, undeploying returns the agent in Live to its previous deployment.
 
 Everything that Bob does in the next sections happens in Draft: the build imports the agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the agent in Live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full; here you perform it once.
 
@@ -179,7 +179,7 @@ The build takes Bob a minute or two. From one approved document, Bob produces a 
 
 ## 4.7 Read the definition
 
-The agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, this file was written by hand, field by field, from the product documentation; now Bob writes it from the design, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
+The agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, you had to write this file by hand. Now Bob writes it for you, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
 
 | Field | Purpose |
 |---|---|
@@ -213,7 +213,7 @@ Now talk to it. Bob tested it with the questions from the design; this time the 
 Ask civic_info_agent: "My recycling bin was not collected this morning. Who do I contact?"
 ```
 
-Then test it with questions written the way residents write. Residents do not write like a design document, and the agent should handle that:
+Residents will not write their questions as neatly as the design does. Try these:
 
 - The same question, written badly: "bin not collected today who do i call".
 - A question with two departments in it: "I want to build a garden shed and I also need to get rid of the old one. Who do I contact?"
@@ -250,7 +250,7 @@ display name "Utopia city information", as in the design. Import the agent
 again and ask it the same question.
 ```
 
-Bob changes the definition file, imports it again, and asks the question. It may also update the design with the new hours, which is correct: the design is meant to describe the agent as built. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent instead of creating a second one.
+Bob changes the definition file, imports it again, and asks the question. Bob may also add the new hours to the design, so that the design and the agent stay the same. The agent now answers with the hours. Importing a file with the name of an existing agent replaces that agent instead of creating a second one.
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The agent should now say that it does not have that information and give the department's contact.
 
@@ -268,7 +268,7 @@ From now on, the agent exists in both environments, and you need to know which o
 
 ## 4.10 Summary
 
-A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist an hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
+A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist one hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
@@ -276,6 +276,6 @@ A resident of Utopia can now ask who to tell about a dark street light and get t
 - An agent knows what its instructions say and nothing else. A wrong answer is corrected in the instructions.
 - An agent exists in Draft until you deploy it. Deploying puts the agent as it is in Draft into Live, the environment that users see.
 
-You built the first agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in under an hour and without writing code. Every agent in the rest of the guide is made the same way, and only the components change.
+You built the first agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in about one hour and without writing code. Every agent in the rest of the guide is made the same way, and only the components change.
 
-The agent knows twenty lines of facts, and a city has far more to say than that. A resident may ask whether a shed can be built without a permit, which bin a broken mirror goes in, or how loud a party may be after ten at night. The answers are in the city's guides and regulations, pages of them, and no agent instruction can hold them. In chapter 5, Bob writes those documents for the City of Utopia, and the agent gets them as a knowledge base: a set of documents that it searches when a resident asks, so that it answers from the regulations themselves and can say which document the answer came from.
+The agent knows twenty lines of facts, and a city has far more than that. Can a shed be built without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, and no agent instruction can hold pages like these. In chapter 5, Bob gives those documents to the agent as a knowledge base, and the agent answers from them and names the document.
