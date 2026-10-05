@@ -10,7 +10,7 @@ So far, the agent has answered from what it knows, and every answer was the same
 
 A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. You watch it decide by reading the agent's reasoning, the steps it took between the question and the answer.
 
-The component introduced in this chapter is the tool. Everything else stays as in chapter 5: one agent, its instructions, its knowledge base.
+This chapter introduces the tool. The agent, its instructions and its knowledge base stay as in chapter 5.
 
 Skip this chapter if you have already given an agent a Python tool with Bob. To continue with chapter 7 without building it, first make sure that the knowledge base of chapter 5 exists on your instance, then send Bob these instructions in Agent mode: `Import the three Python tools in walkthroughs/ch06/tools into my instance, each one packaged with its record file, then import walkthroughs/ch06/agents/civic_info_agent.yaml.`
 

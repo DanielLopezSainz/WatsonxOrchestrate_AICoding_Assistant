@@ -8,7 +8,7 @@ You want to build a garden shed and need to know whether it requires a permit. T
 
 In this chapter, the agent gets the city's guides and regulations: the building permit guide, the waste sorting rules and the noise ordinance. Bob writes the three documents for the City of Utopia, puts them into a knowledge base, and connects the agent to it. The agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
 
-The component introduced in this chapter is the knowledge base. Everything else stays as in chapter 4: one agent, the same facts in its instructions, no tools.
+This chapter introduces one new component, the knowledge base. The agent from chapter 4, its instructions and its facts are unchanged.
 
 Skip this chapter if you have already connected a knowledge base to an agent with Bob. To continue with chapter 6 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch05/knowledge-bases/city_regulations.yaml into my instance, wait until the knowledge base is ready, then import walkthroughs/ch05/agents/civic_info_agent.yaml.`
 
@@ -34,14 +34,14 @@ Where the information lives and who maintains it decides between the two. Instru
 - Already exists as documents, written and maintained by other people. The legal department updates the regulation and the HR team updates the handbook; the agent must follow without anyone touching its definition.
 - Must be quoted word for word. A resident who asks about a fee or a deadline wants the official wording and the document it comes from.
 
-Typical knowledge bases in real deployments: the policies and procedures of a company for an employee assistant; product documentation and troubleshooting guides for a support agent; contracts, terms and tariffs for a customer service agent; regulations and forms for a public service, like the City of Utopia. In all of them, the documents exist before the agent and keep changing after it is built.
+Typical knowledge bases in real deployments: the policies and procedures of a company for an employee assistant; product documentation and troubleshooting guides for a support agent; contracts, terms and tariffs for a customer service agent; regulations and forms for a public service, like the City of Utopia.
 
 Do not use a knowledge base for information about one person or one case, such as the status of a permit application or a customer's last order. That information lives in a system and changes by the minute; a tool fetches it (chapter 6).
 
 **What to know before building one**
 
 - Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A knowledge base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
-- Indexing takes time. After the import, the knowledge base is not ready at once; the platform processes the documents in the background, and an agent can use the knowledge base only when its status is ready. Bob checks the status for you.
+- Indexing takes time. After the import, the knowledge base is not ready at once; the platform processes the documents in the background, and an agent can use the knowledge base only when its status is ready. Bob checks the status during the build.
 - A knowledge base belongs to the whole instance. The agent in Draft and the agent deployed in Live search the same knowledge base, so a change to the documents reaches residents as soon as the platform has indexed it, without a deployment.
 - Updating a knowledge base is importing it again under the same name. When a regulation changes, you tell Bob what changed; Bob edits the text file and imports the knowledge base again, the platform re-indexes it, and the agents that use it need no change, because they refer to it by name. Adding or removing a document works the same way. The text files in the project folder are the only copy of the documents, since the instance does not give them back; keep them in git.
 - watsonx Orchestrate also has a feature called chat with documents, which lets a user attach a file to one conversation. It is not a knowledge base: the file is not indexed for other conversations, and this guide does not use it.
@@ -50,21 +50,21 @@ An agent uses a knowledge base when its definition names it. The agent's instruc
 
 **The documents of this chapter**
 
-The City of Utopia is fictional, so in this chapter you give Bob the rules and Bob writes the documents. With real documents, you would give them to Bob, and everything else, the knowledge base, the agent and the questions, works the same way.
+The City of Utopia is fictional. In this chapter, you supply the rules in the prompts and Bob writes the documents. With real documents, you supply the files instead; the knowledge base definition, the agent update and the tests follow the same steps.
 
 **How it works, in a few lines**
 
-This is retrieval-augmented generation, RAG for short: the agent retrieves passages from documents and the language model generates the answer from them. In watsonx Orchestrate it works as follows.
+This process is retrieval-augmented generation, RAG for short: the agent retrieves passages from documents and the language model generates the answer from them. In watsonx Orchestrate:
 
 - At import, each document is split into passages, and each passage is converted into a list of numbers that captures its meaning, called an embedding. An embedding model does the conversion; the built-in knowledge base uses an IBM model named `ibm/slate-125m-english-rtrvr-v2` unless you choose another. The passages and their embeddings are stored in a vector database that comes with the platform, Milvus.
-- At question time, the resident's question is converted the same way, the database returns the passages whose embeddings are closest to it, and the language model writes the answer from those passages. The agent named the document in its answers because its instructions asked for it; the passages themselves carry the document they came from.
+- At question time, the resident's question is converted the same way, and the database returns the passages whose embeddings are closest to it. The language model writes the answer from those passages. The agent named the document in its answers because its instructions asked for it; the passages themselves carry the document they came from.
 - The built-in database is one option. If your organisation already keeps its documents in Milvus, Elasticsearch, OpenSearch or Astra DB, a knowledge base can point at that index instead of importing files, and the agent uses it the same way.
 
 ## 5.3 Ask mode: describe the knowledge
 
 Mode: Ask, in a new conversation.
 
-As in chapter 4, Bob must understand the request before anything is written. This time the request has two parts, the documents and the change to the agent, and the documents do not exist yet: Bob writes them, so it needs to know what they must contain. The prompt says which documents the city needs, what each one covers, and the questions that residents must get answered.
+The request has two parts: the documents and the change to the agent. The documents do not exist yet; the prompt tells Bob what each one must contain and which questions residents must get answered.
 
 ```
 I want civic_info_agent to answer questions from the City of Utopia's guides
@@ -81,9 +81,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know from chapter 4. Its questions are about the format and tone of the documents, the kind of knowledge base, the numbers to use in the rules, and how the agent's instructions should change.
-
-Bob may end its answer with a set of suggested answers to click. They are Bob's own defaults, and some of them, such as Markdown for the documents, are not what this chapter needs. Do not click any of them; type the answer below instead.
+Bob queries the instance and answers with the three parts you know from chapter 4. Its questions cover the format and tone of the documents, the kind of knowledge base, the numbers for the rules, and how the agent's instructions should change. Bob may end with a row of suggested answers to click. They are its own defaults, and some, such as Markdown for the documents, do not match this chapter. Ignore them and type the answer below.
 
 The second prompt is your answer to Bob's questions. It gives Bob the content of the documents and your decisions, so that Bob can write the design in the next step. The rules in it are the facts of this chapter: everything that the agent answers about regulations must come from them.
 
@@ -151,13 +149,13 @@ Bob asks for approval to write the file, writes it, and shows a summary. Open th
 | The build order | Documents first, then the knowledge base, then wait for it to be ready, then the agent |
 | The tests | The three questions of the Overview at least, each with what a correct answer contains and which document it comes from |
 
-The agent must not be imported with a knowledge base that is not ready; the design should say so, and Bob should wait.
+Confirm that the design includes a wait before the agent is imported.
 
 ## 5.5 Approve the design
 
 Mode: Plan, same conversation.
 
-Read the design once. If a rule is missing or a test question is wrong, ask Bob to change it, as in chapter 4. When it says what you mean, it is approved: the approval is the first line of the next prompt.
+Read the design. If a rule is missing or a test question is wrong, ask Bob to change it. When the design is correct, it is approved; go to 5.6.
 
 ## 5.6 Agent mode: build and test
 
@@ -245,6 +243,6 @@ The agent can now answer from the city's regulations: a question about a shed, a
 - A knowledge base is a set of documents that the platform indexes and an agent searches. It is made of files, kept apart from the agent's instructions. An agent that answers this way uses retrieval-augmented generation, RAG.
 - After the import, the platform needs a few minutes to index the documents. The knowledge base can be attached to an agent only when its status is ready.
 - The agent's instructions decide when to search and what to say when the documents have no answer.
-- A knowledge base belongs to the instance. A change to its documents reaches the agent in Draft and the agent deployed in Live without a deployment, as soon as it is indexed.
+- A knowledge base belongs to the instance. Changes to its documents take effect as soon as the platform has indexed them again, for the agent in Draft and the agent in Live alike; no deployment is needed.
 
 The agent knows what the city has written down. It still cannot look anything up about a particular resident: whether their permit application has been approved, or when their street's bins are collected. That information is in the city's systems. In chapter 6, Bob gives the agent its first tools, and the answers start depending on who is asking.

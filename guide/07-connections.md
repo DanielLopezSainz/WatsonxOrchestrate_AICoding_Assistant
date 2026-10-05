@@ -10,7 +10,7 @@ The agent needs that key to report the pothole, and nobody else should see it: n
 
 In this chapter, Bob writes a tool that reports an issue to the service desk and a connection that holds the service desk's key. Bob never sees the key: you set it yourself, in watsonx Orchestrate, the way an operations team sets production credentials. Then the agent reports the pothole and gives the resident a request number.
 
-The component introduced in this chapter is the connection. The tool is of the kind you know from chapter 6, with one difference: it acts instead of reading.
+This chapter introduces the connection. The tool is of the kind you know from chapter 6, with one difference: it acts instead of reading.
 
 Skip this chapter if you have already given a tool a credential through a connection with Bob. To continue with chapter 8 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_service_desk.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, then import walkthroughs/ch07/agents/civic_info_agent.yaml.` Then set the credential of the connection as section 7.6 describes.
 
