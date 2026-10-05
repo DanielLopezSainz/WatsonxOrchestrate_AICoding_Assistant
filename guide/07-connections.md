@@ -51,12 +51,12 @@ The request has a new element, a service that needs a key, and the prompt says w
 ```
 I want civic_info_agent to report a road problem to the city's service desk
 when a resident asks it to, for example "There is a pothole outside 18 Elm
-Street. Can you report it?". The service desk is reached over an API that needs
-an API key with every request, and the key must never appear in the chat, in
-the project files or in the tool's code. The City of Utopia has no service desk:
-use the public test service at https://postman-echo.com/post, which returns
-what it receives, and treat a report as accepted when the service echoes the
-key header back.
+Street. Can you report it?". The service desk is an external system reached
+over an API that requires an API key with every request. The key must never
+appear in the chat, in the project files or in the Tool's code. The City of
+Utopia has no service desk, so the public test service at
+https://postman-echo.com/post, which returns what it receives, stands in for
+it.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -75,10 +75,11 @@ These are my answers. The connection is named utopia_service_desk, shared by
 the whole team, with the key sent in the header x-api-key. One tool,
 report_issue, which receives the street and a description of the problem,
 sends them to the service desk with the key from the connection, and returns a
-request number in the format RQ-2026-NNNN that the tool generates, since the
-test service returns none. If the service does not echo the key header back,
-the tool reports a failure and the agent says that the report could not be
-sent and gives the contact of Roads and Infrastructure.
+request number in the format RQ-2026-NNNN that the Tool generates, since the
+test service returns none. The Tool treats a report as accepted only if the
+service echoes the key header back; otherwise it reports a failure, and the
+Agent says that the report could not be sent and gives the contact of Roads
+and Infrastructure.
 
 The agent uses the tool when a resident asks to report a road problem. Before
 calling it, the agent makes sure it has the street and a description; it asks
