@@ -66,7 +66,7 @@ Three things to find in Bob's answer:
 - What it found on the instance: the Agent, the Knowledge Base, the three Tools, an empty `connections` folder, and the line in the Agent's instructions from chapter 4 that forbids creating requests, which Bob says must change.
 - Its questions: what the report contains, whether residents identify themselves, whether the Agent confirms the details before sending or sends at once, and what reference number to return, since the test service gives none.
 
-The second prompt answers them. It names the Connection and the header, so that the chapter and the walkthrough files agree.
+These are the questions that an integration engineer asks before connecting anything to an external system: how the system authenticates, what a request carries, and what happens when it fails. Bob asked them without being told that the service desk needs a key. The second prompt answers them, and names the Connection and the header, so that the chapter and the walkthrough files agree.
 
 ```
 These are my answers. Create the connection now: the real service desk will
