@@ -32,7 +32,7 @@ An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an 
 
 **One credential per environment**
 
-The credential is stored per environment: the Connection has one value for Draft and one for Live. You test in Draft with a test key; operations sets the production key in Live when the Agent is deployed. Deploying the Agent does not copy the credential; section 7.9 sets the Live value before the deployment.
+The credential is stored per environment: the Connection has one value for Draft and one for Live. You test in Draft with a test key; operations sets the production key in Live when the Agent is deployed. Deploying the Agent does not copy the credential. In this chapter, the Connection is defined for Draft first; section 7.9 adds the Live environment and its key before the deployment.
 
 **Shared or personal**
 
@@ -111,7 +111,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 | Content | What to check |
 |---|---|
-| The Connection | Its name, `utopia_service_desk`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft and for Live |
+| The Connection | Its name, `utopia_service_desk`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.9 |
 | The credential | The design says that the credential is set by you in watsonx Orchestrate, after the import, and that no file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
@@ -122,7 +122,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 Mode: Plan, same conversation.
 
-Read the design against the table in 7.4 and ask Bob to change what is missing. The most likely gap is the Live environment: Bob tends to define the Connection for Draft only. If so, send `Define the connection for the Live environment as well, with the same kind and type.` Check one more point: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
+Read the design against the table in 7.4 and ask Bob to change what is missing. Check one point in particular: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
 
 ## 7.6 Agent mode: build, set the credential, test
 
@@ -135,7 +135,7 @@ before the tests and tell me when the connection is ready for its credential.
 
 The second sentence is new: Bob builds everything except the credential, which it must not have. Bob:
 
-1. Writes the Connection file in the `connections` folder and imports it, for Draft and for Live.
+1. Writes the Connection file in the `connections` folder and imports it.
 2. Writes the Tool in the `tools` folder and imports it, packaged with its folder.
 3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
 4. Stops and tells you that the Connection `utopia_service_desk` is waiting for its credential.
@@ -154,7 +154,7 @@ If the test fails with an authentication error, the credential was saved under t
 
 ## 7.7 What Bob built
 
-Open the `connections` folder in the File Explorer and the file `utopia_service_desk.yaml`. It is a few lines: the name, and for each environment, Draft and Live, the kind of credential, `api_key`, the header name, `x-api-key`, the address of the service, and the type, `team`. It contains no key, so it can be shared and committed.
+Open the `connections` folder in the File Explorer and the file `utopia_service_desk.yaml`. It is a few lines: the name, and for the Draft environment, the kind of credential, an API key, the address of the service, and the type, `team`. It contains no key, so it can be shared and committed.
 
 Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_service_desk`. And near the top of the function, one line asks the platform for the credential, and the key arrives in a variable that the function uses in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
@@ -182,9 +182,16 @@ Ask the first question again with reasoning. The steps show the call to `report_
 
 Mode: Agent, same conversation.
 
-The Agent that reports issues exists in Draft, and the Connection has a credential for Draft only. The Agent deployed in Live would fail at the first report. In a company, operations sets the Live credential before the deployment; here you do it yourself.
+The Agent that reports issues exists in Draft, and the Connection exists for Draft only: deployed as it is, the Agent would fail at the first report. Going live takes three steps, in this order. In a company, the first two are done by operations; here you do them yourself.
 
-In the Connections page of watsonx Orchestrate, enter the key for the Live environment of `utopia_service_desk` and save it. Then:
+First, the Connection gets its Live environment. In Bob, Agent mode, same conversation:
+
+```
+Define the connection utopia_service_desk for the Live environment as well,
+with the same kind and type, and import it again.
+```
+
+Second, in the Connections page of watsonx Orchestrate, enter the key for the Live environment of `utopia_service_desk` and save it. Third, deploy:
 
 ```
 Deploy civic_info_agent from draft to live.
