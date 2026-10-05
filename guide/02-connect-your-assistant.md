@@ -4,15 +4,13 @@ Level: beginner. Time: about 30 minutes. Prerequisites: IBM Bob installed, and a
 
 ## Overview
 
-Before Bob can create anything in watsonx Orchestrate, it must be connected to your instance. IBM provides an extension for Bob that does most of this work: it installs the toolkit that Bob uses, connects Bob to the instance, and prepares the project folder. This chapter takes you through the installation step by step.
+Before Bob can create anything in watsonx Orchestrate, it must be connected to your instance. IBM provides an extension for Bob that installs the toolkit Bob uses, connects Bob to the instance, and prepares the project folder.
 
 At the end of the chapter:
 
 - The guide's repository is open in Bob as your project folder.
 - Bob is connected to your watsonx Orchestrate instance and can list what exists on it.
 - Bob reads from the instance without asking, and asks for your approval before any change.
-
-The installation is section 2.2. The sections after it explain what you installed and the views of Bob that the guide uses.
 
 Skip this chapter if every line of the checklist in section 2.7 is already true for the folder that you have open in Bob.
 
@@ -26,8 +24,6 @@ You need the following.
 | Git | Installed on your machine; Bob uses it to clone. You will not type git commands |
 | An Orchestrate instance | A SaaS tenant on IBM Cloud or AWS, or the Developer Edition running on your machine |
 | For a tenant: its URL and an API key | In the Orchestrate interface: your user icon, Settings, API details. The key is displayed only once. After cloning the repository (2.2, step 1), copy the URL and the key into a file named `.env` in the project folder, using `.env.example` as the model. Git ignores this file |
-
-The extension installs what it needs inside the project folder; no IBM software needs to be installed in advance.
 
 Do not paste the API key into a chat with Bob, and do not write it into any other file.
 
@@ -91,7 +87,7 @@ You should see: in Environment Manager, the dropdown reading your environment's 
 
 Step 6. Check that Bob reaches the two servers.
 
-The extension gave Bob two connections: the Orchestrate server, through which Bob acts on your instance, and the documentation server, through which it looks up IBM's documentation.
+Step 3 registered two MCP servers: `watsonx-orchestrate-adk`, which Bob uses to act on your instance, and `watsonx-orchestrate-adk-docs`, which it uses to search the Orchestrate documentation.
 
 1. Open Bob's settings with the settings icon in the Bob panel, then the MCP tab.
 2. Find the two entries `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`.
@@ -100,7 +96,7 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-By default, Bob asks for approval before every action, including each file that it reads and each query to your instance. This produces dozens of approval requests per chapter. With every action approved automatically, Bob could write files, run commands and remove agents without asking. With the following settings, Bob reads files and queries the instance without asking, and asks for approval before it changes a file or the instance. Section 2.5 describes the two settings in more detail.
+By default, Bob asks for approval before every action, which produces many interruptions per chapter. The following settings let Bob read files and query the instance without asking, and still require approval before any change. Section 2.5 explains both settings.
 
 1. Click the Permissions button, next to the mode dropdown at the bottom of the chat input. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
@@ -192,26 +188,22 @@ The following components appear by name in Bob's messages and in the MCP tab.
 | The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard protocol that coding assistants use to communicate with such programs |
 | IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and gives Bob a search over the Orchestrate documentation, so that Bob consults the documentation instead of relying on its general knowledge |
 
-Keep the following in mind throughout the guide.
-
 1. Bob works inside the cloned repository only. The Orchestrate server does not read or write outside the folder that was open when you initialised the workspace. Always open this folder in Bob.
-2. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. After that, every operation fails with an authentication error until you activate the environment again in the Environment Manager. If operations that worked earlier start to fail, check this first.
+2. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. After that, every operation fails with an authentication error until you activate the environment again in the Environment Manager.
 3. The ADK keeps one active environment per machine, and Bob and any other coding assistant on the machine use it. Switching the environment in the Environment Manager switches it for all of them. Chapter 11 is the only chapter that switches environments.
 
 ## 2.5 The approvals, explained
 
 Two settings determine when Bob asks for approval.
 
-- The Permissions button, next to the mode dropdown at the bottom of the chat input, opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands. Leave them off, so that Bob asks before either.
+- The Permissions button, next to the mode dropdown at the bottom of the chat input, opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands. Leave Edit and Execute off, so that Bob asks before writing files or running commands.
 - The Always allow switch on each operation in the MCP tab approves that operation permanently. Step 7 approved the eleven operations that only read from the instance or send a test message. Every other operation, such as importing, creating, removing or setting credentials, still requires approval.
 
 ## 2.6 Other AI coding assistants
 
-The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server. This guide covers Bob only.
+The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server. This guide covers Bob only; for other assistants, follow the instructions at that address.
 
 ## 2.7 Checklist
-
-Every line must be true before you continue.
 
 1. The folder open in Bob is the cloned repository, and it is the one you initialised.
 2. The `guide` folder is visible at the top level of that folder, next to the folders the extension created.
@@ -222,7 +214,7 @@ Every line must be true before you continue.
 
 ## 2.8 When something goes wrong
 
-The following failures occurred while this guide was prepared.
+Known failures and their fixes:
 
 | Bob reports | Cause | Fix |
 |---|---|---|
