@@ -1,4 +1,4 @@
-# Chapter 5. Adding a Knowledge Base (RAG)
+# Chapter 5. Adding an Orchestrate Knowledge Base (RAG)
 
 Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or its agent imported from the walkthrough folder as the chapter's Overview describes.
 
@@ -8,7 +8,7 @@ You want to build a garden shed and need to know whether it requires a permit. T
 
 In this chapter, the agent gets the city's guides and regulations: the building permit guide, the waste sorting rules and the noise ordinance. Bob writes the three documents for the City of Utopia, puts them into a knowledge base, and connects the agent to it. The agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
 
-This chapter introduces one new component, the knowledge base. The agent from chapter 4, its instructions and its facts are unchanged.
+This chapter introduces one new component, the Orchestrate Knowledge Base. The agent from chapter 4, its instructions and its facts are unchanged.
 
 Skip this chapter if you have already connected a knowledge base to an agent with Bob. To continue with chapter 6 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch05/knowledge-bases/city_regulations.yaml into my instance, wait until the knowledge base is ready, then import walkthroughs/ch05/agents/civic_info_agent.yaml.`
 
@@ -20,13 +20,13 @@ Skip this chapter if you have already connected a knowledge base to an agent wit
 
 Check that the agent is there: in Ask mode, ask `Which agents exist on my instance?` and confirm that `civic_info_agent` is listed.
 
-## 5.2 What a knowledge base is
+## 5.2 What an Orchestrate Knowledge Base is
 
-An agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year, and the people who write them never see the agent's instructions. For documents like these, the agent uses a knowledge base.
+An agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year, and the people who write them never see the agent's instructions. For documents like these, the agent uses an Orchestrate Knowledge Base.
 
-A knowledge base is a set of documents that watsonx Orchestrate indexes, so that an agent can search them. When a resident asks a question, the agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nothing is copied into the instructions.
+An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate indexes, so that an agent can search them. When a resident asks a question, the agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nothing is copied into the instructions.
 
-**When a knowledge base is the right component**
+**When an Orchestrate Knowledge Base is the right component**
 
 Where the information lives and who maintains it decides between the two. Instructions are right for a small, stable set of facts that the agent's builder owns, like the three departments of chapter 4. A knowledge base is right when the information:
 
@@ -189,7 +189,7 @@ Bob may also have added files of its own, such as import scripts or a test repor
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
-## 5.8 Ways to interact with watsonx Orchestrate agents
+## 5.8 Ways to interact with Orchestrate Agents
 
 There are two ways to talk to an agent.
 
@@ -240,9 +240,9 @@ Bob reports that the agent is deployed and tells you where residents can find it
 
 The agent can now answer from the city's regulations: a question about a shed, a mirror or a party gets the rule and the document it came from. The documents, the knowledge base definition and the change to the agent are files in your project folder.
 
-- A knowledge base is a set of documents that the platform indexes and an agent searches. It is made of files, kept apart from the agent's instructions. An agent that answers this way uses retrieval-augmented generation, RAG.
+- An Orchestrate Knowledge Base is a set of documents that the platform indexes and an agent searches. It is made of files, kept apart from the agent's instructions. An agent that answers this way uses retrieval-augmented generation, RAG.
 - After the import, the platform needs a few minutes to index the documents. The knowledge base can be attached to an agent only when its status is ready.
 - The agent's instructions decide when to search and what to say when the documents have no answer.
 - A knowledge base belongs to the instance. Changes to its documents take effect as soon as the platform has indexed them again, for the agent in Draft and the agent in Live alike; no deployment is needed.
 
-The agent knows what the city has written down. It still cannot look anything up about a particular resident: whether their permit application has been approved, or when their street's bins are collected. That information is in the city's systems. In chapter 6, Bob gives the agent its first tools, and the answers start depending on who is asking.
+The agent knows what the city has written down. It still cannot look anything up about a particular resident: whether their permit application has been approved, or when their street's bins are collected. That information is in the city's systems. In chapter 6, Bob gives the agent its first Orchestrate Tools, and the answers start depending on who is asking.

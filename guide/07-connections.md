@@ -1,4 +1,4 @@
-# Chapter 7. Reporting an issue: connections
+# Chapter 7. Reporting an issue: Orchestrate Connections
 
 Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or its tools and agent imported from the walkthrough folder as that chapter's Overview describes.
 
@@ -6,11 +6,9 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or 
 
 A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The agent of chapter 6 can tell you the status of a report that exists. It cannot create one. Reporting a pothole means writing a record into the city's service desk, and the service desk, like every real system, asks who is calling: it wants an API key with every request.
 
-The agent needs that key to report the pothole, and nobody else should see it: not the resident, not the chat, not the project folder in git, not the code of the tool, and not Bob. In watsonx Orchestrate, a credential like this lives in a connection: a named place on the instance where the key is stored, and from which a tool receives it at the moment it calls the service.
+In this chapter, Bob creates an Orchestrate Tool that reports the issue to the city's service desk. To report it, the agent sends the resident's data to an external system, a database or an application, through a tool of the kind you built in chapter 6. The address of that system and the credentials that it requires are not written in the tool: watsonx Orchestrate stores them in a separate asset, the Orchestrate Connection, and gives them to the tool when the agent calls it.
 
-In this chapter, Bob writes a tool that reports an issue to the service desk and a connection that holds the service desk's key. Bob never sees the key: you set it yourself, in watsonx Orchestrate, the way an operations team sets production credentials. Then the agent reports the pothole and gives the resident a request number.
-
-This chapter introduces the connection. The tool is of the kind you know from chapter 6, with one difference: it acts instead of reading.
+The Orchestrate Connection is the component introduced in this chapter. Bob writes the connection and the tool; the credential itself you set in watsonx Orchestrate, the way an operations team sets production credentials, so that it never passes through Bob. With Orchestrate Tools and Orchestrate Connections, the agent can update external systems, not only read them.
 
 Skip this chapter if you have already given a tool a credential through a connection with Bob. To continue with chapter 8 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_service_desk.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, then import walkthroughs/ch07/agents/civic_info_agent.yaml.` Then set the credential of the connection as section 7.6 describes.
 
@@ -22,15 +20,15 @@ Skip this chapter if you have already given a tool a credential through a connec
 
 Check that the tools are there: in Ask mode, ask `Which tools exist on my instance?` and confirm that `get_permit_status`, `get_request_status` and `get_collection_days` are listed.
 
-## 7.2 What a connection is
+## 7.2 What an Orchestrate Connection is
 
 A tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the tool. A key written in the code would be copied into git, into every copy of the project and into every chat that shows the file, so the credential is kept elsewhere.
 
-A connection is where watsonx Orchestrate keeps the credential instead. It has a name, the kind of credential (an API key, a user and password, a token, an OAuth login), the address of the service, and the credential itself. A tool names the connection it needs. When the agent calls the tool, the platform hands the tool the credential; the tool uses it and never stores it.
+An Orchestrate Connection is where watsonx Orchestrate keeps the credential instead. It has a name, the kind of credential (an API key, a user and password, a token, an OAuth login), the address of the service, and the credential itself. A tool names the connection it needs. When the agent calls the tool, the platform hands the tool the credential; the tool uses it and never stores it.
 
 **The definition and the credential**
 
-A connection is defined in a file, like an agent or a tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the connection, and you set the credential yourself in watsonx Orchestrate.
+An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the connection, and you set the credential yourself in watsonx Orchestrate.
 
 **One credential per environment**
 
@@ -188,9 +186,9 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and report t
 
 The agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. You set the credential in watsonx Orchestrate, in Draft and in Live; it is the one thing in this chapter that is not a file in your project, and Bob never saw it.
 
-- A connection is where watsonx Orchestrate keeps a credential for a service. A tool names the connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
+- An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A tool names the connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
 - The connection is defined by the developer and imported with the project. The credential is set on the instance by the person who holds it, once per environment, Draft and Live.
 - A connection is shared by the team, one credential for all users, or personal, one credential per user, asked for in the chat.
-- A tool that acts is built like a tool that reads: a function, a description, parameters, a result. The agent decides when to call it from the description and the question.
+- An Orchestrate Tool that acts is built like one that reads: a function, a description, parameters, a result. The agent decides when to call it from the description and the question.
 
-The agent now looks up records and creates them, with three Python tools that Bob wrote and that the city maintains. Many services come with their tools ready: an MCP server offers a set of tools that any agent can use, and watsonx Orchestrate can import the whole set at once as a toolkit. In chapter 8, Bob builds one, with a skill made for that, and the agent gets an address lookup from it.
+The agent now looks up records and creates them, with three Python tools that Bob wrote and that the city maintains. Many services come with their tools ready: an MCP server offers a set of tools that any agent can use, and watsonx Orchestrate can import the whole set at once as an Orchestrate Toolkit. In chapter 8, Bob builds one, with a skill made for that, and the agent gets an address lookup from it.

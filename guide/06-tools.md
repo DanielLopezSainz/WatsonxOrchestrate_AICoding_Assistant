@@ -1,4 +1,4 @@
-# Chapter 6. Adding tools
+# Chapter 6. Adding Orchestrate Tools
 
 Level: beginner. Time: about 60 minutes. Prerequisites: chapter 5 completed, or its agent and knowledge base imported from the walkthrough folder as that chapter's Overview describes.
 
@@ -8,9 +8,9 @@ Three weeks ago you applied for a building permit. The confirmation email gives 
 
 Every question that the agent of chapter 5 could answer had the same answer for every resident: the hours of a department, the rule for a shed. The questions in this chapter need answers that depend on the resident asking: the status of an application, the date of a repair, the collection day of a street. To answer, the agent must look up a record in the city's system when the question is asked.
 
-A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. Section 6.8 shows how to read the agent's reasoning and check these decisions.
+An Orchestrate Tool is how an agent fetches it. In this chapter, Bob writes three Orchestrate Tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. Section 6.8 shows how to read the agent's reasoning and check these decisions.
 
-This chapter introduces the tool. The agent, its instructions and its knowledge base stay as in chapter 5.
+This chapter introduces the Orchestrate Tool. The agent, its instructions and its knowledge base stay as in chapter 5.
 
 Skip this chapter if you have already given an agent a Python tool with Bob. To continue with chapter 7 without building it, first make sure that the knowledge base of chapter 5 exists on your instance, then send Bob these instructions in Agent mode: `Import the three Python tools in walkthroughs/ch06/tools into my instance, each one packaged with its record file, then import walkthroughs/ch06/agents/civic_info_agent.yaml.`
 
@@ -22,11 +22,11 @@ Skip this chapter if you have already given an agent a Python tool with Bob. To 
 
 Check that both are there: in Ask mode, ask `Which agents and knowledge bases exist on my instance?` and confirm that `civic_info_agent` and `city_regulations` are listed.
 
-## 6.2 What a tool is
+## 6.2 What an Orchestrate Tool is
 
-Instructions hold what the agent knows. A knowledge base holds what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. A tool is a function that the agent calls while it answers, to fetch information or to act.
+Instructions hold what the agent knows. A knowledge base holds what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. An Orchestrate Tool is a function that the agent calls while it answers, to fetch information or to act.
 
-In watsonx Orchestrate, a tool has three parts, and the agent uses each one in turn.
+An Orchestrate Tool has three parts, and the agent uses each one in turn.
 
 | Part | What it is | What the agent does with it |
 |---|---|---|
@@ -36,14 +36,14 @@ In watsonx Orchestrate, a tool has three parts, and the agent uses each one in t
 
 The agent calls a tool the way it searches the knowledge base: nobody tells it to. The model reads the question, the instructions and the descriptions of its tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit tool and contains a permit number, so the agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the agent asks for it. The agent decides only from the description and the parameter names.
 
-**Kinds of tools**
+**Kinds of Orchestrate Tools**
 
 | Kind | What it is | In this guide |
 |---|---|---|
 | Python tool | A Python function in a file, uploaded to the instance and run there | This chapter |
 | OpenAPI tool | An existing REST API, described by its OpenAPI file; no code to write | The alternative to a Python tool when the API already exists |
-| MCP toolkit | A set of tools served by an MCP server, like the one that Bob uses to talk to your instance | Chapter 8 |
-| Flow | A sequence of steps with tools and agents in it, which the agent calls as one tool | Chapter 10 |
+| Orchestrate Toolkit | A set of tools served by an MCP server, like the one that Bob uses to talk to your instance | Chapter 8 |
+| Orchestrate Flow | A sequence of steps with tools and agents in it, which the agent calls as one tool | Chapter 10 |
 
 A Python tool consists of a function, a description, parameters and a result, in one file. Section 6.7 describes the file.
 
@@ -257,9 +257,9 @@ Bob confirms the deployment. Go to the watsonx Orchestrate chat and ask about PP
 
 The agent now gives answers that are different for every resident: the status of an application, the date of a repair, the collection day of a street. You approved the design and supplied the records; the tools, the records and the new instructions are files in your project folder, and you have read the agent's reasoning.
 
-- A tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
+- An Orchestrate Tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
 - The description and the parameter descriptions are written for the agent. The agent decides from them, so they are the first place to look when it decides wrongly.
 - One answer can combine the sources: a tool for the resident's record, the knowledge base for the rule, the instructions for the contact.
 - The agent's reasoning shows the steps between the question and the answer, every tool call included. Ask Bob for it with the words "with reasoning", or open Show Reasoning next to an answer in watsonx Orchestrate.
 
-None of the three tools creates or changes a record. Chapter 7 adds a tool that creates a problem report through the city's service desk API, and introduces the connection, the place in watsonx Orchestrate where a tool's credentials are kept so that they never appear in code or in git.
+None of the three tools creates or changes a record. Chapter 7 adds a tool that creates a problem report through the city's service desk API, and introduces the Orchestrate Connection, the asset where a tool's credentials are kept so that they never appear in code or in git.

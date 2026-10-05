@@ -1,4 +1,4 @@
-# Chapter 4. Your first agent
+# Chapter 4. Your first Orchestrate Agent
 
 Level: beginner. Time: about 45 minutes. Prerequisites: chapter 2 completed, chapter 3 read or skipped according to its reading table.
 
@@ -12,12 +12,12 @@ You create the agent in three steps, one in each of Bob's modes. Bob asks you wh
 
 The agent is intentionally simple. It consists of:
 
-- One agent, `civic_info_agent`, defined in one file.
+- One Orchestrate Agent, `civic_info_agent`, defined in one file.
 - The default model of the instance.
 - About twenty lines of instructions: the facts about three departments, the tone, and what to answer when a question is outside those facts.
 - A welcome message and two starter prompts, shown before the resident types.
 
-It has no knowledge base, no tools and no connection to any other system, so every answer can be traced to its instructions. The other components are added from chapter 5 onwards; section 1.2 describes them.
+It has no Orchestrate Knowledge Base, no Orchestrate Tools and no Orchestrate Connection to any other system, so every answer can be traced to its instructions. The other components are added from chapter 5 onwards; section 1.2 describes them.
 
 Skip this chapter if you have already created an agent in watsonx Orchestrate with Bob. To continue with chapter 5 without building the agent, send Bob this instruction in Agent mode: `Import walkthroughs/ch04/agents/civic_info_agent.yaml into my instance.`
 
@@ -268,14 +268,14 @@ From now on, the agent exists in both environments, and you need to know which o
 
 ## 4.10 Summary
 
-A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist one hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every agent that follows:
+A resident of Utopia can now ask who to tell about a dark street light and get the right department, with its contact and its hours, from an agent that did not exist one hour ago. You wrote three prompts and one correction; Bob wrote everything else. Five things from this chapter apply to every Orchestrate Agent that follows:
 
 - An agent project goes through Bob's three modes: Ask mode to understand the request, Plan mode to write the design, Agent mode to build and test.
 - You approve the design before Bob builds, and anything that you want built must be in the design.
-- One file defines the agent. Importing the file creates the agent in Draft; importing it again replaces the agent.
+- One file defines an Orchestrate Agent. Importing the file creates the agent in Draft; importing it again replaces the agent.
 - The instructions are all that the agent knows, so a wrong answer is corrected there.
 - Until you deploy, the agent exists in Draft only. Deploying puts the agent as it is in Draft into Live, the environment that users see.
 
-You built the first agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in about one hour and without writing code. Every agent in the rest of the guide is made the same way, and only the components change.
+You built the first agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in about one hour and without writing code. Every Orchestrate Agent in the rest of the guide is made the same way, and only the components change.
 
-The agent knows twenty lines of facts, and a city has far more than that. Can a shed be built without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, and no agent instruction can hold pages like these. In chapter 5, Bob gives those documents to the agent as a knowledge base, and the agent answers from them and names the document.
+The agent knows twenty lines of facts, and a city has far more than that. Can a shed be built without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, and no agent instruction can hold pages like these. In chapter 5, Bob gives those documents to the agent as an Orchestrate Knowledge Base, and the agent answers from them and names the document.
