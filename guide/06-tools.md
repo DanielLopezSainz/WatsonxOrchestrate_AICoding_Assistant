@@ -4,11 +4,11 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 5 completed, or 
 
 ## Overview
 
-Three weeks ago you applied for a building permit. The confirmation email gives a number, PP-2026-0412, and nothing has arrived since. You ask CivicPulse: "Where is my permit application PP-2026-0412?" The agent of chapter 5 has the city's regulations in its knowledge base. It can tell you that a decision is given within 30 days, and that is all it can tell you, because it has never seen your application. Your file is in the city's permit system, not in a document.
+Three weeks ago you applied for a building permit. The confirmation email gives a number, PP-2026-0412, and nothing has arrived since. You ask CivicPulse: "Where is my permit application PP-2026-0412?" The agent of chapter 5 has the city's regulations in its knowledge base. It can tell you that a decision is given within 30 days, and nothing more, because it has never seen your application. Your file is in the city's permit system, not in a document.
 
-So far, the agent has answered from what it knows, and every answer was the same for every resident: the hours of a department, the rule for a shed. The answers in this chapter differ for every resident who asks. Residents want to know where their application is, whether their pothole report has been scheduled, and which day the grey bin is collected on their street. To answer, the agent must look up one record in one system, at the moment the question is asked.
+So far, the agent has answered from what it knows, and every answer was the same for every resident: the hours of a department, the rule for a shed. The questions in this chapter need answers that depend on the resident asking: the status of an application, the date of a repair, the collection day of a street. To answer, the agent must look up a record in the city's system when the question is asked.
 
-A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. You watch it decide by reading the agent's reasoning, the steps it took between the question and the answer.
+A tool is how an agent fetches it. In this chapter, Bob writes three tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the tools read, a few lines in a file for each. Then Bob connects the tools to the agent, and the agent decides, question by question, when to use one. Section 6.8 shows how to read the agent's reasoning and check these decisions.
 
 This chapter introduces the tool. The agent, its instructions and its knowledge base stay as in chapter 5.
 
@@ -24,7 +24,7 @@ Check that both are there: in Ask mode, ask `Which agents and knowledge bases ex
 
 ## 6.2 What a tool is
 
-Instructions hold what the agent knows. A knowledge base holds what the city has written down. Neither holds the status of your permit application, because that status changed this morning, in a system, and it is yours alone. A tool is a function that the agent can call to fetch information like this, or to act, while it answers.
+Instructions hold what the agent knows. A knowledge base holds what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. A tool is a function that the agent can call to fetch information like this, or to act, while it answers.
 
 In watsonx Orchestrate, a tool has three parts, and the agent uses each one in turn.
 
@@ -45,11 +45,11 @@ The agent calls a tool the way it searches the knowledge base: nobody tells it t
 | MCP toolkit | A set of tools served by an MCP server, like the one that Bob uses to talk to your instance | Chapter 8 |
 | Flow | A sequence of steps with tools and agents in it, which the agent calls as one tool | Chapter 10 |
 
-A Python tool is the simplest kind, and the one that shows best what a tool is: a function, a description, parameters and a result, in one file. Bob writes the file, and you read it in 6.7.
+A Python tool consists of a function, a description, parameters and a result, in one file. Bob writes the file, and you read it in 6.7.
 
 **The data of this chapter**
 
-In a real city, the permit tool would query the permit system, over its API, with a credential. The City of Utopia has no permit system. In this chapter, each tool reads its records from a small file that Bob writes and uploads together with the tool: ten applications, ten problem reports, the collection days of ten streets. The agent cannot tell the difference, and neither can the resident. Chapter 7 adds a tool that acts instead of reading, by calling a service that needs a key, and shows how the agent uses the key without ever seeing it.
+In a real city, the permit tool would query the permit system, over its API, with a credential. The City of Utopia has no permit system. In this chapter, each tool reads its records from a small file that Bob writes and uploads together with the tool: ten applications, ten problem reports, the collection days of ten streets. Nothing changes for the agent or for the resident. Chapter 7 adds a tool that acts instead of reading, by calling a service that needs a key, and shows how the agent uses the key without ever seeing it.
 
 **Reading the agent's reasoning**
 
@@ -59,9 +59,7 @@ An agent with tools makes choices, and watsonx Orchestrate lets you see them. Wi
 
 Mode: Ask, in a new conversation.
 
-As in the two previous chapters, Bob must understand the request before it writes anything. This time the request is about things the agent must look up, and Bob needs to know what systems exist. None do, and the prompt says so.
-
-The prompt does not say the word tool. As in chapter 5, it describes what residents ask and where the answer is, and leaves the choice of the component to Bob. You know from 6.2 what the right choice is, so you can check Bob's proposal.
+The prompt does not use the word tool: it describes what residents ask and where the answers are, and leaves the choice of the component to Bob. The city has no systems to query, and the prompt says so. The expected answer is a Python tool, as 6.2 describes.
 
 ```
 I want civic_info_agent to answer questions about one resident's own record,
@@ -84,7 +82,7 @@ Read Bob's answer for four things:
 - The line from chapter 4 that says the agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
-Residents of Utopia are about to get their first personal answers, and the records behind them do not exist yet. The second prompt creates them in words: three applications, three reports and three streets, with fixed numbers and dates, so that your agent gives the same answers as every other reader's agent. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
+The second prompt creates the records in words: three applications, three reports and three streets, with fixed numbers and dates, so that your agent gives the same answers as every other reader's agent. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
 
 ```
 These are my answers. Three Python tools: get_permit_status, which receives a
@@ -126,11 +124,11 @@ other systems is replaced by these tools. Answers from a tool stay within
 three sentences and end with the contact of the department, as before.
 ```
 
-Bob accepts the answers and again goes further than asked. Read its answer for three things:
+Bob's answer includes the full implementation. Read it for three things:
 
-- The whole implementation is already there: the records in tables, the code of the three tools, the new paragraph of the instructions. Bob may even start as if it were going to write the files, and stop because Ask mode does not allow it.
+- The records in tables, the code of the three tools, the new paragraph of the instructions. Bob may even start as if it were going to write the files, and stop because Ask mode does not allow it.
 - The three descriptions, one sentence above each tool. "Look up the status of a building permit application by its permit number" is what the agent will read when it decides.
-- The invitation to switch to Agent mode. Do not take it. Nothing has been created, and the next step turns this proposal into a design that you read and approve.
+- The invitation to switch to Agent mode. Do not switch to Agent mode yet; nothing has been created. Section 6.4 turns this proposal into a design that you read and approve.
 
 ## 6.4 Plan mode: write the design
 
@@ -179,12 +177,12 @@ The design in @design/city-services-tools-design.md is approved. Build it.
 This build includes code. Bob:
 
 1. Writes the three record files, one CSV per kind of record.
-2. Writes the three tools, one Python file each, in the `tools` folder. Open one of them while Bob continues.
+2. Writes the three tools, one Python file each, in the `tools` folder.
 3. Imports the tools. Each one is packaged with its record file and uploaded; the instance checks the code and the description, and Bob corrects a file if the instance refuses it.
 4. Updates the agent: the three tools are attached, the instructions are extended, and the agent is imported again, replacing the agent in Draft.
 5. Tests the agent with the questions from the design and reports.
 
-Approve each request as it comes. Bob's report may say that the agent is deployed. It is imported into Draft; deploying in Live is section 6.9.
+Approve each request as it comes. Bob's report may say that the agent is deployed. It is imported into Draft only; section 6.9 deploys it in Live.
 
 ## 6.7 What Bob built
 
@@ -196,7 +194,7 @@ Open `get_permit_status.py`. Near the bottom of the file is the function `get_pe
 - The text between triple quotes just under the function name. This is the description: one sentence on what the tool does, one line on the parameter, one line on the result. These are the words the agent reads when it decides whether to call the tool.
 - The parameter `permit_number`. The agent must find a value for it in the resident's question before it can call the tool.
 
-The rest of the file opens `permits.csv`, finds the line with that number, and returns it. If the city connects a real permit system, only this part changes.
+The rest of the file opens `permits.csv`, finds the line with that number, and returns it.
 
 Open `permits.csv`, which has one line per application. The second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
 
@@ -262,6 +260,6 @@ The agent now gives answers that are different for every resident: the status of
 - A tool is a function that the agent calls while it answers. The agent decides when to call it, from the tool's description and the question.
 - The description and the parameter descriptions are written for the agent. The agent decides from them, so they are the first place to look when it decides wrongly.
 - One answer can combine the sources: a tool for the resident's record, the knowledge base for the rule, the instructions for the contact.
-- The agent's reasoning shows the steps between the question and the answer, every tool call included. Ask Bob for it with the words "with reasoning", or open Show Reasoning next to an answer in watsonx Orchestrate. Read it to check an answer and to diagnose a wrong one.
+- The agent's reasoning shows the steps between the question and the answer, every tool call included. Ask Bob for it with the words "with reasoning", or open Show Reasoning next to an answer in watsonx Orchestrate.
 
-The three tools read records; none of them changes anything. The next thing residents ask for is to report a pothole, which none of these tools can do. That takes a tool that creates a record in the city's service desk, a service reached over an API with a key, and that key must never appear in a chat, in git or in a tool's code. In chapter 7, the agent gets a tool that reports an issue, and watsonx Orchestrate keeps the key for it: a connection.
+The three tools read records; none of them changes anything. The next thing residents ask for is to report a pothole, which none of these tools can do. That takes a tool that creates a record in the city's service desk, a service reached over an API with a key, and that key must never appear in a chat, in git or in a tool's code. Chapter 7 adds a tool that creates a record in the city's service desk through an API. It introduces the connection, the place where watsonx Orchestrate keeps the credentials that a tool needs.
