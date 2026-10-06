@@ -134,11 +134,12 @@ There is no prompt to send in this section unless the design needs a change. Rea
 Mode: Agent, in a new conversation.
 
 ```
-The design in @design/report-issue-design.md is approved. Build it. Stop
-before testing and tell me when the connection is ready for its credential.
+The design in @design/report-issue-design.md is approved. Build it, and stop
+when the connection is ready for its credential; I will set it and tell you
+to continue.
 ```
 
-The second sentence is new: Bob builds everything except the credential, which it must not have. Bob:
+The second sentence is new: Bob builds everything except the credential, which it must not have, and waits instead of testing an Agent whose Tool cannot work yet. Bob:
 
 1. Writes the Connection file in the `connections` folder and imports it.
 2. Writes the Tool in the `tools` folder and imports it, packaged with its folder.
