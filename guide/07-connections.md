@@ -141,7 +141,7 @@ In a terminal, from your project folder, after activating its Python environment
 orchestrate connections set-credentials -a utopia_service_desk --env draft --api-key <your-test-key>
 ```
 
-The command is what a deployment pipeline runs, with the key read from a vault. Both ways store the same thing; use the browser unless you are used to a terminal.
+The command is what a deployment pipeline runs, with the key read from a vault. Both ways store the same thing; use the browser unless you are used to a terminal. On the Developer Edition, only the command works: its interface does not manage credentials.
 
 The key for this chapter is a value you invent, a word and a number, because the test service accepts anything. Never type it in a chat with Bob, and never write it in a file of the project.
 
