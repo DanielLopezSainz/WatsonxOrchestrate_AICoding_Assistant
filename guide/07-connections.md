@@ -28,7 +28,7 @@ An Orchestrate Connection is where watsonx Orchestrate keeps the credential inst
 
 **The definition and the credential**
 
-An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and you set the credential yourself in watsonx Orchestrate.
+An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and you set the credential yourself, on the instance.
 
 **One credential per environment**
 
@@ -76,8 +76,8 @@ access. The connection is named utopia_service_desk, shared by the whole team,
 with the key sent in the header x-api-key. For now the key is a test value
 that I invent, since the test service accepts anything, but it is stored and
 used exactly as the real key will be. The key must never appear in the chat,
-in the project files or in the tool's code; I will set it in watsonx
-Orchestrate myself.
+in the project files or in the tool's code; I will set it on the instance
+myself.
 
 One tool, report_issue, which receives the street and a free-text description
 of the problem, with no category and no resident details, since reports are
@@ -118,7 +118,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 | Content | What to check |
 |---|---|
 | The Connection | Its name, `utopia_service_desk`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.10 |
-| The credential | The design says that the credential is set by you in watsonx Orchestrate, after the import, and that no file and no prompt contains it |
+| The credential | The design says that the credential is set by you, on the instance, after the import, and that no file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
 | The build order | Connection, Tool packaged with its folder, Agent; then the credential, set by you; then the test |
@@ -127,21 +127,17 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 Mode: Plan, same conversation.
 
-There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` If something else is missing, ask Bob to add it. When the design is correct, go to 7.7: its first prompt is the approval.
+There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set on the instance, not in a file.` If something else is missing, ask Bob to add it. When the design is correct, go to 7.7: its first prompt is the approval.
 
 ## 7.6 How the credential is set
 
-The Connection that Bob imports has a name and a kind but no key. Once it exists on the instance, you give it the key, for one environment at a time. Bob is not involved: this is the step that an operations team performs in a company, and it happens in one of two places.
-
-In watsonx Orchestrate, in the browser: open Manage, then Connections, select `utopia_service_desk`, choose the Draft environment, enter the API key and save. The value stays on the instance.
-
-In a terminal, from your project folder, after activating its Python environment with `source venv/bin/activate`, with the ADK command:
+The Connection that Bob imports has a name and a kind but no key. Once it exists on the instance, you give it the key, for one environment at a time, with one command of the ADK, typed in a terminal from your project folder after activating its Python environment with `source venv/bin/activate`:
 
 ```
 orchestrate connections set-credentials -a utopia_service_desk --env draft --api-key <your-test-key>
 ```
 
-The command is what a deployment pipeline runs, with the key read from a vault. Both ways store the same thing; use the browser unless you are used to a terminal. On the Developer Edition, only the command works: its interface does not manage credentials.
+Bob is not involved: this is the step that an operations team performs in a company, and the command is what a deployment pipeline runs, with the key read from a vault. The value goes to the instance and nowhere else. Some versions of the watsonx Orchestrate interface also offer a Connections page under Manage, where the same value can be entered for a team Connection; if yours has it, either way works.
 
 The key for this chapter is a value you invent, a word and a number, because the test service accepts anything. Never type it in a chat with Bob, and never write it in a file of the project.
 
@@ -161,7 +157,7 @@ The second sentence is new: Bob builds everything except the credential, which i
 2. Writes the Tool in the `tools` folder and updates the Agent: the Tool is attached and the instructions are extended.
 3. Stops and tells you that the Connection `utopia_service_desk` is waiting for its credential. Some runs import the Tool and the Agent before this stop, others after it; both work, because the Tool reads the key only when it is called.
 
-Set the Draft key as 7.6 describes, in the browser or in a terminal.
+Set the Draft key as 7.6 describes.
 
 Tell Bob to continue:
 
@@ -213,7 +209,7 @@ Define the connection utopia_service_desk for the Live environment as well,
 with the same kind and type, and import it again.
 ```
 
-Second, set the key for the Live environment, as in 7.6 but choosing Live (or `--env live`). Third, deploy:
+Second, set the key for the Live environment, with the command of 7.6 and `--env live`. Third, deploy:
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -223,7 +219,7 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and report t
 
 ## 7.11 Summary
 
-The Agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. You set the credential in watsonx Orchestrate, in Draft and in Live; it is the one thing in this chapter that is not a file in your project, and Bob never saw it.
+The Agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. You set the credential on the instance, in Draft and in Live; it is the one thing in this chapter that is not a file in your project, and Bob never saw it.
 
 - An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A Tool names the Connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
 - The Connection is defined by the developer and imported with the project. The credential is set on the instance by the person who holds it, once per environment, Draft and Live.
