@@ -101,7 +101,7 @@ Bob confirms the answers and lays out the implementation in the chat, as in chap
 
 - The Connection file has no key in it: a name, the kind of credential, the type `team`, the address of the service.
 - In the Tool, one line asks the platform for the key at run time, and the key goes into the request header and nowhere else.
-- Bob tells you that setting the key is your step, in a terminal or in watsonx Orchestrate, and never in the chat.
+- Bob tells you that setting the key is your step, with a command in a terminal, and never in the chat.
 
 Do not switch to Agent mode yet.
 
