@@ -28,7 +28,7 @@ An Orchestrate Connection is where watsonx Orchestrate keeps the credential inst
 
 **The definition and the credential**
 
-An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and you set the credential yourself, on the instance.
+An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and the key comes from your `.env` file, the file that chapter 2 created for secrets and that git ignores.
 
 **One credential per environment**
 
@@ -76,8 +76,9 @@ access. The connection is named utopia_service_desk, shared by the whole team,
 with the key sent in the header x-api-key. For now the key is a test value
 that I invent, since the test service accepts anything, but it is stored and
 used exactly as the real key will be. The key must never appear in the chat,
-in the project files or in the tool's code; I will set it on the instance
-myself.
+in the project files or in the tool's code. It is in my .env file, as the
+variable SERVICE_DESK_API_KEY, and the credential is set from that variable
+without displaying its value.
 
 One tool, report_issue, which receives the street and a free-text description
 of the problem, with no category and no resident details, since reports are
@@ -101,7 +102,7 @@ Bob confirms the answers and lays out the implementation in the chat, as in chap
 
 - The Connection file has no key in it: a name, the kind of credential, the type `team`, the address of the service.
 - In the Tool, one line asks the platform for the key at run time, and the key goes into the request header and nowhere else.
-- Bob tells you that setting the key is your step, with a command in a terminal, and never in the chat.
+- Bob sets the key from the variable in `.env`, with a command whose output does not show the value, and never asks you to paste it in the chat.
 
 Do not switch to Agent mode yet.
 
@@ -118,10 +119,10 @@ Bob writes the file after your approval and summarises it. Open it and check the
 | Content | What to check |
 |---|---|
 | The Connection | Its name, `utopia_service_desk`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.10 |
-| The credential | The design says that the credential is set by you, on the instance, after the import, and that no file and no prompt contains it |
+| The credential | The design says that the credential is set from the variable `SERVICE_DESK_API_KEY` in `.env`, after the import, without displaying it, and that no other file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
-| The build order | Connection, Tool packaged with its folder, Agent; then the credential, set by you; then the test |
+| The build order | Connection, Tool packaged with its folder, Agent, the credential from `.env`, then the test |
 
 ## 7.5 Approve the design
 
@@ -129,46 +130,37 @@ Mode: Plan, same conversation.
 
 There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set on the instance, not in a file.` If something else is missing, ask Bob to add it. When the design is correct, go to 7.7: its first prompt is the approval.
 
-## 7.6 How the credential is set
+## 7.6 Where the key comes from
 
-The Connection that Bob imports has a name and a kind but no key. Once it exists on the instance, you give it the key, for one environment at a time, with one command of the ADK, typed in a terminal from your project folder after activating its Python environment with `source venv/bin/activate`:
+The Connection that Bob imports has a name and a kind but no key. The key is yours to provide, and it must not pass through the chat. The guide keeps it where chapter 2 keeps the other secret of the project: the `.env` file in your project folder, which git ignores. Open `.env` and add one line, with a value you invent:
 
 ```
-orchestrate connections set-credentials -a utopia_service_desk --env draft --api-key <your-test-key>
+SERVICE_DESK_API_KEY=<a word and a number>
 ```
 
-Bob is not involved: this is the step that an operations team performs in a company, and the command is what a deployment pipeline runs, with the key read from a vault. The value goes to the instance and nowhere else. Some versions of the watsonx Orchestrate interface also offer a Connections page under Manage, where the same value can be entered for a team Connection; if yours has it, either way works.
-
-The key for this chapter is a value you invent, a word and a number, because the test service accepts anything. Never type it in a chat with Bob, and never write it in a file of the project.
+Bob sets the credential from that variable: it runs the ADK command that stores the key on the instance for one environment, and the shell fills in the value, so that the key appears neither in the conversation nor in any file of the project other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
 
 ## 7.7 Agent mode: build and test
 
 Mode: Agent, in a new conversation.
 
 ```
-The design in @design/report-issue-design.md is approved. Build it, and stop
-when the connection is ready for its credential; I will set it and tell you
-to continue.
-```
-
-The second sentence is new: Bob builds everything except the credential, which it must not have, and waits instead of testing an Agent whose Tool cannot work yet. Bob:
-
-1. Writes the Connection file in the `connections` folder and imports it.
-2. Writes the Tool in the `tools` folder and updates the Agent: the Tool is attached and the instructions are extended.
-3. Stops and tells you that the Connection `utopia_service_desk` is waiting for its credential. Some runs import the Tool and the Agent before this stop, others after it; both work, because the Tool reads the key only when it is called.
-
-Set the Draft key as 7.6 describes.
-
-Tell Bob to continue:
-
-```
-The Draft credential is set. Finish the build and test the agent with the
+The design in @design/report-issue-design.md is approved. Build it. Set the
+Draft credential of the connection from the variable SERVICE_DESK_API_KEY in
+my .env file, without displaying its value, then test the agent with the
 pothole report of the Overview.
 ```
 
-Bob imports what is left, asks the Agent to report the pothole, and reports the answer.
+The second sentence is new: it tells Bob where the key is and that the value must not be shown. Bob:
 
-If the test fails with an authentication error, the credential was saved under the wrong environment or the wrong Connection; check the page and run the test again. If it fails because the Tool could not read the Connection, the Tool's code names a different Connection than the one you set; Bob reads the error and corrects it.
+1. Writes the Connection file in the `connections` folder and imports it.
+2. Writes the Tool in the `tools` folder and imports it, packaged with its folder.
+3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
+4. Sets the Draft credential from `.env` and tests the Agent with the pothole report.
+
+Approve each request as it comes. Read the command that sets the credential when Bob asks for approval: it names the variable, not the value.
+
+If the test fails with an authentication error, the credential was saved under the wrong environment or the wrong Connection. If it fails because the Tool could not read the Connection, the Tool's code names a different Connection than the one that was imported. In both cases Bob reads the error and corrects it.
 
 ## 7.8 What Bob built
 
@@ -200,16 +192,18 @@ Ask the first question again with reasoning. The steps show the call to `report_
 
 Mode: Agent, same conversation.
 
-The Agent that reports issues exists in Draft, and the Connection exists for Draft only: deployed as it is, the Agent would fail at the first report. Going live takes three steps, in this order. In a company, the first two are done by operations; here you do them yourself.
+The Agent that reports issues exists in Draft, and the Connection exists for Draft only: deployed as it is, the Agent would fail at the first report. Going live takes two steps, in this order. In a company, the first is done by operations, with the production key; here it is Bob with your test key.
 
-First, the Connection gets its Live environment:
+First, the Connection gets its Live environment and its Live key:
 
 ```
 Define the connection utopia_service_desk for the Live environment as well,
-with the same kind and type, and import it again.
+with the same kind and type, import it again, and set its Live credential
+from the variable SERVICE_DESK_API_KEY in my .env file, without displaying
+its value.
 ```
 
-Second, set the key for the Live environment, with the command of 7.6 and `--env live`. Third, deploy:
+Second, deploy:
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -219,10 +213,10 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and report t
 
 ## 7.11 Summary
 
-The Agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. You set the credential on the instance, in Draft and in Live; it is the one thing in this chapter that is not a file in your project, and Bob never saw it.
+The Agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. The key lived in your `.env` file and on the instance, and nowhere else: not in the chat, not in git, not in the code.
 
 - An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A Tool names the Connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
-- The Connection is defined by the developer and imported with the project. The credential is set on the instance by the person who holds it, once per environment, Draft and Live.
+- The Connection is defined by the developer and imported with the project. The credential is set on the instance separately, once per environment, Draft and Live, from a place that git does not see.
 - A Connection is shared by the team, one credential for all users, or personal, one credential per user, asked for in the chat.
 - An Orchestrate Tool that acts is built like one that reads: a function, a description, parameters, a result. The Agent decides when to call it from the description and the question.
 
