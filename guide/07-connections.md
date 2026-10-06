@@ -158,20 +158,19 @@ to continue.
 The second sentence is new: Bob builds everything except the credential, which it must not have, and waits instead of testing an Agent whose Tool cannot work yet. Bob:
 
 1. Writes the Connection file in the `connections` folder and imports it.
-2. Writes the Tool in the `tools` folder and imports it, packaged with its folder.
-3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
-4. Stops and tells you that the Connection `utopia_service_desk` is waiting for its credential.
+2. Writes the Tool in the `tools` folder and updates the Agent: the Tool is attached and the instructions are extended.
+3. Stops and tells you that the Connection `utopia_service_desk` is waiting for its credential. Some runs import the Tool and the Agent before this stop, others after it; both work, because the Tool reads the key only when it is called.
 
 Set the Draft key as 7.6 describes, in the browser or in a terminal.
 
 Tell Bob to continue:
 
 ```
-The Draft credential is set. Test the agent with the pothole report of the
-Overview.
+The Draft credential is set. Finish the build and test the agent with the
+pothole report of the Overview.
 ```
 
-Bob asks the Agent to report the pothole and reports the answer.
+Bob imports what is left, asks the Agent to report the pothole, and reports the answer.
 
 If the test fails with an authentication error, the credential was saved under the wrong environment or the wrong Connection; check the page and run the test again. If it fails because the Tool could not read the Connection, the Tool's code names a different Connection than the one you set; Bob reads the error and corrects it.
 
