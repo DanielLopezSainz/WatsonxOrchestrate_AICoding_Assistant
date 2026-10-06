@@ -97,7 +97,13 @@ replaced by this tool. The facts, the knowledge base and the three lookup
 tools stay as they are.
 ```
 
-Bob confirms the answers and lays out the implementation in the chat, as in chapter 6: the Connection file, the Tool, the change to the Agent. Do not switch to Agent mode yet.
+Bob confirms the answers and lays out the implementation in the chat, as in chapter 6. Three things to check in it:
+
+- The Connection file has no key in it: a name, the kind of credential, the type `team`, the address of the service.
+- In the Tool, one line asks the platform for the key at run time, and the key goes into the request header and nowhere else.
+- Bob tells you that setting the key is your step, in a terminal or in watsonx Orchestrate, and never in the chat.
+
+Do not switch to Agent mode yet.
 
 ## 7.4 Plan mode: write the design
 
