@@ -127,7 +127,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 Mode: Plan, same conversation.
 
-Read the design against the table in 7.4 and ask Bob to change what is missing. Check one point in particular: the design must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` When the design is correct, it is approved.
+There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set in watsonx Orchestrate, not in a file.` If something else is missing, ask Bob to add it. When the design is correct, go to 7.6: its first prompt is the approval.
 
 ## 7.6 Agent mode: build, set the credential, test
 
