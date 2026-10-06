@@ -262,4 +262,4 @@ The Agent now gives answers that are different for every resident: the status of
 - One answer can combine the sources: a Tool for the resident's record, the Knowledge Base for the rule, the instructions for the contact.
 - The Agent's reasoning shows the steps between the question and the answer, every Tool call included. Ask Bob for it with the words "with reasoning", or open Show Reasoning next to an answer in watsonx Orchestrate.
 
-None of the three Tools creates or changes a record. Chapter 7 adds a Tool that creates a problem report through the city's service desk API, and introduces the Orchestrate Connection, the asset where a Tool's credentials are kept so that they never appear in code or in git.
+None of the three Tools creates or changes a record. Chapter 7 adds a Tool that creates a problem report through the API of the city's 311 Call Center, and introduces the Orchestrate Connection, the asset where a Tool's credentials are kept so that they never appear in code or in git.
