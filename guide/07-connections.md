@@ -135,7 +135,7 @@ The Connection that Bob imports has a name and a kind but no key. Once it exists
 
 In watsonx Orchestrate, in the browser: open Manage, then Connections, select `utopia_service_desk`, choose the Draft environment, enter the API key and save. The value stays on the instance.
 
-In a terminal, from your project folder, with the ADK command:
+In a terminal, from your project folder, after activating its Python environment with `source venv/bin/activate`, with the ADK command:
 
 ```
 orchestrate connections set-credentials -a utopia_service_desk --env draft --api-key <your-test-key>
