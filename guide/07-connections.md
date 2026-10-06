@@ -121,8 +121,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 | The credential | The design says that the credential is set by you in watsonx Orchestrate, after the import, and that no file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
-| The build order | Connection, Tool packaged with its folder, Agent; then the credential, set by you; then the tests |
-| The tests | The pothole report of the Overview at least, with what the Agent must answer |
+| The build order | Connection, Tool packaged with its folder, Agent; then the credential, set by you; then the test |
 
 ## 7.5 Approve the design
 
@@ -136,7 +135,7 @@ Mode: Agent, in a new conversation.
 
 ```
 The design in @design/report-issue-design.md is approved. Build it. Stop
-before the tests and tell me when the connection is ready for its credential.
+before testing and tell me when the connection is ready for its credential.
 ```
 
 The second sentence is new: Bob builds everything except the credential, which it must not have. Bob:
@@ -151,10 +150,11 @@ Open your watsonx Orchestrate instance in the browser, go to the Connections pag
 Tell Bob to continue:
 
 ```
-The Draft credential is set. Run the tests.
+The Draft credential is set. Test the agent with the pothole report of the
+Overview.
 ```
 
-Bob asks the Agent to report the pothole of the Overview and reports the answer.
+Bob asks the Agent to report the pothole and reports the answer.
 
 If the test fails with an authentication error, the credential was saved under the wrong environment or the wrong Connection; check the page and run the test again. If it fails because the Tool could not read the Connection, the Tool's code names a different Connection than the one you set; Bob reads the error and corrects it.
 
