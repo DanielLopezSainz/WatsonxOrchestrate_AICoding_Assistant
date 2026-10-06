@@ -6,11 +6,11 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 6 completed, or 
 
 A pothole outside 18 Elm Street has been there for a month, and you are the resident who hits it every morning. You ask CivicPulse: "There is a pothole outside 18 Elm Street. Can you report it?" The Agent of chapter 6 can tell you the status of a report that exists. It cannot create one.
 
-In this chapter, Bob creates an Orchestrate Tool that sends reports to the city's service desk. The Orchestrate Agent sends the resident's data to an external system, a database or an application, using an Orchestrate Tool (you built one in chapter 6). The address of that external system and the credentials that it requires are not written in the Tool: watsonx Orchestrate stores them in a separate asset, the Orchestrate Connection, and gives them to the Tool when the Agent calls it.
+In this chapter, Bob creates an Orchestrate Tool that sends reports to the city's 311 Call Center, the office that North American cities reach by dialling 311 and that turns every resident's report into a numbered service request. The Orchestrate Agent sends the resident's data to an external system, a database or an application, using an Orchestrate Tool (you built one in chapter 6). The address of that external system and the credentials that it requires are not written in the Tool: watsonx Orchestrate stores them in a separate asset, the Orchestrate Connection, and gives them to the Tool when the Agent calls it.
 
 The Orchestrate Connection is the component introduced in this chapter. Bob creates both the Orchestrate Connection and the Orchestrate Tool. With Orchestrate Tools and Orchestrate Connections, the Agent can update external systems, not only read them.
 
-Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_service_desk.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, import walkthroughs/ch07/agents/civic_info_agent.yaml, and set the Draft credential of the connection from the variable SERVICE_DESK_API_KEY in my .env file without displaying its value.`
+Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_311.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, import walkthroughs/ch07/agents/civic_info_agent.yaml, and set the Draft credential of the connection from the variable UTOPIA_311_API_KEY in my .env file without displaying its value.`
 
 ## 7.1 Before you start
 
@@ -38,11 +38,11 @@ The credential is stored per environment: the Connection has one value for Draft
 
 **Shared or personal**
 
-A Connection is either shared by everyone, `team`, with one credential that an administrator sets, or personal, `member`, where each user is asked for their own credential in the chat the first time. The city's service desk account is shared, so the Connection of this chapter is a team Connection.
+A Connection is either shared by everyone, `team`, with one credential that an administrator sets, or personal, `member`, where each user is asked for their own credential in the chat the first time. The city's 311 Call Center account is shared, so the Connection of this chapter is a team Connection.
 
-**The service desk of this chapter**
+**The 311 Call Center of this chapter**
 
-The City of Utopia has no service desk, so this chapter uses a public test service, Postman Echo, which answers every request by sending back what it received, including the headers. The mechanism is the same as with a real service desk: the Tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key is a value you invent. A real service desk would also return a request number; the test service does not, so the Tool creates one in the format of chapter 6.
+The City of Utopia has no 311 system, so this chapter uses a public test service, Postman Echo, which answers every request by sending back what it received, including the headers. The mechanism is the same as with a real 311 system: the Tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key is a value you invent. A real 311 system would also return a request number; the test service does not, so the Tool creates one in the format of chapter 6.
 
 ## 7.3 Ask mode: describe the report
 
@@ -51,9 +51,9 @@ Mode: Ask, in a new conversation.
 The prompt describes what residents need and which system is involved, and says nothing about how that system is reached or secured. As before, Bob must understand the request before anything is written, and this time the question of credentials is Bob's to raise.
 
 ```
-I want civic_info_agent to report a road problem to the city's service desk
+I want civic_info_agent to report a road problem to the 311 Call Center
 when a resident asks it to, for example "There is a pothole outside 18 Elm
-Street. Can you report it?". The service desk is an external system, and the
+Street. Can you report it?". The 311 Call Center is an external system, and the
 city has not given us access yet, so for now the public test service at
 https://postman-echo.com/post, which returns what it receives, stands in for
 it.
@@ -64,27 +64,27 @@ exists on my instance.
 
 Three things to find in Bob's answer:
 
-- The Connection. Nobody mentioned credentials, and Bob raises them: the test service needs none, but the real service desk will need an address and an API key, so Bob asks whether to create a Connection now, so that the Tool is wired correctly when the city gives access. Section 7.2 explains what a Connection is. If your Bob does not raise it, the answer below does.
+- The Connection. Nobody mentioned credentials, and Bob raises them: the test service needs none, but the real 311 system will need an address and an API key, so Bob asks whether to create a Connection now, so that the Tool is wired correctly when the city gives access. Section 7.2 explains what a Connection is. If your Bob does not raise it, the answer below does.
 - What it found on the instance: the Agent, the Knowledge Base, the three Tools, an empty `connections` folder, and no Connection of the project; the instance only has the built-in Connections of the platform, for products such as Salesforce or ServiceNow. Bob also finds the line in the Agent's instructions from chapter 4 that forbids creating requests, and says that it must change.
-- Its questions, which vary from one run to another: what the report contains, as free text or from a fixed list of problem types, and whether residents identify themselves; what the Agent says back, and what reference number it gives, since the test service returns none; whether the Agent confirms the details before sending; and how the real service desk authenticates.
+- Its questions, which vary from one run to another: what the report contains, as free text or from a fixed list of problem types, and whether residents identify themselves; what the Agent says back, and what reference number it gives, since the test service returns none; whether the Agent confirms the details before sending; and how the real 311 system authenticates.
 
-These are the questions that an integration engineer asks before connecting anything to an external system: how the system authenticates, what a request carries, and what happens when it fails. Bob asked them without being told that the service desk needs a key. The second prompt answers them, and names the Connection and the header, so that the chapter and the walkthrough files agree.
+These are the questions that an integration engineer asks before connecting anything to an external system: how the system authenticates, what a request carries, and what happens when it fails. Bob asked them without being told that the 311 Call Center needs a key. The second prompt answers them, and names the Connection and the header, so that the chapter and the walkthrough files agree.
 
 ```
-These are my answers. Create the connection now: the real service desk will
+These are my answers. Create the connection now: the real 311 system will
 require an API key with every request, and the tool must send it from the
 start, so that only the address and the key change when the city gives
-access. The connection is named utopia_service_desk, shared by the whole team,
+access. The connection is named utopia_311, shared by the whole team,
 with the key sent in the header x-api-key. For now the key is a test value
 that I invent, since the test service accepts anything, but it is stored and
 used exactly as the real key will be. The key must never appear in the chat,
 in the project files or in the tool's code. It is in my .env file, as the
-variable SERVICE_DESK_API_KEY, and the credential is set from that variable
+variable UTOPIA_311_API_KEY, and the credential is set from that variable
 without displaying its value.
 
 One tool, report_issue, which receives the street and a free-text description
 of the problem, with no category and no resident details, since reports are
-anonymous. It sends them to the service desk with the key from the connection
+anonymous. It sends them to the 311 Call Center with the key from the connection
 and returns a request number in the format RQ-2026-NNNN that the tool
 generates, since the test service returns none. The tool treats a report as
 accepted only if the service echoes the key header back; otherwise it reports
@@ -120,8 +120,8 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 | Content | What to check |
 |---|---|
-| The Connection | Its name, `utopia_service_desk`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.10 |
-| The credential | The design says that the credential is set from the variable `SERVICE_DESK_API_KEY` in `.env`, after the import, without displaying it, and that no other file and no prompt contains it |
+| The Connection | Its name, `utopia_311`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.10 |
+| The credential | The design says that the credential is set from the variable `UTOPIA_311_API_KEY` in `.env`, after the import, without displaying it, and that no other file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
 | The build order | Connection, Tool packaged with its folder, Agent, the credential from `.env`, then the test |
@@ -137,7 +137,7 @@ There is no prompt to send in this section unless the design needs a change. Rea
 The Connection that Bob imports has a name and a kind but no key. The key is yours to provide, and it must not pass through the chat. The guide keeps it where chapter 2 keeps the other secret of the project: the `.env` file in your project folder, which git ignores. Open `.env` and add one line, with a value you invent:
 
 ```
-SERVICE_DESK_API_KEY=<a word and a number>
+UTOPIA_311_API_KEY=<a word and a number>
 ```
 
 Bob sets the credential from that variable: it runs the ADK command that stores the key on the instance for one environment, and the shell fills in the value, so that the key appears neither in the conversation nor in any file of the project other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
@@ -148,7 +148,7 @@ Mode: Agent, in a new conversation.
 
 ```
 The design in @design/report-issue-design.md is approved. Build it. Set the
-Draft credential of the connection from the variable SERVICE_DESK_API_KEY in
+Draft credential of the connection from the variable UTOPIA_311_API_KEY in
 my .env file, without displaying its value, then test the agent with the
 pothole report of the Overview.
 ```
@@ -166,9 +166,9 @@ If the test fails with an authentication error, the credential was saved under t
 
 ## 7.8 What Bob built
 
-Open the `connections` folder in the File Explorer and the file `utopia_service_desk.yaml`. It is a few lines: the name, and for the Draft environment, the kind of credential, an API key, the address of the service, and the type, `team`. It contains no key, so it can be shared and committed.
+Open the `connections` folder in the File Explorer and the file `utopia_311.yaml`. It is a few lines: the name, and for the Draft environment, the kind of credential, an API key, the address of the service, and the type, `team`. It contains no key, so it can be shared and committed.
 
-Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_service_desk`. And near the top of the function, one line asks the platform for the credential, and the key arrives in a variable that the function uses in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
+Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_311`. And near the top of the function, one line asks the platform for the credential, and the key arrives in a variable that the function uses in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
 Open `agents/civic_info_agent.yaml`. Under `tools`, a fourth name, `report_issue`. The instructions have a new paragraph: when a resident asks to report a road problem, get the street and the description, call the Tool, and answer with the request number, or with the Roads and Infrastructure contact if the report could not be sent.
 
@@ -186,7 +186,7 @@ The Agent reports it and answers with a request number in the RQ-2026 format, an
 
 - Without a street: "I want to report a broken street light." The Agent asks where.
 - With everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." The Agent makes one report and returns one number.
-- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The Agent looks it up with the chapter 6 Tool and finds no record, because the test service keeps nothing; a real service desk would have it. The Agent answers that it has no record under that number and gives the contact.
+- A check on the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The Agent looks it up with the chapter 6 Tool and finds no record, because the test service keeps nothing; a real 311 system would have it. The Agent answers that it has no record under that number and gives the contact.
 
 Ask the first question again with reasoning. The steps show the call to `report_issue` with the street and the description, and the Tool's result with the request number. The key is not in the steps: the Tool received it from the Connection and did not return it.
 
@@ -199,9 +199,9 @@ The Agent that reports issues exists in Draft, and the Connection exists for Dra
 First, the Connection gets its Live environment and its Live key:
 
 ```
-Define the connection utopia_service_desk for the Live environment as well,
+Define the connection utopia_311 for the Live environment as well,
 with the same kind and type, import it again, and set its Live credential
-from the variable SERVICE_DESK_API_KEY in my .env file, without displaying
+from the variable UTOPIA_311_API_KEY in my .env file, without displaying
 its value.
 ```
 
@@ -215,7 +215,7 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and report t
 
 ## 7.11 Summary
 
-The Agent can now act on a resident's behalf: it reports a pothole to the city's service desk and gives the resident a request number. The key lived in your `.env` file and on the instance, and nowhere else: not in the chat, not in git, not in the code.
+The Agent can now act on a resident's behalf: it reports a pothole to the 311 Call Center and gives the resident a request number. The key lived in your `.env` file and on the instance, and nowhere else: not in the chat, not in git, not in the code.
 
 - An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A Tool names the Connection it needs and receives the credential at run time; the credential is in no file, no prompt and no chat.
 - The Connection is defined by the developer and imported with the project. The credential is set on the instance separately, once per environment, Draft and Live, from a place that git does not see.
