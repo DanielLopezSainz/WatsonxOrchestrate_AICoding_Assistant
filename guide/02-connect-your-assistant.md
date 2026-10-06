@@ -40,7 +40,7 @@ Step 1. Clone the repository.
 
 You should see: the folder name at the top of the panel. If Bob's chat is in front, click the files icon to see the files: `README.md`, the `guide` folder with the chapters, the `walkthroughs` folder, and a file named `.env.example`.
 
-5. Create your `.env` file: right-click `.env.example`, choose Copy, paste it in the same folder and rename the copy to `.env`. Open it and fill in the URL and the API key of your tenant (on the Developer Edition, leave it as it is).
+5. Create your `.env` file at the root of the project folder, next to `README.md`, where `.env.example` is: right-click `.env.example`, choose Copy, paste it in the same place and rename the copy to `.env`. Open it and fill in the URL and the API key of your tenant (on the Developer Edition, leave it as it is).
 
 The `.env` file is where this guide keeps the values that must stay on your machine: the tenant's URL and key now, one more value in chapter 7. Git ignores it, so it is never committed and never reaches your repository, and you never paste its contents into a chat with Bob. In step 5 you type the key into the extension once; `.env` is where you find it again when the extension asks for it later.
 
