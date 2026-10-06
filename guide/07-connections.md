@@ -184,7 +184,7 @@ Mode: Agent, same conversation.
 
 The Agent that reports issues exists in Draft, and the Connection exists for Draft only: deployed as it is, the Agent would fail at the first report. Going live takes three steps, in this order. In a company, the first two are done by operations; here you do them yourself.
 
-First, the Connection gets its Live environment. In Bob, Agent mode, same conversation:
+First, the Connection gets its Live environment:
 
 ```
 Define the connection utopia_service_desk for the Live environment as well,
@@ -208,4 +208,4 @@ The Agent can now act on a resident's behalf: it reports a pothole to the city's
 - A Connection is shared by the team, one credential for all users, or personal, one credential per user, asked for in the chat.
 - An Orchestrate Tool that acts is built like one that reads: a function, a description, parameters, a result. The Agent decides when to call it from the description and the question.
 
-The Agent now looks up records and creates them, with three Python Tools that Bob wrote and that the city maintains. Many services come with their Tools ready: an MCP server offers a set of Tools that any Agent can use, and watsonx Orchestrate can import the whole set at once as an Orchestrate Toolkit. In chapter 8, Bob builds one, with a skill made for that, and the Agent gets an address lookup from it.
+The Agent now looks up records and creates them, with four Python Tools that Bob wrote and that the city maintains. Many services come with their Tools ready: an MCP server offers a set of Tools that any Agent can use, and watsonx Orchestrate can import the whole set at once as an Orchestrate Toolkit. In chapter 8, Bob builds one, with a skill made for that, and the Agent gets an address lookup from it.
