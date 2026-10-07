@@ -192,7 +192,7 @@ Open `tools/report_issue.py`. It differs from the Tools of chapter 6 in two plac
 
 Open `agents/civic_info_agent.yaml`. Under `tools`, a fourth name appears, `report_issue`. The instructions have a new paragraph: when a resident asks to report a road problem, get the street and the description, call the Tool, and answer with the request number, or with the Roads and Infrastructure contact if the report could not be sent.
 
-Save your work: `Commit everything I changed with a short message saying what was built, and push.`
+Save your work: `Commit everything I changed with a short message saying what was built.`
 
 ## 7.9 Try it
 

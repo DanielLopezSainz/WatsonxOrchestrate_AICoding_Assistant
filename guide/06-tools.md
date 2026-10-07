@@ -202,7 +202,7 @@ Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under 
 
 The folder may also contain a requirements file, which names the Python libraries that the Tools need and is uploaded with them, and a test report, which Bob wrote for itself. Neither is part of the Agent.
 
-Save your work: `Commit everything I changed with a short message saying what was built, and push.`
+Save your work: `Commit everything I changed with a short message saying what was built.`
 
 ## 6.8 Try it, and read the reasoning
 

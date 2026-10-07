@@ -283,29 +283,22 @@ Use one conversation per task. Ask mode and Plan mode share one conversation, be
 
 Git keeps a history of the files that Bob writes into the project folder, the designs and the definitions, one version per commit. Bob runs the git commands: you describe the operation in a sentence, in Agent mode, and Bob shows the command it is about to run and asks for your approval. When you do not specify a commit message, Bob writes one from the files that changed.
 
-The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
+The project folder is already a git repository, because it is a clone of the guide's repository. Your commits stay on your machine: readers cannot push to the guide's repository, and this guide does not cover pushing to a repository of your own. To keep your commits elsewhere, add a remote of your own and ask Bob to push to it.
 
-```
-Rename the remote named origin to guide. Add <the address you copied> as the
-new origin and push the current branch to it, setting it as the upstream.
-```
-
-After this, your work is saved to your own repository, named `origin`, and the guide's repository remains available under the name `guide`, so that you can still receive updates to the chapters. The first push asks for your git credentials, once.
-
-After that, the following requests cover daily use. Each one is a plain instruction, and Bob asks for approval before each command it runs.
+The following requests cover daily use. Each one is a plain instruction, and Bob asks for approval before each command it runs.
 
 | You want to | Send |
 |---|---|
-| Save your work | `Commit everything I changed with a short message saying what was built, and push.` |
-| Save only some files | `Commit the files in the design folder with the message "City information agent design v2" and push.` |
+| Save your work | `Commit everything I changed with a short message saying what was built.` |
+| Save only some files | `Commit the files in the design folder with the message "City information agent design v2".` |
 | See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
 | See the history | `List the last ten commits with their dates and messages.` |
-| Get the latest version of the guide | `Merge the main branch of the remote named guide into my current branch. Do not rebase.` |
+| Get the latest version of the guide | `Pull the latest version of the guide from origin. Do not rebase.` |
 | Discard the uncommitted changes to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
 | See an earlier version of a file | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
 | Work on a change without touching the main version | `Create a branch named roads-hours and switch to it.` |
-| Bring a finished branch back | `Switch to the main branch and merge roads-hours into it, then push.` |
+| Bring a finished branch back | `Switch to the main branch and merge roads-hours into it.` |
 
-If a merge produces conflicts, Bob stops and reports them instead of continuing. The guide only ever changes the `guide` and `walkthroughs` folders and the README, and your work lives in the other folders, so a conflict arises only if you edit a chapter file in your clone. Keep notes outside the `guide` folder.
+If a pull produces conflicts, Bob stops and reports them instead of continuing. Updates to the guide change the `guide` and `walkthroughs` folders and the README; a conflict arises only if you changed a file in those places in your clone. Keep your notes and your work in other folders.
 
 Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and are not committed. The Source Control view, described in section 2.3, provides the same operations by clicking.

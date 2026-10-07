@@ -187,7 +187,7 @@ The third file to open is `agents/civic_info_agent.yaml`; look for two changes. 
 
 Any import scripts or test report that Bob added are not part of the Agent on the instance.
 
-Save your work: `Commit everything I changed with a short message saying what was built, and push.`
+Save your work: `Commit everything I changed with a short message saying what was built.`
 
 ## 5.8 Ways to interact with Orchestrate Agents
 

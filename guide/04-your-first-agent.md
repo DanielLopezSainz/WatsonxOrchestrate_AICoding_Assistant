@@ -195,7 +195,7 @@ The Agent has been created in watsonx Orchestrate. What you see in Bob is its de
 
 The file can contain other fields.
 
-Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
+Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built.` From now on, any change to this file can be undone.
 
 Read the file against the design. The two usually match, but not always. In the run, the design gave the display name Utopia city information and the file left it out, so the Agent appeared under its internal name. The correction in 4.9 includes this.
 
