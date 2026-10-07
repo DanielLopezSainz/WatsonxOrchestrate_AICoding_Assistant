@@ -26,8 +26,8 @@ Almost every Agent that does real work talks to systems that belong to someone e
 
 | Where a Connection is used | Example | In this guide |
 |---|---|---|
-| A Python Tool that calls an API | The 311 Call Center, a CRM, a payment service | This chapter |
-| An OpenAPI Tool, built from the description of an existing REST API | A ticketing system, an HR application | Not built; same Connection |
+| A Python Tool that calls an API or queries a database | The 311 Call Center, a CRM, a payment service, a SQL database | This chapter |
+| An OpenAPI Tool, built from the description of an existing REST API | Your company's ERP, a ticketing system, an HR application | Not built; same Connection |
 | An MCP Toolkit whose server requires a credential | A third-party MCP server with an API key | Chapter 8 |
 | A Model hosted by another provider | A watsonx.ai or OpenAI model used by one Agent | Not built |
 | A Knowledge Base kept in an external store | Documents indexed in Elasticsearch or Milvus | Not built |
