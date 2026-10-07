@@ -134,11 +134,15 @@ There is no prompt to send in this section unless the design needs a change. Rea
 
 ## 7.6 Where the key comes from
 
-The Connection that Bob imports has a name and a kind but no key. The key is yours to provide, and it must not pass through the chat. The guide keeps it where chapter 2 keeps the other secret of the project: the `.env` file in your project folder, which git ignores. Open `.env` and add one line, with a value you invent:
+The Connection that Bob imports has a name and a kind but no key. The key is yours to provide, and it must not pass through the chat. The guide keeps it where chapter 2 keeps the other secret of the project: the `.env` file in your project folder, which git ignores. Open `.env` and add one line, with a value you invent. After the change, the file looks like this, with your own values in place of the placeholders:
 
 ```
+WO_INSTANCE=<the URL of your instance>
+WO_API_KEY=<the API key of your instance>
 UTOPIA_311_API_KEY=<a word and a number>
 ```
+
+On the Developer Edition, the first two lines are empty and only the third matters.
 
 Bob sets the credential from that variable: it runs the ADK command that stores the key on the instance for one environment, and the shell fills in the value, so that the key appears neither in the conversation nor in any file of the project other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
 
