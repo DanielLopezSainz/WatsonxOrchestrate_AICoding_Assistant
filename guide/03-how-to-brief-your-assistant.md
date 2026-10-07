@@ -54,7 +54,7 @@ Bob queries the instance, then answers with three parts: what it understood, a t
 
 Plan mode is for planning a task. Bob analyses the requirements, researches the project and designs the implementation steps. It can do everything that Ask mode allows, and it can also write files; it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
 
-In this guide, the plan is a design document in the `design` folder, which you approve before Bob builds.
+The plan in this guide is a design document in the `design` folder, which you approve before Bob builds.
 
 Example, continued. In the same conversation, you switch to Plan mode and write:
 
@@ -62,11 +62,11 @@ Example, continued. In the same conversation, you switch to Plan mode and write:
 Write the design for this agent into design/civic-info-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary: what was asked, what exists on the instance, the proposed Agent with its name and model, the facts it will know, how it behaves, the build order, and the test questions with the expected answers. You read the file and, if something is missing, request a change in the same conversation; Bob revises the file and waits again.
+After you approve writing the file, Bob writes it and shows a summary: what was asked, what exists on the instance, the proposed Agent with its name and model, the facts it will know, how it behaves, the build order, and the test questions with the expected answers. You read the file and, if something is missing, request a change in the same conversation; Bob revises the file and waits again.
 
 ### Agent mode
 
-Agent mode is for implementing an idea or a plan. In this mode, Bob can read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
+Agent mode is for implementing an idea or a plan. Bob can read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
 
 In this guide, Agent mode is where Bob writes the definition and Tool files, imports them, tests the Agent, reads the Agent's reasoning, corrects what failed, and reports.
 
@@ -101,7 +101,7 @@ You approve twice in every Agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which Agents exist and what each one is for, which Tools each Agent has, which external systems need a Connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the Agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an Agent is deployed. Deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
+The deployment approval takes place when the Agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an Agent is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
 
 Example. In chapter 4, Bob writes the design for the city information Agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -188,7 +188,7 @@ For an action with several steps, or one whose result must be checked in a parti
 
 ### Type 3: the structured prompt
 
-A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer; Bob reads the content, whatever the labels. The same content can be written as labelled lines or as running text.
+A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer; the same content can be written as labelled lines or as running text, and Bob reads the content, whatever the labels.
 
 To describe what you want at the start of an Agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
 
@@ -278,7 +278,7 @@ Two items in the project folder, both written by the watsonx Orchestrate ADK ext
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
-Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers. Agent mode starts a new conversation with the design file referenced, because in a long conversation Bob loses track of constraints that it accepted earlier.
+Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers; Agent mode starts a new one with the design file referenced, since in a long conversation Bob loses track of constraints that it accepted earlier.
 
 ## 3.6 Bob with Git
 
