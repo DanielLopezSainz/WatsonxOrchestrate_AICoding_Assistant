@@ -45,7 +45,7 @@ An Orchestrate Agent is built from a small set of components. Each component is 
 | Orchestrate Flows | Fixed sequences of steps that run the same way every time |
 | Orchestrate Channels | The interfaces through which users reach an Agent, such as a chat window on a web page |
 
-Everything that you create is stored first in the Draft environment of the instance, where only you can use it. Deployment in Live makes it available to its users.
+Everything that you create stays in the Draft environment of the instance, where only you can use it, until you deploy it to Live, where its users reach it.
 
 ## 1.3 The scenario
 
