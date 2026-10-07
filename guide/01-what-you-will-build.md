@@ -27,7 +27,7 @@ IBM Bob and IBM watsonx Orchestrate are the two products of this guide, each wit
 | IBM watsonx Orchestrate | A platform that runs AI agents. An Orchestrate Agent answers questions and performs tasks for its users, using instructions, documents, and Connections to other systems | The Agents that you create run here. Your copy of the platform is called an instance: a SaaS tenant, or the Developer Edition on your own machine |
 | IBM Bob | An AI coding assistant that works inside a development environment. You describe what you want in a chat; Bob writes the files, runs the operations, and reports the result | You create the Agents here. You do not write code or configuration files by hand |
 
-Chapter 2 installs the watsonx Orchestrate ADK extension for Bob, which connects the two products: with it, Bob can list what exists on your instance, send new Agents to it, and test them.
+Chapter 2 installs the watsonx Orchestrate ADK extension for Bob. That extension connects the two products, so Bob can list what exists on your instance, send new Agents to it, and test them.
 
 ## 1.2 What an Orchestrate Agent is made of
 
@@ -49,7 +49,7 @@ Everything that you create stays in the Draft environment of the instance, where
 
 ## 1.3 The scenario
 
-CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. The scenario gives every component of an Orchestrate Agent a use: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route between.
+CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. Each component of an Orchestrate Agent gets a use in that scenario: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route between.
 
 The city, its departments, its residents and all its data are fictional; three departments are used throughout the guide:
 
