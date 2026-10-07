@@ -166,7 +166,7 @@ The second sentence is new: it tells Bob where the key is and that the value mus
 3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
 4. Tests the Agent with the pothole report.
 
-Approve each request as it comes. Read the command that sets the credential when Bob asks for approval: it names the variable, not the value.
+Approve each request as it comes. Read the command that sets the credential when Bob asks for approval: it names the variable, not the value. If Bob proposes to set the credential through one of its Orchestrate operations instead of a command, tell it to use the command with the variable; a value passed to an operation goes through the chat.
 
 If the test fails with an authentication error, the credential was saved under the wrong environment or the wrong Connection. If it fails because the Tool could not read the Connection, the Tool's code names a different Connection than the one that was imported. In both cases Bob reads the error and corrects it.
 
