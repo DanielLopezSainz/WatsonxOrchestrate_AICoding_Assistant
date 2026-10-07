@@ -10,7 +10,7 @@ At the end of the chapter:
 
 - The guide's repository is open in Bob as your project folder.
 - Bob is connected to your watsonx Orchestrate instance and can list what exists on it.
-- Bob reads from the instance without asking, and asks for your approval before any change.
+- Bob reads from the instance without asking, and asks for your approval before it writes a file, runs a command or changes the instance.
 
 Skip this chapter if every line of the checklist in section 2.7 is already true for the folder that you have open in Bob.
 
@@ -36,13 +36,12 @@ Step 1. Clone the repository.
 1. In Bob, click the files icon at the top left. With no folder open, the panel shows two buttons: Open Folder and Clone Repository.
 2. Click Clone Repository and paste `https://github.com/DanielLopezSainz/WatsonxOrchestrate_AICoding_Assistant.git`.
 3. Choose where to save it. Bob creates a folder named `WatsonxOrchestrate_AICoding_Assistant` there.
-4. When Bob offers to open the cloned repository, click Open.
-
-You should see: the folder name at the top of the panel. If Bob's chat is in front, click the files icon to see the files: `README.md`, the `guide` folder with the chapters, the `walkthroughs` folder, and a file named `.env.example`.
-
+4. When Bob offers to open the cloned repository, click Open. If Bob's chat is in front, click the files icon to see the files: `README.md`, the `guide` folder with the chapters, the `walkthroughs` folder, and a file named `.env.example`.
 5. Create your `.env` file at the root of the project folder, next to `README.md`, where `.env.example` is: right-click `.env.example`, choose Copy, paste it in the same place and rename the copy to `.env`. Open it and fill in the URL and the API key of your tenant (on the Developer Edition, leave it as it is).
 
-The `.env` file is where this guide keeps the values that must stay on your machine: the tenant's URL and key now, one more value in chapter 7. Git ignores it, so it is never committed and never reaches your repository, and you never paste its contents into a chat with Bob. In step 5 you type the key into the extension once; `.env` is where you find it again when the extension asks for it later.
+You should see: the folder name at the top of the panel, and `.env` listed next to `.env.example`.
+
+The `.env` file is where this guide keeps the values that must stay on your machine: the tenant's URL and key now, one more value in chapter 7. Git ignores it, so it is not committed and does not reach your repository; you never paste its contents into a chat with Bob. In step 5 you type the key into the extension once; `.env` is where you find it again when the extension asks for it later.
 
 Step 2. Install the extension.
 
@@ -78,14 +77,14 @@ The message tells Bob to switch to Agent mode, to load the Orchestrate skills, a
 3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
 ```
 
-You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. The number of skills depends on the version of the ADK; version 2.17 provides eight. Chapter 12 uses the skills, which are stored in `.bob/skills` in the project folder.
+You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. If Bob first requests approval to run `fetch_all_skills`, approve it; step 7 sets the approvals for the rest of the guide. The number of skills depends on the version of the ADK; version 2.17 provides eight. Chapter 12 uses the skills, which are stored in `.bob/skills` in the project folder.
 
 Step 5. Connect to your instance.
 
-Your instance is the watsonx Orchestrate service where your Agents run: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
+Your instance is the watsonx Orchestrate service where your Agents run: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment; this is a different use of the word from the Draft and Live environments of chapter 1, which are two parts of one instance. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
 
 - Developer Edition running on your machine: nothing to do. The dropdown already reads `local (active)`, and below it "Local server: Started".
-- SaaS tenant: the dropdown is empty. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; the SSL setting, where you select the first option, Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, confirm.
+- SaaS tenant: the dropdown is empty on a machine where the ADK was not used before. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; the SSL setting, where you select the first option, Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, confirm.
 
 You should see: in Environment Manager, the dropdown reading your environment's name followed by "(active)". In Explorer, expand Agents: the list is read from the instance, so it shows the Agents that exist there. A tenant that nobody has used yet has one, `AskOrchestrate`. The Developer Edition has two, shown as "Try Document Processing Agent (DocProcessing)" and "AskOrchestrate".
 
@@ -100,14 +99,14 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-By default, Bob asks for approval before every action. The following settings reduce that: Bob reads files and queries the instance without asking, and approval is still required before any change. Section 2.5 explains both settings.
+By default, Bob asks for approval before every action. With the following settings, Bob reads files and queries the instance without asking, and still asks before it writes a file, runs a command or changes the instance. Section 2.5 explains both settings.
 
 1. Click the Permissions button, next to the mode dropdown at the bottom of the chat input. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
 
 You should see: no change yet. The effect is visible in the next step, where Bob lists the Agents without requesting approval.
 
-Step 8. Test the Connection. Start a new conversation, select Ask mode in the mode dropdown, and send:
+Step 8. Test the access to the instance. Start a new conversation, select Ask mode in the mode dropdown, and send:
 
 ```
 Which agents exist on my instance? List their names and one line each.
@@ -180,7 +179,7 @@ The MCP tab is also where you check that both Orchestrate servers are connected,
 
 ### How the views relate
 
-An Agent definition is a file in the File Explorer until Bob imports it. After the import, the Agent appears in the Explorer section of the watsonx Orchestrate panel. If the two differ, the watsonx Orchestrate panel shows what is on the instance, and the file shows what you decided. Source Control shows which files changed since the last commit.
+An Agent definition is a file in the File Explorer until Bob imports it. After the import, the Agent appears in the Explorer section of the watsonx Orchestrate panel. If the two differ, the instance has not received the latest version of the file, or the file was changed after the import. Source Control shows which files changed since the last commit.
 
 ## 2.4 What was installed
 
@@ -190,9 +189,9 @@ The following components appear by name in Bob's messages and in the MCP tab.
 |---|---|
 | The watsonx Orchestrate Agent Development Kit, the ADK | Defines Agents, Tools and everything around them as files, and pushes those files to an instance. Installed in step 3 |
 | The watsonx Orchestrate MCP server, `watsonx-orchestrate-adk` in the MCP tab | Lets Bob use the ADK: list, import, test and export things on your instance. Bob starts it when needed. MCP is the standard protocol that coding assistants use to communicate with such programs |
-| IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and gives Bob a search over the Orchestrate documentation, so that Bob consults the documentation instead of relying on its general knowledge |
+| IBM's documentation server, `watsonx-orchestrate-adk-docs` in the MCP tab | Runs on the internet and lets Bob search the Orchestrate documentation, so that Bob consults the documentation instead of relying on its general knowledge |
 
-1. Bob works inside the cloned repository only. The Orchestrate server does not read or write outside the folder that was open when you initialised the workspace. Always open this folder in Bob.
+1. The Orchestrate server reads and writes only inside the folder that was open when you initialised the workspace. Always open this folder in Bob.
 2. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. After that, every operation fails with an authentication error until you activate the environment again in the Environment Manager.
 3. The ADK keeps one active environment per machine, and Bob and any other coding assistant on the machine use it. Switching the environment in the Environment Manager switches it for all of them. Chapter 11 is the only chapter that switches environments.
 
@@ -211,10 +210,11 @@ The Orchestrate server is the same for every assistant. Cursor and VS Code with 
 
 1. The folder open in Bob is the cloned repository, and it is the one you initialised.
 2. The `guide` folder is visible at the top level of that folder, next to the folders the extension created.
-3. The MCP tab shows `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, both connected.
-4. Under the Permissions button, Read and MCP are on and Edit and Execute are off, and Always allow is on for the eleven reading operations.
-5. The Environment Manager shows an active environment.
-6. The Agent list prompt returns the Agents you expect, without an approval request.
+3. The `.env` file is at the root of that folder, and `.bob/skills` holds the Orchestrate skills loaded in step 4.
+4. The MCP tab shows `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`, both connected.
+5. Under the Permissions button, Read and MCP are on and Edit and Execute are off, and Always allow is on for the eleven reading operations.
+6. The Environment Manager shows an active environment.
+7. The Agent list prompt returns the Agents you expect, without an approval request.
 
 ## 2.8 When something goes wrong
 
@@ -223,9 +223,9 @@ Known failures and their fixes:
 | Bob reports | Cause | Fix |
 |---|---|---|
 | `Attempting to access resources outside the working directory is forbidden.` | The folder open in Bob is not the one that was initialised, or Bob is pointing at a file elsewhere on your disk | Open the initialised folder. If you must change folders, run Update MCP Servers from the command palette with the right folder open |
-| Every operation fails with an authentication or authorization error after working earlier | The two-hour token expired | Activate the environment again in the Environment Manager; the next call works without a restart |
-| An artifact was imported, but the list of the instance does not show it | Some operations report success even when the platform logged an error. The Knowledge Base import with an unsupported document type is one of them | Rely on the list, not on the message. After an import, ask Bob to list the artifacts of that kind and confirm the new one is there |
+| Every operation fails with an authentication or authorization error after working earlier | Most often, the two-hour token of step 5 has expired | Activate the environment again in the Environment Manager; the next call works without a restart |
+| An artifact was imported, but the Explorer of the watsonx Orchestrate panel does not show it | Some operations report success even when the platform logged an error. The Knowledge Base import with an unsupported document type is one of them | Rely on the list, not on the message. After an import, ask Bob to list the artifacts of that kind and confirm the new one is there |
 | A Python Tool import fails with `No module named '<tool>'` although the file exists | Bob tried to import from that folder before it existed, and the server remembers the failure while it runs | Restart the server with the restart control in the MCP tab, then import again |
-| The server command is not found, or the entry will not start | The environment the extension created is damaged or was moved | Run Initialise Workspace again; it repairs it |
+| The server command is not found, or the entry will not start | Most often, the Python environment the extension created is damaged or was moved | Run Initialise Workspace again; it repairs it |
 
 When Bob tests an Agent that has no Tools, it reports that the reasoning is empty; an Agent without Tools has no steps to show.
