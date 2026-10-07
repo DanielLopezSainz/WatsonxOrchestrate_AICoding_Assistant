@@ -107,7 +107,7 @@ Bob confirms the answers and lays out the implementation in the chat, as in chap
 - In the Tool, one line asks the platform for the key at run time, and the key goes into the request header and nowhere else.
 - Bob sets the key from the variable in `.env`, with a command whose output does not show the value, and never asks you to paste it in the chat.
 
-Do not switch to Agent mode yet.
+Do not switch to Agent mode yet. Bob ends every answer in Ask mode with that invitation, because building is what it is made for. The guide goes through Plan mode first, as Bob's own documentation recommends for any feature of some size: the design file is where you check the decisions before anything exists on the instance, and it stays in the project, under git, as the record of why the Agent is built the way it is. Chapter 3 explains the three modes.
 
 ## 7.4 Plan mode: write the design
 
