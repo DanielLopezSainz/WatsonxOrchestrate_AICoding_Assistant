@@ -10,7 +10,7 @@ In this chapter, Bob creates an Orchestrate Tool that sends the report to the ci
 
 The Orchestrate Connection is the component introduced in this chapter. Bob creates both the Orchestrate Connection and the Orchestrate Tool. With Orchestrate Tools and Orchestrate Connections, the Agent can update external systems, not only read them.
 
-Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_311.yaml into my instance, import the tool in walkthroughs/ch07/tools with the connection named, import walkthroughs/ch07/agents/civic_info_agent.yaml, and set the Draft credential of the connection from the variable UTOPIA_311_API_KEY in my .env file without displaying its value.`
+Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Create the connection utopia_311 on my instance, kind API key sent in the header x-api-key, type team, for the Draft environment, and set its Draft credential from the variable UTOPIA_311_API_KEY in my .env file without displaying its value. Then import the tool walkthroughs/ch07/tools/report_issue.py with that connection, and import walkthroughs/ch07/agents/civic_info_agent.yaml.`
 
 ## 7.1 Before you start
 
