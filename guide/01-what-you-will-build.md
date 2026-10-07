@@ -4,11 +4,11 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 ## Overview
 
-Creating an Agent in watsonx Orchestrate usually means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the Agent must do. Bob writes the files, sends them to your instance, and tests the result.
+Creating an Agent in watsonx Orchestrate from code means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the Agent must do. Bob writes the files, sends them to your instance, and tests the result.
 
 The system is CivicPulse, the citizen services platform of the fictional City of Utopia. Residents ask it which department handles their question, check the status of a permit, report a broken street light, and apply for a building permit. You start with one Orchestrate Agent that answers from a short list of facts. Chapter by chapter, you give it the city's regulations to search, Tools to look up data, a Connection to the city's 311 Call Center, a team of specialised Agents and a permit workflow. Chapter 11 puts it on the city's website.
 
-At the end of the guide, you have built:
+At the end of chapter 11, you have built:
 
 - A front desk Agent and three department Agents that work together.
 - An Orchestrate Knowledge Base of city guides and regulations that the Agents search.
@@ -20,18 +20,18 @@ If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scena
 
 ## 1.1 The 2 main characters
 
-IBM Bob and IBM watsonx Orchestrate are the two products of this guide, each with a different job.
+IBM Bob and IBM watsonx Orchestrate are the two products that this guide uses, each with a different job.
 
 | Product | What it is | Its job in this guide |
 |---|---|---|
 | IBM watsonx Orchestrate | A platform that runs AI agents. An Orchestrate Agent answers questions and performs tasks for its users, using instructions, documents, and Connections to other systems | The Agents that you create run here. Your copy of the platform is called an instance: a SaaS tenant, or the Developer Edition on your own machine |
-| IBM Bob | An AI coding assistant that works inside a development environment. You describe what you want in a chat; Bob writes the files, runs the operations, and reports the result | You create the Agents here. You do not write code or configuration files by hand |
+| IBM Bob | An AI coding assistant that works inside a development environment. You describe what you want in a chat; Bob writes the files, runs the operations, and reports the result | You create the Agents here. You do not write the Agent, Tool or Knowledge Base files by hand |
 
 Chapter 2 installs the watsonx Orchestrate ADK extension for Bob. That extension connects the two products, so Bob can list what exists on your instance, send new Agents to it, and test them.
 
 ## 1.2 What an Orchestrate Agent is made of
 
-An Orchestrate Agent is built from a small set of components. Each component is an Orchestrate asset with its own type, named with a capital in this guide.
+An Orchestrate Agent is built from a small set of components. Several of them are Orchestrate assets with a type of their own, named with a capital in this guide.
 
 | Component | What it is |
 |---|---|
@@ -42,14 +42,14 @@ An Orchestrate Agent is built from a small set of components. Each component is 
 | Orchestrate Connections | The addresses and credentials of the external systems that Tools use |
 | Orchestrate Toolkits | Groups of Tools provided by an external server and attached to the Agent as a set |
 | Collaborator Agents | Other Orchestrate Agents that an Agent delegates to, so that each Agent has a clear purpose |
-| Orchestrate Flows | Fixed sequences of steps that run the same way every time |
+| Orchestrate Flows | Sequences of steps defined in advance, with branches where needed, instead of decided by the model at each question |
 | Orchestrate Channels | The interfaces through which users reach an Agent, such as a chat window on a web page |
 
-Everything that you create stays in the Draft environment of the instance, where only you can use it, until you deploy it to Live, where its users reach it.
+An Agent that you create stays in the Draft environment of the instance, where only builders can use it, until you deploy it to Live, where its users reach it.
 
 ## 1.3 The scenario
 
-CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. Each component of an Orchestrate Agent gets a use in that scenario: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route between.
+CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. Each component of an Orchestrate Agent has a job in that scenario: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route questions between.
 
 The city, its departments, its residents and all its data are fictional; three departments are used throughout the guide:
 
@@ -75,4 +75,4 @@ The city, its departments, its residents and all its data are fictional; three d
 | 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the Orchestrate Channel for web chat | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
-From chapter 4 onwards, each chapter opens with an overview that says what is built and whether you can skip it, states its prerequisites, lists its steps, and ends with questions to check the result. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
+From chapter 4 onwards, each chapter opens with an overview that says what is built and whether you can skip it, states its prerequisites, lists its steps, tests the result with questions, and ends with a deployment and a summary. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
