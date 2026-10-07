@@ -131,7 +131,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 
 Mode: Plan, same conversation.
 
-There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set on the instance, not in a file.` If something else is missing, ask Bob to add it. When the design is correct, go to 7.7: its first prompt is the approval.
+There is no prompt to send in this section unless the design needs a change. Read the design against the table in 7.4, and check one point in particular: it must not contain a key value, not even an example. If it does, send `Remove every credential value from the design. The credential is set on the instance, not in a file.` If something else is missing, ask Bob to add it. Bob may also ask you about details that the design does not fix, such as where to put a requirements file; answer `Decide these yourself and proceed.` When the design is correct, go to 7.7: its first prompt is the approval.
 
 ## 7.6 Where the key comes from
 
