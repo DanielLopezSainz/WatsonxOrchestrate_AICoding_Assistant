@@ -22,7 +22,7 @@ Check that the Tools are there: in Ask mode, ask `Which tools exist on my instan
 
 ## 7.2 What an Orchestrate Connection is
 
-Almost every Agent that does real work talks to systems that belong to someone else: a database, a ticketing system, a payroll application, a model hosted by a provider, an MCP server, a document index. Each of them has an address and a way to prove who is calling, a user and password, an API key, a token, or a login that the user performs. In watsonx Orchestrate, all of that lives in one kind of asset, the Orchestrate Connection, and the Tools, Toolkits, Models and Knowledge Bases that need a system refer to its Connection by name.
+Almost every Agent in a real project talks to systems that other teams own: a database, a ticketing system, a payroll application, a model hosted by a provider, an MCP server, a document index. Each of them has an address and a way to prove who is calling, a user and password, an API key, a token, or a login that the user performs. In watsonx Orchestrate, all of that lives in one kind of asset, the Orchestrate Connection, and the Tools, Toolkits, Models and Knowledge Bases that need a system refer to its Connection by name.
 
 When a project grows from one Tool to twenty, an operations team sees in the list of Connections which systems the Agents reach and with which credentials, per environment. The Agent of chapter 4, which only reads its instructions, has no Connection. Every external system that the project reaches needs a Connection.
 
@@ -120,7 +120,7 @@ Bob confirms the answers and lays out the implementation in the chat, as in chap
 - The Tool gets the key from the Connection when it runs, and sends it only in the request header.
 - Bob sets the key from the variable in `.env`, with a command that does not show the value, and never asks you to paste it in the chat.
 
-Do not switch to Agent mode yet. Bob ends every answer in Ask mode with that invitation. The guide goes through Plan mode first, as Bob's own documentation recommends: the design file is where you check the decisions before anything exists on the instance, and it stays in the project, under git, as the record of what was decided. Chapter 3 explains the three modes.
+Do not switch to Agent mode yet. Bob often ends an answer in Ask mode with that invitation. The guide goes through Plan mode first, as Bob's own documentation recommends: the design file is where you check the decisions before anything exists on the instance, and it stays in the project, under git, as the record of what was decided. Chapter 3 explains the three modes.
 
 ## 7.4 Plan mode: write the design
 
@@ -188,7 +188,7 @@ If the test fails, Bob reads the error and corrects it. With an authentication e
 
 The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed. An empty `connections` folder means that Bob used the commands. In that case, confirm that the Connection exists on the instance: in Ask mode, `Which connections of this project exist on my instance, and is a credential set for them?` Bob lists `utopia_311` with a credential set for Draft and none yet for Live, which section 7.10 completes.
 
-Open `tools/report_issue.py`. It differs from the Tools of chapter 6 in two places. The `@tool` line names the Connection the Tool expects, `utopia_311`. Near the top of the function, one line gets the key from the platform, through the Connection library or from a variable that the platform sets when the Tool runs; that variable is not your `.env` variable, which served only to put the key on the instance. The function uses the key only in the request header. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
+Open `tools/report_issue.py`. It differs from the Tools of chapter 6 in two places. The `@tool` line names the Connection the Tool expects, `utopia_311`. Near the top of the function, one line gets the key from the platform, from a variable that the platform sets when the Tool runs, or through the Connection library; that variable is not your `.env` variable, which served only to put the key on the instance. The function uses the key only in the request header. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
 Open `agents/civic_info_agent.yaml`. Under `tools`, a fourth name appears, `report_issue`. The instructions have a new paragraph: when a resident asks to report a road problem, get the street and the description, call the Tool, and answer with the request number, or with the Roads and Infrastructure contact if the report could not be sent.
 
@@ -202,7 +202,7 @@ Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the prev
 There is a pothole outside 18 Elm Street. Can you report it?
 ```
 
-The Agent reports it and answers with a request number in the RQ-2026 format, and says that the status can be checked with that number. Then try three more:
+The Agent reports it and answers with a request number in the RQ-2026 format, says that the status can be checked with that number, and gives the Roads and Infrastructure contact. Then try three more:
 
 - Leave out the street: "I want to report a broken street light." The Agent asks where.
 - Put everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." The Agent makes one report and returns one number.
@@ -236,7 +236,7 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and report t
 
 The Agent can now act on a resident's behalf: it reports a pothole to the 311 Call Center and gives the resident a request number. The key lived only in your `.env` file and on the instance, and never appeared in the chat, in git or in the code.
 
-- An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A Tool names the Connection it needs and receives the credential at run time, so no file, prompt or chat contains it.
+- An Orchestrate Connection is where watsonx Orchestrate keeps a credential for a service. A Tool names the Connection it needs and receives the credential at run time; the key appears in no project file and in no chat.
 - The Connection is defined by the developer and imported with the project. The credential is set on the instance separately, once per environment, Draft and Live, from a place that git does not see.
 - Team Connections share one credential among all users; member Connections ask each user for their own, in the chat.
 - Building an Orchestrate Tool that acts takes the same parts as one that reads, a function, a description, parameters and a result, and the Agent decides when to call it in the same way.
