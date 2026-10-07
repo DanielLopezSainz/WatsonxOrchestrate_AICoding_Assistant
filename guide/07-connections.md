@@ -173,7 +173,7 @@ If the test fails with an authentication error, the credential was saved under t
 
 ## 7.8 What Bob built
 
-The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed. If the `connections` folder is empty, confirm that the Connection exists on the instance: in Ask mode, `Which connections of this project exist on my instance, and is a credential set for them?` Bob lists `utopia_311` with its credential set for Draft.
+The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed. If the `connections` folder is empty, confirm that the Connection exists on the instance: in Ask mode, `Which connections of this project exist on my instance, and is a credential set for them?` Bob lists `utopia_311` with a credential set for Draft and none yet for Live, which section 7.10 completes.
 
 Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_311`. And near the top of the function, one line gets the key from the platform, through the Connection library or from a variable that the platform sets, and the function uses it in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
@@ -206,10 +206,9 @@ The Agent that reports issues exists in Draft, and the Connection exists for Dra
 First, the Connection gets its Live environment and its Live key:
 
 ```
-Define the connection utopia_311 for the Live environment as well,
-with the same kind and type, import it again, and set its Live credential
-from the variable UTOPIA_311_API_KEY in my .env file, without displaying
-its value.
+Configure the connection utopia_311 for the Live environment with the same
+kind and type as in Draft, and set its Live credential from the variable
+UTOPIA_311_API_KEY in my .env file, without displaying its value.
 ```
 
 Second, deploy:
