@@ -6,11 +6,11 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 5 completed, or 
 
 Three weeks ago you applied for a building permit. The confirmation email gives a number, PP-2026-0412, and nothing has arrived since. You ask CivicPulse: "Where is my permit application PP-2026-0412?" The Agent of chapter 5 has the city's regulations in its Knowledge Base. It can tell you that a decision is given within 30 days, and nothing more, because it has never seen your application. Your file is in the city's permit system, not in a document.
 
-Every question that the Agent of chapter 5 could answer had the same answer for every resident: the hours of a department, the rule for a shed. The questions in this chapter need answers that depend on the resident asking: the status of an application, the date of a repair, the collection day of a street. To answer, the Agent must look up a record in the city's system when the question is asked.
+Every question that the Agent of chapter 5 could answer had the same answer for every resident: the hours of a department, the rule for a shed. The questions in this chapter need answers that depend on the record asked about: the status of one application, the date of one repair, the collection day of one street. To answer, the Agent looks up that record in the city's system when the question is asked.
 
 An Orchestrate Tool is how an Agent fetches it. In this chapter, Bob writes three Orchestrate Tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the Tools read, a few lines in a file for each. Then Bob connects the Tools to the Agent, and the Agent decides, question by question, when to use one. Section 6.8 shows how to read the Agent's reasoning and check these decisions.
 
-This chapter introduces the Orchestrate Tool. The Agent, its instructions and its Knowledge Base stay as in chapter 5.
+This chapter introduces the Orchestrate Tool. The Agent and its Knowledge Base stay as in chapter 5; the instructions gain one paragraph.
 
 Skip this chapter if you have already given an Agent a Python Tool with Bob. To continue with chapter 7 without building it, first make sure that the Knowledge Base of chapter 5 exists on your instance, then send Bob these instructions in Agent mode: `Import the three Python tools in walkthroughs/ch06/tools into my instance, each one packaged with its record file, then import walkthroughs/ch06/agents/civic_info_agent.yaml.`
 
@@ -34,7 +34,7 @@ An Orchestrate Tool has three parts, and the Agent uses each one in turn.
 | The parameters | The values the Tool needs, each with a name and a description, for example a permit number | Finds them in the question, or asks the resident for them |
 | The result | What the Tool returns, for example the record of one application | Writes the answer from it |
 
-Nobody tells the Agent to call a Tool, just as nobody tells it to search the Knowledge Base. The model reads the question, the instructions and the descriptions of its Tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit Tool and contains a permit number, so the Agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the Agent asks for it. Only the description and the parameter names count in that decision.
+No prompt tells the Agent to call a Tool for a given question, just as none tells it to search the Knowledge Base: the instructions say when Tools apply, and the model decides each case from the question and the descriptions of its Tools. "Where is my permit application PP-2026-0412?" matches the description of the permit Tool and contains a permit number, so the Agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the Agent asks for it. Besides the instructions, the description and the parameter names are all the Agent has for that decision.
 
 **Kinds of Orchestrate Tools**
 
@@ -59,7 +59,7 @@ An Agent with Tools makes choices, and watsonx Orchestrate lets you see them. Wi
 
 Mode: Ask, in a new conversation.
 
-The prompt does not use the word Tool: it describes what residents ask and where the answers are, and leaves the choice of the component to Bob. The city has no systems to query, and the prompt says so. The expected answer is a Python Tool, as 6.2 describes.
+The prompt does not use the word Tool: it describes what residents ask and where the answers are, says that the city has no system to query, and leaves the choice of the component to Bob, which should be a Python Tool, as 6.2 describes.
 
 ```
 I want civic_info_agent to answer questions about one resident's own record,
@@ -78,7 +78,7 @@ exists on my instance.
 In Bob's answer, look for four things:
 
 - How Bob would implement it. Under what it understood, Bob proposes record files and Python Tools that read them, one per kind of record. Nobody said the word Tool; Bob chose it, and 6.2 explains why.
-- What it found on the instance: the Agent, the Knowledge Base, no Tools.
+- What it found on the instance: the Agent, the Knowledge Base, and no Tools of the project.
 - The line from chapter 4 that says the Agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
@@ -149,7 +149,7 @@ Bob requests approval, writes the file and summarises it. Check that the file co
 | The import of each Tool | The design says that each Tool is uploaded to the instance together with its record file. Without the file, the Tool fails on the instance |
 | The change to the Agent | The three Tools attached; the instructions say when to use a Tool, ask for a missing number, what to say when a record is unknown; the facts and the Knowledge Base unchanged |
 | The build order | Records and Tools first, each Tool imported, then the Agent |
-| The tests | The three questions of the Overview at least, each with its expected record |
+| The tests | The three questions of the first prompt in 6.3 at least, each with its expected record |
 
 ## 6.5 Approve the design
 
@@ -188,7 +188,7 @@ Approve each request as it comes. Bob's report may say that the Agent is deploye
 
 Open the `tools` folder in the File Explorer. It has six files: three Python files, one per Tool, `get_permit_status.py`, `get_request_status.py` and `get_collection_days.py`, and three CSV files with the records, `permits.csv`, `requests.csv` and `collection_calendar.csv`.
 
-Open `get_permit_status.py`. Near the bottom of the file is the function `get_permit_status`. Three things around it are written for the Agent:
+Open `get_permit_status.py` and find the function `get_permit_status`, in the run near the bottom of the file. Three things around it are not for the computer that runs the code:
 
 - The line `@tool` above the function. It tells watsonx Orchestrate that this function is a Tool.
 - Just under the function name, the text between triple quotes. This is the description: one sentence on what the Tool does, one line on the parameter, one line on the result. These are the words the Agent reads when it decides whether to call the Tool.
@@ -196,17 +196,17 @@ Open `get_permit_status.py`. Near the bottom of the file is the function `get_pe
 
 The rest of the file opens `permits.csv`, finds the line with that number, and returns it.
 
-`permits.csv` has one line per application. Its second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
+`permits.csv` has one line per application. Find the line of PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
 
 Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three Tool names. In the instructions, a new section says when to call each Tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three Tools. The facts and the Knowledge Base are unchanged. Bob may have added starter prompts for the new questions.
 
-The folder may also contain a requirements file or a test report. Bob added them for its own use; they are not part of the Agent on the instance.
+The folder may also contain a requirements file, which names the Python libraries that the Tools need and is uploaded with them, and a test report, which Bob wrote for itself. Neither is part of the Agent.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
 ## 6.8 Try it, and read the reasoning
 
-Ask the Agent the three questions from the Overview, through Bob or in the preview panel of watsonx Orchestrate. Through Bob, start each message with `Ask civic_info_agent:`.
+Ask the Agent the three questions of the first prompt in 6.3, through Bob or in the preview panel of watsonx Orchestrate. Through Bob, start each message with `Ask civic_info_agent:`.
 
 ```
 Where is my permit application PP-2026-0412?
@@ -224,7 +224,7 @@ The answers are, in order: under review with a decision due 12 October, a repair
 
 Then try questions that test the limits of the Tools:
 
-- Leave out the number: "Where is my permit application?" The Agent asks for it.
+- Leave out the number, in a new conversation so that the Agent does not reuse the one above: "Where is my permit application?" The Agent asks for it.
 - Use a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
 - Ask for a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the building permit guide. Keep this question for the next part.
 - Name a street without needing a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool: the question names a street, but nothing in it needs the collection day.
@@ -239,13 +239,13 @@ Bob now shows the steps along with the answer: the Agent called `get_permit_stat
 
 Next, ask the shed question with reasoning. The Knowledge Base appears in the steps as a Tool named `city_regulations`, with the query the Agent sent it and the passages it got back. The Agent can answer this question by two routes, the record and the guide, and the steps show which it took: in the test runs, it used both sources on one run and the guide alone on another, and both answers were correct.
 
-When an Agent with Tools answers wrongly, open its reasoning steps. If it called the wrong Tool, a Tool description is unclear; if it called the right Tool with the wrong value, a parameter description is unclear; and if it called no Tool, the instructions do not say when to use one. Tell Bob which one it is, in one sentence, as in 4.9.
+When an Agent with Tools answers wrongly, open its reasoning steps. They show which Tool was called and with which values, and that narrows the search: a wrong Tool points at the Tool descriptions, a wrong value at the parameter descriptions, and no call at all at the instructions. Tell Bob what you found, in one sentence, as in 4.9.
 
 ## 6.9 Deploy the change in Live
 
 Mode: Agent, same conversation.
 
-On the Developer Edition, skip this section. In Live, the Agent still answers that a decision is given within 30 days; the Agent in Draft looks up records. Send the deployment instruction again:
+On the Developer Edition, skip this section. In Live, the Agent still answers that a decision is given within 30 days, or there is no Agent at all if you imported chapter 5 from the walkthrough folder; the Agent in Draft looks up records. Send the deployment instruction again:
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -255,7 +255,7 @@ Bob confirms the deployment. Go to the watsonx Orchestrate chat and ask about PP
 
 ## 6.10 Summary
 
-The Agent now gives answers that are different for every resident: the status of an application, the date of a repair, the collection day of a street. You approved the design and supplied the records; the Tools, the records and the new instructions are files in your project folder, and you have read the Agent's reasoning.
+The Agent now gives answers that depend on the record asked about: the status of an application, the date of a repair, the collection day of a street. You approved the design and supplied the records; the Tools, the records and the new instructions are files in your project folder, and you have read the Agent's reasoning.
 
 - An Orchestrate Tool is a function that the Agent calls while it answers. The Agent decides when to call it, from the Tool's description and the question.
 - The description and the parameter descriptions are written for the Agent. The Agent decides from them, so they are the first place to look when it decides wrongly.
