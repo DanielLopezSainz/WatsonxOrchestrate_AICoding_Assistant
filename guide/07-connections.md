@@ -47,7 +47,7 @@ An Orchestrate Connection is defined without its secret: a name, the kind of cre
 
 **One credential per environment**
 
-The credential is stored per environment: the Connection has one value for Draft and one for Live. You test in Draft with a test key; operations sets the production key in Live when the Agent is deployed. Deploying the Agent does not copy the credential. In this chapter, the Connection is defined for Draft first; section 7.10 adds the Live environment and its key before the deployment.
+Each environment keeps its own credential: Draft holds a test key and Live holds the production key. You test in Draft; operations sets the Live key when the Agent is deployed. Deploying the Agent does not copy the credential. In this chapter, the Connection is defined for Draft first; section 7.10 adds the Live environment and its key before the deployment.
 
 **Shared or personal**
 
@@ -158,7 +158,7 @@ UTOPIA_311_API_KEY=<a word and a number>
 
 On the Developer Edition, the first two lines are empty and only the third matters.
 
-Bob sets the credential from that variable: it runs the ADK command that stores the key on the instance for one environment, and the shell fills in the value, so that the key appears neither in the conversation nor in any file of the project other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
+That variable is how the key reaches the instance without passing through the chat: the ADK command that Bob runs reads it from the shell, so the key appears in no conversation and in no project file other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
 
 ## 7.7 Agent mode: build and test
 
@@ -188,7 +188,7 @@ If the test fails, Bob reads the error and corrects it. With an authentication e
 
 The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed. An empty `connections` folder means that Bob used the commands. In that case, confirm that the Connection exists on the instance: in Ask mode, `Which connections of this project exist on my instance, and is a credential set for them?` Bob lists `utopia_311` with a credential set for Draft and none yet for Live, which section 7.10 completes.
 
-Open `tools/report_issue.py`. It differs from the Tools of chapter 6 in two places. The `@tool` line names the Connection the Tool expects, `utopia_311`. Near the top of the function, one line gets the key from the platform, from a variable that the platform sets when the Tool runs, or through the Connection library; that variable is not your `.env` variable, which served only to put the key on the instance. The function uses the key only in the request header. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
+Open `tools/report_issue.py`. It differs from the Tools of chapter 6 in two places: the `@tool` line names the Connection the Tool expects, `utopia_311`, and near the top of the function, one line gets the key from the platform, from a variable that the platform sets when the Tool runs, or through the Connection library; that variable is not your `.env` variable, which served only to put the key on the instance. The function uses the key only in the request header. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
 Open `agents/civic_info_agent.yaml`. Under `tools`, a fourth name appears, `report_issue`. The instructions have a new paragraph: when a resident asks to report a road problem, get the street and the description, call the Tool, and answer with the request number, or with the Roads and Infrastructure contact if the report could not be sent.
 
@@ -208,7 +208,7 @@ The Agent reports it and answers with a request number in the RQ-2026 format, sa
 - Put everything in one sentence: "Report a damaged road sign at the corner of Mill Road and Station Road, it has been down since Monday." The Agent makes one report and returns one number.
 - Check the number you were given: "Has my report RQ-2026-NNNN been scheduled?", with the number from the first answer. The Agent looks it up with the chapter 6 Tool and finds no record, because the test service keeps nothing (a real 311 system would have it), so it answers that it has no record under that number and gives the contact.
 
-Ask the first question again with reasoning. The steps show the call to `report_issue` with the street and the description, and the Tool's result with the request number. The key is not in the steps: the Tool received it from the Connection and did not return it.
+Ask the first question again with reasoning. The steps show the call to `report_issue` with the street and the description, and the Tool's result with the request number. The Tool received the key from the Connection and did not return it; nothing in the steps shows it.
 
 ## 7.10 Deploy the change in Live
 
