@@ -173,7 +173,7 @@ If the test fails with an authentication error, the credential was saved under t
 
 ## 7.8 What Bob built
 
-The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed.
+The Connection is defined in one of two places, depending on the run: a file `utopia_311.yaml` in the `connections` folder, or two commands in Bob's import script, one that creates the Connection and one that configures it. Either way the definition is a few lines: the name, the kind of credential, an API key, the type, `team`, and the Draft environment. It contains no key, so it can be shared and committed. If the `connections` folder is empty, confirm that the Connection exists on the instance: in Ask mode, `Which connections of this project exist on my instance, and is a credential set for them?` Bob lists `utopia_311` with its credential set for Draft.
 
 Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_311`. And near the top of the function, one line gets the key from the platform, through the Connection library or from a variable that the platform sets, and the function uses it in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
