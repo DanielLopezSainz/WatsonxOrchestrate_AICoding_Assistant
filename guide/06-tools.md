@@ -24,7 +24,7 @@ Check that both are there: in Ask mode, ask `Which agents and knowledge bases ex
 
 ## 6.2 What an Orchestrate Tool is
 
-Instructions hold what the Agent knows. A Knowledge Base holds what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. An Orchestrate Tool is a function that the Agent calls while it answers, to fetch information or to act.
+Instructions hold what the Agent knows; the Knowledge Base, what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. An Orchestrate Tool is a function that the Agent calls while it answers, to fetch information or to act.
 
 An Orchestrate Tool has three parts, and the Agent uses each one in turn.
 
@@ -164,7 +164,7 @@ Each tool must be uploaded to the instance together with its record file.
 Change the design so that it says how.
 ```
 
-Bob adds the mechanism to the design and explains it: the import command names the `tools` folder as the package root, and the whole folder goes to the instance with the Tool. Approve the design when it says what you mean.
+Bob adds the mechanism to the design and explains it: the import command names the `tools` folder as the package root, and the whole folder goes to the instance with the Tool. When the design says what you mean, go on to 6.6.
 
 ## 6.6 Agent mode: build and test
 
@@ -224,10 +224,10 @@ The answers are, in order: under review with a decision due 12 October, a repair
 
 Then try questions that test the limits of the Tools:
 
-- Without a number: "Where is my permit application?" The Agent asks for it.
-- With a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
-- With a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the building permit guide. Keep this question for the next part.
-- With a street name but no need for a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool: the question names a street, but nothing in it needs the collection day.
+- Leave out the number: "Where is my permit application?" The Agent asks for it.
+- Use a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
+- Ask for a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the building permit guide. Keep this question for the next part.
+- Name a street without needing a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool: the question names a street, but nothing in it needs the collection day.
 
 To read how the Agent got there, ask the first question again through Bob, with two more words:
 
