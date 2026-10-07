@@ -154,7 +154,7 @@ Open Bob's MCP tab (chapter 2, section 2.3). The registry is listed as a server,
 
 Open `agents/civic_info_agent.yaml`. Under `toolkits`, the name `utopia_addresses`. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the registry does not know.
 
-Save your work: `Commit everything I changed with a short message saying what was built, and push.`
+Save your work: `Commit everything I changed with a short message saying what was built.`
 
 ## 8.8 Try it
 
