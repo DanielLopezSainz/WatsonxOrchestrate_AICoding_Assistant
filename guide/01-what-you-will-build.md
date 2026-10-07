@@ -20,7 +20,7 @@ If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scena
 
 ## 1.1 The 2 main characters
 
-The guide uses two IBM products, each with a different job.
+IBM Bob and IBM watsonx Orchestrate are the two products of this guide, each with a different job.
 
 | Product | What it is | Its job in this guide |
 |---|---|---|
@@ -45,13 +45,13 @@ An Orchestrate Agent is built from a small set of components. Each component is 
 | Orchestrate Flows | Fixed sequences of steps that run the same way every time |
 | Orchestrate Channels | The interfaces through which users reach an Agent, such as a chat window on a web page |
 
-Everything that you create is stored first in the Draft environment of the instance, where only you can use it; deployment in Live makes it available to its users.
+Everything that you create is stored first in the Draft environment of the instance, where only you can use it. Deployment in Live makes it available to its users.
 
 ## 1.3 The scenario
 
-The guide builds one system from start to finish: CivicPulse, the citizen services platform of the City of Utopia. The scenario gives every component of an Orchestrate Agent a use: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route between.
+CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. The scenario gives every component of an Orchestrate Agent a use: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route between.
 
-The city, its departments, its residents and all its data are fictional. Three departments are used throughout the guide:
+The city, its departments, its residents and all its data are fictional; three departments are used throughout the guide:
 
 | Department | What it handles |
 |---|---|
