@@ -80,7 +80,8 @@ that I invent, since the test service accepts anything, but it is stored and
 used exactly as the real key will be. The key must never appear in the chat,
 in the project files or in the tool's code. It is in my .env file, as the
 variable UTOPIA_311_API_KEY, and the credential is set from that variable
-without displaying its value.
+with the orchestrate command in a shell that reads my .env file, so that the
+value never appears in the chat, in a tool call or in a file.
 
 One tool, report_issue, which receives the street and a free-text description
 of the problem, with no category and no resident details, since reports are
@@ -121,7 +122,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 | Content | What to check |
 |---|---|
 | The Connection | Its name, `utopia_311`; the kind, an API key sent in the header `x-api-key`; the address of the service; shared by the team; defined for Draft. Live is added in 7.10 |
-| The credential | The design says that the credential is set from the variable `UTOPIA_311_API_KEY` in `.env`, after the import, without displaying it, and that no other file and no prompt contains it |
+| The credential | The design says that the credential is set from the variable `UTOPIA_311_API_KEY` in `.env`, with the orchestrate command in a shell, after the import, and that no other file and no prompt contains the value |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
 | The build order | Connection and its credential from `.env`, Tool, Agent, then the test |
