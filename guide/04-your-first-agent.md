@@ -99,7 +99,7 @@ Bob confirms the answers and may propose to switch to Agent mode and create the 
 
 Mode: Plan, in the same conversation.
 
-In Plan mode, in the same conversation, Bob writes a design document that defines the Agent.
+In Plan mode, Bob writes a design document that defines the Agent.
 
 Stay in the same conversation, so that Bob keeps everything that you have told it, and switch to Plan mode. The prompt is one line, an instruction (chapter 3, type 2).
 
@@ -107,7 +107,7 @@ Stay in the same conversation, so that Bob keeps everything that you have told i
 Write the design for this agent into design/civic-info-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another, but the file must contain the following:
+Bob writes the file after you approve the request, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another, but the file must contain the following:
 
 | Content | What to check |
 |---|---|
@@ -135,7 +135,7 @@ Add a welcome message and two starter prompts to the design: the street light
 question and the building permit question.
 ```
 
-Bob revises the file, summarises what it changed, and waits again. Do not take the summary on trust. Open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the Agent covers before typing, and the two starter prompts should be the two questions you asked for. A detail that is wrong in the design is wrong in the Agent.
+Bob revises the file and waits again, with a summary of what it changed. Do not take the summary on trust: open the design in the File Explorer and read the new lines. The welcome message should name the three departments, so that a resident knows what the Agent covers before typing, and the two starter prompts should be the two questions you asked for. A detail that is wrong in the design is wrong in the Agent.
 
 When the design says what you mean, it is approved. There is nothing to send: the approval is the first line of the prompt in 4.6.
 
@@ -179,7 +179,7 @@ The build takes Bob a minute or two. In the run, Bob:
 
 ## 4.7 Read the definition
 
-The Agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, you had to write this file by hand. Now Bob writes it for you, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
+The Agent has been created in watsonx Orchestrate. What you see in Bob is its definition file, `agents/civic_info_agent.yaml`, which Bob wrote and imported. Before Bob, you wrote this file by hand; now Bob writes it for you, and you read it. Open it in the File Explorer. The table lists the fields that this guide refers to.
 
 | Field | Purpose |
 |---|---|
@@ -197,7 +197,7 @@ The file can contain other fields.
 
 Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built, and push.` From now on, any change to this file can be undone.
 
-Read the file against the design. The two usually match, but not always. In the run, the design named a display name, Utopia city information, and the file did not carry it, so the Agent appeared under its internal name. Section 4.9 corrects this together with the other correction of the chapter.
+Read the file against the design. The two usually match, but not always. In the run, the design named a display name, Utopia city information, and the file did not carry it, so the Agent appeared under its internal name. The correction in 4.9 includes this.
 
 ## 4.8 Meet your Agent
 
@@ -223,7 +223,7 @@ Residents will not write their questions as neatly as the design does. Try these
 
 Read each answer with the facts of 4.2 next to you. For the first four, the right department and its contact should be there, the flooded street should get the urgent line, and the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up should be answered as a question about waste collection, with the Waste and Recycling contact, without the Agent asking what "it" refers to.
 
-Keep a note of any answer that contains something not in the facts. Section 4.9 shows what to do about it.
+Keep a note of any answer that contains something not in the facts; 4.9 shows what to do about it.
 
 The Agent exists in Draft only: you can use it, and residents cannot, until the end of the next section.
 
@@ -250,7 +250,7 @@ display name "Utopia city information", as in the design. Import the agent
 again and ask it the same question.
 ```
 
-Bob changes the definition file, imports it again, and asks the question. Bob may also add the new hours to the design, so that the design and the Agent stay the same. The Agent now answers with the hours. Importing a file with the name of an existing Agent replaces that Agent instead of creating a second one.
+Bob changes the definition file and imports it again before it asks the question. Bob may also add the new hours to the design, so that the design and the Agent stay the same. The Agent now answers with the hours. Importing a file with the name of an existing Agent replaces that Agent instead of creating a second one.
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The Agent should now say that it does not have that information and give the department's contact.
 
@@ -278,4 +278,4 @@ A resident of Utopia can now ask who to tell about a dark street light and get t
 
 You built the first Agent, tested it, caught it inventing an answer, corrected it and deployed it in Live, in about one hour and without writing code. Every Orchestrate Agent in the rest of the guide is made the same way, and only the components change.
 
-The Agent knows twenty lines of facts, and a city has far more than that. Can a shed be built without a permit? Which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, and no Agent instruction can hold pages like these. In chapter 5, Bob gives those documents to the Agent as an Orchestrate Knowledge Base, and the Agent answers from them and names the document.
+The Agent knows twenty lines of facts, and a city has far more than that. Can a shed be built without a permit, and which bin does a broken mirror go in? How loud can a party be after ten at night? The answers are in the city's guides and regulations, and no Agent instruction can hold pages like these. In chapter 5, Bob gives those documents to the Agent as an Orchestrate Knowledge Base, and the Agent answers from them and names the document.
