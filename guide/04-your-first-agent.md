@@ -161,7 +161,7 @@ Start a new conversation with the plus sign at the top of the chat panel, then s
 
 In the current conversation, Bob has your request, its first proposal, the facts, a complete Agent that it drafted before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
-For an Agent this small, the difference rarely shows. It matters from chapter 9 onwards, where a design covers four Agents and the discussion behind it is long. It is also the practice that Bob's documentation describes for moving from a plan to its implementation.
+For an Agent this small, the difference rarely shows. The difference matters from chapter 9 onwards, where a design covers four Agents and the discussion behind it is long, and Bob's documentation describes the same practice for moving from a plan to its implementation.
 
 The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read.
 
@@ -225,7 +225,7 @@ Read each answer with the facts of 4.2 next to you. For the first four, the righ
 
 Keep a note of any answer that contains something not in the facts; 4.9 shows what to do about it.
 
-The Agent exists in Draft only: you can use it, and residents cannot, until the end of the next section.
+Until the end of the next section, the Agent exists in Draft only, where you can use it and residents cannot.
 
 ## 4.9 Correct a wrong answer
 
@@ -250,7 +250,7 @@ display name "Utopia city information", as in the design. Import the agent
 again and ask it the same question.
 ```
 
-Bob changes the definition file and imports it again before it asks the question. Bob may also add the new hours to the design, so that the design and the Agent stay the same. The Agent now answers with the hours. Importing a file with the name of an existing Agent replaces that Agent instead of creating a second one.
+Bob changes the definition file and imports it again before it asks the question. The design may get the new hours as well, so that the design and the Agent stay the same. The Agent now answers with the hours. Importing a file with the name of an existing Agent replaces that Agent instead of creating a second one.
 
 Ask one more question that the facts do not cover, for example "Who is the head of the Permits department?". The Agent should now say that it does not have that information and give the department's contact.
 
