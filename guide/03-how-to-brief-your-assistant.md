@@ -34,9 +34,9 @@ A mode determines what Bob is allowed to do in a conversation. Bob has three mod
 
 ### Ask mode
 
-Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands. Use Ask mode when you need information without making changes.
+Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands; use Ask mode when you need information without making changes.
 
-In this guide, every Agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode. This guide starts in Ask mode so that no file is written before the design is reviewed.
+In this guide, every Agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode, but this guide starts in Ask mode so that no file is written before the design is reviewed.
 
 Example. The same Agent is used in all three modes below: an Agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
@@ -54,7 +54,7 @@ Bob queries the instance, then answers with three parts: what it understood, a t
 
 Plan mode is for planning a task. Bob analyses the requirements, researches the project and designs the implementation steps. It can do everything that Ask mode allows, and it can also write files; it cannot run commands. It asks clarifying questions, requests your approval before writing the plan files, and writes them into the project as Markdown. Review the plan for three things: the scope matches your request, the plan names concrete files and avoids vague language, and nothing is missing. Request revisions in the same conversation.
 
-The plan in this guide is a design document in the `design` folder, which you approve before Bob builds.
+Bob writes the plan as a design document in the `design` folder; you approve it before anything is built.
 
 Example, continued. In the same conversation, you switch to Plan mode and write:
 
@@ -66,7 +66,7 @@ After you approve writing the file, Bob writes it and shows a summary: what was 
 
 ### Agent mode
 
-Agent mode is for implementing an idea or a plan. Bob can read and write files, run commands, use the servers, switch modes, and delegate work to subagents. Use Agent mode for implementing features, fixing bugs, and any task that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
+Agent mode is for implementing an idea or a plan. It has the fewest restrictions: Bob reads and writes files, runs commands, uses the servers, switches modes, and can delegate work to subagents. Reserve it for features, bug fixes, and anything that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
 
 In this guide, Agent mode is where Bob writes the definition and Tool files, imports them, tests the Agent, reads the Agent's reasoning, corrects what failed, and reports.
 
@@ -76,7 +76,7 @@ Example, continued. You start a new conversation, switch to Agent mode, and writ
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, imports it, checks that the Agent appears on the instance, sends the test questions from the design to the Agent, and reports the answers. The Agent now exists in draft on your instance. Chapter 4 runs this example in full.
+Bob writes `agents/civic_info_agent.yaml`, asks for approval to import it, imports it, checks that the Agent appears on the instance, sends the test questions from the design to the Agent, and reports the answers. After this, the Agent exists in Draft on your instance; chapter 4 repeats every step, with the full output.
 
 ### Switching modes
 
@@ -120,7 +120,7 @@ This line is the design approval. Bob builds and tests the Agent, and the Agent 
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 
-Between these two approvals, Bob works without an approval for each file; approving every file in Agent mode slows the work without adding control. After each import, ask Bob to list the artifacts on the instance and confirm that the new one appears. When testing, ask for the reasoning and read it.
+Between these two approvals, Bob works without an approval for each file; approving every file in Agent mode slows the work without adding control. After each import, ask Bob to list the artifacts on the instance and confirm that the new one appears; when testing, ask for the reasoning and read it.
 
 ## 3.3 The types of prompts
 
@@ -278,7 +278,7 @@ Two items in the project folder, both written by the watsonx Orchestrate ADK ext
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
-Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers; Agent mode starts a new one with the design file referenced, since in a long conversation Bob loses track of constraints that it accepted earlier.
+Use one conversation per task. Ask mode and Plan mode share one conversation, because the design needs your answers; Agent mode uses a separate conversation with the design file referenced, because over a long exchange Bob loses track of constraints that it accepted earlier.
 
 ## 3.6 Bob with Git
 
