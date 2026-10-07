@@ -177,16 +177,6 @@ The Connection is defined in one of two places, depending on the run: a file `ut
 
 Open `tools/report_issue.py`. Two things are new compared with the Tools of chapter 6. The `@tool` line names the Connection the Tool expects, `utopia_311`. And near the top of the function, one line gets the key from the platform, through the Connection library or from a variable that the platform sets, and the function uses it in the request header and nowhere else. The function then sends the report, checks that the echo contains the header, builds the request number, and returns it.
 
-Now read the messages that the Tool returns when something fails. In the run behind this chapter, Bob wrote the key into one of them: "API key verification failed. Expected <the key>, got ...". A message returned by a Tool goes to the Agent, and from the Agent to the chat, so this one line would have shown the key to a resident the first time the check failed. Nobody noticed, because the test succeeded. If your Tool has such a message, correct it, Agent mode, same conversation:
-
-```
-The failure message of report_issue contains the API key. No message that the
-tool returns may contain the key. Remove it, import the tool again, and test
-the pothole report again.
-```
-
-Reading the code that handles failure is a habit worth keeping: it is the part that tests rarely reach.
-
 Open `agents/civic_info_agent.yaml`. Under `tools`, a fourth name, `report_issue`. The instructions have a new paragraph: when a resident asks to report a road problem, get the street and the description, call the Tool, and answer with the request number, or with the Roads and Infrastructure contact if the report could not be sent.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
