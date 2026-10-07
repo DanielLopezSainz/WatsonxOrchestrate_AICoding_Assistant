@@ -59,7 +59,7 @@ Step 3. Initialise the workspace.
 4. If Bob asks permission to install `uv`, accept. The extension needs `uv` to create the Python environment. If `uv` cannot be installed, for example on a machine where installations are restricted, the extension displays the address of the manual installation instructions; install `uv` and click Initialise Workspace again.
 5. Wait. A progress message counts through the steps; the extension installs a Python environment and the ADK inside the folder, which takes one to two minutes.
 
-You should see: the panel now has two sections. Explorer lists Agents, Tools, Connections, Knowledge Bases and Toolkits. Environment Manager shows an Environment dropdown and an Add button.
+You should see: the panel now has two sections. Explorer lists Agents, Tools, Connections, Knowledge Bases and Toolkits; Environment Manager shows an Environment dropdown and an Add button.
 
 Step 4. Send Bob its starting message.
 
@@ -78,7 +78,7 @@ The message tells Bob to switch to Agent mode, to load the Orchestrate skills, a
 3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
 ```
 
-You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. The number of skills depends on the version of the ADK; version 2.17 provides eight. The skills are stored in `.bob/skills` in the project folder. Chapter 12 uses them.
+You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. The number of skills depends on the version of the ADK; version 2.17 provides eight. Chapter 12 uses the skills, which are stored in `.bob/skills` in the project folder.
 
 Step 5. Connect to your instance.
 
@@ -150,7 +150,7 @@ The Environment Manager, below the Explorer, is where you activate an environmen
 
 ### Source Control
 
-Open it with the branch icon in the left bar. It lists the files that changed since the last commit. From this view you can stage files, type a commit message, commit, and synchronise with the remote repository, by clicking.
+Open it with the branch icon in the left bar; it lists the files that changed since the last commit. From this view you can stage files, type a commit message, commit, and synchronise with the remote repository, by clicking.
 
 Use Source Control to see what Bob changed in the project folder and to keep your work in git. Chapter 3, section 3.6, describes how to do the same operations by asking Bob.
 
@@ -158,7 +158,7 @@ Use Source Control to see what Bob changed in the project folder and to keep you
 
 ### Bob chat panel
 
-Open it with the Bob icon. It is where you write prompts and read Bob's answers. Five controls in this panel are used throughout the guide.
+The Bob icon opens the panel where you write prompts and read Bob's answers. Five controls in this panel are used throughout the guide.
 
 | Control | Location | Purpose |
 |---|---|---|
@@ -201,11 +201,11 @@ The following components appear by name in Bob's messages and in the MCP tab.
 Two settings determine when Bob asks for approval.
 
 - The Permissions button, next to the mode dropdown at the bottom of the chat input, opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands. Leave Edit and Execute off, so that Bob asks before writing files or running commands.
-- The Always allow switch on each operation in the MCP tab approves that operation permanently. Step 7 approved the eleven operations that only read from the instance or send a test message. Every other operation, such as importing, creating, removing or setting credentials, still requires approval.
+- The Always allow switch on each operation in the MCP tab approves that operation permanently; step 7 approved the eleven operations that only read from the instance or send a test message. Every other operation, such as importing, creating, removing or setting credentials, still requires approval.
 
 ## 2.6 Other AI coding assistants
 
-The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps. Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server. This guide covers Bob only; for other assistants, follow the instructions at that address.
+The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps; Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server. This guide covers Bob only; for other assistants, follow the instructions at that address.
 
 ## 2.7 Checklist
 
