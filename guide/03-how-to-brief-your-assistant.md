@@ -22,7 +22,7 @@ What to read, depending on your experience:
 | Use ChatGPT, Claude or a similar assistant, but not Bob | 3.1, 3.2 and 3.5, which are specific to Bob and to watsonx Orchestrate | 3.3 and 3.4, on writing prompts, and 3.6 if you know git |
 | Already use Bob in its three modes | 3.2 and 3.5 | The other sections |
 
-## 3.1 Bob proposed workflow
+## 3.1 The recommended workflow
 
 You describe the problem and take the decisions; Bob writes the files, imports and tests them, and reports the result, including failures. Follow these practices when you work with Bob:
 
@@ -36,7 +36,7 @@ A mode determines what Bob is allowed to do in a conversation. Bob has three mod
 
 Ask mode is for asking questions and getting explanations. In this mode, Bob can read files, use the connected servers, which for Orchestrate means querying the instance and searching the documentation, and load skills. Bob cannot write files or run commands; use Ask mode when you need information without making changes.
 
-In this guide, every Agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode, but this guide starts in Ask mode so that no file is written before the design is reviewed.
+In this guide, every Agent project starts in Ask mode. Bob restates the request, lists what already exists on the instance, and asks the questions that must be answered before a design can be written. Bob's standard workflow starts new work in Plan mode, but this guide starts in Ask mode so that the request is understood before the design is written.
 
 Example. The same Agent is used in all three modes below: an Agent that tells the residents of the City of Utopia which city department handles their question. In Ask mode, you write:
 
@@ -66,7 +66,7 @@ After you approve writing the file, Bob writes it and shows a summary: what was 
 
 ### Agent mode
 
-Agent mode is for implementing an idea or a plan. It has the fewest restrictions: Bob reads and writes files, runs commands, uses the servers, switches modes, and can delegate work to subagents. Reserve it for features, bug fixes, and anything that modifies files. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
+Agent mode is for implementing an idea or a plan. It has the fewest restrictions: Bob reads and writes files, runs commands, uses the servers, switches modes, and can delegate work to subagents. Reserve it for building: features, bug fixes, and anything that changes the instance. Start Agent mode in a new conversation, with a prompt that references the plan with an @ mention.
 
 In this guide, Agent mode is where Bob writes the definition and Tool files, imports them, tests the Agent, reads the Agent's reasoning, corrects what failed, and reports.
 
@@ -93,7 +93,7 @@ The three modes as this guide uses them:
 |---|---|---|---|
 | Ask | Understand the request | Read files, query the instance, search the documentation | A restatement of the request, the open questions, an inventory of the instance |
 | Plan | Write the design | The above, and write files | A design document, awaiting your approval |
-| Agent | Build and test | Everything | The artifacts in draft on the instance, a test transcript, a report |
+| Agent | Build and test | Everything | The artifacts in Draft on the instance, a test transcript, a report |
 
 ## 3.2 What you approve, and when
 
@@ -101,7 +101,7 @@ You approve twice in every Agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which Agents exist and what each one is for, which Tools each Agent has, which external systems need a Connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the Agent is built and tested. Everything that Bob creates is stored in the draft environment of the instance. Nothing reaches end users until an Agent is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
+The deployment approval takes place when the Agent is built and tested. Every Agent, Tool and Knowledge Base that Bob imports is stored in the Draft environment of the instance. An Agent reaches its users only when it is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine, so switch only when you mean to.
 
 Example. In chapter 4, Bob writes the design for the city information Agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -116,11 +116,11 @@ Bob revises the file and waits again. When the design is complete, you start a n
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-This line is the design approval. Bob builds and tests the Agent, and the Agent exists in draft. For the deployment approval, in chapter 11, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, only you can see the Agent.
+This line is the design approval. Bob builds and tests the Agent, and the Agent exists in Draft. For the deployment approval, in chapter 11, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the Agent is in Draft, where only the builders of the instance reach it.
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 
-Between these two approvals, Bob works without an approval for each file; approving every file in Agent mode slows the work without adding control. After each import, ask Bob to list the artifacts on the instance and confirm that the new one appears; when testing, ask for the reasoning and read it.
+Between these two approvals, Bob requests approval for each file it writes and each command it runs, as chapter 2 configured; approve each request as it comes, and read the file that Bob proposes to import. After each import, ask Bob to list the artifacts on the instance and confirm that the new one appears; when testing, ask for the reasoning and read it.
 
 ## 3.3 The types of prompts
 
@@ -147,7 +147,7 @@ Why did civic_info_agent answer that permit BP-2041 was unknown in the last test
 
 Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
 
-Name the file or the test that Bob must examine; otherwise, Bob answers from its general knowledge.
+Name the file or the test that Bob must examine; otherwise, Bob may answer from its general knowledge.
 
 ### Type 2: the instruction
 
@@ -188,9 +188,9 @@ For an action with several steps, or one whose result must be checked in a parti
 
 ### Type 3: the structured prompt
 
-A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer; the same content can be written as labelled lines or as running text, and Bob reads the content, whatever the labels.
+A structured prompt is divided into parts, each answering one question that Bob would otherwise have to guess. It has two uses in this guide, with a template for each. The templates are checklists for the writer: the same content can be sent as labelled lines or as running text.
 
-To describe what you want at the start of an Agent project, in Ask mode. The template answers six questions. For any question left unanswered, Bob makes an assumption and does not report it.
+The first use is to describe what you want at the start of an Agent project, in Ask mode. The template answers six questions. A question left unanswered comes back from Bob as a question, or is settled by an assumption that Bob does not report.
 
 ```
 Users:        who will talk to the agent, and in which language
@@ -201,25 +201,25 @@ Out of scope: what it must not do, and what must not be built yet
 Done when:    the questions it must answer correctly, and what a correct answer contains
 ```
 
-A shorter form of the same template is also common, with a title, a description, example prompts and the business value:
+A shorter form, with a title, a description, example prompts and the business value, is enough to open the conversation:
 
 ```
 I would like to develop an AI agent with watsonx Orchestrate. Here is my use case:
 
-Title: Market analysis agent
-Description: Tracks financial news, analyzes historical data, and forecasts trends.
+Title: Permit status agent
+Description: Answers residents' questions about the status of their building permit applications.
 Example prompts:
-  "What's the recent trend in tech stocks?"
-  "How has IBM's stock performed over the last week?"
-Value: productivity improvement of a financial advisor by 10%
+  "Where is my permit application PP-2026-0412?"
+  "How long does a permit review take?"
+Value: fewer calls to the Permits and Planning desk about applications in progress
 
 Please propose the agent, tools, knowledge base and connections first
 and wait for my approval before making changes.
 ```
 
-A description that answers the six questions receives few questions back from Bob. A description that answers only two or three, like the first prompt of chapter 4, makes Bob ask the rest.
+The first prompt of chapter 4 answers only two or three of the six questions, and Bob asks the rest.
 
-To specify a task in Agent mode, when the task creates or changes something on the instance and the check is specific to the task. The template has six parts:
+The second use is to specify a task in Agent mode, when the task creates or changes something on the instance and the check is specific to the task. The template has six parts:
 
 ```
 Goal:        what must exist when the task is done, in one sentence
@@ -230,25 +230,26 @@ Verify:      how Bob proves that the task worked, in a way that you can repeat
 Stop:        the condition under which Bob must ask you instead of continuing
 ```
 
-Example, from the Agent-mode step of chapter 6:
+Example, for the permit Tool of chapter 6, written as if no design existed:
 
 ```
 Goal: the permit status tool exists on the instance and civic_info_agent can call it.
 Context: @tools/get_permit_status.py and @agents/civic_info_agent.yaml.
 Constraints: import the tool from that file. Keep the name get_permit_status.
-  Do not change the agent's instructions.
+  Add one paragraph to the agent's instructions saying when to call it; change
+  nothing else.
 Deliverable: the tool imported, the agent re-imported, and one chat asking
-  "What is the status of permit BP-2041?" with reasoning included.
-Verify: the list of tools shows get_permit_status with permit_id in its input
+  "Where is my permit application PP-2026-0412?" with reasoning included.
+Verify: the list of tools shows get_permit_status with permit_number in its input
   schema, and the chat reasoning shows one call to it returning "under review".
 Stop: if the import returns an error, show me the exact text and wait.
 ```
 
-Each part removes one reason for Bob to guess. Verify and Stop are recommended for any prompt that changes the instance. Omit a part when an approved design already states it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
+Verify and Stop are recommended for any prompt that changes the instance. Omit a part when an approved design already states it; in chapter 4, the Agent-mode prompt is a single instruction for this reason.
 
 ## 3.4 Prompts, weak and better
 
-A weak prompt leaves Bob to make assumptions: it does not name the files, the Agent or the data involved, and it does not state the expected result. Bob completes the missing information with its own choices and does not report them. A better prompt supplies that information: it references the files with @ mentions, names the Agent and the data, and states what Bob must return and, where the change matters, how to check it.
+A weak prompt does not name the files, the Agent or the data involved, and does not state the expected result; Bob fills the gaps with choices of its own. A better prompt references the files with @ mentions, names the Agent and the data, and states what Bob must return and, where the change matters, how to check it.
 
 The following table shows a weak prompt and a better prompt for the same situation.
 
@@ -257,24 +258,22 @@ The following table shows a weak prompt and a better prompt for the same situati
 | Starting an Agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing Tool referenced with @, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent Tools and import before you have seen a name |
 | Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the Agent and the form of the answer |
 | Adding one Tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names neither a file nor an Agent, and gives no proof of success. Bob might create the Tool from scratch, rename it, or report success as soon as the import returns |
-| Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the cause is in the reasoning |
-| Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the Agent's name, purpose and Tools listed, ending "Return only the file" | Every property is listed. The weak prompt produces a plausible file with an invented name |
-| Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it changes something arbitrary |
-
-The better prompts name the real files, Agents and data instead of describing them, and they state what Bob must return.
+| Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the reasoning is where to look for it |
+| Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the Agent's name, purpose and Tools listed, ending "Return only the file" | The name, the purpose and the Tools are stated. The weak prompt produces a plausible file with an invented name |
+| Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it guesses what was wrong |
 
 Prompts to avoid:
 
 | Prompt | Why it fails | What to write instead |
 |---|---|---|
 | "Build me a citizen services agent" | Bob invents the users, the facts, the Tools and the names | The structured prompt with the six questions, in Ask mode |
-| "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, the cause cannot be traced | One component per iteration, as the walkthroughs do |
-| "It does not work, fix it" | Bob changes the first thing it finds | Request the reasoning of the failing test first |
-| "Make it production ready" | Everything that Bob creates is a draft. Deployment is a separate approval | Build and test in draft; deploy in chapter 11 |
+| "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, finding the cause takes much longer | One component per iteration, as the walkthroughs do |
+| "It does not work, fix it" | Bob guesses what is wrong and changes that | Request the reasoning of the failing test first |
+| "Make it production ready" | The prompt names no check that Bob can perform, and what Bob builds stays in Draft until you deploy it | Build and test in Draft; deploy in chapter 11 |
 
 ## 3.5 What Bob reads from the project folder
 
-Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. Neither file needs editing.
+Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. Neither needs editing.
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 
@@ -282,7 +281,7 @@ Use one conversation per task. Ask mode and Plan mode share one conversation, be
 
 ## 3.6 Bob with Git
 
-Git keeps every version of the files that Bob writes into the project folder, the designs and the definitions. Bob runs the git commands: you describe the operation in a sentence, in Agent mode, and Bob shows the command it is about to run and asks for your approval. When you do not specify a commit message, Bob writes one from the files that changed.
+Git keeps a history of the files that Bob writes into the project folder, the designs and the definitions, one version per commit. Bob runs the git commands: you describe the operation in a sentence, in Agent mode, and Bob shows the command it is about to run and asks for your approval. When you do not specify a commit message, Bob writes one from the files that changed.
 
 The project folder is already a git repository, because it is a clone of the guide's repository. One thing is needed before the first commit: a repository of your own to push to, because readers cannot write to the guide's repository. Create an empty repository in your git account, copy its address, and send:
 
@@ -302,11 +301,11 @@ After that, the following requests cover daily use. Each one is a plain instruct
 | See what changed since the last save | `Show me which files changed since the last commit and summarise the changes.` |
 | See the history | `List the last ten commits with their dates and messages.` |
 | Get the latest version of the guide | `Merge the main branch of the remote named guide into my current branch. Do not rebase.` |
-| Undo the last change to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
-| Go back to an earlier version | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
+| Discard the uncommitted changes to a file | `Restore agents/civic_info_agent.yaml to the version in the last commit.` |
+| See an earlier version of a file | `Show me what agents/civic_info_agent.yaml looked like three commits ago.` |
 | Work on a change without touching the main version | `Create a branch named roads-hours and switch to it.` |
 | Bring a finished branch back | `Switch to the main branch and merge roads-hours into it, then push.` |
 
 If a merge produces conflicts, Bob stops and reports them instead of continuing. The guide only ever changes the `guide` and `walkthroughs` folders and the README, and your work lives in the other folders, so a conflict arises only if you edit a chapter file in your clone. Keep notes outside the `guide` folder.
 
-Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and never leave your computer. The Source Control view, described in section 2.3, provides the same operations by clicking.
+Files that are specific to your machine, the Python environment, Bob's settings folder and `.env`, are ignored by git and are not committed. The Source Control view, described in section 2.3, provides the same operations by clicking.
