@@ -10,7 +10,7 @@ In this chapter, Bob creates an Orchestrate Tool that sends the report to the ci
 
 The Orchestrate Connection is the component introduced in this chapter. Bob creates both the Orchestrate Connection and the Orchestrate Tool. With Orchestrate Tools and Orchestrate Connections, the Agent can update external systems, not only read them.
 
-Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_311.yaml into my instance, import the tool in walkthroughs/ch07/tools packaged with its folder, import walkthroughs/ch07/agents/civic_info_agent.yaml, and set the Draft credential of the connection from the variable UTOPIA_311_API_KEY in my .env file without displaying its value.`
+Skip this chapter if you have already given a Tool a credential through a Connection with Bob. To continue with chapter 8 without building it, add the line that section 7.6 describes to your `.env` file, then send Bob these instructions in Agent mode: `Import walkthroughs/ch07/connections/utopia_311.yaml into my instance, import the tool in walkthroughs/ch07/tools with the connection named, import walkthroughs/ch07/agents/civic_info_agent.yaml, and set the Draft credential of the connection from the variable UTOPIA_311_API_KEY in my .env file without displaying its value.`
 
 ## 7.1 Before you start
 
@@ -124,7 +124,7 @@ Bob writes the file after your approval and summarises it. Open it and check the
 | The credential | The design says that the credential is set from the variable `UTOPIA_311_API_KEY` in `.env`, after the import, without displaying it, and that no other file and no prompt contains it |
 | The Tool | `report_issue`, its two parameters, the Connection it uses, the check on the echoed header, the request number it returns |
 | The change to the Agent | The Tool attached; the instructions say when to use it, what to ask for first, what to answer on success and on failure; everything else unchanged |
-| The build order | Connection, Tool packaged with its folder, Agent, the credential from `.env`, then the test |
+| The build order | Connection and its credential from `.env`, Tool, Agent, then the test |
 
 ## 7.5 Approve the design
 
@@ -155,10 +155,10 @@ pothole report of the Overview.
 
 The second sentence is new: it tells Bob where the key is and that the value must not be shown. Bob:
 
-1. Writes the Connection file in the `connections` folder and imports it.
-2. Writes the Tool in the `tools` folder and imports it, packaged with its folder.
+1. Writes the Connection file in the `connections` folder, imports it, and sets its Draft credential from `.env`.
+2. Writes the Tool in the `tools` folder and imports it, with the Connection named.
 3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
-4. Sets the Draft credential from `.env` and tests the Agent with the pothole report.
+4. Tests the Agent with the pothole report.
 
 Approve each request as it comes. Read the command that sets the credential when Bob asks for approval: it names the variable, not the value.
 
