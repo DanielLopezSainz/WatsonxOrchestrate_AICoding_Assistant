@@ -150,6 +150,8 @@ Bob sets the credential from that variable: it runs the ADK command that stores 
 
 Mode: Agent, in a new conversation.
 
+The build starts in a new conversation for the reason given in chapter 4: the planning conversation holds Bob's first proposal and your corrections, and Bob could build from them instead of from the design you approved. In a new conversation, Bob reads only the design file.
+
 ```
 The design in @design/report-issue-design.md is approved. Build it. Set the
 Draft credential of the connection from the variable UTOPIA_311_API_KEY in
