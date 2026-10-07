@@ -66,7 +66,7 @@ Three things to find in Bob's answer:
 
 - The Connection. Nobody mentioned credentials, and Bob raises them: the test service needs none, but the real 311 system will need an address and an API key, so Bob asks whether to create a Connection now, so that the Tool is wired correctly when the city gives access. Section 7.2 explains what a Connection is. If your Bob does not raise it, the answer below does.
 - What it found on the instance: the Agent, the Knowledge Base, the three Tools, an empty `connections` folder, and no Connection of the project; the instance only has the built-in Connections of the platform, for products such as Salesforce or ServiceNow. Bob also finds the line in the Agent's instructions from chapter 4 that forbids creating requests, and says that it must change.
-- Its questions, which vary from one run to another: what the report contains, as free text or from a fixed list of problem types, and whether residents identify themselves; what the Agent says back, and what reference number it gives, since the test service returns none; whether the Agent confirms the details before sending; and how the real 311 system authenticates.
+- Its questions, which vary from one run to another: what the report contains, as free text or from a fixed list of problem types, and whether residents identify themselves; what the Agent says back, and what reference number it gives, since the test service returns none; whether the Agent confirms the details before sending; whether to write a Python Tool or an OpenAPI Tool; and how the real 311 system authenticates.
 
 These are the questions that an integration engineer asks before connecting anything to an external system: how the system authenticates, what a request carries, and what happens when it fails. Bob asked them without being told that the 311 Call Center needs a key. The second prompt answers them, and names the Connection and the header, so that the chapter and the walkthrough files agree.
 
@@ -83,7 +83,7 @@ variable UTOPIA_311_API_KEY, and the credential is set from that variable
 with the orchestrate command in a shell that reads my .env file, so that the
 value never appears in the chat, in a tool call or in a file.
 
-One tool, report_issue, which receives the street and a free-text description
+One Python tool, report_issue, which receives the street and a free-text description
 of the problem, with no category and no resident details, since reports are
 anonymous. It sends them to the 311 Call Center with the key from the connection
 and returns a request number in the format RQ-2026-NNNN that the tool
