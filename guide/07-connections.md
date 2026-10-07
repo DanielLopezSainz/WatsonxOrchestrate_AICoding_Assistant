@@ -24,13 +24,22 @@ Check that the Tools are there: in Ask mode, ask `Which tools exist on my instan
 
 Almost every Agent that does real work talks to systems that belong to someone else: a database, a ticketing system, a payroll application, a model hosted by a provider, an MCP server, a document index. Each of them has an address and a way to prove who is calling, a user and password, an API key, a token, or a login that the user performs. In watsonx Orchestrate, all of that lives in one kind of asset, the Orchestrate Connection, and the Tools, Toolkits, Models and Knowledge Bases that need a system refer to its Connection by name. When a project grows from one Tool to twenty, the Connections are where an operations team sees, in one list, which systems the Agents reach, with which credentials, in which environment. For an Agent that only reads its instructions, as in chapter 4, they do not exist; from the first external system onwards, they are part of every project.
 
+| Where a Connection is used | Example | In this guide |
+|---|---|---|
+| A Python Tool that calls an API | The 311 Call Center, a CRM, a payment service | This chapter |
+| An OpenAPI Tool, built from the description of an existing REST API | A ticketing system, an HR application | Not built; same Connection |
+| An MCP Toolkit whose server requires a credential | A third-party MCP server with an API key | Chapter 8 |
+| A Model hosted by another provider | A watsonx.ai or OpenAI model used by one Agent | Not built |
+| A Knowledge Base kept in an external store | Documents indexed in Elasticsearch or Milvus | Not built |
+| A login that each user performs | A system where the Agent acts as the person, through OAuth | Not built |
+
 A Tool that calls a service needs two things: the address of the service and a credential that the service accepts. The address can be written in the Tool. A key written in the code would be copied into git, into every copy of the project and into every chat that shows the file, so the credential is kept elsewhere.
 
 An Orchestrate Connection is where watsonx Orchestrate keeps the credential instead. It has a name, the kind of credential (an API key, a user and password, a token, an OAuth login), the address of the service, and the credential itself. A Tool names the Connection it needs. When the Agent calls the Tool, the platform hands the Tool the credential; the Tool uses it and never stores it.
 
 **The definition and the credential**
 
-An Orchestrate Connection is defined in a file, like an Orchestrate Agent or an Orchestrate Tool, and the file contains no secret: the name, the kind, the address. That file is the developer's; it goes into git and Bob imports it. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and the key comes from your `.env` file, the file that chapter 2 created for secrets and that git ignores.
+An Orchestrate Connection is defined without its secret: a name, the kind of credential, the type, the address. Bob writes that definition either as a file in the `connections` folder, like an Agent or a Tool, or as two commands in its import script, one that creates the Connection and one that configures it. Either form is the developer's and goes into git. The credential is set separately, on the instance, by the person who holds it. In a company, that is the team that owns the service or the operations team, and the developer never sees the production key. In this guide you play both roles: Bob imports the Connection, and the key comes from your `.env` file, the file that chapter 2 created for secrets and that git ignores.
 
 **One credential per environment**
 
