@@ -100,7 +100,7 @@ You should see: both marked as connected, and about sixty operations listed unde
 
 Step 7. Set the approvals.
 
-By default, Bob asks for approval before every action, which produces many interruptions per chapter. The following settings let Bob read files and query the instance without asking, and still require approval before any change. Section 2.5 explains both settings.
+By default, Bob asks for approval before every action. The following settings reduce that: Bob reads files and queries the instance without asking, and approval is still required before any change. Section 2.5 explains both settings.
 
 1. Click the Permissions button, next to the mode dropdown at the bottom of the chat input. A list of nine categories opens: Read, Edit, Execute, MCP, Skill, Todo, Subtask, Subagent, Mode. Switch on Read and MCP. Leave Edit and Execute off. The same list is in Bob's settings under Auto-Approve.
 2. Open Bob's settings, MCP tab, expand `watsonx-orchestrate-adk`, and switch on Always allow for these operations only: `check_version`, `list_agents`, `list_tools`, `list_toolkits`, `list_knowledge_bases`, `list_connections`, `list_models`, `export_agent`, `export_tool`, `export_toolkit`, `chat_with_agent`.
@@ -115,7 +115,7 @@ Which agents exist on my instance? List their names and one line each.
 
 You should see: Bob calling the Orchestrate server, shown above its answer, and the same Agents that the Explorer lists. If Bob requests approval first, the settings of step 7 are not in place. If the answer mentions a working directory, a forbidden path or an authentication problem, see section 2.8.
 
-Sections 2.3 and 2.4 describe the views of Bob and what was installed.
+The next two sections name those views and list what the installation placed on your machine.
 
 ## 2.3 The Bob views used in this guide
 
@@ -172,9 +172,9 @@ The Bob icon opens the panel where you write prompts and read Bob's answers. Fiv
 
 ### Bob settings, MCP tab
 
-Open Bob's settings with the settings icon in the Bob chat panel, then select the MCP tab. It lists the servers that Bob is connected to, with their status. Expanding a server shows its operations, each with an Always allow switch, and a control to restart the server.
+Open Bob's settings with the settings icon in the Bob chat panel, then select the MCP tab. It lists the servers that Bob is connected to; expanding one shows its status and its operations, each with an Always allow switch and a control to restart the server.
 
-The MCP tab shows whether the two Orchestrate servers are connected. It is also where you set the Always allow switches and restart a server when an operation fails for no apparent reason.
+The MCP tab is also where you check that both Orchestrate servers are connected, set the Always allow switches, and restart a server when an operation fails for no apparent reason.
 
 [Screenshot: the MCP tab with the two Orchestrate servers and the Always allow switches]
 
