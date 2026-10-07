@@ -34,7 +34,7 @@ An Orchestrate Tool has three parts, and the Agent uses each one in turn.
 | The parameters | The values the Tool needs, each with a name and a description, for example a permit number | Finds them in the question, or asks the resident for them |
 | The result | What the Tool returns, for example the record of one application | Writes the answer from it |
 
-The Agent calls a Tool the way it searches the Knowledge Base: nobody tells it to. The model reads the question, the instructions and the descriptions of its Tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit Tool and contains a permit number, so the Agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the Agent asks for it. The Agent decides only from the description and the parameter names.
+Nobody tells the Agent to call a Tool, just as nobody tells it to search the Knowledge Base. The model reads the question, the instructions and the descriptions of its Tools, and chooses. "Where is my permit application PP-2026-0412?" matches the description of the permit Tool and contains a permit number, so the Agent calls it with that number. "Where is my permit application?" matches the description but has no number, so the Agent asks for it. Only the description and the parameter names count in that decision.
 
 **Kinds of Orchestrate Tools**
 
@@ -45,7 +45,7 @@ The Agent calls a Tool the way it searches the Knowledge Base: nobody tells it t
 | Orchestrate Toolkit | A set of Tools served by an MCP server, like the one that Bob uses to talk to your instance | Chapter 8 |
 | Orchestrate Flow | A sequence of steps with Tools and Agents in it, which the Agent calls as one Tool | Chapter 10 |
 
-A Python Tool consists of a function, a description, parameters and a result, in one file. Section 6.7 describes the file.
+A Python Tool consists of a function, a description, parameters and a result, in one file, which section 6.7 describes.
 
 **The data of this chapter**
 
@@ -53,7 +53,7 @@ In a real city, the permit Tool would query the permit system, over its API, wit
 
 **Reading the Agent's reasoning**
 
-An Agent with Tools makes choices, and watsonx Orchestrate lets you see them. With every answer, the Agent can show the steps it took: the Tool it called, the values it passed, what the Tool returned. In the watsonx Orchestrate chat, the steps are behind a Show Reasoning link next to the answer; through Bob, you ask for them with the words "with reasoning". The Agent's definition has a setting for this, `hide_reasoning`, which is `false` for `civic_info_agent`. Section 6.8 shows how to read them.
+An Agent with Tools makes choices, and watsonx Orchestrate lets you see them. With every answer, the Agent can show the steps it took: the Tool it called, the values it passed, what the Tool returned. In the watsonx Orchestrate chat, the steps are behind a Show Reasoning link next to the answer; through Bob, you ask for them with the words "with reasoning". The Agent's definition has a setting for this, `hide_reasoning`, which is `false` for `civic_info_agent`; section 6.8 shows how to read the steps.
 
 ## 6.3 Ask mode: describe the lookups
 
@@ -191,12 +191,12 @@ Open the `tools` folder in the File Explorer. It has six files: three Python fil
 Open `get_permit_status.py`. Near the bottom of the file is the function `get_permit_status`. Three things around it are written for the Agent:
 
 - The line `@tool` above the function. It tells watsonx Orchestrate that this function is a Tool.
-- The text between triple quotes just under the function name. This is the description: one sentence on what the Tool does, one line on the parameter, one line on the result. These are the words the Agent reads when it decides whether to call the Tool.
-- The parameter `permit_number`. The Agent must find a value for it in the resident's question before it can call the Tool.
+- Just under the function name, the text between triple quotes. This is the description: one sentence on what the Tool does, one line on the parameter, one line on the result. These are the words the Agent reads when it decides whether to call the Tool.
+- `permit_number`, the parameter. The Agent must find a value for it in the resident's question before it can call the Tool.
 
 The rest of the file opens `permits.csv`, finds the line with that number, and returns it.
 
-Open `permits.csv`, which has one line per application. The second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
+`permits.csv` has one line per application. Its second line is PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
 
 Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three Tool names. In the instructions, a new section says when to call each Tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three Tools. The facts and the Knowledge Base are unchanged. Bob may have added starter prompts for the new questions.
 
@@ -237,7 +237,7 @@ Ask civic_info_agent, with reasoning: "Where is my permit application PP-2026-04
 
 Bob now shows the steps along with the answer: the Agent called `get_permit_status` with the permit number `PP-2026-0412`, the Tool returned the record from `permits.csv`, and the Agent wrote the answer from it. In the preview panel of watsonx Orchestrate, every answer has a Show Reasoning link next to it, which opens the same steps: the Tool, its input, its output.
 
-Next, ask the shed question with reasoning. The Knowledge Base appears in the steps as a Tool named `city_regulations`, with the query the Agent sent it and the passages it got back. The Agent can answer this question by two routes, the record and the guide, and the steps show which it took. In the test runs, the Agent used both sources on one run and the guide alone on another; both answers were correct.
+Next, ask the shed question with reasoning. The Knowledge Base appears in the steps as a Tool named `city_regulations`, with the query the Agent sent it and the passages it got back. The Agent can answer this question by two routes, the record and the guide, and the steps show which it took: in the test runs, it used both sources on one run and the guide alone on another, and both answers were correct.
 
 When an Agent with Tools answers wrongly, open its reasoning steps. If it called the wrong Tool, a Tool description is unclear; if it called the right Tool with the wrong value, a parameter description is unclear; and if it called no Tool, the instructions do not say when to use one. Tell Bob which one it is, in one sentence, as in 4.9.
 
