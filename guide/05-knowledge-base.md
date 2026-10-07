@@ -22,7 +22,7 @@ Check that the Agent is there: in Ask mode, ask `Which agents exist on my instan
 
 ## 5.2 What an Orchestrate Knowledge Base is
 
-An Agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year, and the people who write them never see the Agent's instructions. For documents like these, the Agent uses an Orchestrate Knowledge Base.
+An Agent's instructions can hold a page of facts. A city's regulations run to hundreds of pages and change every year, and the people who write them never see the Agent's instructions, so for documents like these the Agent uses an Orchestrate Knowledge Base.
 
 An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate indexes, so that an Agent can search them. When a resident asks a question, the Agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nothing is copied into the instructions.
 
@@ -41,7 +41,7 @@ Do not use a Knowledge Base for information about one person or one case, such a
 **What to know before building one**
 
 - Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A Knowledge Base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
-- Indexing takes time. After the import, the Knowledge Base is not ready at once; the platform processes the documents in the background, and an Agent can use the Knowledge Base only when its status is ready. Bob checks the status during the build.
+- After the import, the Knowledge Base is not ready at once: the platform processes the documents in the background, Bob checks the status during the build, and an Agent can use the Knowledge Base only when its status is ready.
 - A Knowledge Base belongs to the whole instance. The Agent in Draft and the Agent deployed in Live search the same Knowledge Base, so a change to the documents reaches residents as soon as the platform has indexed it, without a deployment.
 - Updating a Knowledge Base is importing it again under the same name. When a regulation changes, you tell Bob what changed; Bob edits the text file and imports the Knowledge Base again, the platform re-indexes it, and the Agents that use it need no change, because they refer to it by name. Adding or removing a document works the same way. The text files in the project folder are the only copy of the documents, since the instance does not give them back; keep them in git.
 - watsonx Orchestrate also has a feature called chat with documents, which lets a user attach a file to one conversation. It is not a Knowledge Base: the file is not indexed for other conversations, and this guide does not use it.
@@ -181,11 +181,11 @@ Open the `knowledge-bases` folder in the File Explorer. It has four files: the t
 
 The documents are three text files: the building permit guide, the waste sorting rules and the noise ordinance. Open the permit guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a shed of 8 square metres that needs no permit and one of 12 that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
 
-The Knowledge Base definition is a short file named `city_regulations.yaml`. It holds the name of the Knowledge Base, a sentence that says what the documents cover, so that the Agent knows when to look inside, and the list of the three documents. It contains no rules and lists which files belong together.
+The Knowledge Base definition, `city_regulations.yaml`, is a short file with no rules in it: it holds the name of the Knowledge Base, a sentence that says what the documents cover, so that the Agent knows when to look inside, and the list of the three documents.
 
-The Agent is the third part. Open `agents/civic_info_agent.yaml` and look for two changes. The name `city_regulations` now appears under `knowledge_base`: the Agent can use the Knowledge Base. And the instructions have a new paragraph that tells the Agent what to do with it: search the documents for any question about a rule, say which document the answer comes from, and say when the documents do not cover a question. Everything from chapter 4, the three departments and their contacts, is still there. The file also has a long block named `chat_with_docs` with `enabled: false`: that is the chat with documents feature of 5.2, switched off as your answer in 5.3 asked.
+In `agents/civic_info_agent.yaml`, the third part, look for two changes. The name `city_regulations` now appears under `knowledge_base`: the Agent can use the Knowledge Base. And the instructions have a new paragraph that tells the Agent what to do with it: search the documents for any question about a rule, say which document the answer comes from, and say when the documents do not cover a question. Everything from chapter 4, the three departments and their contacts, is still there. The file also has a long block named `chat_with_docs` with `enabled: false`: that is the chat with documents feature of 5.2, switched off as your answer in 5.3 asked.
 
-Bob may also have added files of its own, such as import scripts or a test report. They are Bob's additions and are not part of the Agent on the instance.
+Any import scripts or test report that Bob added are not part of the Agent on the instance.
 
 Save your work: `Commit everything I changed with a short message saying what was built, and push.`
 
@@ -196,7 +196,7 @@ There are two ways to talk to an Agent.
 - With Bob, you send the question to the Agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the Agent in your next message. The chapters use this method to test every Agent.
 - In watsonx Orchestrate, you open your instance in the browser and type the question yourself, in the chat that residents use, which talks to the Agent deployed in Live, or in the preview on the Manage Agents page, which talks to the Agent in Draft.
 
-The Agent exists in two environments; know which one you are talking to. A question sent through Bob always reaches the Agent in Draft, the one you are developing. In watsonx Orchestrate you can reach both: the preview on the Manage Agents page talks to the Agent in Draft, and the chat on the landing page talks to the Agent deployed in Live. Right now only the Agent in Draft searches the documents, until you deploy in 5.9.
+The Agent exists in two environments; know which one you are talking to. A question sent through Bob always reaches the Agent in Draft, the one you are developing, and right now only the Agent in Draft searches the documents, until you deploy in 5.9.
 
 Bob wrote the documents in its own words from your rules, so the answers to the questions below are in them. If an answer differs from what the rules say, open the document: if the rule is there, ask Bob to correct the Agent as you did in chapter 4; if it is missing, ask Bob to add it to the document and import the Knowledge Base again.
 
@@ -218,11 +218,11 @@ Read each answer with your rules of 5.3 next to you. The shed needs no permit, b
 
 Then ask as residents do:
 
-- A question that needs a document and the facts: "I want to build a 60 square metre extension. What does it cost, and who do I call?" The fee is 300, and the contact is Permits and Planning.
-- A question with a day in it: "Can the builders work on Sunday morning?" Never on Sundays.
-- A question about a rule that the documents do not cover: "Can I keep chickens in my garden?" The Agent says that it does not have that information.
+- To test a document and the facts together, ask "I want to build a 60 square metre extension. What does it cost, and who do I call?" The fee is 300, and the contact is Permits and Planning.
+- For a question with a day in it, ask "Can the builders work on Sunday morning?" Never on Sundays.
+- For a rule that the documents do not cover, ask "Can I keep chickens in my garden?" The Agent says that it does not have that information.
 
-In watsonx Orchestrate, the Agent that searches the documents is the one in Draft; the Agent deployed in Live is the chapter 4 version until section 5.9. Do not use the chat on the landing page yet: it answers with contacts and hours and no documents. Open your instance in the browser, go to Manage Agents, select Utopia city information, and use the preview panel, which talks to the Agent in Draft. Type the shed question; the same answer comes back, with its document named.
+Do not use the chat on the landing page yet: it answers with contacts and hours and no documents. Open your instance in the browser, go to Manage Agents, select Utopia city information, and type the shed question in the preview panel. The same answer comes back, with its document named.
 
 ## 5.9 Deploy the change in Live
 
