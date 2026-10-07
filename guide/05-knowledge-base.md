@@ -81,7 +81,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know from chapter 4. Its questions cover the format and tone of the documents, the kind of Knowledge Base, the numbers for the rules, and how the Agent's instructions should change. Bob may end with a row of suggested answers to click. They are its own defaults, and some, such as Markdown for the documents, do not match this chapter. Ignore them and type the answer below.
+Bob queries the instance and answers with the three parts you know from chapter 4. Its questions cover the format and tone of the documents, the kind of Knowledge Base, the numbers for the rules, and how the Agent's instructions should change. Bob may end with a row of suggested answers to click. They are its own defaults, and some, such as Markdown for the documents, do not match this chapter, so ignore them and type the answer below.
 
 The second prompt is your answer to Bob's questions. It gives Bob the content of the documents and your decisions, so that Bob can write the design in the next step. The rules in it are the facts of this chapter: everything that the Agent answers about regulations must come from them.
 
@@ -179,11 +179,11 @@ Approve each request as it comes. If an import fails, Bob reads the error and co
 
 Open the `knowledge-bases` folder in the File Explorer. It has four files: the three text documents and the Knowledge Base definition, `city_regulations.yaml`.
 
-The documents are three text files: the building permit guide, the waste sorting rules and the noise ordinance. Open the permit guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a shed of 8 square metres that needs no permit and one of 12 that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
+The three text files are the building permit guide, the waste sorting rules and the noise ordinance. Open the permit guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a shed of 8 square metres that needs no permit and one of 12 that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
 
 The Knowledge Base definition, `city_regulations.yaml`, is a short file with no rules in it: it holds the name of the Knowledge Base, a sentence that says what the documents cover, so that the Agent knows when to look inside, and the list of the three documents.
 
-In `agents/civic_info_agent.yaml`, the third part, look for two changes. The name `city_regulations` now appears under `knowledge_base`: the Agent can use the Knowledge Base. And the instructions have a new paragraph that tells the Agent what to do with it: search the documents for any question about a rule, say which document the answer comes from, and say when the documents do not cover a question. Everything from chapter 4, the three departments and their contacts, is still there. The file also has a long block named `chat_with_docs` with `enabled: false`: that is the chat with documents feature of 5.2, switched off as your answer in 5.3 asked.
+In `agents/civic_info_agent.yaml`, the third part, look for two changes. The name `city_regulations` now appears under `knowledge_base`: the Agent can use the Knowledge Base. The instructions gain a new paragraph that tells the Agent what to do with it: search the documents for any question about a rule, say which document the answer comes from, and say when the documents do not cover a question. Everything from chapter 4, the three departments and their contacts, is still there. The file also has a long block named `chat_with_docs` with `enabled: false`: that is the chat with documents feature of 5.2, switched off as your answer in 5.3 asked.
 
 Any import scripts or test report that Bob added are not part of the Agent on the instance.
 
