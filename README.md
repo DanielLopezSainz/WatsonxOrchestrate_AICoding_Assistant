@@ -29,6 +29,7 @@ To connect your assistant to watsonx Orchestrate, start with chapter 2. Read cha
 - [Chapter 5. Adding an Orchestrate Knowledge Base (RAG)](guide/05-knowledge-base.md)
 - [Chapter 6. Adding Orchestrate Tools](guide/06-tools.md)
 - [Chapter 7. Reporting an issue: Orchestrate Connections](guide/07-connections.md)
+- [Chapter 8. An address lookup from an MCP server: Orchestrate Toolkits](guide/08-mcp-toolkit.md)
 
 The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
 
