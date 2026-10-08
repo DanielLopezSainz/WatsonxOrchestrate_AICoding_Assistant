@@ -53,6 +53,8 @@ The last row matters when an MCP server needs a key. The Address Registry of thi
 
 The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode.
 
+Most Agents that you build after this guide will use an MCP server at some point. The ones that vendors publish give an Agent a ticketing system, a CRM, a document store or a code repository in one import; the ones that your own team writes give it a database, an internal API, a product catalogue or an address registry, written once and used by every Agent in the company. This chapter teaches what applies to all of them: how to describe an MCP server to Bob so that the design names the component and ends with the build steps; how to try the MCP server from Bob before the platform receives a copy; where it runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes.
+
 ## 8.3 Ask mode: describe the Address Registry
 
 Mode: Ask, in a new conversation.
@@ -171,7 +173,7 @@ Approve each request as it comes. The import of the Toolkit is the step that can
 
 ## 8.7 What Bob built
 
-Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has two files: the program, `server.py`, with the ten streets inside it, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
+Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has two files: the program, `server.py`, with the ten streets inside it, and `requirements.txt`, which names the MCP library the program uses. The library is not part of the environment that chapter 2 installed: Bob installed it there during the build, for its own test, and watsonx Orchestrate installs it on the instance from this file when the Toolkit is imported. Bob may add a README or a test file.
 
 Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
