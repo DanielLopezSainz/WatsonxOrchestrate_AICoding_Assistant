@@ -140,7 +140,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 
 Mode: Plan, same conversation.
 
-Read the design against the table in 8.4. In the run, the design listed the two tools of the Agent as `lookup_address` and `list_streets`, without the Toolkit's name, and said nothing about installing the MCP library; both were left for the build, where Bob corrects them itself (8.6). Bob may ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design matches the table, go to 8.6: its first prompt is the approval.
+Read Bob's summary and the design file against the table in 8.4. If something is missing or wrong, request the change in the same conversation; Bob revises the file and waits again. When you agree with the design, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
