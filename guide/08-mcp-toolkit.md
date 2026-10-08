@@ -55,7 +55,7 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 **Why this is one of the most important chapters of this guide**
 
-Most Agents that you build after this guide will use an MCP server at some point. You and your team will write MCP servers to reach a database, an internal API, a product catalogue or any other system of the company. Through them, your Agents gain access to systems inside and outside the company. This chapter teaches what applies to all of them: how to describe an MCP server to Bob so that the design names the component and ends with the build steps; how to try the MCP server from Bob before the platform receives a copy; where it runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes.
+Most Agents that you build after this guide will use an MCP server at some point. You and your team will write MCP servers to reach a database, an internal API, a product catalogue or any other system of the company. Through them, your Agents gain access to systems inside and outside the company. This chapter teaches what applies to all of them: how to describe an MCP server to Bob so that the design names the component and ends with the build steps; how to try the MCP server from Bob before the platform receives a copy; where it runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes. Section 8.10 collects these practices in one list, with the reason for each, for the day you build a Toolkit of your own.
 
 ## 8.3 Ask mode: describe the Address Registry
 
@@ -128,7 +128,7 @@ Bob confirms the answers and lays out the build in the chat: the MCP server file
 
 Mode: Plan, in the same conversation.
 
-When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design, and states two details inside them that the designs of the runs got wrong: the MCP server is started with the Python of the project's environment, where its library is installed, and the Toolkit is imported from the MCP server's folder, so that the platform receives the code. Together with the sentence of the second prompt of 8.3 that names the Toolkit and its folder, these are the practices for every MCP server that you build with Bob: say which asset you want, give the Toolkit and its folder one name, ask for the build steps, have Bob try the MCP server itself, and import from the folder.
+When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design, and states two details inside them that the designs of the runs got wrong: the MCP server is started with the Python of the project's environment, where its library is installed, and the Toolkit is imported from the MCP server's folder, so that the platform receives the code. Section 8.10 explains both, with the other practices of this chapter.
 
 ```
 Write the design for this change into design/address-registry-design.md. End
@@ -217,7 +217,26 @@ Deploy civic_info_agent from draft to live.
 
 When Bob reports the deployment, go to the watsonx Orchestrate chat and ask the question of the Overview: a resident who writes "18 elm st" gets the collection days of Elm Street.
 
-## 8.10 Summary
+## 8.10 Advice for building Orchestrate Toolkits with Bob
+
+The runs of this chapter went wrong in more places than any earlier chapter, and every time for a reason that applies to any MCP server built with Bob. This list collects them. Each item says what to do and why; the prompts of this chapter already follow all of them.
+
+1. Name the asset you want. Say "an MCP server" in the first prompt. From a description of the need alone, Bob proposes the simplest component that meets it, a Python Tool like those of chapter 6, and the MCP server never appears.
+2. Name the language. Say "in Python". Bob's documentation says that it writes MCP servers typically in TypeScript, which brings Node.js and its own dependencies into the project; Python is the language of the Tools, and its environment is already there from chapter 2.
+3. Say where the MCP server runs. "Running inside watsonx Orchestrate as a local toolkit" settles the transport: a local Toolkit always uses stdio. Without it, Bob asks about transports, and in one run it claimed that a cloud instance requires HTTP, which is not so.
+4. Ask Bob to try the MCP server itself before the import. Bob does not propose it on its own. A tool that fails on your machine is corrected in a minute; the same failure after the import shows up as an Agent that cannot answer.
+5. Fix the data in the prompt. Left to itself, Bob invents districts and postcodes, and every reader's registry gives different answers. Keep the matching simple as well: every library that the MCP server imports must be in `requirements.txt` and is installed again on the instance.
+6. Name the tools and what each returns, including the case of no match. Bob proposes one tool where you want two, and names it as it likes. Say what the Agent does with a result that is not found: here, it asks the resident and calls no other Tool.
+7. Give the Toolkit and its folder one name, with underscores. Bob wrote `toolkits/address-registry` with a hyphen and named the Toolkit `utopia-address-registry`; the Agent, the import command and this chapter then disagree about the name. Underscores are safe in every place the name goes.
+8. Say that the tools are attached to the Agent, and expect them under `tools` as `toolkit:tool`. On the instance, a tool of a Toolkit is named `address_registry:lookup_address`; an Agent that lists `lookup_address` does not find it. Bob also listed one tool of two, and once proposed the `toolkits` line, which is for another kind of Agent. An import with the bare names fails, and Bob corrects it; one sentence in the prompt saves the round trip.
+9. Ask for the build steps at the end of the design. Without them, "Build it" means "write the files": in one run, Bob wrote the six files, checked their syntax and stopped, with nothing installed, tested or imported. With the steps, one approval builds everything.
+10. Start the MCP server with the Python of the project's environment. Bob's entry in `.bob/mcp.json` started the server with a bare `python`, which on most machines is not the environment where the library was installed; the first test call then fails. `venv/bin/python` is the one that has it.
+11. Import the Toolkit from its folder, with all its tools. The ADK command is `orchestrate toolkits add --kind mcp --package-root <folder> --command "python server.py" --tools "*"`. Bob once wrote the command with the wrong flags and no folder; the platform would then receive no code, and the failure shows only when the Agent calls a tool.
+12. Stay in the three modes. Bob asks to switch to Agent mode after the first prompt, after the second, and sometimes instead of writing the design in Plan mode. Answer the questions in Ask mode, write the design in Plan mode, and build in a new conversation in Agent mode; if Bob shows the design in the chat instead of writing it, tell it to write the file.
+13. Check Bob's statements about the platform against the ADK documentation. Bob is confident when it is wrong: the transport claim of item 3, the import command of item 11. Section 2.4 names the documentation server that Bob itself can search; ask it to confirm a claim before you build on it.
+14. After a change to the MCP server, remove the Toolkit, import it again, import the Agents that use it again, and deploy again those in Live. A Toolkit is not updated in place, and an Agent in Live keeps the old tools until it is deployed again.
+
+## 8.11 Summary
 
 The Agent now understands addresses the way residents write them, through a service of the kind that a city offers to every system, and the same program answered Bob's test calls before it answered residents. Bob wrote the MCP server, tried it as a client, imported it as an Orchestrate Toolkit, and changed the Agent; you described the Address Registry, fixed its data, and approved the design.
 
