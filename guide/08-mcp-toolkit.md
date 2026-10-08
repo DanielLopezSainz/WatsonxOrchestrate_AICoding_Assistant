@@ -163,7 +163,7 @@ Read Bob's summary and the design file against the table in 8.4. If something is
 
 Mode: Agent, in a new conversation.
 
-To build the design, open a new conversation in Bob. Bob then reads the final, approved design only, with a clean memory.
+Create a new conversation and switch to Agent mode to run the prompt:
 
 ```
 The design in @design/address-registry-design.md is approved. Build it.
