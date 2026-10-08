@@ -6,7 +6,7 @@ Level: intermediate. Time: about 75 minutes. Prerequisites: chapter 7 completed,
 
 You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An address registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that registry as an MCP server, with the ten streets of the collection calendar, and the Agent uses it.
 
-MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI assistants. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds a server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the server as an Orchestrate Toolkit, and the Agent gets its tools.
+MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds a server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the server as an Orchestrate Toolkit, and the Agent gets its tools.
 
 The Orchestrate Toolkit is the component introduced in this chapter. Bob's capability is the creation of MCP servers.
 
@@ -192,7 +192,7 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and ask the 
 
 The Agent now understands addresses the way residents write them, through a service of the kind that a city offers to every system, and the same program answered Bob's test calls before it answered residents. Bob wrote the server, tried it as a client, imported it as an Orchestrate Toolkit, and changed the Agent; you described the registry, fixed its data, and approved the design.
 
-- An MCP server is a program that offers tools over a standard protocol to any client: Bob, other assistants, watsonx Orchestrate.
+- An MCP server is a program that offers tools over a standard protocol to any client, Bob or watsonx Orchestrate among them.
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
 - A local toolkit is a folder that the platform runs; a remote toolkit is a server reached over HTTP. A toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
 - Bob creates MCP servers itself, and uses them as a client before the platform does.
