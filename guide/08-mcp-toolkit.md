@@ -33,7 +33,9 @@ An Orchestrate Toolkit is a group of Tools that you import together as one asset
 
 **Where the MCP server runs**
 
-watsonx Orchestrate runs an MCP server in two ways. A local Toolkit is an MCP server whose code the platform receives at import, a folder with the program and its dependencies, and runs itself when an Agent calls a tool, in Python or Node.js. A remote Toolkit is an MCP server that runs elsewhere, on your infrastructure or a vendor's, and that the platform reaches over HTTP. A local MCP server talks to its client through its standard input and output, called stdio: the client starts the program, writes the call to it and reads the answer back. Bob does the same when it connects to the MCP server on your machine. This chapter builds a local Toolkit: a copy of the folder that Bob writes is uploaded to the instance, the way the Tools of chapter 6 were, and the platform starts the MCP server when needed. A change to the folder on your machine reaches the instance only through a new import.
+An MCP server can run inside watsonx Orchestrate or outside it. Inside, the platform receives the code of the MCP server at import, a folder with the program and its dependencies in Python or Node.js, and starts it when an Agent calls one of its tools. Outside, the MCP server runs on your own infrastructure or on a vendor's, and the platform reaches it over HTTP. This guide calls the first a local Toolkit and the second a remote Toolkit.
+
+In this chapter, Bob writes an MCP server for watsonx Orchestrate.
 
 **What changes compared with a Tool**
 
@@ -47,9 +49,9 @@ watsonx Orchestrate runs an MCP server in two ways. A local Toolkit is an MCP se
 
 The last row matters when an MCP server needs a key. The registry of this chapter needs none.
 
-**The registry of this chapter**
+**The MCP server of this chapter**
 
-The registry of this chapter is a small MCP server in Python with two tools, written by Bob. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data is a table of ten streets, the ones of the collection calendar of chapter 6, that Bob writes into the MCP server's folder.
+The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the collection calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the address registry, as the Overview did.
 
 ## 8.3 Ask mode: describe the registry
 
