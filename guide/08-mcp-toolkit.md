@@ -130,7 +130,7 @@ Mode: Plan, in the same conversation.
 
 After a switch of mode inside a conversation, Bob sometimes believes that it is still in Ask mode: it shows the design in the chat instead of writing the file, and asks for Agent mode. Plan mode writes files. If you get that answer, send `You are in Plan mode and can write files. Write the design to design/address-registry-design.md.` and approve the write; Bob then writes the file and summarises it.
 
-When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design, and states two details inside them that the designs of the runs got wrong: the MCP server is started with the Python of the project's environment, where its library is installed, and the Toolkit is imported from the MCP server's folder, so that the platform receives the code. Section 8.10 explains both, with the other practices of this chapter.
+A design for an MCP server often describes files only: the program, Bob's configuration entry, a script with the import command. From such a design, Bob writes the files and stops; nothing is installed, tested or imported. The prompt below prevents that by asking for the build steps as a numbered list at the end of the design. It also names two details that Bob tends to get wrong: the Python that starts the MCP server, and the import from the MCP server's folder. Section 8.10 explains both.
 
 ```
 Write the design for this change into design/address-registry-design.md. End
