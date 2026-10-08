@@ -25,7 +25,7 @@ The list comes from the Agent in Draft. Bob's Orchestrate server reads and chang
 
 ## 8.2 What an MCP server is, and what an Orchestrate Toolkit is
 
-An MCP server is a program that offers tools over a standard protocol. Any client that speaks the protocol can list the tools, read their descriptions and call them: Bob, other coding assistants, and watsonx Orchestrate. The tools of chapter 6 were written for watsonx Orchestrate alone; the tools of an MCP server are written once and used by whichever client connects.
+An MCP server is a program that offers tools over a standard protocol. Any client that speaks the protocol can list the tools, read their descriptions and call them.
 
 Companies meet MCP servers from two sides. Vendors publish servers for their products, so that an assistant can search a ticketing system, read a document store or query a database without anyone writing code for it. And teams write servers for their own systems, so that the same address registry, the same product catalogue, serves every assistant and every agent in the company. The ADK documentation lists servers of both kinds that watsonx Orchestrate can import.
 
