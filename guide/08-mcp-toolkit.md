@@ -118,8 +118,8 @@ official street name, the house number if there is one, the district and the
 postcode; and list_streets, which receives a district and returns its streets.
 When an address matches no street, lookup_address says so and returns nothing
 else. Name the toolkit and its folder address_registry, and attach both tools
-to the agent. The facts, the Knowledge Base, the four tools and the Connection
-stay as they are.
+to the agent, listed under tools as toolkit:tool. The facts, the Knowledge
+Base, the four tools and the Connection stay as they are.
 ```
 
 Bob confirms the answers and lays out the build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two test calls, the changes to the Agent, and in some runs the import into watsonx Orchestrate. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it; it then asks you to switch to Agent mode. Do not: the design comes first.
@@ -174,7 +174,7 @@ Bob follows the build steps of the design:
 
 1. Writes the MCP server, `toolkits/address_registry/server.py` with the ten streets inside it, and `requirements.txt`.
 2. Installs the library into the project's environment and checks that the program imports. In the run, the library had changed its version since the design was written and renamed its server class; Bob read the error and changed one line.
-3. Registers the MCP server in its MCP configuration and calls `lookup_address` and `list_streets`. This is Bob using the MCP server as a client, the way it uses the Orchestrate server; the registry appears in Bob's MCP tab next to the two MCP servers of chapter 2.
+3. Registers the MCP server in its MCP configuration and tests `lookup_address` and `list_streets`. The design says to call them through that connection; in the run, Bob ran the two functions in Python instead and reported their results, which is not the same test. The registry appears in Bob's MCP tab next to the two MCP servers of chapter 2, and the test in 8.8 makes Bob use the connection.
 4. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts it. In the run, the design had the wrong form of the command; Bob read the error, read the command's help, and used the right one. The first correct attempt was refused with "We are configuring your tool in the background"; Bob waited a minute and the second succeeded.
 5. Updates the Agent and imports it again, replacing the Agent in Draft. In the run, Bob first put the Toolkit on the `toolkits` line; the import succeeded and the Agent ignored the tools, which Bob saw in its first test. It then listed them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imported the Agent again.
 6. Sends three test questions to the Agent and reports: an address with an abbreviation, a pothole report with a house number, and an address the registry does not know.
