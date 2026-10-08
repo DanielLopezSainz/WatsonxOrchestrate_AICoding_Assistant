@@ -213,7 +213,7 @@ Ask the first question again with reasoning. The steps show two tool calls in or
 
 Mode: Agent, same conversation.
 
-The Agent changed in Draft; for residents to get the new version, deploy it to Live again. The Toolkit needs no deployment of its own: it is on the instance and serves both environments. On the Developer Edition, skip this section. If you took the skip path of chapter 7, its Connection exists for Draft only: send the first prompt of section 7.10 before deploying, so that the Agent in Live can report problems.
+The Agent changed in Draft and needs to be deployed to Live again. On the Developer Edition, skip this section.
 
 ```
 Deploy civic_info_agent from draft to live.
