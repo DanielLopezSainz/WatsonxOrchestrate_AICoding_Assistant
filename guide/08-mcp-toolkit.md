@@ -137,9 +137,10 @@ Write the design for this change into design/address-registry-design.md. End
 it with the build steps in order: write the MCP server and its requirements
 file, install the requirements into the project's Python environment, register
 the MCP server in your MCP configuration, started with the Python of the
-project's environment, and call its two tools, import the toolkit into watsonx
-Orchestrate from its folder with all its tools, import the agent, run the test
-scenarios.
+project's environment, and call its two tools through that connection, import
+the toolkit into watsonx Orchestrate from its folder with all its tools, import
+the agent, run the test scenarios through the chat operation of the
+Orchestrate server.
 ```
 
 Bob writes the file after your approval and summarises it. Open `design/address-registry-design.md` and check it against this table:
@@ -168,21 +169,22 @@ To build the design, open a new conversation in Bob. Bob then reads the final, a
 The design in @design/address-registry-design.md is approved. Build it.
 ```
 
-Bob:
+Bob follows the build steps of the design:
 
-1. Writes the MCP server: a folder with the Python program, the data file and the requirements file.
-2. Registers the MCP server in its MCP configuration and calls `lookup_address` with a test address. This is Bob using the MCP server as a client, the way it uses the Orchestrate server. The tools appear in Bob's MCP tab, next to the two MCP servers of chapter 2.
-3. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts the MCP server.
-4. Updates the Agent: the two tools are attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
-5. Tests the Agent with an address and reports.
+1. Writes the MCP server, `toolkits/address_registry/server.py` with the ten streets inside it, and `requirements.txt`.
+2. Installs the library into the project's environment and checks that the program imports. In the run, the library had changed its version since the design was written and renamed its server class; Bob read the error and changed one line.
+3. Registers the MCP server in its MCP configuration and calls `lookup_address` and `list_streets`. This is Bob using the MCP server as a client, the way it uses the Orchestrate server; the registry appears in Bob's MCP tab next to the two MCP servers of chapter 2.
+4. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts it. In the run, the design had the wrong form of the command; Bob read the error, read the command's help, and used the right one. The first correct attempt was refused with "We are configuring your tool in the background"; Bob waited a minute and the second succeeded.
+5. Updates the Agent and imports it again, replacing the Agent in Draft. In the run, Bob first put the Toolkit on the `toolkits` line; the import succeeded and the Agent ignored the tools, which Bob saw in its first test. It then listed them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imported the Agent again.
+6. Sends three test questions to the Agent and reports: an address with an abbreviation, a pothole report with a house number, and an address the registry does not know.
 
-Approve each request as it comes. The import of the Toolkit is the step that can fail: the platform installs the MCP server's dependencies and starts it to read the list of tools. The usual causes of an error at that point are a missing dependency, a wrong start command and a Toolkit of the same name already on the instance; Bob reads the error and corrects what it names.
+Approve each request as it comes. Three of the steps above went wrong once before they went right, and Bob corrected each from the error it read; the report at the end lists only the results. To see what Bob corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
 
 ## 8.7 What Bob built
 
 Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has two files: the program, `server.py`, with the ten streets inside it, and `requirements.txt`, which names the MCP library the program uses. The library is not part of the environment that chapter 2 installed: Bob installed it there during the build, for its own test, and watsonx Orchestrate installs it on the instance from this file when the Toolkit is imported. Bob may add a README or a test file.
 
-Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
+Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server, an object of the library's server class, `MCPServer` in version 2 of the library and `FastMCP` in version 1. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
 Open Bob's MCP tab (chapter 2, section 2.3). The Address Registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
 
@@ -230,13 +232,15 @@ The runs of this chapter went wrong in more places than any earlier chapter, and
 5. Fix the data in the prompt. Left to itself, Bob invents districts and postcodes, and every reader's registry gives different answers. Keep the matching simple as well: every library that the MCP server imports must be in `requirements.txt` and is installed again on the instance.
 6. Name the tools and what each returns, including the case of no match. Bob proposes one tool where you want two, and names it as it likes. Say what the Agent does with a result that is not found: here, it asks the resident and calls no other Tool.
 7. Give the Toolkit and its folder one name, with underscores. Bob wrote `toolkits/address-registry` with a hyphen and named the Toolkit `utopia-address-registry`; the Agent, the import command and this chapter then disagree about the name. Underscores are safe in every place the name goes.
-8. Say that the tools are attached to the Agent, and expect them under `tools` as `toolkit:tool`. On the instance, a tool of a Toolkit is named `address_registry:lookup_address`; an Agent that lists `lookup_address` does not find it. Bob also listed one tool of two, and once proposed the `toolkits` line, which is for another kind of Agent. An import with the bare names fails, and Bob corrects it; one sentence in the prompt saves the round trip.
+8. Say that the tools are attached to the Agent, and expect them under `tools` as `toolkit:tool`. On the instance, a tool of a Toolkit is named `address_registry:lookup_address`. Bob listed one tool of two in one design, and in the build put the Toolkit on the `toolkits` line, which is for another kind of Agent: that Agent imported without any error and ignored the tools, and only the test showed it. A failure without an error is the kind to prevent in the prompt rather than leave to Bob.
 9. Ask for the build steps at the end of the design. Without them, "Build it" means "write the files": in one run, Bob wrote the six files, checked their syntax and stopped, with nothing installed, tested or imported. With the steps, one approval builds everything.
 10. Start the MCP server with the Python of the project's environment. Bob's entry in `.bob/mcp.json` started the server with a bare `python`, which on most machines is not the environment where the library was installed; the first test call then fails. `venv/bin/python` is the one that has it.
 11. Import the Toolkit from its folder, with all its tools. The ADK command is `orchestrate toolkits add --kind mcp --package-root <folder> --command "python server.py" --tools "*"`. Bob once wrote the command with the wrong flags and no folder; the platform would then receive no code, and the failure shows only when the Agent calls a tool.
 12. Stay in the three modes. Bob asks to switch to Agent mode after the first prompt, after the second, and sometimes instead of writing the design in Plan mode. Answer the questions in Ask mode, write the design in Plan mode, and build in a new conversation in Agent mode; if Bob shows the design in the chat instead of writing it, tell it to write the file.
 13. Check Bob's statements about the platform against the ADK documentation. Bob is confident when it is wrong: the transport claim of item 3, the import command of item 11. Section 2.4 names the documentation server that Bob itself can search; ask it to confirm a claim before you build on it.
 14. After a change to the MCP server, remove the Toolkit, import it again, import the Agents that use it again, and deploy again those in Live. A Toolkit is not updated in place, and an Agent in Live keeps the old tools until it is deployed again.
+15. Pin the version of the MCP library in `requirements.txt`. In the run, `mcp>=1.0.0` installed a new major version that had renamed the server class, and Bob had to change the program; the instance installs the library again from the same file, so the version that Bob tested is the one to name, for example `mcp==2.3.0`.
+16. Have Bob test the Agent through the chat operation of the Orchestrate server, and never let it print `.env`. In one run Bob tested through the command line and the platform's API instead, and while debugging its own calls it printed the `.env` file, key included, into the chat. The chat operation needs no key in the conversation; if a key is ever shown, create a new one and replace it.
 
 ## 8.11 Summary
 
