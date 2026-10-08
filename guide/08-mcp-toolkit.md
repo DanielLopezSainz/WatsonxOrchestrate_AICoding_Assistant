@@ -146,7 +146,7 @@ Read Bob's summary and the design file against the table in 8.4. If something is
 
 Mode: Agent, in a new conversation.
 
-The build starts in a new conversation, as in every chapter: the planning discussion is out of Bob's context, and Bob reads the design and the project files that the design names.
+To build the design, open a new conversation in Bob. Bob then reads the final, approved design only, and its memory holds nothing from the questions and answers that led to it.
 
 ```
 The design in @design/address-registry-design.md is approved. Build it.
