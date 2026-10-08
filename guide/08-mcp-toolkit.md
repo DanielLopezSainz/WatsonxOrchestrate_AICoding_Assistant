@@ -203,7 +203,7 @@ The rubbish was not collected today at 18 elm st, which days do they collect it?
 
 The Agent resolves the address to Elm Street, looks up the collection days, and answers with the days of the four bins and the Waste and Recycling contact. Then try these:
 
-- The Address Registry alone, through Bob, in Agent mode: `Call lookup_address on the address registry MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
+- The Address Registry alone, through Bob, in a new conversation in Ask mode: `Call lookup_address with "7 harbour ln" on the address_registry MCP server and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. Ask mode leaves Bob no way to run the program itself, so the call goes through its MCP connection, and Bob shows the server and the tool above its answer. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
 - An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the description "Pothole outside house number 7", and the Agent gives a request number.
 - A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
 - An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
