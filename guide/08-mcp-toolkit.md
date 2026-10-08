@@ -123,6 +123,8 @@ Bob confirms the answers and lays out the whole build in the chat: the MCP serve
 
 Mode: Plan, in the same conversation.
 
+When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design. Make this a habit for every MCP server that you build with Bob: when the design ends with the steps, one approval builds everything.
+
 ```
 Write the design for this change into design/address-registry-design.md. End
 it with the build steps in order: write the MCP server and its requirements
