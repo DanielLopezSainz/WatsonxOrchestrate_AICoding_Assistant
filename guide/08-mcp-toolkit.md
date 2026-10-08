@@ -117,8 +117,9 @@ Two tools: lookup_address, which receives an address as typed and returns the
 official street name, the house number if there is one, the district and the
 postcode; and list_streets, which receives a district and returns its streets.
 When an address matches no street, lookup_address says so and returns nothing
-else. The facts, the Knowledge Base, the four tools and the Connection stay as
-they are.
+else. Name the toolkit and its folder address_registry, and attach both tools
+to the agent. The facts, the Knowledge Base, the four tools and the Connection
+stay as they are.
 ```
 
 Bob confirms the answers and lays out the build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two test calls, the changes to the Agent, and in some runs the import into watsonx Orchestrate. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it; it then asks you to switch to Agent mode. Do not: the design comes first.
@@ -127,14 +128,16 @@ Bob confirms the answers and lays out the build in the chat: the MCP server file
 
 Mode: Plan, in the same conversation.
 
-When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design. Make this a habit for every MCP server that you build with Bob: when the design ends with the steps, one approval builds everything.
+When the design is for an MCP server, Bob tends to write it as a description of files: the MCP server, its entry in Bob's configuration, the import command inside a script. Built from such a design, Bob writes the files and stops, with nothing installed, tested or imported. The prompt therefore asks for the build steps as a list at the end of the design, and states two details inside them that the designs of the runs got wrong: the MCP server is started with the Python of the project's environment, where its library is installed, and the Toolkit is imported from the MCP server's folder, so that the platform receives the code. Together with the sentence of the second prompt of 8.3 that names the Toolkit and its folder, these are the practices for every MCP server that you build with Bob: say which asset you want, give the Toolkit and its folder one name, ask for the build steps, have Bob try the MCP server itself, and import from the folder.
 
 ```
 Write the design for this change into design/address-registry-design.md. End
 it with the build steps in order: write the MCP server and its requirements
 file, install the requirements into the project's Python environment, register
-the MCP server in your MCP configuration and call its two tools, import the
-toolkit into watsonx Orchestrate, import the agent, run the test scenarios.
+the MCP server in your MCP configuration, started with the Python of the
+project's environment, and call its two tools, import the toolkit into watsonx
+Orchestrate from its folder with all its tools, import the agent, run the test
+scenarios.
 ```
 
 Bob writes the file after your approval and summarises it. Open `design/address-registry-design.md` and check it against this table:
@@ -151,19 +154,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 
 Mode: Plan, same conversation.
 
-Read Bob's summary and the design file against the table in 8.4. In every run, the design needed the same corrections: a hyphen in the folder name, a Toolkit name different from the folder, the two tools listed in the Agent without the Toolkit's name in front or one of them missing, Bob's entry starting the MCP server with a bare `python`, and an import command with the wrong flags. The prompt below corrects all of them; remove the sentences that your design does not need.
-
-```
-Four corrections to the design. Name the toolkit and its folder
-address_registry, with an underscore. The agent lists the two tools under tools
-as address_registry:lookup_address and address_registry:list_streets, not under
-toolkits. Your MCP configuration starts the server with venv/bin/python. The
-toolkit is imported with: orchestrate toolkits add --kind mcp --name
-address_registry --description "Address registry of Utopia" --package-root
-toolkits/address_registry --command "python server.py" --tools "*".
-```
-
-Bob revises the file and summarises the changes. Read the file once more; when you agree with the design, go to 8.6: its first prompt is the approval.
+Read Bob's summary and the design file against the table in 8.4. If something is missing or wrong, request the change in the same conversation; Bob revises the file and waits again. When you agree with the design, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
