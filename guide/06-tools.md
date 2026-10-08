@@ -226,7 +226,7 @@ Then try questions that test the limits of the Tools:
 
 - Leave out the number, in a new conversation so that the Agent does not reuse the one above: "Where is my permit application?" The Agent asks for it.
 - Use a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
-- Ask for a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the Building Building Permit Guide. Keep this question for the next part.
+- Ask for a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the Building Permit Guide. Keep this question for the next part.
 - Name a street without needing a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool: the question names a street, but nothing in it needs the collection day.
 
 To read how the Agent got there, ask the first question again through Bob, with two more words:
