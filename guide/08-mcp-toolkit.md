@@ -194,7 +194,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 8.8 Try it
 
-Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of watsonx Orchestrate:
+Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of the Agent in the watsonx Orchestrate builder (Build, Agents, `civic_info_agent`). Do not use the chat of the home page yet: it talks to the Agent deployed in Live, which is still the chapter 7 version and answers that it has no record for "18 elm st". The chat catches up in 8.9.
 
 ```
 The rubbish was not collected today at 18 elm st, which days do they collect it?
