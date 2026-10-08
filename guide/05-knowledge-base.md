@@ -4,9 +4,9 @@ Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or 
 
 ## Overview
 
-You want to build a garden shed and need to know whether it requires a permit. The city offices are closed, so you ask CivicPulse. The Agent from chapter 4 can only tell you that Permits and Planning handles permits and when they open. It knows twenty lines of facts, and the answer to your question is in the city's building permit guide, which it has never read.
+You want to build a garden shed and need to know whether it requires a permit. The city offices are closed, so you ask CivicPulse. The Agent from chapter 4 can only tell you that Permits and Planning handles permits and when they open. It knows twenty lines of facts, and the answer to your question is in the city's Building Building Permit Guide, which it has never read.
 
-In this chapter, the Agent gets the city's guides and regulations: the building permit guide, the waste sorting rules and the noise ordinance. Bob writes the three documents for the City of Utopia, puts them into a Knowledge Base, and connects the Agent to it. The Agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
+In this chapter, the Agent gets the city's guides and regulations: the Building Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance. Bob writes the three documents for the City of Utopia, puts them into a Knowledge Base, and connects the Agent to it. The Agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
 
 This chapter introduces one new component, the Orchestrate Knowledge Base. The Agent from chapter 4 and its facts are unchanged; its instructions gain one paragraph.
 
@@ -30,7 +30,7 @@ An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate ind
 
 Which of the two to use depends on where the information lives and who maintains it. Instructions are right for a small, stable set of facts that the Agent's builder owns, like the three departments of chapter 4. A Knowledge Base is right when the information:
 
-- Is too large for instructions. A permit guide, a product catalogue, an employee handbook.
+- Is too large for instructions. A Building Permit Guide, a product catalogue, an employee handbook.
 - Already exists as documents, written and maintained by other people. The legal department updates the regulation and the HR team updates the handbook; the Agent must follow without anyone touching its definition.
 - Must be answered from the official wording. A resident who asks about a fee or a deadline wants what the document says and which document it is.
 
@@ -167,7 +167,7 @@ The design in @design/city-regulations-design.md is approved. Build it.
 
 The @ mention tells Bob to read the design file. One step of this build takes a few minutes. Bob:
 
-1. Writes the three documents, the building permit guide, the waste sorting rules and the noise ordinance, as text files in the `knowledge-bases` folder. Open one while Bob continues: residents' answers will come from these pages.
+1. Writes the three documents, the Building Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance, as text files in the `knowledge-bases` folder. Open one while Bob continues: residents' answers will come from these pages.
 2. Writes the Knowledge Base definition, a short file that names `city_regulations` and lists the three documents.
 3. Imports the Knowledge Base and waits. The platform indexes the documents in the background; Bob checks the status until it is ready, which takes a few minutes on a tenant.
 4. Updates the Agent: the Knowledge Base is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
@@ -179,7 +179,7 @@ Approve each request as it comes. If an import fails, Bob reads the error and co
 
 Open the `knowledge-bases` folder in the File Explorer. It has four files: the three text documents and the Knowledge Base definition, `city_regulations.yaml`.
 
-The three text files are the building permit guide, the waste sorting rules and the noise ordinance. Open the permit guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a detached shed of 8 square metres and 2 metres high that needs no permit and one of 12 square metres that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
+The three text files are the Building Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance. Open the Building Permit Guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a detached shed of 8 square metres and 2 metres high that needs no permit and one of 12 square metres that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
 
 The Knowledge Base definition, `city_regulations.yaml`, is a short file with no rules in it: it holds the name of the Knowledge Base, a sentence that says what the documents cover, so that the Agent knows when to look inside, and the list of the three documents.
 
