@@ -4,7 +4,7 @@ Level: intermediate. Time: about 75 minutes. Prerequisites: chapter 7 completed,
 
 ## Overview
 
-You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An address registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that registry as an MCP server, with the ten streets of the collection calendar, and the Agent uses it.
+You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An Address Registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that Address Registry as an MCP server, with the ten streets of the collection calendar, and the Agent uses it.
 
 MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds an MCP server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the MCP server as an Orchestrate Toolkit, and the Agent gets its tools.
 
@@ -47,17 +47,17 @@ In this chapter, Bob writes an MCP server for watsonx Orchestrate.
 | Updating it | Import the Tool again | Remove the Toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
 | Credentials | A Connection named at import | A Connection named at import, whose values reach the MCP server as environment variables |
 
-The last row matters when an MCP server needs a key. The registry of this chapter needs none.
+The last row matters when an MCP server needs a key. The Address Registry of this chapter needs none.
 
 **The MCP server of this chapter**
 
-The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the collection calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the address registry, as the Overview did.
+The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the collection calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the Address Registry, as the Overview did.
 
-## 8.3 Ask mode: describe the registry
+## 8.3 Ask mode: describe the Address Registry
 
 Mode: Ask, in a new conversation.
 
-The prompt describes the service, what residents type, and what the Agent must do with the answer. It names MCP and Python, and it says that the registry is not a customer care MCP server: one of the Orchestrate skills loaded in chapter 2 builds MCP servers for customer care, with a welcome tool and a login, and Bob must not use it here.
+The prompt describes the service, what residents type, and what the Agent must do with the answer. It names MCP and Python, and it says that the Address Registry is not a customer care MCP server: one of the Orchestrate skills loaded in chapter 2 builds MCP servers for customer care, with a welcome tool and a login, and Bob must not use it here.
 
 ```
 The city of Utopia has an address registry that resolves any address a
@@ -78,9 +78,9 @@ Look for these points in Bob's answer:
 
 - Bob proposes to write the MCP server, to register it in its own MCP configuration so that it can try the tools itself, and then to import it into watsonx Orchestrate as a Toolkit. The MCP server must work for one client before a copy is given to the second.
 - On the instance, Bob finds the Agent, its four Tools, the Connection and the Knowledge Base, and no Toolkit.
-- The questions vary from one run to another: which tools the MCP server offers and what they return, the districts and postcodes to use, what the Agent does when an address is not in the registry, and whether the Agent should look up every address or only ambiguous ones.
+- The questions vary from one run to another: which tools the MCP server offers and what they return, the districts and postcodes to use, what the Agent does when an address is not in the Address Registry, and whether the Agent should look up every address or only ambiguous ones.
 
-The second prompt answers them. It fixes the data, so that your registry and every other reader's registry give the same answers.
+The second prompt answers them. It fixes the data, so that your Address Registry and every other reader's Address Registry give the same answers.
 
 ```
 These are my answers. Two tools: lookup_address, which receives an address as
@@ -120,7 +120,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 | The MCP server | Its folder in the project, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
 | The Toolkit | Its name, `utopia_addresses`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
-| The change to the Agent | The two tools of the Toolkit attached; the instructions say to look up every address first and what to do when the registry does not know it; everything else unchanged |
+| The change to the Agent | The two tools of the Toolkit attached; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
 | The build order | MCP server, Bob's connection and a test through Bob, Toolkit, Agent, then the test through the Agent |
 
 ## 8.5 Approve the design
@@ -151,13 +151,13 @@ Approve each request as it comes. The import of the Toolkit is the step that can
 
 ## 8.7 What Bob built
 
-Open the MCP server's folder in the File Explorer; Bob names it after the registry, for example `mcp/utopia_addresses`. It has at least three files: the program, a data file with the ten streets, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
+Open the MCP server's folder in the File Explorer; Bob names it after the Address Registry, for example `mcp/utopia_addresses`. It has at least three files: the program, a data file with the ten streets, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
 
 Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
-Open Bob's MCP tab (chapter 2, section 2.3). The registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
+Open Bob's MCP tab (chapter 2, section 2.3). The Address Registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
 
-Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the Toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the registry does not know.
+Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the Toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the Address Registry does not know.
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
@@ -171,10 +171,10 @@ bins not collected at 18 elm st, which day is it?
 
 The Agent resolves the address to Elm Street, looks up the collection days, and answers with the days of the four bins and the Waste and Recycling contact. Then try these:
 
-- The registry alone, through Bob, in Agent mode: `Call lookup_address on the utopia_addresses MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
+- The Address Registry alone, through Bob, in Agent mode: `Call lookup_address on the utopia_addresses MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
 - An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the house number in the description, and the Agent gives a request number.
 - A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
-- An address the registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
+- An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
 Ask the first question again with reasoning. The steps show two tool calls in order: `utopia_addresses:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The Toolkit's tool carries the Toolkit's name in front, and the chapter 6 Tool does not.
 
@@ -192,7 +192,7 @@ When Bob reports the deployment, go to the watsonx Orchestrate chat and ask the 
 
 ## 8.10 Summary
 
-The Agent now understands addresses the way residents write them, through a service of the kind that a city offers to every system, and the same program answered Bob's test calls before it answered residents. Bob wrote the MCP server, tried it as a client, imported it as an Orchestrate Toolkit, and changed the Agent; you described the registry, fixed its data, and approved the design.
+The Agent now understands addresses the way residents write them, through a service of the kind that a city offers to every system, and the same program answered Bob's test calls before it answered residents. Bob wrote the MCP server, tried it as a client, imported it as an Orchestrate Toolkit, and changed the Agent; you described the Address Registry, fixed its data, and approved the design.
 
 - An MCP server is a program that offers tools over a standard protocol to any client, Bob or watsonx Orchestrate among them.
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
