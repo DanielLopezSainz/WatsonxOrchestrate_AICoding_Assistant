@@ -203,11 +203,11 @@ The rubbish was not collected today at 18 elm st, which days do they collect it?
 The Agent resolves the address to Elm Street, looks up the collection days, and answers with the days of the four bins and the Waste and Recycling contact. Then try these:
 
 - The Address Registry alone, through Bob, in Agent mode: `Call lookup_address on the address registry MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
-- An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the house number in the description, and the Agent gives a request number.
+- An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the description "Pothole outside house number 7", and the Agent gives a request number.
 - A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
 - An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
-Ask the first question again with reasoning. The steps show two tool calls in order: `address_registry:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The Toolkit's tool carries the Toolkit's name in front, and the chapter 6 Tool does not.
+Ask the first question again with reasoning. The steps show two tool calls in order: `lookup_address` with the address as typed, returning Elm Street, house number 18, North and UT1 1AA, then `get_collection_days` with Elm Street. In the reasoning, the tool of the Toolkit appears under its own name, without the Toolkit's name in front; the prefix is for the Agent definition only.
 
 ## 8.9 Deploy the change in Live
 
