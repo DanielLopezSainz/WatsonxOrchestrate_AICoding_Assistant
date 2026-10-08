@@ -213,7 +213,7 @@ Ask the first question again with reasoning. The steps show two tool calls in or
 
 Mode: Agent, same conversation.
 
-A Toolkit belongs to the instance, like a Tool, so Live needs only the Agent. On the Developer Edition, skip this section. If you skipped chapter 7, the Connection `utopia_311` exists for Draft only; send the first prompt of section 7.10 before the deployment, or the Agent in Live fails at its first report.
+The Agent changed in Draft; for residents to get the new version, deploy it to Live again. The Toolkit needs no deployment of its own: it is on the instance and serves both environments. On the Developer Edition, skip this section. If you took the skip path of chapter 7, its Connection exists for Draft only: send the first prompt of section 7.10 before deploying, so that the Agent in Live can report problems.
 
 ```
 Deploy civic_info_agent from draft to live.
