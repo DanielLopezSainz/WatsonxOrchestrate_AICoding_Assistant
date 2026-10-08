@@ -128,8 +128,6 @@ Bob confirms the answers and lays out the build in the chat: the MCP server file
 
 Mode: Plan, in the same conversation.
 
-After a switch of mode inside a conversation, Bob sometimes believes that it is still in Ask mode: it shows the design in the chat instead of writing the file, and asks for Agent mode. Plan mode writes files. If you get that answer, send `You are in Plan mode and can write files. Write the design to design/address-registry-design.md.` and approve the write; Bob then writes the file and summarises it.
-
 A design for an MCP server often describes files only: the program, Bob's configuration entry, a script with the import command. From such a design, Bob writes the files and stops; nothing is installed, tested or imported. The prompt below prevents that by asking for the build steps as a numbered list at the end of the design. It also names two details that Bob tends to get wrong: the Python that starts the MCP server, and the import from the MCP server's folder. Section 8.10 explains both.
 
 ```
@@ -138,13 +136,14 @@ it with the build steps in order: write the MCP server and its requirements
 file, install the requirements into the project's Python environment, register
 the MCP server in your MCP configuration, started with the Python of the
 project's environment, with absolute paths, and call its two tools through
-that connection, import
-the toolkit into watsonx Orchestrate from its folder with all its tools, import
-the agent, run the test scenarios through the chat operation of the
-Orchestrate server.
+that connection, import the toolkit into watsonx Orchestrate from its folder
+with all its tools, import the agent, run the test scenarios through the chat
+operation of the Orchestrate server.
 ```
 
-Bob writes the file after your approval and summarises it. Open `design/address-registry-design.md` and check it against this table:
+Read Bob's answer. Sometimes, in its first lines, Bob says that it cannot write files and asks you to switch to Agent mode. If you get that answer and you have confirmed that you are in Plan mode, send the following prompt: `You are in Plan mode and can write files. Write the design to design/address-registry-design.md.` Approve the write; Bob then writes the file and summarises it.
+
+Open `design/address-registry-design.md` and check it against this table:
 
 | Content | What to check |
 |---|---|
