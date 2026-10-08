@@ -57,17 +57,19 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 Mode: Ask, in a new conversation.
 
-In the previous chapters, the prompts did not name the Orchestrate asset to create; Bob chose it based on your prompt. This time the prompt asks for an MCP server by name. You know by now which components exist and what each one is for, so you can state what you need, and Bob no longer has to work out your intention. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies.
+In the previous chapters, the prompts did not name the Orchestrate asset to create; Bob chose it based on your prompt. This time the prompt asks for an MCP server by name. You know by now which components exist and what each one is for, so you can state what you need, and Bob no longer has to work out your intention. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies. The prompt also says where the MCP server runs and asks Bob to try it before the import, two decisions that Bob would otherwise ask about.
 
 ```
 The city of Utopia has an address registry that resolves any address a
 resident types, such as "18 elm st" or "7 Harbour Ln", into the official
 street name, the house number, the district and the postcode. The address
-registry will be an MCP server. I want civic_info_agent to use it so that,
-when a resident gives an address, the Agent finds the official street before
-it looks up collection days or reports a road problem. The city has no
-registry yet: build the MCP server yourself, in Python, with the data for the
-ten streets of the collection calendar.
+registry will be an MCP server, running inside watsonx Orchestrate as a local
+toolkit. I want civic_info_agent to use it so that, when a resident gives an
+address, the Agent finds the official street before it looks up collection
+days or reports a road problem. The city has no address registry yet: build
+the MCP server in Python, with the data for the ten streets of the collection
+calendar, and connect to it from Bob to try its tools before importing it
+into watsonx Orchestrate.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -75,31 +77,44 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- Bob proposes a Python MCP server, with the ten streets of the Collection Calendar as its data, imported into watsonx Orchestrate as a Toolkit. It may name one tool or two; the second prompt fixes them.
-- On the instance, Bob finds the Agent, its four Tools, the Connection and the Knowledge Base, and no Toolkit.
-- The questions vary from one run to another. In the run there were three: which districts and postcodes to use; whether the MCP server runs inside watsonx Orchestrate over stdio or is reached over HTTP; and whether the matching of abbreviations is done in the MCP server or left to the Agent. Bob added that a cloud instance requires HTTP. It does not: a local Toolkit is uploaded at import and runs inside the platform, on a SaaS tenant as on the Developer Edition. The second prompt answers stdio.
+- What Bob understood: a Python MCP server with the ten streets of the Collection Calendar as its data, running inside watsonx Orchestrate as a local Toolkit, called by the Agent before any Tool that takes a street, and tried from Bob before the import.
+- What exists on the instance: the Agent, its four Tools, the Connection and the Knowledge Base, and no Toolkit. Bob also lists the project files it will change: the Agent definition, its own MCP configuration in `.bob/mcp.json`, and the import script if your project has one.
+- The questions. In the run there were five: which districts and postcodes to use; how far the matching of a typed address should go; which Python library to build the MCP server with; what to test from Bob; and whether the Agent must look up every address or only the informal ones. Yours may differ in number and wording. Each one is a decision for you, and none has a single right answer; the second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers.
 
-The second prompt answers them. It fixes the data, so that your Address Registry and every other reader's Address Registry give the same answers.
+The second prompt answers the questions in Bob's order. If Bob asked something that the prompt does not cover, add one line with your answer at the end.
 
 ```
-These are my answers. Two tools: lookup_address, which receives an address as
-typed and returns the official street name, the house number if there is one,
-the district and the postcode; and list_streets, which receives a district and
-returns its streets. The registry has four districts. North: Elm Street
-(UT1 1AA) and Oak Avenue (UT1 1AB). Harbour: Harbour Lane (UT2 2AA) and River
-Close (UT2 2AB). Old Town: Mill Road (UT3 3AA), High Street (UT3 3AB) and
-Station Road (UT3 3AC). West: Cedar Way (UT4 4AA), Maple Drive (UT4 4AB) and
-Birch Lane (UT4 4AC). The lookup accepts abbreviations such as st, rd, ln,
-ave, and any capitalisation. When an address matches no street, the tool says
-so and returns nothing else.
+These are my answers.
 
-The Agent looks up every address that a resident gives, and uses the official
-street name for the collection calendar and for problem reports, keeping the
-house number in the description of a report. When the registry does not know
-the address, the Agent asks the resident to check it and calls no other Tool.
-The Agent can also answer which district a street is in and which streets a
-district has. The facts, the Knowledge Base, the four Tools and the Connection
-stay as they are.
+1. Do not invent the data. The address registry has four districts. North:
+Elm Street (UT1 1AA) and Oak Avenue (UT1 1AB). Harbour: Harbour Lane
+(UT2 2AA) and River Close (UT2 2AB). Old Town: Mill Road (UT3 3AA), High
+Street (UT3 3AB) and Station Road (UT3 3AC). West: Cedar Way (UT4 4AA), Maple
+Drive (UT4 4AB) and Birch Lane (UT4 4AC). The house number is whatever the
+resident typed; the address registry returns it as given and does not check it.
+
+2. Normalise only: lowercase, remove punctuation, expand the abbreviations st,
+rd, ln, ave, dr, cl. No fuzzy matching and no extra library for it.
+
+3. The official mcp Python SDK, one file, started with "python server.py", with
+a requirements.txt next to it.
+
+4. From Bob, call the two tools only: lookup_address with "18 elm st" and
+list_streets with "Old Town". The chain through the Agent is tested after the
+import.
+
+5. The Agent always calls lookup_address before any tool that takes a street,
+and uses the official street name for the collection calendar and for problem
+reports, keeping the house number in the description of a report. When the
+address registry does not know the address, the Agent asks the resident to
+check it and calls no other tool.
+
+Two tools: lookup_address, which receives an address as typed and returns the
+official street name, the house number if there is one, the district and the
+postcode; and list_streets, which receives a district and returns its streets.
+When an address matches no street, lookup_address says so and returns nothing
+else. The facts, the Knowledge Base, the four tools and the Connection stay as
+they are.
 ```
 
 Bob confirms the answers and lays out the MCP server in the chat: its two tools, the data, the files it will create, and the import into watsonx Orchestrate. Do not switch to Agent mode yet.
