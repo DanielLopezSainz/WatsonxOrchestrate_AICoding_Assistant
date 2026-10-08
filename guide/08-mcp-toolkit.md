@@ -55,7 +55,7 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 **Why this is one of the most important chapters of this guide**
 
-Most Agents that you build after this guide will use an MCP server at some point. The ones that vendors publish give an Agent a ticketing system, a CRM, a document store or a code repository in one import; the ones that your own team writes give it a database, an internal API, a product catalogue or an address registry, written once and used by every Agent in the company. This chapter teaches what applies to all of them: how to describe an MCP server to Bob so that the design names the component and ends with the build steps; how to try the MCP server from Bob before the platform receives a copy; where it runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes.
+Most Agents that you build after this guide will use an MCP server at some point. You and your team will write MCP servers to reach a database, an internal API, a product catalogue or any other system of the company. Through them, your Agents gain access to systems inside and outside the company. This chapter teaches what applies to all of them: how to describe an MCP server to Bob so that the design names the component and ends with the build steps; how to try the MCP server from Bob before the platform receives a copy; where it runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes.
 
 ## 8.3 Ask mode: describe the Address Registry
 
