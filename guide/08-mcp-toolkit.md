@@ -21,6 +21,8 @@ Skip this chapter if you have already imported an MCP server into watsonx Orches
 
 Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the four names, `get_permit_status`, `get_request_status`, `get_collection_days` and `report_issue`.
 
+The list comes from the Agent in Draft. Bob's Orchestrate server reads and changes the Draft environment of the active instance only; the Agent deployed in Live in chapter 7 is not touched until section 8.9.
+
 ## 8.2 What an MCP server is, and what an Orchestrate Toolkit is
 
 An MCP server is a program that offers tools over a standard protocol. Any client that speaks the protocol can list the tools, read their descriptions and call them: Bob, other coding assistants, and watsonx Orchestrate. The tools of chapter 6 were written for watsonx Orchestrate alone; the tools of an MCP server are written once and used by whichever client connects.
