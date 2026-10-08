@@ -6,7 +6,7 @@ Level: intermediate. Time: about 75 minutes. Prerequisites: chapter 7 completed,
 
 You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An address registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that registry as an MCP server, with the ten streets of the collection calendar, and the Agent uses it.
 
-MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds a MCP server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the MCP server as an Orchestrate Toolkit, and the Agent gets its tools.
+MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds an MCP server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the MCP server as an Orchestrate Toolkit, and the Agent gets its tools.
 
 The Orchestrate Toolkit is the component introduced in this chapter. Bob's capability is the creation of MCP servers.
 
@@ -16,7 +16,7 @@ Skip this chapter if you have already imported an MCP server into watsonx Orches
 
 - The setup from chapter 2, complete.
 - The Agent `civic_info_agent` from chapter 7 on your instance, in Draft, with its four Tools and the Connection `utopia_311`. If you skipped chapter 7, import them as described in that chapter's Overview.
-- In Bob's settings, MCP tab, the setting Enable MCP Server Creation switched on. It is on by default; when it is off, Bob does not know how to write a MCP server.
+- In Bob's settings, MCP tab, the setting Enable MCP Server Creation switched on. It is on by default; when it is off, Bob does not know how to write an MCP server.
 - A new conversation in Bob for this chapter.
 
 Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the four names, `get_permit_status`, `get_request_status`, `get_collection_days` and `report_issue`.
@@ -33,7 +33,7 @@ An Orchestrate Toolkit is one asset that holds several tools, imported and remov
 
 **Where the MCP server runs**
 
-watsonx Orchestrate runs an MCP server in two ways. A local toolkit is a MCP server whose code the platform receives at import, a folder with the program and its dependencies, and runs itself when an Agent calls a tool, in Python or Node.js. A remote toolkit is a MCP server that runs elsewhere, on your infrastructure or a vendor's, and that the platform reaches over HTTP. A local MCP server talks to its client through its standard input and output, called stdio: the client starts the program, writes the call to it and reads the answer back. Bob does the same when it connects to the MCP server on your machine. This chapter builds a local toolkit: a copy of the folder that Bob writes is uploaded to the instance, the way the Tools of chapter 6 were, and the platform starts the MCP server when needed. A change to the folder on your machine reaches the instance only through a new import.
+watsonx Orchestrate runs an MCP server in two ways. A local toolkit is an MCP server whose code the platform receives at import, a folder with the program and its dependencies, and runs itself when an Agent calls a tool, in Python or Node.js. A remote toolkit is an MCP server that runs elsewhere, on your infrastructure or a vendor's, and that the platform reaches over HTTP. A local MCP server talks to its client through its standard input and output, called stdio: the client starts the program, writes the call to it and reads the answer back. Bob does the same when it connects to the MCP server on your machine. This chapter builds a local toolkit: a copy of the folder that Bob writes is uploaded to the instance, the way the Tools of chapter 6 were, and the platform starts the MCP server when needed. A change to the folder on your machine reaches the instance only through a new import.
 
 **What changes compared with a Tool**
 
@@ -45,7 +45,7 @@ watsonx Orchestrate runs an MCP server in two ways. A local toolkit is a MCP ser
 | Updating it | Import the Tool again | Remove the toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
 | Credentials | A Connection named at import | A Connection named at import, whose values reach the MCP server as environment variables |
 
-The last row matters when a MCP server needs a key. The registry of this chapter needs none.
+The last row matters when an MCP server needs a key. The registry of this chapter needs none.
 
 **The registry of this chapter**
 
@@ -153,7 +153,7 @@ Open the MCP server's folder in the File Explorer; Bob names it after the regist
 
 Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
-Open Bob's MCP tab (chapter 2, section 2.3). The registry is listed as a MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
+Open Bob's MCP tab (chapter 2, section 2.3). The registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
 
 Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the registry does not know.
 
@@ -194,7 +194,7 @@ The Agent now understands addresses the way residents write them, through a serv
 
 - An MCP server is a program that offers tools over a standard protocol to any client, Bob or watsonx Orchestrate among them.
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
-- A local toolkit is a folder that the platform runs; a remote toolkit is a MCP server reached over HTTP. A toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
+- A local toolkit is a folder that the platform runs; a remote toolkit is an MCP server reached over HTTP. A toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
 - Bob creates MCP servers itself, and uses them as a client before the platform does.
 
 The Agent of CivicPulse now knows the departments, searches the regulations, looks up records, reports problems and resolves addresses, all from one set of instructions that has grown with every chapter. In chapter 9, that one Agent becomes several: a front desk Agent that talks to residents, and one Agent per department behind it, each with the Tools and the knowledge of its own domain.
