@@ -4,7 +4,7 @@ Level: intermediate. Time: about 75 minutes. Prerequisites: chapter 7 completed,
 
 ## Overview
 
-You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An Address Registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that Address Registry as an MCP server, with the ten streets of the collection calendar, and the Agent uses it.
+You send a message to CivicPulse: "bins not collected at 18 elm st, which day is it?". The Agent of chapter 7 has a Tool that knows the collection days of Elm Street, but the Tool does not find the street, because "18 elm st" is not how the city spells it. An Address Registry solves this: it receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. In this chapter, Bob writes that Address Registry as an MCP server, with the ten streets of the Collection Calendar, and the Agent uses it.
 
 MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. In this chapter Bob builds an MCP server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the MCP server as an Orchestrate Toolkit, and the Agent gets its tools.
 
@@ -51,7 +51,7 @@ The last row matters when an MCP server needs a key. The Address Registry of thi
 
 **The MCP server of this chapter**
 
-The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the collection calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the Address Registry, as the Overview did.
+The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the Address Registry, as the Overview did.
 
 ## 8.3 Ask mode: describe the Address Registry
 
