@@ -57,7 +57,7 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 Mode: Ask, in a new conversation.
 
-The prompt describes the service, what residents type, and what the Agent must do with the answer. It names MCP and Python, and it says that the Address Registry is not a customer care MCP server: one of the Orchestrate skills loaded in chapter 2 builds MCP servers for customer care, with a welcome tool and a login, and Bob must not use it here.
+The prompts of chapters 6 and 7 described a need and left the choice of component to Bob. This prompt names the component, because the need alone does not lead to it: an address lookup over ten streets can be a Python Tool like those of chapter 6, and Bob may well propose that. The chapter is about the MCP server, so the prompt asks for one. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies. Finally, it says that the Address Registry is not a customer care MCP server: one of the Orchestrate skills loaded in chapter 2 builds MCP servers for customer care, with a welcome tool and a login, and Bob must not use it here.
 
 ```
 The city of Utopia has an address registry that resolves any address a
