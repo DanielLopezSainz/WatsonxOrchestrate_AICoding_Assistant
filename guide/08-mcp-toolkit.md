@@ -29,7 +29,7 @@ An MCP server is a program that offers tools over a standard protocol. Any clien
 
 Companies meet MCP servers from two sides. Vendors publish MCP servers for their products, so that an Agent can search a ticketing system, read a document store or query a database without anyone writing code for it. And teams write MCP servers for their own systems, so that the same address registry, the same product catalogue, serves every Agent in the company. The ADK documentation lists MCP servers of both kinds that watsonx Orchestrate can import.
 
-An Orchestrate Toolkit is one asset that holds several tools, imported and removed in one operation. It has two kinds: an MCP toolkit, which is an MCP server registered on the instance, and a Python toolkit, which is a set of Python Tools that run in one process. This chapter builds an MCP toolkit. At import, you choose all the tools of the MCP server or some of them; the Agent sees each one under the name of the toolkit, `utopia_addresses:lookup_address`, and uses it like any other Tool, from its description and its parameters.
+An Orchestrate Toolkit is a group of Tools that you import together as one asset. In this chapter the group is the MCP server: when watsonx Orchestrate imports it, the Toolkit is created and each tool of the MCP server becomes a Tool of the Toolkit. At import, you choose all the tools of the MCP server or some of them; the Agent sees each one under the name of the Toolkit, `utopia_addresses:lookup_address`, and uses it like any other Tool, from its description and its parameters.
 
 **Where the MCP server runs**
 
