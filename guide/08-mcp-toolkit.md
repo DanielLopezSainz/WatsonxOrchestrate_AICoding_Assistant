@@ -10,7 +10,7 @@ MCP, the Model Context Protocol, is a standard way for a program to offer tools 
 
 The Orchestrate Toolkit is the component introduced in this chapter. Bob's capability is the creation of MCP servers.
 
-Skip this chapter if you have already imported an MCP server into watsonx Orchestrate with Bob. To continue with chapter 9 without building it, send Bob these instructions in Agent mode: `Import the MCP server in walkthroughs/ch08/mcp/utopia_addresses into my instance as a toolkit named utopia_addresses, with all its tools, then import walkthroughs/ch08/agents/civic_info_agent.yaml.`
+Skip this chapter if you have already imported an MCP server into watsonx Orchestrate with Bob. To continue with chapter 9 without building it, send Bob these instructions in Agent mode: `Import the MCP server in walkthroughs/ch08/toolkits/address_registry into my instance as a toolkit named address_registry, with all its tools, then import walkthroughs/ch08/agents/civic_info_agent.yaml.`
 
 ## 8.1 Before you start
 
@@ -29,7 +29,7 @@ An MCP server is a program that offers tools over a standard protocol. Any clien
 
 Companies meet MCP servers from two sides. Vendors publish MCP servers for their products, so that an Agent can search a ticketing system, read a document store or query a database without anyone writing code for it. And teams write MCP servers for their own systems, so that the same address registry, the same product catalogue, serves every Agent in the company. The ADK documentation lists MCP servers of both kinds that watsonx Orchestrate can import.
 
-An Orchestrate Toolkit is a group of Tools that you import together as one asset. In this chapter the group is the MCP server: when watsonx Orchestrate imports it, the Toolkit is created and each tool of the MCP server becomes a Tool of the Toolkit. At import, you choose all the tools of the MCP server or some of them; the Agent sees each one under the name of the Toolkit, `utopia_addresses:lookup_address`, and uses it like any other Tool, from its description and its parameters.
+An Orchestrate Toolkit is a group of Tools that you import together as one asset. In this chapter the group is the MCP server: when watsonx Orchestrate imports it, the Toolkit is created and each tool of the MCP server becomes a Tool of the Toolkit. At import, you choose all the tools of the MCP server or some of them; the Agent sees each one under the name of the Toolkit, `address_registry:lookup_address`, and uses it like any other Tool, from its description and its parameters.
 
 **Where the MCP server runs**
 
@@ -43,7 +43,7 @@ In this chapter, Bob writes an MCP server for watsonx Orchestrate.
 |---|---|---|
 | What you import | One function | One MCP server with all its tools |
 | Who else can use it | watsonx Orchestrate | Any MCP client, including Bob |
-| Name in the Agent | `get_collection_days` | `utopia_addresses:lookup_address` |
+| Name in the Agent | `get_collection_days` | `address_registry:lookup_address` |
 | Updating it | Import the Tool again | Remove the Toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
 | Credentials | A Connection named at import | A Connection named at import, whose values reach the MCP server as environment variables |
 
@@ -117,7 +117,7 @@ else. The facts, the Knowledge Base, the four tools and the Connection stay as
 they are.
 ```
 
-Bob confirms the answers and lays out the MCP server in the chat: its two tools, the data, the files it will create, and the import into watsonx Orchestrate. Do not switch to Agent mode yet.
+Bob confirms the answers and lays out the whole build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two tools added to the Agent and the new instructions, and the import command. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it; it then asks you to switch to Agent mode. Do not: the design comes first.
 
 ## 8.4 Plan mode: write the design
 
@@ -133,15 +133,15 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 |---|---|
 | The MCP server | Its folder in the project, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
-| The Toolkit | Its name, `utopia_addresses`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
-| The change to the Agent | The two tools of the Toolkit attached; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
+| The Toolkit | Its name, `address_registry`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
+| The change to the Agent | The two tools listed under `tools` with the Toolkit's name in front, `address_registry:lookup_address` and `address_registry:list_streets`; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
 | The build order | MCP server, Bob's connection and a test through Bob, Toolkit, Agent, then the test through the Agent |
 
 ## 8.5 Approve the design
 
 Mode: Plan, same conversation.
 
-There is no prompt to send in this section unless the design needs a change. Read the design against the table in 8.4. The most common gap is the second row: a design that goes from the MCP server straight to the import, without Bob connecting to the MCP server itself. If that is the case, send `Add a step after the MCP server is written: register it in your MCP configuration and call lookup_address with "18 elm st" before importing anything into watsonx Orchestrate.` Bob may also ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design is correct, go to 8.6: its first prompt is the approval.
+There is no prompt to send in this section unless the design needs a change. Read the design against the table in 8.4. The gap to expect is in the fourth row: in the run, Bob listed the two tools in the Agent as `lookup_address` and `list_streets`, without the Toolkit's name. On the instance, the tools of a Toolkit are named `toolkit:tool`, and an Agent that lists the bare names does not find them. If the design has the bare names, send `The tools of a toolkit are named toolkit:tool on the instance. In the design, the agent must list address_registry:lookup_address and address_registry:list_streets.` Bob may also ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design is correct, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
@@ -157,7 +157,7 @@ Bob:
 
 1. Writes the MCP server: a folder with the Python program, the data file and the requirements file.
 2. Registers the MCP server in its MCP configuration and calls `lookup_address` with a test address. This is Bob using the MCP server as a client, the way it uses the Orchestrate server. The tools appear in Bob's MCP tab, next to the two MCP servers of chapter 2.
-3. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `utopia_addresses`, from the folder and with the command that starts the MCP server.
+3. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts the MCP server.
 4. Updates the Agent: the two tools are attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
 5. Tests the Agent with an address and reports.
 
@@ -165,13 +165,13 @@ Approve each request as it comes. The import of the Toolkit is the step that can
 
 ## 8.7 What Bob built
 
-Open the MCP server's folder in the File Explorer; Bob names it after the Address Registry, for example `toolkits/utopia_addresses`. It has at least three files: the program, a data file with the ten streets, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
+Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has at least three files: the program, a data file with the ten streets, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
 
 Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
 Open Bob's MCP tab (chapter 2, section 2.3). The Address Registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
 
-Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the Toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the Address Registry does not know.
+Open `agents/civic_info_agent.yaml`. Under `tools`, after the four Tools of chapter 7, the two tools of the Toolkit with its name in front: `address_registry:lookup_address` and `address_registry:list_streets`. The `toolkits` line stays empty; it is for another kind of Agent. The instructions have a new section: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the Address Registry does not know.
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
@@ -185,12 +185,12 @@ bins not collected at 18 elm st, which day is it?
 
 The Agent resolves the address to Elm Street, looks up the collection days, and answers with the days of the four bins and the Waste and Recycling contact. Then try these:
 
-- The Address Registry alone, through Bob, in Agent mode: `Call lookup_address on the utopia_addresses MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
+- The Address Registry alone, through Bob, in Agent mode: `Call lookup_address on the address registry MCP server with "7 harbour ln" and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
 - An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the house number in the description, and the Agent gives a request number.
 - A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
 - An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
-Ask the first question again with reasoning. The steps show two tool calls in order: `utopia_addresses:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The Toolkit's tool carries the Toolkit's name in front, and the chapter 6 Tool does not.
+Ask the first question again with reasoning. The steps show two tool calls in order: `address_registry:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The Toolkit's tool carries the Toolkit's name in front, and the chapter 6 Tool does not.
 
 ## 8.9 Deploy the change in Live
 
