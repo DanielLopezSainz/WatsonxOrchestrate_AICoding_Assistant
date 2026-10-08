@@ -49,9 +49,9 @@ In this chapter, Bob writes an MCP server for watsonx Orchestrate.
 
 The last row matters when an MCP server needs a key. The Address Registry of this chapter needs none.
 
-**The MCP server of this chapter**
+**The MCP server of this chapter: Address Registry**
 
-The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server. The chapter calls this MCP server the Address Registry, as the Overview did.
+The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server.
 
 ## 8.3 Ask mode: describe the Address Registry
 
