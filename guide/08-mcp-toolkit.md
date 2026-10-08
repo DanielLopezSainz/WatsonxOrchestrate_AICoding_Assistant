@@ -121,7 +121,7 @@ else. The facts, the Knowledge Base, the four tools and the Connection stay as
 they are.
 ```
 
-Bob confirms the answers and lays out the whole build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two tools added to the Agent and the new instructions, and the import command. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it; it then asks you to switch to Agent mode. Do not: the design comes first.
+Bob confirms the answers and lays out the build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two test calls, the changes to the Agent, and in some runs the import into watsonx Orchestrate. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it; it then asks you to switch to Agent mode. Do not: the design comes first.
 
 ## 8.4 Plan mode: write the design
 
@@ -142,7 +142,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 | Content | What to check |
 |---|---|
 | The MCP server | Its folder in the project, `toolkits/address_registry`, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
-| Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
+| Bob's own connection to it | The MCP server registered in Bob's MCP configuration, started with the Python of the project's environment, so that Bob can call the tools before the import |
 | The Toolkit | Its name, `address_registry`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
 | The change to the Agent | The two tools listed under `tools` with the Toolkit's name in front, `address_registry:lookup_address` and `address_registry:list_streets`; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
 | The build steps | A numbered list at the end, in the order of the prompt. Without it, Bob writes the files and stops |
