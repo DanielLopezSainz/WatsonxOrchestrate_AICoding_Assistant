@@ -140,7 +140,7 @@ Orchestrate from its folder with all its tools, import the agent, run the test
 scenarios.
 ```
 
-Bob writes the file after your approval and summarises it. Open `design/address-registry-design.md` and check it against this table:
+Bob writes the file after your approval and summarises it. In two runs of three, it showed the design in the chat instead, said that it was in Ask mode, and asked for Agent mode. It is not: Plan mode writes files. Send `You are in Plan mode and can write files. Write the design to design/address-registry-design.md.` and approve the write. Then open `design/address-registry-design.md` and check it against this table:
 
 | Content | What to check |
 |---|---|
