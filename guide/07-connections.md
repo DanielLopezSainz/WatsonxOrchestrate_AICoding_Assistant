@@ -241,4 +241,4 @@ The Agent can now act on a resident's behalf: it reports a pothole to the 311 Ca
 - Team Connections share one credential among all users; member Connections ask each user for their own, in the chat.
 - Building an Orchestrate Tool that acts takes the same parts as one that reads, a function, a description, parameters and a result, and the Agent decides when to call it in the same way.
 
-The Agent now looks up records and sends new reports, with four Python Tools that Bob wrote and that the city maintains. Many services come with their Tools ready, as an MCP server that any Agent can use; watsonx Orchestrate imports the whole set in one step, as an Orchestrate Toolkit. In chapter 8, Bob builds one with a skill made for that, and the Agent gets an address lookup from it.
+The Agent now looks up records and sends new reports, with four Python Tools that Bob wrote and that the city maintains. Many services come with their Tools ready, as an MCP server that any Agent can use; watsonx Orchestrate imports the whole set in one step, as an Orchestrate Toolkit. In chapter 8, Bob builds one, and the Agent gets an address lookup from it.
