@@ -2,7 +2,7 @@
 
 Files produced by chapter 8, as built with Bob on a watsonx Orchestrate tenant:
 
-- `design/address-registry-design.md`: the design that Bob wrote in Plan mode, with the build steps at the end.
+- `design/address-registry-design.md`: the design that Bob wrote in Plan mode, with the build steps at the end. Two lines of its build steps are as Bob corrected them during the build (section 8.6): the absolute paths of the entry in Bob's configuration, and the import command.
 - `toolkits/address_registry/server.py`: the MCP server of the Address Registry, in Python, with its two tools, `lookup_address` and `list_streets`, and the ten streets inside it.
 - `toolkits/address_registry/requirements.txt`: the MCP library the server uses. The version is pinned to the one Bob tested, as section 8.10 advises; the run had `mcp>=1.0.0`, which installs whatever version is current.
 - `agents/civic_info_agent.yaml`: the Agent with the two tools of the Toolkit listed under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and the extended instructions.

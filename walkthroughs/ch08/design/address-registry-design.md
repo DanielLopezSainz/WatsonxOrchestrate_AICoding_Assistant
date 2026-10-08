@@ -146,15 +146,18 @@ Execute the following build steps in exact order:
 2. **Install Requirements into Project Python Environment**:
    - Run `pip install -r toolkits/address_registry/requirements.txt` using `venv/bin/pip`.
 3. **Register MCP Server in Bob MCP Configuration & Test Tools**:
-   - Register `address_registry` in `.bob/mcp.json` using `venv/bin/python toolkits/address_registry/server.py`.
+   - Register `address_registry` in `.bob/mcp.json` using the project's Python interpreter and the server file, both with absolute paths.
    - From Bob, call the two tools:
      - `lookup_address` with `"18 elm st"`
      - `list_streets` with `"Old Town"`
 4. **Import Toolkit into watsonx Orchestrate**:
    - Import the toolkit from `toolkits/address_registry` with all its tools:
      ```bash
-     orchestrate toolkits import -f toolkits/address_registry
-     ```
+orchestrate toolkits add -k mcp -n address_registry \
+  --description "Official City of Utopia address registry. Resolves raw resident addresses to canonical street names, districts, and postcodes." \
+  --package-root toolkits/address_registry --language python \
+  --command '["python", "server.py"]' --tools "*"
+```
 5. **Import the Agent**:
    - Update `agents/civic_info_agent.yaml` to include `lookup_address` and `list_streets` and the resolution instructions.
    - Import the updated agent:
