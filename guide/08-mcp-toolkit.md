@@ -151,7 +151,19 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 
 Mode: Plan, same conversation.
 
-Read Bob's summary and the design file against the table in 8.4. If something is missing or wrong, request the change in the same conversation; Bob revises the file and waits again. When you agree with the design, go to 8.6: its first prompt is the approval.
+Read Bob's summary and the design file against the table in 8.4. In every run, the design needed the same corrections: a hyphen in the folder name, a Toolkit name different from the folder, the two tools listed in the Agent without the Toolkit's name in front or one of them missing, Bob's entry starting the MCP server with a bare `python`, and an import command with the wrong flags. The prompt below corrects all of them; remove the sentences that your design does not need.
+
+```
+Four corrections to the design. Name the toolkit and its folder
+address_registry, with an underscore. The agent lists the two tools under tools
+as address_registry:lookup_address and address_registry:list_streets, not under
+toolkits. Your MCP configuration starts the server with venv/bin/python. The
+toolkit is imported with: orchestrate toolkits add --kind mcp --name
+address_registry --description "Address registry of Utopia" --package-root
+toolkits/address_registry --command "python server.py" --tools "*".
+```
+
+Bob revises the file and summarises the changes. Read the file once more; when you agree with the design, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
