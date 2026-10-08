@@ -131,7 +131,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 
 | Content | What to check |
 |---|---|
-| The MCP server | Its folder in the project, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
+| The MCP server | Its folder in the project, `toolkits/address_registry`, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
 | The Toolkit | Its name, `address_registry`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
 | The change to the Agent | The two tools listed under `tools` with the Toolkit's name in front, `address_registry:lookup_address` and `address_registry:list_streets`; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
@@ -141,7 +141,19 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 
 Mode: Plan, same conversation.
 
-There is no prompt to send in this section unless the design needs a change. Read the design against the table in 8.4. The gap to expect is in the fourth row: in the run, Bob listed the two tools in the Agent as `lookup_address` and `list_streets`, without the Toolkit's name. On the instance, the tools of a Toolkit are named `toolkit:tool`, and an Agent that lists the bare names does not find them. If the design has the bare names, send `The tools of a toolkit are named toolkit:tool on the instance. In the design, the agent must list address_registry:lookup_address and address_registry:list_streets.` Bob may also ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design is correct, go to 8.6: its first prompt is the approval.
+Read the design against the table in 8.4. In the run, the design was complete on four rows and short on two, and the same two are likely in yours. The Agent listed the two tools as `lookup_address` and `list_streets`, without the Toolkit's name: on the instance, the tools of a Toolkit are named `toolkit:tool`, and an Agent that lists the bare names does not find them. And the design assumed that the MCP library was already installed in the project's Python environment, which it is not; the test from Bob would fail at the first call. The prompt below corrects both and asks for the build order as a list:
+
+```
+Three changes to the design. The tools of a toolkit are named toolkit:tool on
+the instance: the agent must list address_registry:lookup_address and
+address_registry:list_streets. The mcp library is not installed in the
+project's Python environment: install requirements.txt into it before the test
+from Bob. Add a build order section: MCP server, its entry in your MCP
+configuration, the two test calls from Bob, the toolkit import, the agent,
+then the test scenarios through the agent.
+```
+
+Bob revises the file and summarises the changes. If your design already has one of the three, remove that sentence from the prompt. Bob may also ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design is correct, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
@@ -165,7 +177,7 @@ Approve each request as it comes. The import of the Toolkit is the step that can
 
 ## 8.7 What Bob built
 
-Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has at least three files: the program, a data file with the ten streets, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
+Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has two files: the program, `server.py`, with the ten streets inside it, and `requirements.txt`, which names the MCP library the program uses. Bob may add a README or a test file.
 
 Open the program. It is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
 
