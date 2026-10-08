@@ -55,7 +55,7 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 The Agents that you build after this guide will often use an MCP server. You and your team will write MCP servers to reach a database, an internal API, a product catalogue or any other system of the company, and through them your Agents reach systems inside and outside the company. This chapter covers what applies to all of them. You learn how to describe an MCP server to Bob so that the design names the component and ends with the build steps, and how to try the MCP server from Bob before the platform receives a copy. You also learn where the MCP server runs, inside the platform or on a server of your own; how a Toolkit gets its credentials through a Connection, as the Tool of chapter 7 did; and how a Toolkit is updated when its MCP server changes. Section 8.10 collects these practices in one list, with the reason for each.
 
-Because of that importance, this chapter goes further into the details of watsonx Orchestrate and of Bob than the earlier ones: how the platform runs an MCP server, how Bob connects to one, what the design must contain, and what each prompt has to say. For a component this central, that depth is needed once; the later chapters do not repeat it. With the practices of 8.10 followed, your own Toolkits should go through in one build, without the detours this chapter describes.
+This chapter explains how watsonx Orchestrate runs an MCP server, how Bob connects to it and what the design and the prompts must specify. These details are explained once and are not repeated in later chapters. The practices in 8.10 address these problems, but your Toolkits may still need corrections after one build.
 
 ## 8.3 Ask mode: describe the Address Registry
 
