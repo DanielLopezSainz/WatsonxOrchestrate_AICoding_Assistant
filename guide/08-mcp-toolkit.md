@@ -27,7 +27,7 @@ The list comes from the Agent in Draft. Bob's Orchestrate server reads and chang
 
 An MCP server is a program that offers tools over a standard protocol. Any client that speaks the protocol can list the tools, read their descriptions and call them.
 
-Companies meet MCP servers from two sides. Vendors publish servers for their products, so that an assistant can search a ticketing system, read a document store or query a database without anyone writing code for it. And teams write servers for their own systems, so that the same address registry, the same product catalogue, serves every assistant and every agent in the company. The ADK documentation lists servers of both kinds that watsonx Orchestrate can import.
+Companies meet MCP servers from two sides. Vendors publish servers for their products, so that an Agent can search a ticketing system, read a document store or query a database without anyone writing code for it. And teams write servers for their own systems, so that the same address registry, the same product catalogue, serves every Agent in the company. The ADK documentation lists servers of both kinds that watsonx Orchestrate can import.
 
 An Orchestrate Toolkit is one asset that holds several tools, imported and removed in one operation. It has two kinds: an MCP toolkit, which is an MCP server registered on the instance, and a Python toolkit, which is a set of Python Tools that run in one process. This chapter builds an MCP toolkit. At import, you choose all the tools of the server or some of them; the Agent sees each one under the name of the toolkit, `utopia_addresses:lookup_address`, and uses it like any other Tool, from its description and its parameters.
 
