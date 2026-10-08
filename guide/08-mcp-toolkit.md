@@ -16,7 +16,7 @@ Skip this chapter if you have already imported an MCP server into watsonx Orches
 
 - The setup from chapter 2, complete.
 - The Agent `civic_info_agent` from chapter 7 on your instance, in Draft, with its four Tools and the Connection `utopia_311`. If you skipped chapter 7, import them as described in that chapter's Overview.
-- In Bob's settings, MCP tab, the setting Enable MCP Server Creation switched on. It is on by default; when it is off, Bob does not know how to write an MCP server.
+- In Bob's settings, MCP tab, the setting Enable MCP Server Creation switched on. It is on by default; when it is off, Bob has no instructions for writing one.
 - A new conversation in Bob for this chapter.
 
 Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the four names, `get_permit_status`, `get_request_status`, `get_collection_days` and `report_issue`.
@@ -64,7 +64,7 @@ Mode: Ask, in a new conversation.
 In the previous chapters, the prompts did not name the Orchestrate asset to create; Bob chose it based on your prompt. This time the prompt asks for an MCP server by name. You know by now which components exist and what each one is for, so you can state what you need, and Bob no longer has to guess your intention. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies. The prompt also says where the MCP server runs and asks Bob to try it before the import, two decisions that Bob would otherwise ask about.
 
 ```
-The city of Utopia has an address registry that resolves any address a
+The city of Utopia needs an address registry that resolves any address a
 resident types, such as "18 elm st" or "7 Harbour Ln", into the official
 street name, the house number, the district and the postcode. The address
 registry will be an MCP server, running inside watsonx Orchestrate as a local
@@ -83,19 +83,20 @@ Look for these points in Bob's answer:
 
 - What Bob understood: a Python MCP server with the ten streets of the Collection Calendar as its data, running inside watsonx Orchestrate as a local Toolkit, called by the Agent before any Tool that takes a street, and tried from Bob before the import.
 - What exists: the Agent with its four Tools and its Knowledge Base, the Collection Calendar with the ten streets, the two servers in Bob's MCP configuration, and no Toolkit.
-- The questions. Their number varies from two to five. Which districts and postcodes to use is always among them; the others may be what the tool returns for an unknown address, how far the matching of a typed address should go, which Python library to use, whether to install it in the project's environment or in one of its own, what to test from Bob, and whether the Agent must look up every address or only the informal ones. Each one is a decision for you, and none has a single right answer; the second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
+- The questions. Their number varies from two to five. Expect one about the districts and postcodes; the others may be what the tool returns for an unknown address, how far the matching of a typed address should go, which Python library to use, whether to install it in the project's environment or in one of its own, what to test from Bob, and whether the Agent must look up every address or only the informal ones. Each one is a decision for you, and none has a single right answer; the second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
 
 Send the prompt below whole, still in Ask mode and in the same conversation; it covers what Bob asked and the points it did not raise. If Bob asked something that it does not cover, add one line with your answer at the end.
 
 ```
 These are my answers.
 
-1. Do not invent the data. The address registry has four districts. North:
-Elm Street (UT1 1AA) and Oak Avenue (UT1 1AB). Harbour: Harbour Lane
-(UT2 2AA) and River Close (UT2 2AB). Old Town: Mill Road (UT3 3AA), High
-Street (UT3 3AB) and Station Road (UT3 3AC). West: Cedar Way (UT4 4AA), Maple
-Drive (UT4 4AB) and Birch Lane (UT4 4AC). The house number is whatever the
-resident typed; the address registry returns it as given and does not check it.
+1. The address registry covers the ten streets of tools/collection_calendar.csv
+and nothing else. It has four districts: North, with Elm Street (UT1 1AA);
+Harbour, with Harbour Lane (UT2 2AA); Old Town, with Mill Road (UT3 3AA); and
+West. Put the other seven streets of the calendar into these four districts,
+two or three per district, with postcodes that continue the pattern (UT1 1AB,
+UT2 2AB, UT4 4AA and so on). The house number is whatever the resident typed;
+the address registry returns it as given and does not check it.
 
 2. Normalise only: lowercase, remove punctuation, expand the abbreviations st,
 rd, ln, ave, dr, cl. No fuzzy matching and no extra library for it.
@@ -172,10 +173,10 @@ The design in @design/address-registry-design.md is approved. Build it.
 Bob follows the build steps of the design:
 
 1. Writes the MCP server, `toolkits/address_registry/server.py` with the ten streets inside it, and `requirements.txt`.
-2. Installs the library into the project's environment and checks that the program imports. Since the design was written, the library had changed its version and renamed its server class; Bob read the error and changed one line.
+2. Installs the library into the project's environment and checks that the program imports. The library may have changed its version since the design was written and renamed its server class; Bob reads the error and changes one line.
 3. Registers the MCP server in its MCP configuration and tests `lookup_address` and `list_streets`. The design says to call them through that connection; Bob may run the two functions in Python instead and report their results, which is not the same test. The registry appears in Bob's MCP tab next to the two MCP servers of chapter 2, and the test in 8.8 makes Bob use the connection.
-4. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts it. The design had the wrong form of the command; Bob corrected it from the command's help. The first correct attempt was refused with "We are configuring your tool in the background"; Bob waited a minute and the second succeeded.
-5. Updates the Agent and imports it again, replacing the Agent in Draft. Bob first put the Toolkit on the `toolkits` line. The import succeeded and the Agent ignored the tools, which Bob saw in its first test; it then listed them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imported the Agent again.
+4. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `address_registry`, from the folder and with the command that starts it. The design may have the wrong form of the command; Bob corrects it from the command's help. The platform may answer the first attempt with "We are configuring your tool in the background"; Bob waits a minute and tries again, and the second attempt succeeds.
+5. Updates the Agent and imports it again, replacing the Agent in Draft. Bob may first put the Toolkit on the `toolkits` line: the import succeeds and the Agent ignores the tools, which Bob sees in its first test; it then lists them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imports the Agent again.
 6. Sends three test questions to the Agent and reports: an address with an abbreviation, a pothole report with a house number, and an address the registry does not know.
 
 Approve each request as it comes. Bob corrects failures of this kind during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
@@ -186,7 +187,7 @@ Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. 
 
 The program is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server, an object of the library's server class, `MCPServer` in version 2 of the library and `FastMCP` in version 1. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output (the stdio transport, which every local Toolkit uses), and stops it.
 
-Bob's MCP tab (chapter 2, section 2.3) lists the Address Registry as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own. If the entry is red, disconnected, the paths in it are relative: Bob starts its MCP servers from a directory of its own, where `venv/bin/python` does not exist. Send, in Agent mode: `The address_registry server in your MCP tab is disconnected. Fix its entry in .bob/mcp.json with absolute paths for the Python interpreter and the program, and restart it.`
+Bob's MCP tab (chapter 2, section 2.3) lists the Address Registry as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own. If the entry is red, disconnected, the usual cause is a relative path in it: Bob starts its MCP servers from a directory of its own, where `venv/bin/python` does not exist. Send, in Agent mode: `The address_registry server in your MCP tab is disconnected. Fix its entry in .bob/mcp.json with absolute paths for the Python interpreter and the program, and restart it.`
 
 In `agents/civic_info_agent.yaml`, the `tools` list has, after the four Tools of chapter 7, the two tools of the Toolkit with its name in front: `address_registry:lookup_address` and `address_registry:list_streets`. The `toolkits` line stays empty; it is for another kind of Agent. The instructions have a new section: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the Address Registry does not know.
 
@@ -194,7 +195,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 8.8 Try it
 
-Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of the Agent in the watsonx Orchestrate builder (Build, Agents, `civic_info_agent`). Do not use the chat of the home page yet: it talks to the Agent deployed in Live, which is still the chapter 7 version and answers that it has no record for "18 elm st". The chat shows the change after 8.9.
+Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of the Agent in the watsonx Orchestrate builder (Build, Agents, `civic_info_agent`). On a tenant, do not use the chat of the home page yet: it talks to the Agent deployed in Live, which is still the chapter 7 version and answers that it has no record for "18 elm st". The chat shows the change after 8.9. On the Developer Edition, the chat shows the Agent in Draft and answers correctly already.
 
 ```
 The rubbish was not collected today at 18 elm st, which days do they collect it?
@@ -202,9 +203,9 @@ The rubbish was not collected today at 18 elm st, which days do they collect it?
 
 The Agent resolves the address to Elm Street, looks up the collection days, and answers with the days of the four bins and the Waste and Recycling contact. Then try these:
 
-- The Address Registry alone, through Bob, in a new conversation in Ask mode: `Call lookup_address with "7 harbour ln" on the address_registry MCP server and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. Ask mode leaves Bob no way to run the program itself, so the call goes through its MCP connection, and Bob shows the server and the tool above its answer. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
+- The Address Registry alone, through Bob, in a new conversation in Ask mode: `Call lookup_address with "7 harbour ln" on the address_registry MCP server and show me the result.` Harbour Lane, house number 7, Harbour district, UT2 2AA. Then `Now call list_streets with "Old Town" on the same server.`: Mill Road and the other streets of that district. Ask mode leaves Bob no way to run the program itself, so the calls go through its MCP connection, and Bob shows the server and the tool above its answer. This is Bob calling the MCP server on your machine; the Agent calls the copy on the instance.
 - An address with another abbreviation: "Report a pothole at 7 harbour ln." The report goes to the stand-in of the 311 Call Center from chapter 7, with the street Harbour Lane and the description "Pothole outside house number 7", and the Agent gives a request number.
-- A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
+- A question about districts: "Which streets are in the Old Town district?" Mill Road and the other streets that your registry puts there.
 - An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
 Ask the first question again with reasoning. The steps show two tool calls in order: `lookup_address` with the address as typed, returning Elm Street, house number 18, North and UT1 1AA, then `get_collection_days` with Elm Street. In the reasoning, the tool of the Toolkit appears under its own name, without the Toolkit's name in front; the prefix is for the Agent definition only.
@@ -228,14 +229,14 @@ Every MCP server that you build with Bob for watsonx Orchestrate goes through th
 1. Tell Bob in the first prompt that you want an MCP server. If the prompt describes only what the Agent must do, Bob proposes the simplest component that does it, usually a Python Tool, and no MCP server is built.
 2. Tell Bob which language to use, Python in this guide. Bob's documentation says that it typically writes MCP servers in TypeScript, which adds Node.js and its dependencies to the project. Python is the language of the Tools and of the environment that chapter 2 installed.
 3. Tell Bob where the MCP server runs. "Running inside watsonx Orchestrate as a local toolkit" is enough, because a local Toolkit always uses stdio. Without it, Bob asks about transports and may claim that a cloud instance needs HTTP, which is wrong.
-4. Ask Bob to test the MCP server itself before importing it, and check that it did so through its MCP connection rather than by running the Python functions. Bob does not propose this test on its own. A failure found before the import is corrected in the file; the same failure after the import appears only when the Agent calls the tool.
+4. Ask Bob to test the MCP server itself before importing it, and check that it did so through its MCP connection rather than by running the Python functions. Bob rarely proposes this test on its own. A failure found before the import is corrected in the file; the same failure after the import appears only when the Agent calls the tool.
 5. Give the data in the prompt and keep the matching simple. Otherwise Bob invents the data. Every library that the MCP server imports has to be installed again on the instance, so the fewer the better.
 6. Name the tools, say what each returns, and say what happens when nothing matches. Otherwise Bob proposes one tool where two are needed and chooses their names. Say also what the Agent does with a not-found result; for the Address Registry, it asks the resident and calls no other Tool.
 7. Use one name for the Toolkit and its folder, with underscores. Otherwise Bob may write a folder with a hyphen and give the Toolkit another name, and the Agent, the import command and your notes disagree.
 8. Tell Bob that the tools go into the Agent's `tools` list with the Toolkit's name in front, as `toolkit:tool`. If Bob names the Toolkit on the `toolkits` line instead, the Agent imports without any error and ignores the tools; only a test shows it.
-9. Ask Bob to end the design with the build steps. Without them, "Build it" means "write the files": Bob writes them, checks their syntax and stops, with nothing installed, tested or imported. With the steps, one prompt builds everything.
+9. Ask Bob to end the design with the build steps. Without them, "Build it" means "write the files": Bob writes them, checks their syntax and stops, with nothing installed, tested or imported. With the steps, the installation, the tests and the imports are part of the same build.
 10. Ask Bob to start the MCP server with the Python of the project's environment and with absolute paths in its `.bob/mcp.json` entry. A bare `python` is usually not the environment where the library is installed, and a relative path is not found, because Bob starts its servers from a directory of its own. In both cases the entry shows red in the MCP tab.
-11. Ask Bob to import the Toolkit from its folder, with all its tools. The ADK command is `orchestrate toolkits add --kind mcp --name <name> --description "<text>" --package-root <folder> --command "python server.py" --tools "*"`. Without the folder, the platform receives no code, and the failure appears only when the Agent calls a tool.
+11. For a local Toolkit, ask Bob to import it from its folder, with all its tools. The ADK command is `orchestrate toolkits add --kind mcp --name <name> --description "<text>" --package-root <folder> --command "python server.py" --tools "*"`. Without the folder, the platform receives no code, and the failure appears only when the Agent calls a tool.
 12. Keep to the three modes. Bob asks to switch to Agent mode after the first prompt, after the second, and sometimes instead of writing the design in Plan mode. Answer the questions in Ask mode, write the design in Plan mode, and build in a new conversation in Agent mode. If Bob shows the design in the chat instead of writing it, tell it that it is in Plan mode and can write the file.
 13. In case of doubt, check what Bob says about the platform against the ADK documentation. Language models state a wrong claim with the same confidence as a right one. Bob can search the documentation server of section 2.4 itself; ask it to confirm a claim before you build on it.
 14. Specify the version of the MCP library in `requirements.txt`, for example `mcp==2.3.0`. A range such as `mcp>=1.0.0` installs whatever version is current, and a new major version can rename the classes that the server uses. The instance installs the library from the same file, so name the version that Bob tested.
