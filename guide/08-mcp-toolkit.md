@@ -249,5 +249,3 @@ You have built an MCP server with Bob, tried it from Bob, imported it into watso
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
 - A local Toolkit is a folder that the platform runs; a remote Toolkit is an MCP server reached over HTTP. A Toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
 - Bob creates MCP servers itself, and uses them as a client before the platform does.
-
-The Agent of CivicPulse now knows the departments, searches the regulations, looks up records, reports problems and resolves addresses, all from one set of instructions that has grown with every chapter. In chapter 9, the Agent is split into a front desk Agent that talks to residents and one Agent per department behind it, each with the Tools and the knowledge of its own domain.
