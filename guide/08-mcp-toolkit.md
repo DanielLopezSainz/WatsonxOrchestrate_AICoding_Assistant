@@ -81,7 +81,7 @@ Look for these points in Bob's answer:
 - What exists on the instance: the Agent, its four Tools, the Connection and the Knowledge Base, and no Toolkit. Bob also lists the project files it will change: the Agent definition, its own MCP configuration in `.bob/mcp.json`, and the import script if your project has one.
 - The questions. In the run there were five: which districts and postcodes to use; how far the matching of a typed address should go; which Python library to build the MCP server with; what to test from Bob; and whether the Agent must look up every address or only the informal ones. Yours may differ in number and wording. Each one is a decision for you, and none has a single right answer; the second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers.
 
-The second prompt answers the questions in Bob's order. If Bob asked something that the prompt does not cover, add one line with your answer at the end.
+The second prompt answers the questions in Bob's order, still in Ask mode and in the same conversation. If Bob asked something that the prompt does not cover, add one line with your answer at the end.
 
 ```
 These are my answers.
