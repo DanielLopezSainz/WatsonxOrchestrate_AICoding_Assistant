@@ -135,25 +135,12 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
 | The Toolkit | Its name, `address_registry`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
 | The change to the Agent | The two tools listed under `tools` with the Toolkit's name in front, `address_registry:lookup_address` and `address_registry:list_streets`; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
-| The build order | MCP server, Bob's connection and a test through Bob, Toolkit, Agent, then the test through the Agent |
 
 ## 8.5 Approve the design
 
 Mode: Plan, same conversation.
 
-Read the design against the table in 8.4. In the run, the design was complete on four rows and short on two, and the same two are likely in yours. The Agent listed the two tools as `lookup_address` and `list_streets`, without the Toolkit's name: on the instance, the tools of a Toolkit are named `toolkit:tool`, and an Agent that lists the bare names does not find them. And the design assumed that the MCP library was already installed in the project's Python environment, which it is not; the test from Bob would fail at the first call. The prompt below corrects both and asks for the build order as a list:
-
-```
-Three changes to the design. The tools of a toolkit are named toolkit:tool on
-the instance: the agent must list address_registry:lookup_address and
-address_registry:list_streets. The mcp library is not installed in the
-project's Python environment: install requirements.txt into it before the test
-from Bob. Add a build order section: MCP server, its entry in your MCP
-configuration, the two test calls from Bob, the toolkit import, the agent,
-then the test scenarios through the agent.
-```
-
-Bob revises the file and summarises the changes. If your design already has one of the three, remove that sentence from the prompt. Bob may also ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design is correct, go to 8.6: its first prompt is the approval.
+Read the design against the table in 8.4. In the run, the design listed the two tools of the Agent as `lookup_address` and `list_streets`, without the Toolkit's name, and said nothing about installing the MCP library; both were left for the build, where Bob corrects them itself (8.6). Bob may ask you about details that the design does not fix; answer `Decide these yourself and proceed.` When the design matches the table, go to 8.6: its first prompt is the approval.
 
 ## 8.6 Agent mode: build, try, import, test
 
