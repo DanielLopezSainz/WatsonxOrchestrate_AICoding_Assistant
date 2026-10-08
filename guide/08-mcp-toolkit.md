@@ -51,7 +51,7 @@ The last row matters when an MCP server needs a key. The Address Registry of thi
 
 **The MCP server of this chapter: Address Registry**
 
-The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode, which Bob writes into the folder of the MCP server.
+The MCP server that Bob writes is a small Python program with two tools. `lookup_address` receives an address as a resident types it and returns the official street name, the house number, the district and the postcode. `list_streets` receives a district and returns its streets. The data behind both is a list of the ten streets of the Collection Calendar of chapter 6, each with its district and postcode.
 
 ## 8.3 Ask mode: describe the Address Registry
 
