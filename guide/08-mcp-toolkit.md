@@ -33,7 +33,7 @@ An Orchestrate Toolkit is a group of Tools that you import together as one asset
 
 **Where the MCP server runs**
 
-watsonx Orchestrate runs an MCP server in two ways. A local toolkit is an MCP server whose code the platform receives at import, a folder with the program and its dependencies, and runs itself when an Agent calls a tool, in Python or Node.js. A remote toolkit is an MCP server that runs elsewhere, on your infrastructure or a vendor's, and that the platform reaches over HTTP. A local MCP server talks to its client through its standard input and output, called stdio: the client starts the program, writes the call to it and reads the answer back. Bob does the same when it connects to the MCP server on your machine. This chapter builds a local toolkit: a copy of the folder that Bob writes is uploaded to the instance, the way the Tools of chapter 6 were, and the platform starts the MCP server when needed. A change to the folder on your machine reaches the instance only through a new import.
+watsonx Orchestrate runs an MCP server in two ways. A local Toolkit is an MCP server whose code the platform receives at import, a folder with the program and its dependencies, and runs itself when an Agent calls a tool, in Python or Node.js. A remote Toolkit is an MCP server that runs elsewhere, on your infrastructure or a vendor's, and that the platform reaches over HTTP. A local MCP server talks to its client through its standard input and output, called stdio: the client starts the program, writes the call to it and reads the answer back. Bob does the same when it connects to the MCP server on your machine. This chapter builds a local Toolkit: a copy of the folder that Bob writes is uploaded to the instance, the way the Tools of chapter 6 were, and the platform starts the MCP server when needed. A change to the folder on your machine reaches the instance only through a new import.
 
 **What changes compared with a Tool**
 
@@ -42,7 +42,7 @@ watsonx Orchestrate runs an MCP server in two ways. A local toolkit is an MCP se
 | What you import | One function | One MCP server with all its tools |
 | Who else can use it | watsonx Orchestrate | Any MCP client, including Bob |
 | Name in the Agent | `get_collection_days` | `utopia_addresses:lookup_address` |
-| Updating it | Import the Tool again | Remove the toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
+| Updating it | Import the Tool again | Remove the Toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
 | Credentials | A Connection named at import | A Connection named at import, whose values reach the MCP server as environment variables |
 
 The last row matters when an MCP server needs a key. The registry of this chapter needs none.
@@ -74,8 +74,8 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- Bob proposes to write the MCP server, to register it in its own MCP configuration so that it can try the tools itself, and then to import it into watsonx Orchestrate as a toolkit. The MCP server must work for one client before a copy is given to the second.
-- On the instance, Bob finds the Agent, its four Tools, the Connection and the Knowledge Base, and no toolkit.
+- Bob proposes to write the MCP server, to register it in its own MCP configuration so that it can try the tools itself, and then to import it into watsonx Orchestrate as a Toolkit. The MCP server must work for one client before a copy is given to the second.
+- On the instance, Bob finds the Agent, its four Tools, the Connection and the Knowledge Base, and no Toolkit.
 - The questions vary from one run to another: which tools the MCP server offers and what they return, the districts and postcodes to use, what the Agent does when an address is not in the registry, and whether the Agent should look up every address or only ambiguous ones.
 
 The second prompt answers them. It fixes the data, so that your registry and every other reader's registry give the same answers.
@@ -117,9 +117,9 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 |---|---|
 | The MCP server | Its folder in the project, in Python, with the two tools, their descriptions and parameters, the data of the ten streets, and a requirements file |
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
-| The toolkit | Its name, `utopia_addresses`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
-| The change to the Agent | The two tools of the toolkit attached; the instructions say to look up every address first and what to do when the registry does not know it; everything else unchanged |
-| The build order | MCP server, Bob's connection and a test through Bob, toolkit, Agent, then the test through the Agent |
+| The Toolkit | Its name, `utopia_addresses`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
+| The change to the Agent | The two tools of the Toolkit attached; the instructions say to look up every address first and what to do when the registry does not know it; everything else unchanged |
+| The build order | MCP server, Bob's connection and a test through Bob, Toolkit, Agent, then the test through the Agent |
 
 ## 8.5 Approve the design
 
@@ -141,11 +141,11 @@ Bob:
 
 1. Writes the MCP server: a folder with the Python program, the data file and the requirements file.
 2. Registers the MCP server in its MCP configuration and calls `lookup_address` with a test address. This is Bob using the MCP server as a client, the way it uses the Orchestrate server. The tools appear in Bob's MCP tab, next to the two MCP servers of chapter 2.
-3. Imports a copy of the MCP server into watsonx Orchestrate as the toolkit `utopia_addresses`, from the folder and with the command that starts the MCP server.
+3. Imports a copy of the MCP server into watsonx Orchestrate as the Toolkit `utopia_addresses`, from the folder and with the command that starts the MCP server.
 4. Updates the Agent: the two tools are attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
 5. Tests the Agent with an address and reports.
 
-Approve each request as it comes. The import of the toolkit is the step that can fail: the platform installs the MCP server's dependencies and starts it to read the list of tools. The usual causes of an error at that point are a missing dependency, a wrong start command and a toolkit of the same name already on the instance; Bob reads the error and corrects what it names.
+Approve each request as it comes. The import of the Toolkit is the step that can fail: the platform installs the MCP server's dependencies and starts it to read the list of tools. The usual causes of an error at that point are a missing dependency, a wrong start command and a Toolkit of the same name already on the instance; Bob reads the error and corrects what it names.
 
 ## 8.7 What Bob built
 
@@ -155,7 +155,7 @@ Open the program. It is longer than a Tool of chapter 6, and most of it is the s
 
 Open Bob's MCP tab (chapter 2, section 2.3). The registry is listed as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own.
 
-Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the registry does not know.
+Open `agents/civic_info_agent.yaml`. The two tools are listed under `tools` as `utopia_addresses:lookup_address` and `utopia_addresses:list_streets`, or the Toolkit under `toolkits` as `utopia_addresses`; the ADK accepts both. The instructions have a new paragraph: look up every address that a resident gives, use the official street name for the other Tools, and ask the resident to check an address that the registry does not know.
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
@@ -174,13 +174,13 @@ The Agent resolves the address to Elm Street, looks up the collection days, and 
 - A question about districts: "Which streets are in the Old Town district?" Mill Road, High Street and Station Road.
 - An address the registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
-Ask the first question again with reasoning. The steps show two tool calls in order: `utopia_addresses:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The toolkit's tool carries the toolkit's name in front, and the chapter 6 Tool does not.
+Ask the first question again with reasoning. The steps show two tool calls in order: `utopia_addresses:lookup_address` with the address as typed, returning Elm Street, then `get_collection_days` with Elm Street. The Toolkit's tool carries the Toolkit's name in front, and the chapter 6 Tool does not.
 
 ## 8.9 Deploy the change in Live
 
 Mode: Agent, same conversation.
 
-A toolkit belongs to the instance, like a Tool, so Live needs only the Agent. On the Developer Edition, skip this section. If you skipped chapter 7, the Connection `utopia_311` exists for Draft only; send the first prompt of section 7.10 before the deployment, or the Agent in Live fails at its first report.
+A Toolkit belongs to the instance, like a Tool, so Live needs only the Agent. On the Developer Edition, skip this section. If you skipped chapter 7, the Connection `utopia_311` exists for Draft only; send the first prompt of section 7.10 before the deployment, or the Agent in Live fails at its first report.
 
 ```
 Deploy civic_info_agent from draft to live.
@@ -194,7 +194,7 @@ The Agent now understands addresses the way residents write them, through a serv
 
 - An MCP server is a program that offers tools over a standard protocol to any client, Bob or watsonx Orchestrate among them.
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
-- A local toolkit is a folder that the platform runs; a remote toolkit is an MCP server reached over HTTP. A toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
+- A local Toolkit is a folder that the platform runs; a remote Toolkit is an MCP server reached over HTTP. A Toolkit is updated by removing it and importing it again; the Agents that use it are then imported again, and deployed again where they are in Live.
 - Bob creates MCP servers itself, and uses them as a client before the platform does.
 
 The Agent of CivicPulse now knows the departments, searches the regulations, looks up records, reports problems and resolves addresses, all from one set of instructions that has grown with every chapter. In chapter 9, that one Agent becomes several: a front desk Agent that talks to residents, and one Agent per department behind it, each with the Tools and the knowledge of its own domain.
