@@ -124,7 +124,11 @@ Bob confirms the answers and lays out the whole build in the chat: the MCP serve
 Mode: Plan, in the same conversation.
 
 ```
-Write the design for this change into design/address-registry-design.md.
+Write the design for this change into design/address-registry-design.md. End
+it with the build steps in order: write the MCP server and its requirements
+file, install the requirements into the project's Python environment, register
+the MCP server in your MCP configuration and call its two tools, import the
+toolkit into watsonx Orchestrate, import the agent, run the test scenarios.
 ```
 
 Bob writes the file after your approval and summarises it. Open `design/address-registry-design.md` and check it against this table:
@@ -135,6 +139,7 @@ Bob writes the file after your approval and summarises it. Open `design/address-
 | Bob's own connection to it | The MCP server registered in Bob's MCP configuration, so that Bob can call the tools before the import |
 | The Toolkit | Its name, `address_registry`; the import from the MCP server's folder with the command that starts the MCP server; both tools imported |
 | The change to the Agent | The two tools listed under `tools` with the Toolkit's name in front, `address_registry:lookup_address` and `address_registry:list_streets`; the instructions say to look up every address first and what to do when the Address Registry does not know it; everything else unchanged |
+| The build steps | A numbered list at the end, in the order of the prompt. Without it, Bob writes the files and stops |
 
 ## 8.5 Approve the design
 
