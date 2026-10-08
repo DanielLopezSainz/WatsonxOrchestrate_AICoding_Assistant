@@ -27,13 +27,13 @@ The list comes from the Agent in Draft. Bob's Orchestrate server reads and chang
 
 An MCP server is a program that offers tools over a standard protocol. Any client that speaks the protocol can list the tools, read their descriptions and call them.
 
-MCP servers come from two sources. Vendors publish MCP servers for their products, so that an Agent can search a ticketing system, read a document store or query a database without anyone writing code for it. Teams write MCP servers for their own systems, and the same address registry or product catalogue then serves every Agent in the company. The ADK documentation lists MCP servers of both kinds that watsonx Orchestrate can import.
+Vendors publish MCP servers for their products, so that an Agent can search a ticketing system, read a document store or query a database without anyone writing code for it. Teams write MCP servers for their own systems, and the same address registry or product catalogue then serves every Agent in the company. The ADK documentation lists MCP servers of both kinds that watsonx Orchestrate can import.
 
 An Orchestrate Toolkit is a group of Tools that you import together as one asset. In this chapter the group is the MCP server: when watsonx Orchestrate imports it, the Toolkit is created and each tool of the MCP server becomes a Tool of the Toolkit. At import, you choose all the tools of the MCP server or some of them; the Agent sees each one under the name of the Toolkit, `address_registry:lookup_address`, and uses it like any other Tool, from its description and its parameters.
 
 **Where the MCP server runs**
 
-An MCP server can run inside watsonx Orchestrate or outside it. Inside, the platform receives the code of the MCP server at import, a folder with the program and its dependencies in Python or Node.js, and starts it when an Agent calls one of its tools. Outside, the MCP server runs on your own infrastructure or on a vendor's, and the platform reaches it over HTTP. This guide calls the first a local Toolkit and the second a remote Toolkit. In this chapter, Bob writes an MCP server for watsonx Orchestrate.
+An MCP server can run inside watsonx Orchestrate or outside it. Inside, the platform receives the code of the MCP server at import, a folder with the program and the file that lists its dependencies, in Python or Node.js, and starts it when an Agent calls one of its tools. Outside, the MCP server runs on your own infrastructure or on a vendor's, and the platform reaches it over HTTP. This guide calls the first a local Toolkit and the second a remote Toolkit. In this chapter, Bob writes an MCP server for watsonx Orchestrate.
 
 **What changes compared with a Tool**
 
@@ -45,7 +45,7 @@ An MCP server can run inside watsonx Orchestrate or outside it. Inside, the plat
 | Updating it | Import the Tool again | Remove the Toolkit, import it again, then import the Agents that use it again and deploy those that are in Live |
 | Credentials | A Connection named at import | A Connection named at import, whose values reach the MCP server as environment variables |
 
-The last row matters when an MCP server needs a key. The Address Registry of this chapter needs none.
+The Address Registry of this chapter needs no key, so the last row does not apply to it.
 
 **The MCP server of this chapter: Address Registry**
 
@@ -61,7 +61,7 @@ Because of that importance, this chapter goes further into the details of watson
 
 Mode: Ask, in a new conversation.
 
-In the previous chapters, the prompts did not name the Orchestrate asset to create; Bob chose it based on your prompt. This time the prompt asks for an MCP server by name. You know by now which components exist and what each one is for, so you can state what you need, and Bob no longer has to work out your intention. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies. The prompt also says where the MCP server runs and asks Bob to try it before the import, two decisions that Bob would otherwise ask about.
+In the previous chapters, the prompts did not name the Orchestrate asset to create; Bob chose it based on your prompt. This time the prompt asks for an MCP server by name. You know by now which components exist and what each one is for, so you can state what you need, and Bob no longer has to guess your intention. It also names Python instead of leaving the language to Bob, for two reasons: Bob may write the MCP server in TypeScript, which brings Node.js and its own dependencies into the project; and Python is the language of the Tools of chapter 6, the one that most readers know, with fewer dependencies. The prompt also says where the MCP server runs and asks Bob to try it before the import, two decisions that Bob would otherwise ask about.
 
 ```
 The city of Utopia has an address registry that resolves any address a
@@ -85,7 +85,7 @@ Look for these points in Bob's answer:
 - What exists: the Agent with its four Tools and its Knowledge Base, the Collection Calendar with the ten streets, the two servers in Bob's MCP configuration, and no Toolkit.
 - The questions. Their number varies from two to five. Which districts and postcodes to use is always among them; the others may be what the tool returns for an unknown address, how far the matching of a typed address should go, which Python library to use, whether to install it in the project's environment or in one of its own, what to test from Bob, and whether the Agent must look up every address or only the informal ones. Each one is a decision for you, and none has a single right answer; the second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
 
-The second prompt answers the questions and settles the points that Bob did not ask about; send it whole, still in Ask mode and in the same conversation. If Bob asked something that it does not cover, add one line with your answer at the end.
+Send the prompt below whole, still in Ask mode and in the same conversation; it covers what Bob asked and the points it did not raise. If Bob asked something that it does not cover, add one line with your answer at the end.
 
 ```
 These are my answers.
@@ -122,7 +122,7 @@ to the agent, listed under tools as toolkit:tool. The facts, the Knowledge
 Base, the four tools and the Connection stay as they are.
 ```
 
-Bob confirms the answers and lays out the build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two test calls, the changes to the Agent, and in some runs the import into watsonx Orchestrate. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design comes first.
+Bob confirms the answers and lays out the build in the chat: the MCP server file and its data, its entry in Bob's MCP configuration, the two test calls, the changes to the Agent, and in some runs the import into watsonx Orchestrate. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
 
 ## 8.4 Plan mode: write the design
 
@@ -178,13 +178,13 @@ Bob follows the build steps of the design:
 5. Updates the Agent and imports it again, replacing the Agent in Draft. Bob first put the Toolkit on the `toolkits` line. The import succeeded and the Agent ignored the tools, which Bob saw in its first test; it then listed them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imported the Agent again.
 6. Sends three test questions to the Agent and reports: an address with an abbreviation, a pothole report with a house number, and an address the registry does not know.
 
-Approve each request as it comes. Three of the steps above failed on the first attempt, and Bob corrected each from the error it read; the report at the end lists only the results. To see what Bob corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
+Approve each request as it comes. Bob corrects failures of this kind during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
 
 ## 8.7 What Bob built
 
 Open the MCP server's folder in the File Explorer, `toolkits/address_registry`. It has two files: `server.py`, the program with its data, and `requirements.txt`, which names the MCP library the program uses. The library is not part of the environment that chapter 2 installed: Bob installed it there during the build, for its own test, and watsonx Orchestrate installs it on the instance from this file when the Toolkit is imported. Bob may add a README or a test file.
 
-The program is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server, an object of the library's server class, `MCPServer` in version 2 of the library and `FastMCP` in version 1. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output, and stops it.
+The program is longer than a Tool of chapter 6, and most of it is the same idea: each tool is a function with a description and typed parameters, and a line above it registers the function with the MCP server, an object of the library's server class, `MCPServer` in version 2 of the library and `FastMCP` in version 1. The difference is at the end of the file, where the MCP server starts and waits for a client. When watsonx Orchestrate calls a tool, it starts this program, sends the call through its standard input, reads the answer from its standard output (the stdio transport, which every local Toolkit uses), and stops it.
 
 Bob's MCP tab (chapter 2, section 2.3) lists the Address Registry as an MCP server, connected, with its two tools, next to `watsonx-orchestrate-adk` and `watsonx-orchestrate-adk-docs`. Bob's configuration for it is in `.bob/mcp.json`, which git ignores: it points at the folder on your machine, and every reader's Bob writes its own. If the entry is red, disconnected, the paths in it are relative: Bob starts its MCP servers from a directory of its own, where `venv/bin/python` does not exist. Send, in Agent mode: `The address_registry server in your MCP tab is disconnected. Fix its entry in .bob/mcp.json with absolute paths for the Python interpreter and the program, and restart it.`
 
@@ -243,7 +243,7 @@ Every MCP server that you build with Bob for watsonx Orchestrate goes through th
 
 ## 8.11 Summary
 
-You have built an MCP server with Bob, tried it from Bob, imported it into watsonx Orchestrate as a Toolkit and given its tools to an Agent. The same steps apply to every system that your Agents will reach through an MCP server: a database, an internal API, a vendor's product. Before you build the next one, read section 8.10 again; its practices are what keep the build to one prompt.
+You have built an MCP server with Bob, tried it from Bob, imported it into watsonx Orchestrate as a Toolkit and given its tools to an Agent. The same steps apply to every system that your Agents will reach through an MCP server: a database, an internal API, a vendor's product. Before you build the next one, read section 8.10 again.
 
 - An MCP server is a program that offers tools over a standard protocol to any client, Bob or watsonx Orchestrate among them.
 - An Orchestrate Toolkit holds several tools as one asset; the MCP kind is an MCP server registered on the instance. The Agent sees each tool as `toolkit:tool` and uses it like any other Tool.
