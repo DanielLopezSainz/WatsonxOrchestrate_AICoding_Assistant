@@ -18,7 +18,7 @@ Skip this chapter if you have already built an Agent with collaborators with Bob
 - The Agent `civic_info_agent` from chapter 8 on your instance, in Draft, with its four Tools, the two tools of the Toolkit `address_registry`, the Knowledge Base `city_regulations` and the Connection `utopia_311`. If you skipped chapter 8, import them as described in that chapter's Overview.
 - A new conversation in Bob for this chapter.
 
-Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the six names.
+Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the six names: `get_permit_status`, `get_request_status`, `get_collection_days`, `report_issue`, `address_registry:lookup_address` and `address_registry:list_streets`.
 
 ## 9.2 What a collaborator Agent is
 
