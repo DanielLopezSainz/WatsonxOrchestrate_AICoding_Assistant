@@ -48,7 +48,7 @@ IMPORTANT: each Agent can use a different model; this guide keeps the default mo
 - `roads_agent`: road problems, from a new report to the status of an existing one, and the number for urgent hazards.
 - `waste_agent`: bins and recycling, from the collection days of a street to the Waste Sorting Rules.
 
-IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Base and the Connection stay exactly as they are; the only files that change are Agent definitions. Splitting the work of one Agent between several is a matter of definitions, not of programming, which is what makes it quick to do and quick to undo.
+IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Base and the Connection are not touched; the only files that change are Agent definitions. You can split one Agent into several, or merge them back, by editing those definitions and importing them again.
 
 ## 9.3 Ask mode: describe the team
 
