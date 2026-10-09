@@ -34,7 +34,7 @@ The front desk Agent decides where to send each question from the descriptions o
 |---|---|---|
 | Instructions | Everything about the city in one text | The front desk Agent: welcome, general contacts, routing, refusals. Each department: its own work only |
 | Tools | All six on the one Agent | Each Tool on the Agent of its department |
-| Knowledge Base | One Agent searches it | Each Agent that needs a document searches it; the instructions say which document is theirs |
+| Knowledge Base | One Agent searches it | Each Agent with a document in it searches it; the instructions say which document is theirs |
 | A change to one department | Edits the one Agent that serves all three | Edits one department Agent; the others are untouched |
 | Reasoning | The Tool calls | The call to the Collaborator Agent, then its Tool calls inside it |
 | Deployment | One Agent | Each Agent is deployed on its own |
@@ -90,8 +90,9 @@ roads_agent gets get_request_status, report_issue and
 address_registry:lookup_address. waste_agent gets get_collection_days,
 address_registry:lookup_address, address_registry:list_streets and the waste
 sorting rules. civic_info_agent keeps no tool and keeps the noise ordinance.
-The knowledge base city_regulations is attached to all four agents; the
-instructions of each say which document is theirs.
+The knowledge base city_regulations is attached to civic_info_agent,
+permits_agent and waste_agent, and the instructions of each say which document
+is theirs; roads_agent has no document and gets no knowledge base.
 
 3. The description of each department agent is written for the front desk: it
 says what the department answers and when to call it. The front desk calls one
@@ -112,7 +113,7 @@ Update the import and delete scripts as well; the design and the tests come in
 the next step.
 ```
 
-Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
+Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may come back with two or three details, such as the display names of the department Agents; answer each in one line. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
 
 ## 9.4 Plan mode: write the design
 
