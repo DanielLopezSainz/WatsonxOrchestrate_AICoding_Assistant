@@ -8,7 +8,7 @@ Driving home, you hit a pothole on Harbour Lane. That evening you open CivicPuls
 
 The City of Utopia solved this long ago with its 311 Call Center: residents call one number, and the call centre passes each call to the department that owns it. This chapter does the same. A front desk Agent talks to residents, and one Agent per department sits behind it with its own Tools and documents. The front desk keeps the name `civic_info_agent`, so residents notice nothing.
 
-The collaborator Agent is the component introduced in this chapter: an Orchestrate Agent that another Agent passes questions to. Bob's capability is Plan mode for a design with several Agents.
+The collaborator Agent is the component introduced in this chapter: an Orchestrate Agent that another Agent passes questions to.
 
 Skip this chapter if you have already built an Agent with collaborators with Bob. To continue with chapter 10 without building it, send Bob these instructions in Agent mode: `Import the four agents in walkthroughs/ch09/agents into my instance, the three department agents first and civic_info_agent last.`
 
