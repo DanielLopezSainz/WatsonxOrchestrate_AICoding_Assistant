@@ -69,7 +69,7 @@ The city, its departments, its residents and all its data are fictional; three d
 | 5 | Give the Agent the city's guides and regulations | Orchestrate Knowledge Base | Bob writes the documents |
 | 6 | Let the Agent look up the status of a request or a permit | Orchestrate Tools | Bob writes the Tools; reading the Agent's reasoning |
 | 7 | Let the Agent report a new issue to the city's 311 Call Center | Orchestrate Connections | Credentials kept out of the chat |
-| 8 | Add an address lookup provided by an external server | Orchestrate Toolkit | Bob's skill for building an MCP server |
+| 8 | Add an address lookup provided by an MCP server | Orchestrate Toolkit | Bob builds the MCP server and tests it before the platform does |
 | 9 | Split the work between a front desk Agent and one Agent per department | Collaborator Agents | Plan mode for a design with several Agents |
 | 10 | Add a permit application that follows fixed steps | Orchestrate Flow | Agent mode on a build with several steps |
 | 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the Orchestrate Channel for web chat | The deployment approval |
