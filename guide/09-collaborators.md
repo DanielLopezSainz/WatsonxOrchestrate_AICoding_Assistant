@@ -118,7 +118,7 @@ Update the import and delete scripts as well; the design and the tests come in
 the next step.
 ```
 
-Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may come back with two or three details, such as the display names of the department Agents; answer each in one line. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
+Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may also list limits that it cannot guarantee, such as a department's answer being passed on word for word, which depends on the model; they are true, and 9.8 tests them. It may come back with two or three details; answer each in one line. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
 
 ## 9.4 Plan mode: write the design
 
