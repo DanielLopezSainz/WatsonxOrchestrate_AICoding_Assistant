@@ -221,7 +221,7 @@ Once Bob reports the four deployments, ask the question of the Overview in the w
 
 You have split one Agent into a team: a front desk Agent that residents talk to, and three department Agents that it passes questions to. The answers are the answers of chapter 8; the reasoning shows which department gave each. When an Agent's instructions have grown past one subject, consider the same division: one Agent per subject, and one in front.
 
-- A Collaborator Agent is an Orchestrate Agent named in the `collaborators` list of another Agent. The calling Agent passes the question, the Collaborator Agent answers with its own Tools and documents, and the resident sees one conversation.
+- A Collaborator Agent is an Orchestrate Agent named in the `collaborators` list of another Agent. The calling Agent passes the question on and gives the answer back, so the resident sees one conversation; the Collaborator Agent answers with its own Tools and documents.
 - The front desk Agent routes by the descriptions of its Collaborator Agents, so a department Agent's description is written for the front desk Agent: what it answers, and when to call it.
 - A Collaborator Agent must be on the instance before the Agent that names it is imported, and each Agent is deployed on its own.
 - A change to one department changes one Agent definition; only its contact details are also in the front desk Agent's facts.
