@@ -101,7 +101,7 @@ says what the department answers and when to call it. The front desk calls one
 department for a question about that department, and both departments for a
 question that concerns two, and passes their answers on as they are. Residents
 talk to the front desk only; the department agents are hidden in the chat, with
-hidden: true in their definitions.
+hidden: true as a top-level field of their definitions, next to name.
 
 4. Every agent keeps the rules of the earlier chapters: the contact details at
 the end of each answer, the exact wording of the not-found replies, the address
@@ -174,7 +174,7 @@ Approve each request as it comes. Bob corrects failures of this kind during the 
 
 ## 9.7 What Bob built
 
-Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one of chapter 4, shorter: its `description` says what the department answers and when to call it; `tools` has one name; `knowledge_base` has `city_regulations`; the instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents. The line `hidden: true` in the three files keeps the departments out of the list of Agents that residents see in the chat.
+Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one of chapter 4, shorter: its `description` says what the department answers and when to call it; `tools` has one name; `knowledge_base` has `city_regulations`; the instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents. The line `hidden: true`, at the top level of the three files next to `name`, keeps the departments out of the list of Agents that residents see in the chat; nested under another key, the platform ignores it.
 
 Open `agents/civic_info_agent.yaml`. The `tools` list is empty, `collaborators` has the three names, `knowledge_base` keeps `city_regulations`. The instructions are a page shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
 
