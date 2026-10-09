@@ -16,9 +16,9 @@ The tools, the `address_registry` toolkit, the `city_regulations` knowledge base
 
 | Asset | Change |
 |---|---|
-| `agents/permits_agent.yaml` | New: Permits and Planning department agent, hidden |
-| `agents/roads_agent.yaml` | New: Roads and Infrastructure department agent, hidden |
-| `agents/waste_agent.yaml` | New: Waste and Recycling department agent, hidden |
+| `agents/permits_agent.yaml` | New: Permits and Planning department agent |
+| `agents/roads_agent.yaml` | New: Roads and Infrastructure department agent |
+| `agents/waste_agent.yaml` | New: Waste and Recycling department agent |
 | `agents/civic_info_agent.yaml` | Updated: instructions rewritten for the front desk role, `tools` emptied, `collaborators` set to the three department agents |
 | `scripts/import-all.sh` | Updated: import the three department agents before `civic_info_agent` |
 | `scripts/delete-all.sh` | Updated: remove `civic_info_agent` first, then the three department agents |
@@ -30,12 +30,12 @@ Unchanged: `get_permit_status`, `get_request_status`, `get_collection_days`, `re
 
 ## 3. Agent Topology
 
-| Agent | Display name | Hidden | Tools | Knowledge base | Its document | Collaborators |
-|---|---|---|---|---|---|---|
-| `civic_info_agent` | Utopia city information | No | none | `city_regulations` | Noise Ordinance | `permits_agent`, `roads_agent`, `waste_agent` |
-| `permits_agent` | Permits and Planning | Yes | `get_permit_status` | `city_regulations` | Building Permit Guide | none |
-| `roads_agent` | Roads and Infrastructure | Yes | `get_request_status`, `report_issue`, `address_registry:lookup_address` | none | none | none |
-| `waste_agent` | Waste and Recycling | Yes | `get_collection_days`, `address_registry:lookup_address`, `address_registry:list_streets` | `city_regulations` | Waste Sorting Rules | none |
+| Agent | Display name | Tools | Knowledge base | Its document | Collaborators |
+| --- | --- | --- | --- | --- | --- |
+| `civic_info_agent` | Utopia city information | none | `city_regulations` | Noise Ordinance | `permits_agent`, `roads_agent`, `waste_agent` |
+| `permits_agent` | Permits and Planning | `get_permit_status` | `city_regulations` | Building Permit Guide | none |
+| `roads_agent` | Roads and Infrastructure | `get_request_status`, `report_issue`, `address_registry:lookup_address` | none | none | none |
+| `waste_agent` | Waste and Recycling | `get_collection_days`, `address_registry:lookup_address`, `address_registry:list_streets` | `city_regulations` | Waste Sorting Rules | none |
 
 Common settings for all four agents, taken from `agents/civic_info_agent.yaml`:
 
