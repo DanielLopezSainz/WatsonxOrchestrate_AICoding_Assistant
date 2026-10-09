@@ -54,7 +54,7 @@ IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Ba
 
 Mode: Ask, in a new conversation.
 
-The prompt asks Bob to create the Collaborator Agents, says what the front desk Agent does, and says what each of the three department Agents does. Bob writes the descriptions and the instructions of the four Agents.
+The prompt asks Bob to create the Collaborator Agents and describes what the front desk Agent and each of the three departments do. Bob writes the descriptions and the instructions of the four Agents.
 
 ```
 I want to split civic_info_agent into a front desk agent and three department
@@ -124,7 +124,7 @@ Bob confirms the answers and lists the four Agents in the chat: the Tools and th
 
 Mode: Plan, in the same conversation.
 
-A design with several Agents has one more thing to get right than the designs of the earlier chapters: the build order. A Collaborator Agent must exist on the instance before the Agent that names it is imported, so the three departments come first and the front desk Agent last. The prompt asks for the build steps in that order.
+With several Agents, one thing matters more than it did in the earlier chapters: the build order. A Collaborator Agent must be on the instance before the Agent that names it, so the three departments go in first and the front desk Agent last. The prompt asks for the build steps in that order.
 
 ```
 Write the design for this change into design/collaborators-design.md. End it
@@ -176,7 +176,7 @@ Approve each request as it comes. Bob corrects failures during the build and rep
 
 Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one in chapter 4, but shorter. Its `description` says what the department answers and when to call it. `tools` has one name and `knowledge_base` has `city_regulations`. The instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents.
 
-The three departments are listed in the chat next to the front desk Agent. Open one in the preview and ask it about something outside its subject: you see an Agent made to serve another Agent. They stay visible in this guide for that reason. In a production deployment, consider the field `hidden: true` at the top level of each department's definition: the chat then lists the front desk Agent only, and residents cannot go around it.
+The three departments are listed in the chat next to the front desk Agent. Open one and ask it something outside its subject, and you see an Agent made to serve another Agent. They stay visible in this guide for that reason. In a production deployment, consider the field `hidden: true` at the top level of each department's definition: the chat then lists the front desk Agent only, and residents cannot go around it.
 
 Open `agents/civic_info_agent.yaml`. Its `tools` list is empty, the three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are a page shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
 
@@ -201,7 +201,7 @@ The answer has both parts: a request number for the pothole and the green bin da
 
 Ask the first question again with reasoning. A Collaborator Agent appears as a tool of the front desk Agent, named after its display name: `chat_with_collaborator_roads_and_infrastructure`, with a response that starts "Transferring to" and names the department. The steps that follow are labelled with the department's name, Roads and Infrastructure, and are the Tool calls of chapter 8: `lookup_address`, then `report_issue`. Then the same for Waste and Recycling, with `lookup_address` and `get_collection_days`. Each department receives its part of the question in the words of the front desk Agent, and the answer has the two parts one after the other, each with its department's contact. The waste Agent may credit the collection day to the Waste Sorting Rules, a Tool result named as if it came from the document. Its instructions say to name the document for every answer from the Knowledge Base, and it applies the rule too widely.
 
-When an answer comes from the wrong department, the cause is a description: the front desk Agent chose from the descriptions of the three. Tell Bob which question went where, in one sentence; Bob changes the description, imports the Agent again and tests.
+When an answer comes from the wrong department, the cause is a description: the front desk Agent chose from the descriptions of the three. Tell Bob which question went where, in one sentence; the fix is a new description, a new import and a new test.
 
 ## 9.9 Deploy the change in Live
 
