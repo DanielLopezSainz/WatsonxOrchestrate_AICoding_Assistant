@@ -160,7 +160,7 @@ The design in @design/collaborators-design.md is approved. Build it.
 
 Bob follows the build steps of the design:
 
-1. Writes the four definitions in the `agents` folder: three new files and a new version of `agents/civic_info_agent.yaml`.
+1. Writes the four definitions in the `agents` folder, three new files and a new version of `agents/civic_info_agent.yaml`, and updates the import scripts, if your project has them.
 2. Imports `permits_agent`, `roads_agent` and `waste_agent`. An Agent that names a Collaborator Agent not yet on the instance is refused at import; the order of the design prevents that.
 3. Imports `civic_info_agent`, replacing the Agent in Draft. Its six tools are now on the departments.
 4. Sends the test questions of the design to `civic_info_agent` and reports the answers.
