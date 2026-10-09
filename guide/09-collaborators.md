@@ -22,7 +22,7 @@ Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_age
 
 ## 9.2 What a Collaborator Agent is
 
-A Collaborator Agent is an Orchestrate Agent that another Agent calls, the way it calls a Tool. The Agent that calls is written like any other: its definition has a `collaborators` list with the names of the Agents it may pass a question to. The Collaborator Agent receives the question, answers it with its own Tools, documents and instructions, and returns the answer to the calling Agent, which gives it to the resident. The resident sees one conversation with one Agent.
+A Collaborator Agent is an ordinary Orchestrate Agent that works for another Agent. The Agent in front, here the front desk, lists it by name in its definition, under `collaborators`. When a question comes in that the front desk does not answer itself, it passes the question to the Collaborator Agent that owns it, waits for the answer, and gives it to the resident. The Collaborator Agent uses its own Tools, documents and instructions. The resident sees one conversation with one Agent.
 
 **How the front desk decides**
 
