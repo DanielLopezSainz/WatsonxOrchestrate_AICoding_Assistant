@@ -178,7 +178,7 @@ Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like t
 
 The three departments are listed in the chat next to the front desk Agent. Open one and ask it something outside its subject. It answers about its own subject and refuses the rest. It has no welcome message, because it is made to serve another Agent. The departments stay visible in this guide so that you can open and test them this way. In a production deployment, consider the field `hidden: true` at the top level of each department's definition. The chat then lists the front desk Agent only, and residents cannot go around it.
 
-Open `agents/civic_info_agent.yaml`. Its `tools` list is empty, the three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are much shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
+Open `agents/civic_info_agent.yaml`. Its `tools` list is empty. The three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are much shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
 
 Bob's MCP tab has nothing new and the project folder has Agent files only, because a Collaborator Agent is declared in the definition of the Agent that calls it.
 
