@@ -14,7 +14,7 @@ Skip this chapter if you have already built an Agent with Collaborator Agents wi
 
 ## 9.1 Before you start
 
-- The setup from chapter 2, complete.
+- The setup from chapter 2, complete, with your environment active in the Environment Manager. An activated environment lasts two hours (section 2.4); without one, Bob cannot reach the instance and answers from the project files.
 - The Agent `civic_info_agent` from chapter 8 on your instance, in Draft, with its four Tools, the two tools of the Toolkit `address_registry`, the Knowledge Base `city_regulations` and the Connection `utopia_311`. If you skipped chapter 8, import them as described in that chapter's Overview.
 - A new conversation in Bob for this chapter.
 
