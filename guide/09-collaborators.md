@@ -54,7 +54,7 @@ IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Ba
 
 Mode: Ask, in a new conversation.
 
-The prompt names the asset, Collaborator Agents, and says what the front desk Agent keeps and what each department takes, because those are the decisions that Bob would otherwise make for you. It leaves the descriptions and the instructions of the four Agents to Bob.
+In this prompt you take the decisions that matter: you ask for Collaborator Agents by name, you say what the front desk Agent keeps, and you say what each department takes over. Bob writes the descriptions and the instructions of the four Agents.
 
 ```
 I want to split civic_info_agent into a front desk agent and three department
