@@ -43,7 +43,7 @@ IMPORTANT: each Agent can use a different model; this guide keeps the default mo
 
 **The new Agent team**
 
-- `civic_info_agent`, the front desk Agent: no Tools; the Knowledge Base for the Noise Ordinance, which belongs to no department; the welcome message and the starter prompts of chapter 4; the three departments as Collaborator Agents.
+- `civic_info_agent`, the front desk Agent: the entry point of CivicPulse, the Agent that residents talk to. Any question it does not answer itself is passed to one of the three department Agents.
 - `permits_agent`: `get_permit_status`; the Knowledge Base for the Building Permit Guide; the Permits and Planning facts.
 - `roads_agent`: `get_request_status`, `report_issue` and `address_registry:lookup_address`; the Roads and Infrastructure facts, including the number for urgent hazards.
 - `waste_agent`: `get_collection_days`, `address_registry:lookup_address` and `address_registry:list_streets`; the Knowledge Base for the Waste Sorting Rules; the Waste and Recycling facts.
