@@ -168,6 +168,8 @@ Bob follows the build steps of the design:
 3. Imports `civic_info_agent`, replacing the Agent in Draft. Its six tools are now on the departments.
 4. Sends the test questions of the design to `civic_info_agent` and reports the answers.
 
+IMPORTANT: look at step 4. Bob does not only build the Agents; it tests them. The design ends with a set of test scenarios (open it and read them), and Bob runs them one by one and reports the result of each. This was requested with one phrase of the design prompt: "run the test scenarios through the chat operation of the Orchestrate server". Use that phrase in every design you write from now on: Bob builds the Agent and runs the tests that confirm it works.
+
 Approve each request as it comes. Bob corrects failures of this kind during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
 
 ## 9.7 What Bob built
