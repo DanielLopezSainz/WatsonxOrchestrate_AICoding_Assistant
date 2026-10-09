@@ -75,8 +75,8 @@ exists on my instance.
 Look for these points in Bob's answer:
 
 - What Bob understood: four Agents, the front desk Agent with three Collaborator Agents, the Tools and the documents divided by department, the Knowledge Base shared.
-- What exists: the Agent with its six tools, the Knowledge Base, the Toolkit, the Connection, and no other Agent of the project.
-- The questions. Expect them about the names of the department Agents, which Tool goes where, what the front desk Agent does with a question that concerns two departments, and whether the departments answer residents directly or only through the front desk Agent. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
+- What exists: the Agent with its six tools, the Knowledge Base, the Toolkit, the Connection, and no other Agent of the project. Bob may read this from the project files rather than from the instance; the two say the same.
+- The questions. Expect them about the names of the department Agents, which Tool goes where, whether the Knowledge Base is attached whole or split, what the front desk Agent does with a question that concerns two departments, which rules of the earlier chapters are kept, and the model. Bob may also ask whether to update your import scripts; answer with one line at the end of the next prompt. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
 
 Send the prompt below whole, still in Ask mode and in the same conversation; it covers what Bob asked and the points it did not raise. If Bob asked something that it does not cover, add one line with your answer at the end.
 
@@ -103,7 +103,7 @@ the end of each answer, the exact wording of the not-found replies, the address
 lookup before any tool that takes a street, and the refusal of questions
 outside the three departments, which stays with the front desk.
 
-5. All four agents use the default model.
+5. All four agents use the same model and style as civic_info_agent has today.
 ```
 
 Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
