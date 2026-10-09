@@ -39,9 +39,9 @@ The front desk Agent decides where to send each question from the descriptions o
 | Reasoning | The Tool calls | The call to the Collaborator Agent, then its Tool calls inside it |
 | Deployment | One Agent | Each Agent is deployed on its own |
 
-Each Agent can use a different model; this guide keeps the default model for all four.
+IMPORTANT: each Agent can use a different model; this guide keeps the default model for all four.
 
-**The team of this chapter**
+**The new Agent team**
 
 - `civic_info_agent`, the front desk Agent: no Tools; the Knowledge Base for the Noise Ordinance, which belongs to no department; the welcome message and the starter prompts of chapter 4; the three departments as Collaborator Agents.
 - `permits_agent`: `get_permit_status`; the Knowledge Base for the Building Permit Guide; the Permits and Planning facts.
