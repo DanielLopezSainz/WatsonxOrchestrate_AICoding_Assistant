@@ -8,7 +8,7 @@ You send a message to CivicPulse: "The rubbish was not collected today at 18 elm
 
 MCP, the Model Context Protocol, is a standard way for a program to offer tools to AI Agents. You have used it since chapter 2: Bob reaches your instance through one MCP server and the Orchestrate documentation through another. Now Bob builds an MCP server of its own, with its built-in capability for creating MCP servers, and connects to it to try its tools. Then watsonx Orchestrate imports a copy of the MCP server as an Orchestrate Toolkit, and the Agent gets its tools.
 
-The Orchestrate Toolkit is the component introduced in this chapter. Bob's capability is the creation of MCP servers.
+The Orchestrate Toolkit is the component introduced in this chapter.
 
 Skip this chapter if you have already imported an MCP server into watsonx Orchestrate with Bob. To continue with chapter 9 without building it, send Bob these instructions in Agent mode: `Import the MCP server in walkthroughs/ch08/toolkits/address_registry into my instance as a toolkit named address_registry, with all its tools, then import walkthroughs/ch08/agents/civic_info_agent.yaml.` The skip path gives the instance the Toolkit and the Agent; Bob's own connection to the MCP server, which 8.6 sets up, is not needed by the later chapters.
 
