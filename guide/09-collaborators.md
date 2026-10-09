@@ -4,7 +4,7 @@ Level: intermediate. Time: about 60 minutes. Prerequisites: chapter 8 completed,
 
 ## Overview
 
-Driving home, you hit a pothole on Harbour Lane. That evening you open CivicPulse to report it, and you ask about the bins at the same time: "There is a pothole at 7 harbour ln, and which day is the green bin collected there?" The Agent of chapter 8 answers both. It can, because its instructions now cover everything: contacts, regulations, four Tools, addresses. That is the problem. Every question goes through a page of rules, and a change for one department can break the answers of the others.
+Driving home, you hit a pothole on Harbour Lane. That evening you open CivicPulse to report it, and you ask about the bins at the same time: "There is a pothole at 7 harbour ln, and which day is the green bin collected there?" The Agent we have been working on can answer all our questions, because it contains instructions to cover everything: contacts, regulations, four Tools, addresses. That is the problem. Every question goes through a page of rules, and a change for one department can break the answers of the others.
 
 The city solved this long ago: one number, a front desk, and the departments behind it. This chapter does the same. A front desk Agent talks to residents, and one Agent per department sits behind it with its own Tools and documents. The front desk keeps the name `civic_info_agent`, so residents notice nothing.
 
