@@ -83,7 +83,9 @@ Send the prompt below whole, still in Ask mode and in the same conversation; it 
 ```
 These are my answers.
 
-1. The department agents are permits_agent, roads_agent and waste_agent.
+1. The department agents are permits_agent, roads_agent and waste_agent, with
+the display names Permits and Planning, Roads and Infrastructure, and Waste and
+Recycling.
 
 2. permits_agent gets get_permit_status and the building permit guide.
 roads_agent gets get_request_status, report_issue and
