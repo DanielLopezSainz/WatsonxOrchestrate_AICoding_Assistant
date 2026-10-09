@@ -14,7 +14,7 @@ Skip this chapter if you have already built an Agent with Collaborator Agents wi
 
 ## 9.1 Before you start
 
-- The setup from chapter 2, complete, with your environment active in the Environment Manager. An activated environment lasts two hours (section 2.4); without one, Bob cannot reach the instance and answers from the project files.
+- The setup from chapter 2, complete, with your environment active in the Environment Manager and the Orchestrate server connected in Bob's MCP tab. An activated environment lasts two hours (section 2.4), and a server that shows as disconnected is restarted from the tab (section 2.8); without either, Bob cannot reach the instance and answers from the project files.
 - The Agent `civic_info_agent` from chapter 8 on your instance, in Draft, with its four Tools, the two tools of the Toolkit `address_registry`, the Knowledge Base `city_regulations` and the Connection `utopia_311`. If you skipped chapter 8, import them as described in that chapter's Overview.
 - A new conversation in Bob for this chapter.
 
@@ -101,7 +101,8 @@ question that concerns two. Residents talk to the front desk only.
 4. Every agent keeps the rules of the earlier chapters: the contact details at
 the end of each answer, the exact wording of the not-found replies, the address
 lookup before any tool that takes a street, and the refusal of questions
-outside the three departments, which stays with the front desk.
+outside the three departments, which stays with the front desk. The front desk
+also keeps the number for urgent hazards, so that nobody waits for a handover.
 
 5. All four agents use the same model and style as civic_info_agent has today.
 ```
