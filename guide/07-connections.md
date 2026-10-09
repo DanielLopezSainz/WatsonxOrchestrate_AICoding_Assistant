@@ -177,7 +177,7 @@ The third sentence is new: it tells Bob where the key is and that the value must
 
 1. Defines the Connection, as a file in the `connections` folder or with commands, imports it, and sets its Draft credential from `.env`.
 2. Writes the Tool in the `tools` folder and imports it, with the Connection named.
-3. Updates the Agent: the Tool is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
+3. Updates the Agent, which gets the Tool and a longer instruction text, and imports it again, replacing the Agent in Draft.
 4. Tests the Agent with the pothole report.
 
 Approve each request as it comes. Read the command that sets the credential when Bob asks for approval: it names the variable and shows no value. If Bob proposes to set the credential through one of its Orchestrate operations instead of a command, tell it to use the command with the variable; a value passed to an operation goes through the chat.

@@ -179,7 +179,7 @@ This build includes code. Bob:
 1. Writes the three record files, one CSV per kind of record.
 2. Writes the three Tools, one Python file each, in the `tools` folder.
 3. Imports the Tools. Each one is packaged with its record file and uploaded; the instance checks the code and the description, and Bob corrects a file if the instance refuses it.
-4. Updates the Agent: the three Tools are attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
+4. Updates the Agent: attaches the three Tools, extends the instructions and imports the Agent again, replacing the Agent in Draft.
 5. Tests the Agent with the questions from the design and reports.
 
 Approve each request as it comes. Bob's report may say that the Agent is deployed. It is imported into Draft only; section 6.9 deploys it in Live.

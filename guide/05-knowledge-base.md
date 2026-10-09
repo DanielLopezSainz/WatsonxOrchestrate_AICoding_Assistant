@@ -22,7 +22,7 @@ Check that the Agent is there: in Ask mode, ask `Which agents exist on my instan
 
 ## 5.2 What an Orchestrate Knowledge Base is
 
-An Agent's instructions can hold about a page of facts. A city's regulations run to hundreds of pages, are revised from time to time, and are written by people who have no reason to know what the Agent's instructions say; for documents like these, the Agent uses an Orchestrate Knowledge Base.
+An Agent's instructions can hold about a page of facts. A city's regulations run to hundreds of pages and are revised from time to time by people who have no reason to know what the Agent's instructions say; for documents like these, the Agent uses an Orchestrate Knowledge Base.
 
 An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate indexes, so that an Agent can search them. When a resident asks a question, the Agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nothing is copied into the instructions.
 
@@ -41,7 +41,7 @@ Do not use a Knowledge Base for information about one person or one case, such a
 **What to know before building one**
 
 - Documents are files: text, PDF, Word, PowerPoint, Excel, CSV or HTML. A Knowledge Base holds up to 100 of them, with size limits per type, for example 25 MB for a PDF and 5 MB for a text file. Plain text is the simplest format and the one that this chapter uses.
-- After the import, the Knowledge Base is not ready at once: the platform processes the documents in the background, Bob checks the status during the build, and an Agent can use the Knowledge Base only when its status is ready.
+- After the import, the Knowledge Base is not ready at once: the platform processes the documents in the background and Bob checks the status during the build; an Agent can use the Knowledge Base only when its status is ready.
 - A Knowledge Base belongs to the whole instance. The Agent in Draft and the Agent deployed in Live search the same Knowledge Base, so a change to the documents reaches residents as soon as the platform has indexed it, without a deployment.
 - Updating a Knowledge Base is importing it again under the same name. When a regulation changes, you tell Bob what changed; Bob edits the text file and imports the Knowledge Base again, the platform re-indexes it, and the Agents that use it need no change, because they refer to it by name. Adding or removing a document works the same way. The instance does not give the documents back, so keep the text files in the project folder, in git; for the City of Utopia they are the only copy.
 - watsonx Orchestrate also has a feature called chat with documents, which lets a user attach a file to one conversation. It is not a Knowledge Base: the file is not indexed for other conversations, and this guide does not use it.
