@@ -44,9 +44,9 @@ IMPORTANT: each Agent can use a different model; this guide keeps the default mo
 **The new Agent team**
 
 - `civic_info_agent`, the front desk Agent: the entry point of CivicPulse, the Agent that residents talk to. Any question it does not answer itself is passed to one of the three department Agents.
-- `permits_agent`: `get_permit_status`; the Knowledge Base for the Building Permit Guide; the Permits and Planning facts.
-- `roads_agent`: `get_request_status`, `report_issue` and `address_registry:lookup_address`; the Roads and Infrastructure facts, including the number for urgent hazards.
-- `waste_agent`: `get_collection_days`, `address_registry:lookup_address` and `address_registry:list_streets`; the Knowledge Base for the Waste Sorting Rules; the Waste and Recycling facts.
+- `permits_agent`: everything about building permits, from the rules of the Building Permit Guide to the status of an application.
+- `roads_agent`: road problems, from a new report to the status of an existing one, and the number for urgent hazards.
+- `waste_agent`: bins and recycling, from the collection days of a street to the Waste Sorting Rules.
 
 Nothing new is written in code. The Tools, the Toolkit, the Knowledge Base and the Connection exist; the chapter changes Agent definitions only.
 
