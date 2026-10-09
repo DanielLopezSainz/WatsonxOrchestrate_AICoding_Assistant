@@ -6,7 +6,7 @@ Level: intermediate. Time: about 60 minutes. Prerequisites: chapter 8 completed,
 
 Driving home, you hit a pothole on Harbour Lane. That evening you open CivicPulse to report it, and you ask about the bins at the same time: "There is a pothole at 7 harbour ln, and which day is the green bin collected there?" The Agent we have been working on can answer all our questions, because it contains instructions to cover everything: contacts, regulations, four Tools, addresses. That is the problem. Every question goes through a page of rules, and a change for one department can break the answers of the others.
 
-The City of Utopia solved this long ago with its 311 Call Center: residents call one number, and the call centre passes each call to the department that owns it. This chapter does the same. A front desk Agent talks to residents, and one Agent per department sits behind it with its own Tools and documents. The front desk Agent keeps the name `civic_info_agent`, so residents notice nothing.
+The City of Utopia solved this long ago with its 311 Call Center: residents call one number, and the call centre passes each call to the department that owns it. This chapter does the same. A front desk Agent talks to residents, and one Agent per department sits behind it with its own Tools and documents. The front desk Agent keeps the name `civic_info_agent`, so residents keep the same entry point.
 
 The Collaborator Agent is the component introduced in this chapter: an Orchestrate Agent that another Agent passes questions to.
 
@@ -26,7 +26,7 @@ A Collaborator Agent is an ordinary Orchestrate Agent that works for another Age
 
 **How the front desk Agent decides**
 
-The front desk Agent decides where to send each question from the descriptions of its Collaborator Agents. The model reads those descriptions at each question: a question about a pothole reaches `roads_agent` because its description names potholes, and a wrong routing is corrected by editing a description.
+The front desk Agent decides where to send each question from the descriptions of its Collaborator Agents. The model reads those descriptions at each question: a question about a pothole reaches `roads_agent` because its description names potholes, and a question sent to the wrong department is corrected by editing a description.
 
 **What changes compared with one Agent**
 
@@ -34,7 +34,7 @@ The front desk Agent decides where to send each question from the descriptions o
 |---|---|---|
 | Instructions | Everything about the city in one text | The front desk Agent: welcome, general contacts, routing, refusals. Each department: its own work only |
 | Tools | All six on the one Agent | Each Tool on the Agent of its department |
-| Knowledge Base | One Agent searches it | Each Agent with a document in it searches it; the instructions say which document is theirs |
+| Knowledge Base | One Agent searches it | The three Agents that have a document in it search it; each one's instructions name its document |
 | A change to one department | Edits the one Agent that serves all three | Edits one department Agent; the others are untouched |
 | Reasoning | The Tool calls | The call to the Collaborator Agent, then its Tool calls inside it |
 | Deployment | One Agent | Each Agent is deployed on its own |
@@ -43,12 +43,12 @@ IMPORTANT: each Agent can use a different model; this guide keeps the default mo
 
 **The new Agent team**
 
-- `civic_info_agent`, the front desk Agent: the entry point of CivicPulse, the Agent that residents talk to. Any question it does not answer itself is passed to one of the three department Agents.
+- `civic_info_agent`, the front desk Agent: the entry point of CivicPulse, the Agent that residents talk to. Any question it does not answer itself is passed to the department Agent that owns it, or to two when a question concerns two.
 - `permits_agent`: everything about building permits, from the rules of the Building Permit Guide to the status of an application.
 - `roads_agent`: new reports of road problems, the status of an existing report, and the number for urgent hazards.
 - `waste_agent`: bins and recycling, from the collection days of a street to the Waste Sorting Rules.
 
-IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Base and the Connection are not touched; the only files that change are Agent definitions. You can split one Agent into several, or merge them back, by editing those definitions and importing them again.
+IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Base and the Connection are not touched; the files that change are Agent definitions, plus the design and your import scripts. You can split one Agent into several, or merge them back, by editing those definitions and importing them again.
 
 ## 9.3 Ask mode: describe the team
 
@@ -118,7 +118,7 @@ Update the import and delete scripts as well; the design and the tests come in
 the next step.
 ```
 
-Bob confirms the answers and lists the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may also list limits that it cannot guarantee, such as a department's answer being passed on word for word, which depends on the model. Section 9.8 tests them. If Bob comes back with two or three details, answer each in one line. Sometimes Bob starts as if it were going to write the files, and stops because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
+Bob confirms the answers and lists the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may also list limits that it cannot guarantee, such as a department's answer being passed on word for word, which depends on the model. Section 9.8 shows how the answers come back. If Bob comes back with two or three details, answer each in one line. Sometimes Bob starts as if it were going to write the files, and stops because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
 
 ## 9.4 Plan mode: write the design
 
@@ -163,7 +163,7 @@ The design in @design/collaborators-design.md is approved. Build it and run its 
 
 Bob follows the build steps of the design:
 
-1. Writes the four definitions in the `agents` folder, three new files and a new version of `agents/civic_info_agent.yaml`, and updates the import scripts, if your project has them.
+1. Writes the four definitions in the `agents` folder, three new files and a new version of `agents/civic_info_agent.yaml`, and updates the import and delete scripts, if your project has them.
 2. Imports `permits_agent`, `roads_agent` and `waste_agent`. An Agent that names a Collaborator Agent not yet on the instance is refused at import; the order of the design prevents that.
 3. Imports `civic_info_agent`, replacing the Agent in Draft. Its six tools are now on the departments.
 4. Sends the test questions to `civic_info_agent` and reports the answers.
@@ -174,13 +174,13 @@ Approve each request as it comes. Bob corrects failures during the build and rep
 
 ## 9.7 What Bob built
 
-Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one in chapter 4, but shorter. Its `description` says what the department answers and when to call it. `tools` has one name and `knowledge_base` has `city_regulations`. The instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents.
+Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one in chapter 4, but shorter. Its `description` says what the department answers and when to call it. `tools` has one name and `knowledge_base` has `city_regulations`. The instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools; `waste_agent` has the Waste Sorting Rules and `roads_agent` has no document.
 
-The three departments are listed in the chat next to the front desk Agent. Open one and ask it something outside its subject, and you see an Agent made to serve another Agent. They stay visible in this guide for that reason. In a production deployment, consider the field `hidden: true` at the top level of each department's definition: the chat then lists the front desk Agent only, and residents cannot go around it.
+The three departments are listed in the chat next to the front desk Agent. Open one and ask it something outside its subject: it answers about its own subject and refuses the rest, with no welcome message, an Agent made to serve another Agent. They stay visible in this guide for that reason. In a production deployment, consider the field `hidden: true` at the top level of each department's definition: the chat then lists the front desk Agent only, and residents cannot go around it.
 
-Open `agents/civic_info_agent.yaml`. Its `tools` list is empty, the three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are a page shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
+Open `agents/civic_info_agent.yaml`. Its `tools` list is empty, the three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are much shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
 
-Bob's MCP tab and the project folder have nothing new: a Collaborator Agent is declared in the definition of the Agent that calls it.
+Bob's MCP tab has nothing new, and the project folder has Agent files only: a Collaborator Agent is declared in the definition of the Agent that calls it.
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
@@ -196,18 +196,18 @@ The answer has both parts: a request number for the pothole and the green bin da
 
 - A question for one department: "Where is my permit application PP-2026-0412?" The status, from `permits_agent`.
 - The front desk Agent answers some questions itself: "What are the quiet hours?" The Noise Ordinance, named in the answer, with no department called.
-- A question outside the three departments: "When does the swimming pool open?" The front desk Agent refuses and names an office that might help, with no contact details, since it has none for that office. Point 4 of the second prompt forbids invented contact details because, without that rule, the model supplies some.
+- A question outside the three departments: "When does the swimming pool open?" The front desk Agent refuses and names an office that might help, with no contact details, since it has none for that office. Point 4 of the second prompt forbids invented contact details because, without that rule, the model may supply some.
 - Wrong address: "Which day is the grey bin collected at 3 Castle Street?" The waste Agent asks you to check the address; the front desk Agent passes that on.
 
 Ask the first question again with reasoning. A Collaborator Agent appears as a tool of the front desk Agent, named after its display name: `chat_with_collaborator_roads_and_infrastructure`, with a response that starts "Transferring to" and names the department. The steps that follow are labelled with the department's name, Roads and Infrastructure, and are the Tool calls of chapter 8: `lookup_address`, then `report_issue`. Then the same for Waste and Recycling, with `lookup_address` and `get_collection_days`. Each department receives its part of the question in the words of the front desk Agent, and the answer has the two parts one after the other, each with its department's contact. The waste Agent may credit the collection day to the Waste Sorting Rules, a Tool result named as if it came from the document. Its instructions say to name the document for every answer from the Knowledge Base, and it applies the rule too widely.
 
-When an answer comes from the wrong department, the cause is a description: the front desk Agent chose from the descriptions of the three. Tell Bob which question went where, in one sentence; the fix is a new description, a new import and a new test.
+When an answer comes from the wrong department, the cause is usually a description, since the front desk Agent chooses from the descriptions of the three. Tell Bob which question went where, in one sentence; the fix is a changed description, imported and tested again.
 
 ## 9.9 Deploy the change in Live
 
 Mode: Agent, same conversation.
 
-Four Agents changed or appeared in Draft, and each Agent is deployed on its own. On the Developer Edition, skip this section.
+Three Agents were created and one changed in Draft, and each Agent is deployed on its own. On the Developer Edition, skip this section.
 
 ```
 Deploy permits_agent, roads_agent, waste_agent and civic_info_agent from draft to live, in that order.
@@ -217,11 +217,11 @@ Ask the question of the Overview in the watsonx Orchestrate chat once Bob report
 
 ## 9.10 Summary
 
-You have split one Agent into a team: a front desk Agent that residents talk to, and three department Agents that it passes questions to. The answers are the ones of chapter 8; the reasoning shows which department gave each. The same division applies to any Agent whose instructions have grown past one subject: give each subject an Agent, and keep one Agent in front.
+You have split one Agent into a team: a front desk Agent that residents talk to, and three department Agents that it passes questions to. The answers are the answers of chapter 8; the reasoning shows which department gave each. When an Agent's instructions have grown past one subject, consider the same division: one Agent per subject, and one in front.
 
 - A Collaborator Agent is an Orchestrate Agent named in the `collaborators` list of another Agent. The calling Agent passes the question, the Collaborator Agent answers with its own Tools and documents, and the resident sees one conversation.
 - The front desk Agent routes by the descriptions of its Collaborator Agents, so a department Agent's description is written for the front desk Agent: what it answers, and when to call it.
 - A Collaborator Agent must be on the instance before the Agent that names it is imported, and each Agent is deployed on its own.
-- A change to one department changes one Agent definition.
+- A change to one department changes one Agent definition; only its contact details are also in the front desk Agent's facts.
 
 The team answers questions and takes reports, one exchange at a time. In chapter 10, the permit application itself becomes an Orchestrate Flow: a fixed sequence of steps that an Agent runs the same way for every resident.
