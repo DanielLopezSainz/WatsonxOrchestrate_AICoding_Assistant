@@ -26,7 +26,7 @@ A Collaborator Agent is an ordinary Orchestrate Agent that works for another Age
 
 **How the front desk Agent decides**
 
-No prompt tells the front desk Agent which department to call. It decides from the description of each Collaborator Agent, as it decides from the description of a Tool. The ADK documentation says so in one line: supervisor Agents rely on descriptions to route tasks to the right Collaborator Agent. A department Agent's description is therefore written for the front desk Agent, not for residents: it says what the department answers and when to call it.
+The front desk Agent decides where to send each question from the descriptions of its Collaborator Agents. The ADK documentation says so in one line: supervisor Agents rely on descriptions to route tasks to the right Collaborator Agent. A department Agent's description is therefore written for the front desk Agent, not for residents: it says what the department answers and when to call it.
 
 **What changes compared with one Agent**
 
