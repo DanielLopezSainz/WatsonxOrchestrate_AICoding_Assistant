@@ -10,7 +10,7 @@ The City of Utopia solved this long ago with its 311 Call Center: residents call
 
 The Collaborator Agent is the component introduced in this chapter: an Orchestrate Agent that another Agent passes questions to.
 
-Skip this chapter if you have already built an Agent with Collaborator Agents with Bob. To continue with chapter 10 without building it, send Bob these instructions in Agent mode: `Import the four agents in walkthroughs/ch09/agents into my instance, the three department agents first and civic_info_agent last.`
+Skip this chapter if you have already built, with Bob, an Agent that has Collaborator Agents. To continue with chapter 10 without building it, send Bob these instructions in Agent mode: `Import the four agents in walkthroughs/ch09/agents into my instance, the three department agents first and civic_info_agent last.`
 
 ## 9.1 Before you start
 
@@ -22,7 +22,7 @@ Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_age
 
 ## 9.2 What a Collaborator Agent is
 
-A Collaborator Agent is an ordinary Orchestrate Agent that works for another Agent. The front desk Agent contains a list of its Collaborator Agents. When a question comes in that the front desk Agent does not answer itself, it passes the question to the Collaborator Agent that owns it, waits for the answer, and gives it to the resident. The Collaborator Agent uses its own Tools, documents and instructions. The resident sees one conversation with one Agent.
+A Collaborator Agent is an ordinary Orchestrate Agent that works for another Agent. The front desk Agent contains a list of its Collaborator Agents. When a question comes in that the front desk Agent does not answer itself, it passes the question to the Collaborator Agent that owns it, waits for the answer, and gives it to the resident. The Collaborator Agent uses its own Tools, documents and instructions, and the resident sees one conversation with one Agent.
 
 **How the front desk Agent decides**
 
@@ -45,7 +45,7 @@ IMPORTANT: each Agent can use a different model; this guide keeps the default mo
 
 - `civic_info_agent`, the front desk Agent: the entry point of CivicPulse, the Agent that residents talk to. Any question it does not answer itself is passed to one of the three department Agents.
 - `permits_agent`: everything about building permits, from the rules of the Building Permit Guide to the status of an application.
-- `roads_agent`: road problems, from a new report to the status of an existing one, and the number for urgent hazards.
+- `roads_agent`: new reports of road problems, the status of an existing report, and the number for urgent hazards.
 - `waste_agent`: bins and recycling, from the collection days of a street to the Waste Sorting Rules.
 
 IMPORTANT: this chapter writes no code. The Tools, the Toolkit, the Knowledge Base and the Connection are not touched; the only files that change are Agent definitions. You can split one Agent into several, or merge them back, by editing those definitions and importing them again.
@@ -76,7 +76,7 @@ Look for these points in Bob's answer:
 
 - What Bob understood: four Agents, the front desk Agent with three Collaborator Agents, the Tools and the documents divided by department. Bob may propose a division of its own, for example the Address Registry kept on the front desk Agent as well; the second prompt fixes it.
 - What exists: the Agent with its six tools, the Knowledge Base, the Toolkit, the Connection, and no other Agent of the project. Bob may also report differences between your files and the instance, such as the name of the Agent's style, which the platform reports under a name of its own; the second prompt settles them.
-- The questions. Expect them about the names of the department Agents, which Tool goes where, whether the Knowledge Base is attached whole or split, what the front desk Agent does with a question that concerns two departments, which rules of the earlier chapters are kept, whether the department Agents are hidden from residents, and the model. Bob may also ask whether to update your import scripts and whether to write a design; the last line of the next prompt answers both. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
+- The questions. Expect them about the names of the department Agents, which Tool goes where, whether the Knowledge Base is attached whole or split, what the front desk Agent does with a question that concerns two departments, which rules of the earlier chapters are kept, whether the department Agents are hidden from residents, and the model. Bob may also ask whether to update your import scripts and whether to write a design; the last line of the next prompt answers both. If Bob ends by asking you to switch to Agent mode, stay in Ask mode.
 
 Send the prompt below whole, still in Ask mode and in the same conversation; it covers what Bob asked and the points it did not raise. Its last line is for a project that has import scripts, as yours does if you built the earlier chapters; leave it out otherwise. If Bob asked something that it does not cover, add one line with your answer at the end.
 
@@ -118,7 +118,7 @@ Update the import and delete scripts as well; the design and the tests come in
 the next step.
 ```
 
-Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may also list limits that it cannot guarantee, such as a department's answer being passed on word for word, which depends on the model; they are true, and 9.8 tests them. It may come back with two or three details; answer each in one line. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
+Bob confirms the answers and lays out the four Agents in the chat: the Tools and the documents of each, the descriptions, the build order, the changes to your scripts. It may also list limits that it cannot guarantee, such as a department's answer being passed on word for word, which depends on the model. The limits are real, and 9.8 tests them. If Bob comes back with two or three details, answer each in one line. Bob may start as if it were going to write the files, and stop because Ask mode does not allow it. Do not switch to Agent mode: the design is written first, in Plan mode.
 
 ## 9.4 Plan mode: write the design
 
@@ -170,11 +170,11 @@ Bob follows the build steps of the design:
 
 IMPORTANT: look at step 4. Bob does not only build the Agents; it tests them. Every design that Bob wrote in this guide ends with a set of test scenarios (open it and read them: a question, the department it should reach, the expected answer), and the design prompt's last build step, "run the test scenarios through the chat operation of the Orchestrate server", makes Bob run them one by one at the end of the build and report the result of each. Keep both in every design you write from now on: the scenarios, which you ask for if a design lacks them, and the build step that runs them. Bob builds the Agent and runs the tests that confirm it works.
 
-Approve each request as it comes. Bob corrects failures of this kind during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
+Approve each request as it comes. Bob corrects failures during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
 
 ## 9.7 What Bob built
 
-Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one of chapter 4, shorter: its `description` says what the department answers and when to call it; `tools` has one name; `knowledge_base` has `city_regulations`; the instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents.
+Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like the one in chapter 4, but shorter. Its `description` says what the department answers and when to call it. `tools` has one name and `knowledge_base` has `city_regulations`. The instructions hold the Permits and Planning facts, the rule for the Building Permit Guide and the rule for `get_permit_status`, and nothing about roads or waste. `agents/roads_agent.yaml` and `agents/waste_agent.yaml` have the same shape with their own Tools and documents.
 
 The three departments are listed in the chat next to the front desk Agent. Open one in the preview and ask it about something outside its subject: you see an Agent built for another Agent, not for people. They stay visible in this guide so that you can do that. In a production deployment, consider the field `hidden: true` at the top level of each department's definition: the chat then lists the front desk Agent only, and residents cannot go around it.
 
@@ -195,9 +195,9 @@ There is a pothole at 7 harbour ln, and which day is the green bin collected the
 The answer has both parts: a request number for the pothole and the green bin day of Harbour Lane, with the two departments' contacts. Then try these:
 
 - A question for one department: "Where is my permit application PP-2026-0412?" The status, from `permits_agent`.
-- A question the front desk Agent answers itself: "What are the quiet hours?" The Noise Ordinance, named in the answer, with no department called.
+- The front desk Agent answers some questions itself: "What are the quiet hours?" The Noise Ordinance, named in the answer, with no department called.
 - A question outside the three departments: "When does the swimming pool open?" The front desk Agent refuses and names an office that might help, with no contact details, since it has none for that office. Before point 4 of the second prompt said so, it invented a phone number once.
-- A question with a wrong address: "Which day is the grey bin collected at 3 Castle Street?" The waste Agent asks you to check the address; the front desk Agent passes that on.
+- Wrong address: "Which day is the grey bin collected at 3 Castle Street?" The waste Agent asks you to check the address; the front desk Agent passes that on.
 
 Ask the first question again with reasoning. A Collaborator Agent appears as a tool of the front desk Agent, named after its display name: `chat_with_collaborator_roads_and_infrastructure`, with the response "Transferring to". The steps that follow are labelled with the department's name, Roads and Infrastructure, and are the Tool calls of chapter 8: `lookup_address`, then `report_issue`. Then the same for Waste and Recycling, with `lookup_address` and `get_collection_days`. The front desk Agent sends each department its part of the question in its own words, and the answer has the two parts one after the other, each with its department's contact. The waste Agent may credit the collection day to the Waste Sorting Rules, a Tool result named as if it came from the document; the instructions tell it to name the document for every answer from the Knowledge Base, and it applies the rule too widely.
 
