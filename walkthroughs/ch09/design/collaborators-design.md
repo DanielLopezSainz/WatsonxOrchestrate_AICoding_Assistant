@@ -6,7 +6,7 @@ This document describes the design for splitting `civic_info_agent` into a front
 
 The department agents are collaborators of the front desk. Residents talk only to `civic_info_agent`. It keeps its name, display name, description, welcome message and starter prompts. It answers general questions about the departments, their contacts and hours, the urgent hazard number, and questions about the noise ordinance. It passes every other question to the department that owns it, and it passes on the department's answer as it is.
 
-Each department agent gets the tools of its department, the facts of its department, and the document of the knowledge base that concerns it. The department agents are hidden in the chat.
+Each department agent gets the tools of its department, the facts of its department, and the document of the knowledge base that concerns it. The department agents stay visible in the chat.
 
 The tools, the `address_registry` toolkit, the `city_regulations` knowledge base and the `utopia_311` connection do not change.
 
@@ -43,7 +43,7 @@ Common settings for all four agents, taken from `agents/civic_info_agent.yaml`:
 - `style: react_core`
 - `spec_version: v1`, `kind: native`
 
-Department agents carry `hidden: true` and have no welcome message or starter prompts, because residents never reach them directly.
+Department agents stay visible in the chat and have no welcome message or starter prompts, because residents are meant to talk to the front desk.
 
 ---
 
@@ -209,6 +209,6 @@ All scenarios are sent to `civic_info_agent` only, through the `chat_with_agent`
 ## 9. Build Steps
 
 1. **Write the four agent definitions:** create `agents/permits_agent.yaml`, `agents/roads_agent.yaml` and `agents/waste_agent.yaml`, and update `agents/civic_info_agent.yaml` as specified in section 4. Update `scripts/import-all.sh` and `scripts/delete-all.sh` as specified in section 7.
-2. **Import the three department agents:** `orchestrate agents import -f agents/permits_agent.yaml`, then `agents/roads_agent.yaml`, then `agents/waste_agent.yaml`. Confirm with `list_agents` that all three exist and are hidden.
+2. **Import the three department agents:** `orchestrate agents import -f agents/permits_agent.yaml`, then `agents/roads_agent.yaml`, then `agents/waste_agent.yaml`. Confirm with `list_agents` that all three exist.
 3. **Import `civic_info_agent`:** `orchestrate agents import -f agents/civic_info_agent.yaml`. Confirm with `list_agents` that it has no tools, the three collaborators, `city_regulations`, and the unchanged welcome message and starter prompts.
 4. **Run the test scenarios through the chat operation of the Orchestrate server:** send each scenario in section 8 to `civic_info_agent` with `chat_with_agent`, reusing `thread_id` for multi-turn scenarios, and record the results.
