@@ -74,7 +74,7 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- What Bob understood: four Agents, the front desk Agent with three Collaborator Agents, the Tools and the documents divided by department, the Knowledge Base shared.
+- What Bob understood: four Agents, the front desk Agent with three Collaborator Agents, the Tools and the documents divided by department. Bob may propose a division of its own, for example the Address Registry kept on the front desk Agent as well; the second prompt fixes it.
 - What exists: the Agent with its six tools, the Knowledge Base, the Toolkit, the Connection, and no other Agent of the project. Bob may also report differences between your files and the instance, such as the name of the Agent's style, which the platform reports under a name of its own; the second prompt settles them.
 - The questions. Expect them about the names of the department Agents, which Tool goes where, whether the Knowledge Base is attached whole or split, what the front desk Agent does with a question that concerns two departments, which rules of the earlier chapters are kept, whether the department Agents are hidden from residents, and the model. Bob may also ask whether to update your import scripts and whether to write a design; the last line of the next prompt answers both. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
 
