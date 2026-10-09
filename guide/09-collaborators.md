@@ -201,7 +201,7 @@ The answer has both parts: a request number for the pothole and the green bin da
 
 Ask the first question again with reasoning. A Collaborator Agent appears as a tool of the front desk Agent, named after its display name: `chat_with_collaborator_roads_and_infrastructure`, with a response that starts "Transferring to" and names the department. The steps that follow are labelled with the department's name, Roads and Infrastructure, and are the Tool calls of chapter 8: `lookup_address`, then `report_issue`. Then the same for Waste and Recycling, with `lookup_address` and `get_collection_days`. Each department receives its part of the question in the words of the front desk Agent, and the answer has the two parts one after the other, each with its department's contact. The waste Agent may credit the collection day to the Waste Sorting Rules, a Tool result named as if it came from the document. Its instructions say to name the document for every answer from the Knowledge Base, and it applies the rule too widely.
 
-When an answer comes from the wrong department, the cause is usually a description, since the front desk Agent chooses from the descriptions of the three. Tell Bob which question went where, in one sentence; the fix is a changed description, imported and tested again.
+If the front desk Agent sends a question to the wrong department, look at the descriptions of the three Collaborator Agents. Tell Bob which question went where, in one sentence, and ask it to correct the description, import the Agent again and test.
 
 ## 9.9 Deploy the change in Live
 
