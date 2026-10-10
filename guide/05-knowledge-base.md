@@ -8,7 +8,7 @@ You want to build a garden shed and need to know whether it requires a permit. T
 
 In this chapter, the Agent gets the city's guides and regulations: the Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance. Bob writes the three documents for the City of Utopia, puts them into a Knowledge Base, and connects the Agent to it. The Agent then answers from the documents: whether a shed needs a permit, which bin a broken mirror goes in, how loud a party can be after ten at night, and it names the document that the answer came from.
 
-This chapter introduces one new component, the Orchestrate Knowledge Base. The Agent from chapter 4 and its facts are unchanged; its instructions gain one paragraph.
+The Agent from chapter 4 and its facts are unchanged; its instructions gain one paragraph.
 
 Skip this chapter if you have already connected a Knowledge Base to an Agent with Bob. To continue with chapter 6 without building it, send Bob these instructions in Agent mode: `Import walkthroughs/ch05/knowledge-bases/city_regulations.yaml into my instance, wait until the knowledge base is ready, then import walkthroughs/ch05/agents/civic_info_agent.yaml.`
 
@@ -24,13 +24,13 @@ Check that the Agent is there: in Ask mode, ask `Which agents exist on my instan
 
 An Agent's instructions can hold about a page of facts. A city's regulations run to hundreds of pages and are revised from time to time by people who have no reason to know what the Agent's instructions say; for documents like these, the Agent uses an Orchestrate Knowledge Base.
 
-An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate indexes, so that an Agent can search them. When a resident asks a question, the Agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents stay as they are; nothing is copied into the instructions.
+An Orchestrate Knowledge Base is a set of documents that watsonx Orchestrate indexes, so that an Agent can search them. When a resident asks a question, the Agent looks for the passages of the documents that are closest to the question, reads them, and answers from them. The documents are not copied into the instructions.
 
 **When an Orchestrate Knowledge Base is the right component**
 
 Which of the two to use depends on where the information lives and who maintains it. Instructions are right for a small, stable set of facts that the Agent's builder owns, like the three departments of chapter 4. A Knowledge Base is right when the information:
 
-- Is too large for instructions. A permit guide, a product catalogue, an employee handbook.
+- Is too large for instructions, such as a permit guide or an employee handbook.
 - Already exists as documents, written and maintained by other people. The legal department updates the regulation and the HR team updates the handbook; the Agent must follow without anyone touching its definition.
 - Must be answered from the official wording. A resident who asks about a fee or a deadline wants what the document says and which document it is.
 
@@ -81,7 +81,7 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob queries the instance and answers with the three parts you know from chapter 4. Its questions cover the format and tone of the documents, the kind of Knowledge Base, the numbers for the rules, and how the Agent's instructions should change. Bob may end with a row of suggested answers to click. They are its own defaults, and some, such as Markdown for the documents, do not match this chapter, so ignore them and type the answer below.
+Bob queries the instance and answers with the three parts of chapter 4. Its questions cover the format and tone of the documents, the kind of Knowledge Base, the numbers for the rules, and how the Agent's instructions should change. Bob may end with a row of suggested answers to click. They are its own defaults, and some, such as Markdown for the documents, do not match this chapter, so ignore them and type the answer below.
 
 The second prompt answers Bob's questions and fixes the rules of this chapter: everything that the Agent answers about regulations must come from them.
 
@@ -127,19 +127,17 @@ information. In every answer taken from a document, the agent names the
 document.
 ```
 
-Bob confirms the answers. As in chapter 4, it might outline the documents or the design in the chat. The design is written in the next step.
+Bob confirms the answers. As in chapter 4, it might outline the documents or the design in the chat.
 
 ## 5.4 Plan mode: write the design
 
 Mode: Plan, in the same conversation.
 
-The design covers three documents, a Knowledge Base and a change to an existing Agent.
-
 ```
 Write the design for this change into design/city-regulations-design.md.
 ```
 
-Bob asks for approval to write the file, writes it, and shows a summary. Open the file and check that it contains the following:
+Bob asks for approval to write the file, writes it, and shows a summary. Open the file and compare it with the table.
 
 | Content | What to check |
 |---|---|
@@ -165,9 +163,9 @@ Mode: Agent, in a new conversation.
 The design in @design/city-regulations-design.md is approved. Build it.
 ```
 
-The @ mention tells Bob to read the design file. One step of this build takes a few minutes. Bob:
+The @ mention tells Bob to read the design file. Bob:
 
-1. Writes the three documents, the Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance, as text files in the `knowledge-bases` folder. Open one while Bob continues: residents' answers will come from these pages.
+1. Writes the three documents, the Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance, as text files in the `knowledge-bases` folder. Open one while Bob continues.
 2. Writes the Knowledge Base definition, a short file that names `city_regulations` and lists the three documents.
 3. Imports the Knowledge Base and waits. The platform indexes the documents in the background; Bob checks the status until it is ready, which takes a few minutes on a tenant.
 4. Updates the Agent: the Knowledge Base is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
@@ -179,7 +177,7 @@ Approve each request as it comes. If an import fails, Bob reads the error and co
 
 Open the `knowledge-bases` folder in the File Explorer. It has four files: the three text documents and the Knowledge Base definition, `city_regulations.yaml`.
 
-The three text files are the Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance. Open the Building Permit Guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a detached shed of 8 square metres and 2 metres high that needs no permit and one of 12 square metres that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it. When the city changes the rule, only this file changes.
+The three text files are the Building Permit Guide, the Waste Sorting Rules and the Noise Ordinance. Open the Building Permit Guide. It reads like a leaflet from a city office: a title, a few headings, and under each one the rule in plain sentences, with the numbers you gave Bob. Bob may have added examples of its own, such as a detached shed of 8 square metres and 2 metres high that needs no permit and one of 12 square metres that does. When a resident asks about a shed, the Agent finds the right passage in this file and answers from it.
 
 The Knowledge Base definition, `city_regulations.yaml`, is a short file with no rules in it: it holds the name of the Knowledge Base, a sentence that says what the documents cover, so that the Agent knows when to look inside, and the list of the three documents.
 
@@ -191,16 +189,14 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 5.8 Ways to interact with Orchestrate Agents
 
-There are two ways to talk to an Agent.
-
 - With Bob, you send the question to the Agent through Bob: "Ask civic_info_agent: ...". Bob shows you the answer, and because Bob has seen it, you can ask Bob to correct the Agent in your next message. The chapters use this method to test every Agent.
 - In watsonx Orchestrate, you open your instance in the browser and type the question yourself, in the chat that residents use, which talks to the Agent deployed in Live, or in the preview on the Manage Agents page, which talks to the Agent in Draft.
 
-The Agent exists in two environments; know which one you are talking to. A question sent through Bob always reaches the Agent in Draft, the one you are developing, and right now only the Agent in Draft searches the documents, until you deploy in 5.9.
+The Agent exists in two environments. A question sent through Bob always reaches the Agent in Draft, the one you are developing, and right now only the Agent in Draft searches the documents, until you deploy in 5.9.
 
 Bob wrote the documents in its own words from your rules, so the answers to the questions below should be in them. If an answer differs from the rules, open the document: when the rule is there, the Agent read it wrongly, and you ask Bob to correct the Agent as in chapter 4; when it is missing, ask Bob to add it and import the Knowledge Base again.
 
-With Bob, ask the three questions from the Overview, one per message:
+With Bob, ask the questions from the Overview, one per message:
 
 ```
 Ask civic_info_agent: "Do I need a permit for a garden shed of 8 square metres?"
@@ -214,7 +210,7 @@ Ask civic_info_agent: "Which bin does a broken mirror go in?"
 Ask civic_info_agent: "How loud can a party be after 10 pm on a Saturday?"
 ```
 
-Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is detached and under 2.5 metres high. The mirror goes wrapped in the grey bin. On a Saturday, music must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Each answer names its document, because the instructions ask for it.
+Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is detached and under 2.5 metres high. The mirror goes wrapped in the grey bin. On a Saturday, music must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Check that each answer names its document.
 
 Then ask as residents do:
 
@@ -234,7 +230,7 @@ The Agent that searches the documents exists in Draft. If you completed chapter 
 Deploy civic_info_agent from draft to live.
 ```
 
-Bob reports that the Agent is deployed and tells you where residents can find it: in the watsonx Orchestrate chat, under its display name, Utopia city information. Go there and ask the shed question. Residents now get the same answer. On the Developer Edition, skip this step.
+Bob reports that the Agent is deployed and tells you where residents can find it: in the watsonx Orchestrate chat, under its display name, Utopia city information. Go there and ask the shed question; the answer is the same as in Draft. On the Developer Edition, skip this step.
 
 ## 5.10 Summary
 
