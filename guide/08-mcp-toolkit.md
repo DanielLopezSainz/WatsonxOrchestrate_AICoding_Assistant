@@ -51,7 +51,7 @@ The MCP server that Bob writes is a small Python program with two tools. `lookup
 
 **Why this is one of the most important chapters of this guide**
 
-You and your team will write MCP servers to reach a database, an internal API or a product catalogue, and through them your Agents reach systems inside and outside the company.
+You and your team will write MCP servers to reach a database, an internal API or a product catalogue, and through them your Agents reach systems inside and outside the company. Every Agent you build after this guide that reaches a system of the company goes through an MCP server, so the practices of this chapter are the ones you will use most.
 
 ## 8.3 Ask mode: describe the Address Registry
 
@@ -78,7 +78,7 @@ exists on my instance.
 Look for these points in Bob's answer:
 
 - Bob understood a Python MCP server with the ten streets of the Collection Calendar as its data, running inside watsonx Orchestrate as a local Toolkit, called by the Agent before any Tool that takes a street, and tried from Bob before the import.
-- Bob found on the instance the Agent with its four Tools and its Knowledge Base, the Collection Calendar with the ten streets, the two servers in Bob's MCP configuration, and no Toolkit.
+- Bob finds on the instance the Agent with its four Tools and its Knowledge Base, the Collection Calendar with the ten streets, the two servers in Bob's MCP configuration, and no Toolkit.
 - Bob asks between two and five questions. Expect one about the districts and postcodes; the others may be what the tool returns for an unknown address, how far the matching of a typed address should go, which Python library to use, whether to install it in the project's environment or in one of its own, what to test from Bob, and whether the Agent must look up every address or only the informal ones. Each one is a decision for you. The second prompt takes the simplest option every time, so that your Address Registry and every other reader's give the same answers. Bob may end by asking you to switch to Agent mode; stay in Ask mode.
 
 Send the prompt below whole, still in Ask mode and in the same conversation; it covers what Bob asked and the points it did not raise. If Bob asked something that it does not cover, add one line with your answer at the end.
