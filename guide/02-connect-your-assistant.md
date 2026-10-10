@@ -16,8 +16,6 @@ Skip this chapter if every line of the checklist in section 2.7 is already true 
 
 ## 2.1 Before you start
 
-You need the following.
-
 | You need | Where it comes from |
 |---|---|
 | IBM Bob 2.1 or later | Installed and open |
@@ -62,12 +60,12 @@ You should see: the panel now has two sections. Explorer lists Agents, Tools, Co
 
 Step 4. Send Bob its starting message.
 
-When the initialisation ends, the extension places a message in the chat input box of Bob and does not send it. No notification is displayed, so the message is easy to overlook. Check the chat input box before you continue.
+When the initialisation ends, the extension places a message in the chat input box of Bob and does not send it. No notification is displayed, so the message is easy to overlook.
 
 1. Find the text headed "SYSTEM PROMPT - IBM watsonx Orchestrate" in the chat input box.
 2. Press Enter to send it as it is.
 
-The message tells Bob to switch to Agent mode, to load the Orchestrate skills, and to use the Orchestrate server for all Agent, Tool and environment operations and the documentation server for reference. If the box is empty, for example because the text was deleted or a new conversation was started before it was sent, nothing has failed. Paste the following text and send it:
+The message tells Bob to switch to Agent mode, to load the Orchestrate skills, and to use the Orchestrate server for all Agent, Tool and environment operations and the documentation server for reference. If the box is empty, for example because the text was deleted or a new conversation was started before it was sent, paste the following text and send it:
 
 ```
 # SYSTEM PROMPT - IBM watsonx Orchestrate
@@ -114,11 +112,9 @@ Which agents exist on my instance? List their names and one line each.
 
 You should see: Bob calling the Orchestrate server, shown above its answer, and the same Agents that the Explorer lists. If Bob requests approval first, the settings of step 7 are not in place. If the answer mentions a working directory, a forbidden path or an authentication problem, see section 2.8.
 
-The next two sections name those views and list what the installation placed on your machine.
-
 ## 2.3 The Bob views used in this guide
 
-Bob shows different views depending on the icon selected in the left bar. This guide uses five of them. Each later chapter refers to them by the names given here.
+Bob shows different views depending on the icon selected in the left bar. Later chapters refer to the five views below by these names.
 
 ### File Explorer
 
@@ -137,7 +133,7 @@ Open it with the watsonx Orchestrate icon in the left bar. It has two sections.
 
 Use the Explorer to confirm that an import took place: an Agent that appears under Agents exists on the instance. To refresh a list, move the pointer over its row, for example Agents, and click the refresh icon that appears on it.
 
-Three actions are available on an item in the Explorer:
+An item in the Explorer has these actions:
 
 - Clicking the name of an item saves a copy of its definition from the instance into the project folder, for an Agent as `agents/<name>.yaml`, and opens it. If a file with that name already exists, a dialog asks whether to replace it. Choose Cancel to keep your file. Use this action when you want the definition exactly as the instance holds it.
 - The chat icon on an Agent's row opens a conversation with that Agent.
@@ -157,7 +153,7 @@ Use Source Control to see what Bob changed in the project folder and to keep you
 
 ### Bob chat panel
 
-The Bob icon opens the panel where you write prompts and read Bob's answers. Five controls in this panel are used throughout the guide.
+The Bob icon opens the panel where you write prompts and read Bob's answers. The following controls are used throughout the guide.
 
 | Control | Location | Purpose |
 |---|---|---|
@@ -197,14 +193,12 @@ The following components appear by name in Bob's messages and in the MCP tab.
 
 ## 2.5 The approvals, explained
 
-Two settings determine when Bob asks for approval.
-
 - The Permissions button, next to the mode dropdown at the bottom of the chat input, opens one switch per category. Read lets Bob read files without asking. MCP lets it run Orchestrate operations without asking, but only the ones you mark individually. Edit and Execute cover writing files and running commands. Leave Edit and Execute off, so that Bob asks before writing files or running commands.
 - The Always allow switch on each operation in the MCP tab approves that operation permanently; step 7 approved the eleven operations that only read from the instance or send a test message. Every other operation, such as importing, creating, removing or setting credentials, still requires approval.
 
 ## 2.6 Other AI coding assistants
 
-The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps; Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server. This guide covers Bob only; for other assistants, follow the instructions at that address.
+The Orchestrate server is the same for every assistant. Cursor and VS Code with Copilot have the same extension and the same steps; Claude Code and Claude Desktop connect through a settings file that names the server and the folder. The installation for each is described at https://developer.watson-orchestrate.ibm.com/mcp_server/wxOmcp_installation. If this address has changed, search the watsonx Orchestrate ADK documentation for the installation of the MCP server.
 
 ## 2.7 Checklist
 
@@ -218,8 +212,6 @@ The Orchestrate server is the same for every assistant. Cursor and VS Code with 
 
 ## 2.8 When something goes wrong
 
-Known failures and their fixes:
-
 | Bob reports | Cause | Fix |
 |---|---|---|
 | `Attempting to access resources outside the working directory is forbidden.` | The folder open in Bob is not the one that was initialised, or Bob is pointing at a file elsewhere on your disk | Open the initialised folder. If you must change folders, run Update MCP Servers from the command palette with the right folder open |
@@ -229,4 +221,4 @@ Known failures and their fixes:
 | The server command is not found, or the entry will not start | Most often, the Python environment the extension created is damaged or was moved | Run Initialise Workspace again; it repairs it |
 | `watsonx-orchestrate-adk` shows as disconnected and does not restart from the MCP tab, while the environment is active | The entry starts the newest version of the server package each time, and a new version can fail to start | In Agent mode, ask Bob: `Run the command of the watsonx-orchestrate-adk entry of .bob/mcp.json in a terminal and show me its error.` If the error names the package, ask Bob to pin the version in that entry to the version of your ADK, for example `ibm-watsonx-orchestrate-mcp-server@2.18.0`, then restart the server from the MCP tab and start a new conversation |
 
-When Bob tests an Agent that has no Tools, it reports that the reasoning is empty; an Agent without Tools has no steps to show.
+When Bob tests an Agent that has no Tools, it reports that the reasoning is empty.
