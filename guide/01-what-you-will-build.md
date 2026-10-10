@@ -20,7 +20,7 @@ If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scena
 
 ## 1.1 The 2 main characters
 
-IBM Bob and IBM watsonx Orchestrate are the two products that this guide uses, each with a different job.
+This guide uses IBM Bob and IBM watsonx Orchestrate.
 
 | Product | What it is | Its job in this guide |
 |---|---|---|
@@ -51,7 +51,7 @@ An Agent that you create stays in the Draft environment of the instance, where o
 
 CivicPulse, the citizen services platform of the City of Utopia, is the one system that the guide builds from start to finish. Each component of an Orchestrate Agent has a job in that scenario: regulations to search, a permit status to look up, a 311 Call Center to report to, departments to route questions between.
 
-The city, its departments, its residents and all its data are fictional; three departments are used throughout the guide:
+The city, its departments, its residents and all its data are fictional. The guide uses these departments:
 
 | Department | What it handles |
 |---|---|
@@ -75,4 +75,4 @@ The city, its departments, its residents and all its data are fictional; three d
 | 11 | Make CivicPulse available to residents on the city's website | Re-deployment after changes, and the Orchestrate Channel for web chat | The deployment approval |
 | 12 | Add a new department, Parks and Events, without step-by-step help | All of the above | The Orchestrate skills |
 
-From chapter 4 onwards, each chapter opens with an overview that says what is built and whether you can skip it, states its prerequisites, lists its steps, tests the result with questions, and ends with a deployment and a summary. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
+From chapter 4 onwards, each chapter has an overview with a skip note, prerequisites, steps, tests, a deployment and a summary. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
