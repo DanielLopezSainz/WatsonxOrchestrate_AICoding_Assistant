@@ -49,7 +49,7 @@ This prompt tells Bob about the project for the first time. Its purpose is to co
 
 Use Ask mode for this conversation: Bob can read your project and your instance, and cannot change anything.
 
-The prompt is a structured prompt written as running text (chapter 3, type 3). It describes the Agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob for three things in return.
+The prompt is a structured prompt written as running text (chapter 3, type 3). It describes the Agent in plain words: who it is for, the kind of question that it answers, where its knowledge comes from, and what it must not do. It ends by asking Bob what it understood, what it needs from you and what already exists on your instance.
 
 ```
 I would like to build an information agent for the residents of the City of
@@ -64,10 +64,10 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-Bob first looks at your instance, which takes a few seconds, so that its answer describes what is there. The answer usually has three parts:
+Bob first looks at your instance, which takes a few seconds, so that its answer describes what is there. The answer usually contains:
 
-1. What Bob understood. Read it against what you meant. If it is wrong, correct it now.
-2. What already exists on the instance: the Agents, Tools, Knowledge Bases and Connections, and whether the name of the new Agent is free. Bob reads this from the instance.
+1. A summary of what Bob understood. Read it against what you meant. If it is wrong, correct it now.
+2. A list of what already exists on the instance: the Agents, Tools, Knowledge Bases and Connections, and whether the name of the new Agent is free. Bob reads this from the instance.
 3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the Agent.
 
 Bob's questions vary from one run to another, but they come down to the same points: the facts, the tone, the limits of the Agent, and its name. The following answer gives Bob all of them at once, so you can use it whatever the wording of Bob's questions. Send it in the same conversation.
@@ -107,7 +107,7 @@ Stay in the same conversation, so that Bob keeps everything that you have told i
 Write the design for this agent into design/civic-info-design.md.
 ```
 
-Bob writes the file after you approve the request, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another, but the file must contain the following:
+Bob writes the file after you approve the request, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another. The table lists what the file must contain.
 
 | Content | What to check |
 |---|---|
@@ -117,16 +117,16 @@ Bob writes the file after you approve the request, and shows a summary. Open the
 | The instructions | The full text that the Agent will read: the facts and the rules for answering |
 | The test questions | Each with what a correct answer contains |
 
-Two entries in the description of the Agent apply to every Agent in this guide:
+The model and the description are set the same way for every Agent in this guide:
 
-- The model. You did not name one, so the design uses the default model of the instance. The identifier of the default model depends on the instance and its version; on the instance used to prepare this guide, it is `groq/openai/gpt-oss-120b`.
-- The description and the instructions. The description says what the Agent is for, and other Agents and the Orchestrate interface read it to decide when to use this Agent. The instructions are different: they say how the Agent behaves, and the Agent itself reads them in every conversation.
+- You did not name a model, so the design uses the default model of the instance. The identifier of the default model depends on the instance and its version; on the instance used to prepare this guide, it is `groq/openai/gpt-oss-120b`.
+- The description says what the Agent is for, and other Agents and the Orchestrate interface read it to decide when to use this Agent. The instructions say how the Agent behaves, and the Agent itself reads them in every conversation.
 
 ## 4.4 Approve the design
 
 Mode: Plan, same conversation.
 
-The design is a proposal, and this is the time to change it. Changing the design takes one prompt; changing the Agent after the build means importing and testing it again. Everything that you want built must be in the design before you approve it.
+The design is a proposal, and this is the time to change it. Changing the design takes one prompt; changing the Agent after the build means importing and testing it again.
 
 In the run, the design said nothing about what a resident sees before typing a question. Check yours, and if it is missing, request it:
 
@@ -139,15 +139,15 @@ Bob revises the file and waits again, with a summary of what it changed. Do not 
 
 When the design says what you mean, it is approved. There is nothing to send: the approval is the first line of the prompt in 4.6.
 
-The facts give opening hours for two departments and none for Roads and Infrastructure. The design does not say what the Agent should do about that. Section 4.9 shows what the Agent does with the gap.
+The facts give opening hours for two departments and none for Roads and Infrastructure. The design does not say what the Agent should do about that.
 
 ## 4.5 The Draft and Live environments
 
-An instance has two environments. Draft is the builders' environment: an Agent in Draft can be changed as often as you like, tested, corrected and imported again. Only the builders who work on the instance can reach it, from the Manage Agents page, where a preview panel lets you chat with it. Live is the residents' environment: the Agent deployed in Live is what residents find in the chat on the instance's landing page, and later on the city's website.
+An instance has two environments. Draft is the builders' environment: an Agent in Draft can be changed, tested and imported again as often as you need. Only the builders who work on the instance can reach it, from the Manage Agents page, where a preview panel lets you chat with it. Live is the residents' environment: the Agent deployed in Live is what residents find in the chat on the instance's landing page, and later on the city's website.
 
 When Bob imports the Agent, or imports it again after a correction, it changes the Agent in Draft. The Agent in Live does not change until you deploy: one operation that takes the Agent as it is in Draft and deploys it in Live. Until then, residents keep talking to the previous deployment, so nobody meets an Agent that is being repaired. If a deployment turns out to be wrong, undeploying returns the Agent in Live to its previous deployment.
 
-Everything that Bob does in the next sections happens in Draft: the build imports the Agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the Agent in Live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full; here you perform it once.
+Everything that Bob does in the next sections happens in Draft: the build imports the Agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the Agent in Live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full.
 
 The Developer Edition has only the Draft environment: its chat shows the Agents in Draft, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
 
@@ -159,9 +159,9 @@ In this step, Bob builds the Agent from the approved design.
 
 Start a new conversation with the plus sign at the top of the chat panel, then select Agent in the mode dropdown. Do not switch to Agent mode in the conversation you have been using.
 
-In the current conversation, Bob has your request, its first proposal, the facts, perhaps a complete Agent that it laid out in the chat before you asked for a design, the design, and your revision. You approved some of that and not the rest. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
+In the current conversation, Bob has your request, its first proposal, the facts, perhaps a complete Agent that it laid out in the chat before you asked for a design, the design, and your revision. You approved only part of it. If Bob builds there, all of it is in view, and Bob may take a detail from its early draft instead of from the approved design. In a new conversation, Bob reads only the design file and builds what you approved.
 
-For an Agent this small, the difference rarely shows. The difference matters from chapter 9 onwards, where a design covers four Agents and the discussion behind it is long, and Bob's documentation describes the same practice for moving from a plan to its implementation.
+For an Agent this small, the difference rarely shows. From chapter 9 onwards, a design covers four Agents and the discussion behind it is long. Bob's documentation describes the same practice for moving from a plan to its implementation.
 
 The prompt has two sentences: the first approves the design and the second starts the build. Bob takes everything else from the design file, which the @ mention tells it to read.
 
@@ -171,7 +171,7 @@ The design in @design/civic-info-design.md is approved. Build it.
 
 The build takes Bob a minute or two. In the run, Bob:
 
-1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how Agents are built and tested. Everything that follows comes from the design and from that skill, not from the prompt.
+1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how Agents are built and tested. Everything that follows comes from the design and from that skill.
 2. Wrote the Agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
 3. Imported it. The Agent then exists on the instance, in Draft, where only the builders can use it.
 4. Sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and one of its own, a second question in the same conversation to check that the Agent remembers the first. It reported each answer with its verdict; every test passed.
@@ -197,7 +197,7 @@ The file can contain other fields.
 
 Save your work now, as section 3.6 describes: `Commit everything I changed with a short message saying what was built.` From now on, any change to this file can be undone.
 
-Read the file against the design. The two usually match, but not always. In the run, the design gave the display name Utopia city information and the file left it out, so the Agent appeared under its internal name. The correction in 4.9 includes this.
+Read the file against the design. The two can differ. In the run, the design gave the display name Utopia city information and the file left it out, so the Agent appeared under its internal name. The correction in 4.9 includes this.
 
 ## 4.8 Meet your Agent
 
@@ -223,7 +223,7 @@ Residents will not write their questions as neatly as the design does. Try these
 
 Read each answer with the facts of 4.2 next to you. For the first three, the right department and its contact should be there, and the flooded street should get the urgent line; the swimming pool should get a polite refusal with a pointer to the department most likely to help. The follow-up should be answered as a question about waste collection, with the Waste and Recycling contact, without the Agent asking what "it" refers to.
 
-Keep a note of any answer that contains something not in the facts; 4.9 shows what to do about it.
+Keep a note of any answer that contains something not in the facts.
 
 Until the end of the next section, the Agent exists in Draft only, where you can use it and residents cannot.
 
@@ -264,7 +264,7 @@ Deploy civic_info_agent from draft to live.
 
 Bob runs the deployment and reports that the Agent was deployed. Open your watsonx Orchestrate instance in the browser: the Agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
 
-From now on, the Agent exists in both environments, and you need to know which one you are talking to. The next time you ask Bob to change the Agent, the change goes to Draft, and the Agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the Agent, it reaches the Agent in Draft, because the operation that Bob uses to chat with an Agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. While you build, you test what you change, and residents never see it. To talk to the Agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
+From now on, the Agent exists in both environments. The next time you ask Bob to change the Agent, the change goes to Draft, and the Agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the Agent, it reaches the Agent in Draft, because the operation that Bob uses to chat with an Agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. To talk to the Agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
 
 ## 4.10 Summary
 
