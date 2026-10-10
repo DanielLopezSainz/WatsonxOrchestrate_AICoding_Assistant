@@ -8,9 +8,9 @@ Three weeks ago you applied for a building permit. The confirmation email gives 
 
 Every question that the Agent of chapter 5 could answer had the same answer for every resident: the hours of a department, the rule for a shed. The questions in this chapter need answers that depend on the record asked about: the status of one application, the date of one repair, the collection day of one street. To answer, the Agent looks up that record in the city's system when the question is asked.
 
-An Orchestrate Tool is how an Agent fetches it. In this chapter, Bob writes three Orchestrate Tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the Tools read, a few lines in a file for each. Then Bob connects the Tools to the Agent, and the Agent decides, question by question, when to use one. Section 6.8 shows how to read the Agent's reasoning and check these decisions.
+An Orchestrate Tool is how an Agent fetches it. In this chapter, Bob writes three Orchestrate Tools for the City of Utopia: one that looks up a permit application by its number, one that looks up a problem report by its number, and one that gives the collection days of a street. Utopia has no permit system, so Bob also writes the records that the Tools read, a few lines in a file for each. Then Bob connects the Tools to the Agent, and the Agent decides, question by question, when to use one.
 
-This chapter introduces the Orchestrate Tool. The Agent and its Knowledge Base stay as in chapter 5; the instructions gain one paragraph.
+The Agent and its Knowledge Base stay as in chapter 5; the instructions gain one paragraph.
 
 Skip this chapter if you have already given an Agent a Python Tool with Bob. To continue with chapter 7 without building it, first make sure that the Knowledge Base of chapter 5 exists on your instance, then send Bob these instructions in Agent mode: `Import the three Python tools in walkthroughs/ch06/tools into my instance, each one packaged with its record file, then import walkthroughs/ch06/agents/civic_info_agent.yaml.`
 
@@ -26,7 +26,7 @@ Check that both are there: in Ask mode, ask `Which agents and knowledge bases ex
 
 Instructions hold what the Agent knows; the Knowledge Base, what the city has written down. Neither holds the status of a permit application: that information is in the permit system, and it belongs to one resident. An Orchestrate Tool is a function that the Agent calls while it answers, to fetch information or to act.
 
-An Orchestrate Tool has three parts, and the Agent uses each one in turn.
+The Agent uses the following parts of an Orchestrate Tool in turn.
 
 | Part | What it is | What the Agent does with it |
 |---|---|---|
@@ -49,7 +49,7 @@ A Python Tool consists of a function, a description, parameters and a result, in
 
 **The data of this chapter**
 
-In a real city, the permit Tool would query the permit system, over its API, with a credential. The City of Utopia has no permit system. In this chapter, each Tool reads its records from a small file that Bob writes and uploads together with the Tool: ten applications, ten problem reports, the collection days of ten streets. Nothing changes for the Agent or for the resident. Chapter 7 adds a Tool that acts instead of reading, by calling a service that needs a key, and shows how the Agent uses the key without ever seeing it.
+In a real city, the permit Tool would query the permit system, over its API, with a credential. The City of Utopia has no permit system. In this chapter, each Tool reads its records from a small file that Bob writes and uploads together with the Tool: ten applications, ten problem reports, the collection days of ten streets. The Agent calls each Tool as it would call one connected to a real system.
 
 **Reading the Agent's reasoning**
 
@@ -75,11 +75,11 @@ Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
 ```
 
-In Bob's answer, look for four things:
+In Bob's answer, look for the following:
 
-- How Bob would implement it. Under what it understood, Bob proposes record files and Python Tools that read them, one per kind of record. Nobody said the word Tool; Bob chose it, and 6.2 explains why.
+- Under what it understood, Bob proposes record files and Python Tools that read them, one per kind of record. Bob chose the word Tool without being told; 6.2 explains why.
 - What it found on the instance: the Agent, the Knowledge Base, and no Tools of the project.
-- The line from chapter 4 that says the Agent does not look anything up in other systems. Bob may point out that this line has to change, and it does.
+- The line from chapter 4 that says the Agent does not look anything up in other systems. Bob may point out that this line has to change; the build in 6.6 changes it.
 - Its questions: how many records, which status words, which bins, what to say when a number is unknown. They are answered below.
 
 The second prompt creates the records in words: three applications, three reports and three streets, with fixed numbers and dates, so that your Agent gives the same answers as every other reader's Agent. The rest of the prompt takes the decisions Bob asked about. Nothing is created yet.
@@ -127,8 +127,8 @@ three sentences and end with the contact of the department, as before.
 Check Bob's answer for the following:
 
 - The records in tables, the code of the three Tools, the new paragraph of the instructions. Bob may even start as if it were going to write the files, and stop because Ask mode does not allow it.
-- The three descriptions, one sentence above each Tool. "Look up the status of a building permit application by its permit number" is what the Agent will read when it decides.
-- The invitation to switch to Agent mode. Do not switch to Agent mode yet; nothing has been created. Section 6.4 turns this proposal into a design that you read and approve.
+- Above each Tool, Bob writes one sentence that describes it. "Look up the status of a building permit application by its permit number" is what the Agent will read when it decides.
+- Bob invites you to switch to Agent mode. Do not switch yet; nothing has been created. The design that you read and approve follows in 6.4.
 
 ## 6.4 Plan mode: write the design
 
@@ -157,7 +157,7 @@ Mode: Plan, same conversation.
 
 Compare the design with the table in 6.4. If a Tool, a record or a test is missing, ask Bob to change it in the same conversation.
 
-Check one point in particular: the design must say that each Tool is uploaded together with its record file. If it does not, send:
+The design must say that each Tool is uploaded together with its record file. If it does not, send:
 
 ```
 Each tool must be uploaded to the instance together with its record file.
@@ -188,7 +188,7 @@ Approve each request as it comes. Bob's report may say that the Agent is deploye
 
 Open the `tools` folder in the File Explorer. It has six files: three Python files, one per Tool, `get_permit_status.py`, `get_request_status.py` and `get_collection_days.py`, and three CSV files with the records, `permits.csv`, `requests.csv` and `collection_calendar.csv`.
 
-Open `get_permit_status.py` and find the function `get_permit_status`, in the run near the bottom of the file. Three things around it are not for the computer that runs the code:
+Open `get_permit_status.py` and find the function `get_permit_status`, in the run near the bottom of the file. Around the function are the following:
 
 - The line `@tool` above the function. It tells watsonx Orchestrate that this function is a Tool.
 - Just under the function name, the text between triple quotes. This is the description: one sentence on what the Tool does, one line on the parameter, one line on the result. These are the words the Agent reads when it decides whether to call the Tool.
@@ -196,9 +196,9 @@ Open `get_permit_status.py` and find the function `get_permit_status`, in the ru
 
 The rest of the file opens `permits.csv`, finds the line with that number, and returns it.
 
-`permits.csv` has one line per application. Find the line of PP-2026-0412: 18 Elm Street, garden shed, under review, decision due 2026-10-12. The resident of the Overview will get this answer.
+`permits.csv` has one line per application. Find the line of PP-2026-0412, the application in the Overview: 18 Elm Street, garden shed, under review, decision due 2026-10-12.
 
-Open `agents/civic_info_agent.yaml`. Two things changed. Near the bottom, under `tools`, the three Tool names. In the instructions, a new section says when to call each Tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three Tools. The facts and the Knowledge Base are unchanged. Bob may have added starter prompts for the new questions.
+Open `agents/civic_info_agent.yaml`. Near the bottom, under `tools`, are the three Tool names. In the instructions, a new section says when to call each Tool, what to ask when the number is missing, and what to say when there is no record. The line from chapter 4 that forbade looking anything up now allows the three Tools. The facts and the Knowledge Base are unchanged. Bob may have added starter prompts for the new questions.
 
 The folder may also contain a requirements file, which names the Python libraries that the Tools need and is uploaded with them, and a test report, which Bob wrote for itself. Neither is part of the Agent.
 
@@ -225,9 +225,9 @@ The answers are, in order: under review with a decision due 12 October, a repair
 Then try questions that test the limits of the Tools:
 
 - Leave out the number, in a new conversation so that the Agent does not reuse the one above: "Where is my permit application?" The Agent asks for it.
-- Use a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning. It invents nothing.
+- Use a number that does not exist: "Where is my permit application PP-2026-9999?" The Agent says that it has no record under that number and gives the contact of Permits and Planning.
 - Ask for a Tool and a document: "My application PP-2026-0412 is for a shed. Can I start building while I wait?" The answer says that work must not start before the decision, from the Building Permit Guide. Keep this question for the next part.
-- Name a street without needing a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool: the question names a street, but nothing in it needs the collection day.
+- Name a street without needing a lookup: "The grey bin on Elm Street was not collected today. Who do I call?" The Agent answers with the Waste and Recycling contact and does not call the calendar Tool, because the question needs no collection day.
 
 To read how the Agent got there, ask the first question again through Bob, with two more words:
 
@@ -245,7 +245,7 @@ When an Agent with Tools answers wrongly, open its reasoning steps. They show wh
 
 Mode: Agent, same conversation.
 
-On the Developer Edition, skip this section. In Live, the Agent still answers that a decision is given within 30 days, or there is no Agent at all if you imported chapter 5 from the walkthrough folder; the Agent in Draft looks up records. Send the deployment instruction again:
+On the Developer Edition, skip this section. Until you deploy, the Agent in Live still answers that a decision is given within 30 days, or does not exist if you imported chapter 5 from the walkthrough folder, because only the Agent in Draft has the Tools. Send the deployment instruction again:
 
 ```
 Deploy civic_info_agent from draft to live.
