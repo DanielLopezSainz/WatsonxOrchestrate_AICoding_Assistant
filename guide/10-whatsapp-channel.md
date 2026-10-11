@@ -30,7 +30,7 @@ An Agent can have several Channels, one of each type: the same Agent can answer 
 
 **How a message travels**
 
-When Bob creates a Channel, the platform gives it an event URL, an address on the instance that belongs to that Channel. The outside service, Twilio here, is told to send every incoming message to that address. The platform runs the Agent and returns the answer to Twilio, which delivers it to the phone. A Channel holds the credentials of the outside service, in this case Twilio's two values, so that the platform can send answers through it.
+When Bob creates a Channel, the platform gives it an event URL, an address on the instance that belongs to that Channel. The outside service, Twilio here, is told to send every incoming message to that address, and the platform runs the Agent and returns the answer to Twilio, which delivers it to the phone. A Channel holds the credentials of the outside service, in this case Twilio's two values, so that the platform can send answers through it.
 
 **Draft and Live**
 
@@ -146,7 +146,7 @@ Stop: if the command returns an error, show me its exact text and wait.
 
 Approve each request as it comes. Bob runs the command, reports the event URL, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time.
 
-The event URL is the address of this Channel on your instance. It names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. Twilio sends every WhatsApp message that reaches the test number to this address, and the platform answers through it. The URL is the only link between Twilio and your Agent; section 10.7 pastes it into Twilio. Copy it from Bob's answer.
+The event URL, the address of this Channel on your instance, names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. Twilio sends every WhatsApp message that reaches the test number to this address, and the platform answers through it. The URL is the only link between Twilio and your Agent; section 10.7 pastes it into Twilio. Copy it from Bob's answer.
 
 ## 10.6 Look at the Channel with Bob
 
@@ -164,7 +164,7 @@ One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation t
 Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
 ```
 
-Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
+Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier; the Auth Token shows as redacted, because the platform never returns a secret. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
 
 The third prompt exports the Channel to a file in the project. A Channel created with a command has no file of its own; the export gives it one. That file is useful when you need to:
 
