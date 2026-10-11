@@ -242,4 +242,4 @@ The prompt of 10.4 follows the practice of chapter 8 for any new asset, and the 
 5. Say what must not change.
 6. End with the three questions: what Bob understood, what it needs, what exists.
 
-Residents who prefer the website are next. In chapter 11, CivicPulse goes on the city's website through the web chat Channel, and the deployed definition is exported as the record of what is live.
+In chapter 11, CivicPulse is added to the city's website with the web chat Channel.
