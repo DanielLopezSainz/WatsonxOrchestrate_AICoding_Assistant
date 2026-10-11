@@ -1,0 +1,6 @@
+channel: twilio_whatsapp
+name: CivicPulse WhatsApp
+enable_feedback: false
+account_sid: <your Twilio Account SID>
+twilio_authentication_token: null
+description: Residents reach CivicPulse on WhatsApp.
