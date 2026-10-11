@@ -42,7 +42,7 @@ Twilio is a service that companies use to send and receive SMS and WhatsApp mess
 
 **Where you will use it**
 
-A Channel makes an Agent available outside the screen where it is built. The Agents you build after this guide will answer employees in Slack or Teams, customers on WhatsApp, and callers of a contact centre, with the same definition that you test in the Orchestrate chat. For each new Channel, you set an account and an address on the outside service, and on the Orchestrate side you run one command.
+A Channel makes an Agent available outside watsonx Orchestrate. The Agents you build after this guide will answer employees in Slack or Teams, customers on WhatsApp, and callers of a contact centre, with the same definition that you test in the Orchestrate chat. For each new Channel, you set an account and an address on the outside service, and on the Orchestrate side you run one command.
 
 IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values go into `.env` as in chapter 7 and reach the instance through the command that Bob runs, never through the chat or a file of the project.
 
@@ -164,7 +164,7 @@ One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation t
 Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
 ```
 
-Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it anyway, from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
+Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
 
 The third prompt exports the Channel to a file in the project. A Channel created with a command has no file of its own; the export gives it one. That file is useful when you need to:
 
@@ -208,7 +208,7 @@ The answer arrives within a few seconds, from the Waste Sorting Rules: a broken 
 
 WhatsApp shows only the answers. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft. Nothing changed in Draft since the deployment of chapter 9, so Draft and Live hold the same definition and the steps are the same.
 
-If no answer arrives, Twilio's log says why: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is an event URL that does not belong to the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
+If no answer arrives, Twilio's log shows the cause: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is an event URL that does not belong to the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
 
 ## 10.9 What Bob built
 
