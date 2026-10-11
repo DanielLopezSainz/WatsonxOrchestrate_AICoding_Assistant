@@ -198,7 +198,17 @@ In WhatsApp on your phone, in the conversation with the test number, send:
 Does a broken mirror go in the glass bin?
 ```
 
-The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror is not accepted as glass and goes wrapped in the grey bin, with the Waste and Recycling contact. Then try the questions of the earlier chapters: the collection day of a street, the status of a permit application, a pothole to report. Each one reaches the department that owns it, as in chapter 9, and comes back in WhatsApp.
+The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror is not accepted as glass and goes wrapped in the grey bin, with the Waste and Recycling contact. Then keep the phone in hand. Everything the Agents learned in the earlier chapters is now one WhatsApp message away; send these, in any order, and watch the answers come back:
+
+- `What are the quiet hours?` The front desk Agent answers itself, from the Noise Ordinance.
+- `Which day is the green bin collected at 18 elm st?` The address as you would type it on a phone; the Address Registry of chapter 8 corrects it and the Waste and Recycling department gives the day.
+- `Where is my permit application PP-2026-0412?` The Permits and Planning department reads the record of chapter 6: under review, decision due 2026-10-12.
+- `There is a pothole at 7 harbour ln.` A report to the 311 Call Center of chapter 7, and a request number in return.
+- `Which streets are in the Old Town district?` The Address Registry again: Mill Road, High Street, Station Road.
+- `Do I need a permit for a garden shed of 12 square metres?` The Building Permit Guide, through the Permits and Planning department.
+- `When does the swimming pool open?` The refusal of chapter 9, with the office that might help and no invented contact.
+
+Each question reaches the department that owns it, as in chapter 9, and the answer comes back in WhatsApp with the department's contact.
 
 WhatsApp shows the answers and nothing else. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft, whose definition is the one deployed in Live, so the steps are the same.
 
