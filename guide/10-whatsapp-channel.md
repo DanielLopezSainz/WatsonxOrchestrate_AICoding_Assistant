@@ -83,16 +83,18 @@ A Twilio WhatsApp Channel needs:
 
 A Channel is created with one ADK command that takes the two values from the `.env` file.
 
-Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the five requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one.
+Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the five requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one. Name the command line of the ADK as well, `orchestrate channels create`: Bob's other way, the channel operation of the Orchestrate server, takes the two values in the chat, and Bob asks you for them.
 
 ```
 I want to add an Orchestrate channel of type Twilio WhatsApp to
 civic_info_agent. The city uses Twilio; the account SID and the auth token are
 in .env as TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel
 needs only these two values, no sender number. The channel is named CivicPulse
-WhatsApp and is created on civic_info_agent in live with the ADK command for
-channels, which reads the two values from the environment variables. The agent
-is deployed in live and must not change.
+WhatsApp and is created on civic_info_agent in live with the command line of
+the ADK, orchestrate channels create, run in the shell with .env loaded so
+that the two values are read from the environment variables; do not use the
+channel operation of the Orchestrate server, which would need the values in
+the chat. The agent is deployed in live and must not change.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -100,7 +102,7 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, created with the ADK command for channels and the two values from `.env`.
+- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, created with `orchestrate channels create` in the shell and the two values from `.env`.
 - Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
 - Bob may ask for a description of the Channel, which it can choose itself, and it says that the event URL will have to be pasted into Twilio, which is section 10.6. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
@@ -115,12 +117,14 @@ Goal: residents reach civic_info_agent on WhatsApp through Twilio.
 Context: the Twilio account SID and auth token are in @.env as
   TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. The agent is deployed in live.
 Constraints: create one channel of type twilio_whatsapp, named CivicPulse
-  WhatsApp, on civic_info_agent in the live environment, with the ADK command
-  for channels run in the shell, the two values read from the environment
-  variables. The channel has two fields, the account SID and the auth token;
-  no sender number is needed. No value is written in a file or shown in the
-  chat. Change nothing in the agent. Add the command to the import script and
-  the channel's deletion to the delete script.
+  WhatsApp, on civic_info_agent in the live environment, with the command
+  line of the ADK, orchestrate channels create, run in the shell with .env
+  loaded so that the two values are read from the environment variables. Do
+  not use the channel operation of the Orchestrate server. The channel has two
+  fields, the account SID and the auth token; no sender number is needed. No
+  value is written in a file or shown in the chat. Change nothing in the
+  agent. Add the command to the import script and the channel's deletion to
+  the delete script.
 Deliverable: the channel created on the instance, and the event URL that the
   platform returned, quoted in your answer.
 Verify: list the channels of civic_info_agent in live and show that CivicPulse
