@@ -48,21 +48,20 @@ IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values
 
 ## 10.3 Create the Twilio account and join the test number
 
-This section is done by hand, in Twilio's console and on your phone; Bob takes over in 10.5.
+The Orchestrate Agent that you created in the previous chapters will be reachable through WhatsApp. For the test, you use your own phone: a free Twilio account, created with your phone number, lets your WhatsApp talk to the Agent. Create the account as described below; this section is done by hand, in Twilio's console and on your phone, and Bob takes over in 10.4.
 
 1. Create a free account at twilio.com. Twilio asks for an email address, then for your phone number, which it verifies by SMS. No payment card is asked. Answer the questions of the sign-up as you like.
-2. On the console's home page, under Account Info, find the **Account SID** and the **Auth Token**. Keep the page open for 10.4.
-3. In the left menu, open **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
+2. In the left menu, open **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
 
 Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
-4. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
+3. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
 
 The page also offers a tutorial in steps (Business-initiated message, User-initiated conversation, Wrap-up). It is Twilio's, not this chapter's; leave it.
 
-## 10.4 Where the credentials go
+**The two values that the Channel needs**
 
-Open `.env` in your project folder and add two lines, with the two values from the console's home page. After the change, the file looks like this, with your own values in place of the placeholders:
+The Channel identifies itself to Twilio with two values of your account: the **Account SID** and the **Auth Token**. Both are on the home page of the console, under Account Info. Open `.env` in your project folder and add them as two lines. After the change, the file looks like this, with your own values in place of the placeholders:
 
 ```
 WO_INSTANCE=<the URL of your instance>
@@ -72,9 +71,7 @@ TWILIO_ACCOUNT_SID=<the Account SID, which starts with AC>
 TWILIO_AUTH_TOKEN=<the Auth Token>
 ```
 
-The Account SID identifies your account and appears in Twilio's own code samples; the Auth Token is the secret. The command that Bob runs reads both from the shell, as chapter 7's command read the key of the 311 Call Center.
-
-## 10.5 Ask mode: describe the Channel
+## 10.4 Ask mode: describe the Channel
 
 Mode: Ask, in a new conversation.
 
@@ -95,7 +92,7 @@ Look for these points in Bob's answer:
 - Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
 - Bob may ask for a name for the Channel, whether the Channel goes on the Agent in Draft or in Live, and whether to write the definition into the project. The next prompt answers all three. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
-## 10.6 Agent mode: create the Channel
+## 10.5 Agent mode: create the Channel
 
 Mode: Agent, in a new conversation.
 
@@ -117,11 +114,11 @@ Verify: list the channels of civic_info_agent in live and show that CivicPulse
 Stop: if the command returns an error, show me its exact text and wait.
 ```
 
-Approve each request as it comes. Bob writes the definition, runs the command that creates the Channel, and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.7 needs it.
+Approve each request as it comes. Bob writes the definition, runs the command that creates the Channel, and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.6 needs it.
 
 The Verify line is why Bob ends with the list of Channels of the Agent rather than with "done". Without it, the answer would stop at the command's output.
 
-## 10.7 Tell Twilio where to send the messages
+## 10.6 Tell Twilio where to send the messages
 
 Back in Twilio's console, on the page of 10.3, open the second tab, **Sandbox settings**. In the field **When a message comes in**, replace the address that Twilio put there with the event URL from Bob's answer, leave the method on POST, and click **Save**. The setting is not applied until you click Save.
 
@@ -129,7 +126,7 @@ Screenshot: the Sandbox settings tab, with the event URL in the field and the Sa
 
 From this moment, every message that your phone sends to the test number reaches the Agent.
 
-## 10.8 Try it
+## 10.7 Try it
 
 In WhatsApp on your phone, in the conversation with the test number, send:
 
@@ -143,7 +140,7 @@ WhatsApp shows the answers and nothing else. To see the reasoning, which Tool wa
 
 If no answer arrives: check that the event URL in Twilio is the one from Bob's answer and that you clicked Save; check that your phone is still joined, which lapses after three days, by sending the join code again; and ask Bob `List the channels of civic_info_agent in live.` to confirm that the Channel exists.
 
-## 10.9 What Bob built
+## 10.8 What Bob built
 
 Open `channels/whatsapp.yaml`. It has the type, `twilio_whatsapp`, the name, a description, and the two Twilio values as references to the environment variables. The Channel on the instance holds the real values; the file holds the names. When the Channel is exported from the instance, the Auth Token comes back empty, so a Channel definition can be kept in a project and imported elsewhere with the token supplied at import.
 
@@ -153,7 +150,7 @@ The Channel belongs to the Live environment of the Agent. When a later chapter c
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
-## 10.10 Summary
+## 10.9 Summary
 
 CivicPulse answers on WhatsApp. The Agent is the one of chapter 9; what was added is one Channel on the Agent in Live, and an address in Twilio's settings. Every other Channel type is added the same way: an account on the outside service, one definition, one command, and one address to set.
 
