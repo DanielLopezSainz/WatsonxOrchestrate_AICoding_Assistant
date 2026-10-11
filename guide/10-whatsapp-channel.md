@@ -77,20 +77,21 @@ A Twilio WhatsApp Channel needs:
 
 - The Agent and the environment: `civic_info_agent` in Live.
 - A name for the Channel.
-- The two Twilio values, the Account SID and the Auth Token, from `.env`.
+- The two Twilio values, the Account SID and the Auth Token, in `.env`.
 - No phone number: the number is Twilio's.
-- A definition in a Python file that reads the two values from the environment, imported with the ADK.
 
-The prompt gives Bob these five points and asks for its understanding, its questions and what exists on the instance; nothing is created yet. Two of the points are there because Bob would otherwise go wrong: without "no sender number", Bob asks for a WhatsApp number, because the channel operation of the Orchestrate server shows one in its example; without "a Python file that reads the two values from the environment", Bob writes a YAML definition, and a YAML definition has to contain the values themselves. Keep both lines in any prompt that asks Bob for a WhatsApp Channel through Twilio.
+A Channel is created with one ADK command, which takes the two values from the shell, as the command of chapter 7 took the key of the 311 Call Center. The command goes into the import script, and no file of the project holds a value.
+
+The prompt gives Bob these four points and the command, and asks for its understanding, its questions and what exists on the instance; nothing is created yet. Two lines of the prompt are there because Bob would otherwise go wrong. "No sender number": the channel operation of the Orchestrate server shows a WhatsApp number in its example, and Bob asks for one unless told that none is needed. "With the ADK command, which reads the two values from the environment variables": that same operation takes the values as arguments, which would put them in the chat. Keep both lines in any prompt that asks Bob for a WhatsApp Channel through Twilio.
 
 ```
 I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
 account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
 TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel needs only these two values, no
-sender number. The channel is named CivicPulse WhatsApp, defined in a Python
-file channels/whatsapp.py that reads the two values from the environment
-variables, and imported with the ADK on civic_info_agent in live. The agent is
-deployed in live and must not change.
+sender number. The channel is named CivicPulse WhatsApp and is created on
+civic_info_agent in live with the ADK command for channels, which reads the
+two values from the environment variables, as the import script does for the
+connection of chapter 7. The agent is deployed in live and must not change.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -98,8 +99,8 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, defined in `channels/whatsapp.py` with the two values read from `.env`, and the import command of the ADK for channels.
-- Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them, and in the project no `channels` folder yet.
+- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, created with the ADK command for channels and the two values from `.env`.
+- Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
 - Bob may ask for a description of the Channel, which it can choose itself, and it says that the event URL will have to be pasted into Twilio, which is section 10.6. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
 ## 10.5 Agent mode: create the Channel
@@ -113,13 +114,12 @@ Goal: residents reach civic_info_agent on WhatsApp through Twilio.
 Context: the Twilio account SID and auth token are in @.env as
   TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. The agent is deployed in live.
 Constraints: create one channel of type twilio_whatsapp, named CivicPulse
-  WhatsApp, on civic_info_agent in the live environment. The channel has two
-  fields, the account SID and the auth token; no sender number is needed.
-  Write its definition as a Python file, channels/whatsapp.py, that reads the
-  two values from the environment variables, and import that file with the
-  ADK command for channels. No value is written in a file or shown in the
-  chat. Change nothing in the agent. Add the channel to the import and delete
-  scripts.
+  WhatsApp, on civic_info_agent in the live environment, with the ADK command
+  for channels run in the shell, the two values read from the environment
+  variables. The channel has two fields, the account SID and the auth token;
+  no sender number is needed. No value is written in a file or shown in the
+  chat. Change nothing in the agent. Add the command to the import script and
+  the channel's deletion to the delete script.
 Deliverable: the channel created on the instance, and the event URL that the
   platform returned, quoted in your answer.
 Verify: list the channels of civic_info_agent in live and show that CivicPulse
@@ -127,7 +127,7 @@ Verify: list the channels of civic_info_agent in live and show that CivicPulse
 Stop: if the command returns an error, show me its exact text and wait.
 ```
 
-Approve each request as it comes. Bob writes the definition, imports it, and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.6 needs it.
+Approve each request as it comes. Bob runs the command and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.6 needs it.
 
 The Verify line is why Bob ends with the list of Channels of the Agent rather than with "done". Without it, the answer would stop at the command's output.
 
@@ -155,9 +155,9 @@ If no answer arrives: check that the event URL in Twilio is the one from Bob's a
 
 ## 10.8 What Bob built
 
-Open `channels/whatsapp.py`. It is a few lines: the ADK's class for a Twilio WhatsApp Channel, with the name, a description, and the two Twilio values read from the environment variables. The Channel on the instance holds the real values; the file holds the names. A YAML definition exists too, but it has to contain the values themselves, which is why the chapter uses the Python form. When a Channel is exported from the instance, the Auth Token comes back empty.
+Open the import script. The Channel is one command at the end, with the type, the name, a description, and the two values as the names of the variables. A Channel has no file of its own in the project: its definition is that command, and the values are on the instance. The delete script has the matching command. When a Channel is exported from the instance, the Auth Token comes back empty.
 
-The import and delete scripts have a line for the Channel. Bob's MCP tab has nothing new, and the Agent definitions are unchanged: a Channel is attached to an Agent from the outside, in one environment, and the Agent does not know it is there.
+Bob's MCP tab has nothing new, and the Agent definitions are unchanged: a Channel is attached to an Agent from the outside, in one environment, and the Agent does not know it is there.
 
 The Channel belongs to the Live environment of the Agent. When a later chapter changes the Agent in Draft and deploys it again, the Channel stays where it is and residents on WhatsApp get the new version.
 
