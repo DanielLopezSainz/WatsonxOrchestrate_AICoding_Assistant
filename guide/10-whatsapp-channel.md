@@ -162,7 +162,7 @@ One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation t
 Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
 ```
 
-The type, the name, the description, the identifier, the creation time and the event URL. The two Twilio values do not appear: the platform never returns a credential.
+The record of the Channel: the type, the name, the description, its identifier and those of the Agent and the environment, the creation time, and the Account SID; the Auth Token is redacted, because the platform never returns a secret. The event URL is not a field of the record: the platform prints it once, at creation, and Bob rebuilds it from the identifiers, because its form is always the same: the tenant, the Agent, the environment, the type and the identifier of the Channel. If you lose the URL, this question gives it back.
 
 ```
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
