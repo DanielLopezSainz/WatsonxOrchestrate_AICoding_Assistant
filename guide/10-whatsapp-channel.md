@@ -26,17 +26,7 @@ To verify that the chapter 9 Agent is in Live, ask in the watsonx Orchestrate ch
 
 An Orchestrate Channel connects an Agent to a messaging service, a website or a contact-centre platform. The Agent you created does not change; the Channel receives each message from the service, passes it to the Agent, and sends the answer back the same way.
 
-**The types of Channel**
-
-| Channel | Who uses it | What it needs |
-|---|---|---|
-| Web chat | Visitors of a website (chapter 11) | A snippet of code on the page |
-| WhatsApp, SMS | Residents on their phone | A Twilio account |
-| Slack, Microsoft Teams | Employees, in the tools they work in | A Slack or Teams application |
-| Facebook Messenger | Followers of a page | A Facebook page |
-| Genesys | Callers of a contact centre | A Genesys Cloud account |
-
-An Agent can have one Channel of each type in each environment. The same Agent can therefore answer residents on WhatsApp and employees in Slack, each Channel with its own configuration.
+An Agent can have several Channels, one of each type: the same Agent can answer residents on WhatsApp, visitors of the website, and employees in Slack or Teams.
 
 **How a message travels**
 
