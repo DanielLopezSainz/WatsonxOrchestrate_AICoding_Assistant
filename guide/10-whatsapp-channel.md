@@ -164,11 +164,13 @@ Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in li
 
 Bob shows the record that the platform keeps for the Channel. Read it as the Channel's identity card: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret, not even to you. One thing is missing: the event URL. The platform prints it once, when the Channel is created, and does not store it. Bob rebuilds it anyway, because the URL is made of the identifiers of the record in a fixed order: tenant, Agent, environment, type and identifier of the Channel. If you ever lose the URL, this question gives it back.
 
+The third prompt exports the Channel. An export is how a definition leaves the instance: the file it produces is what you import on another instance, or on the Agent in another environment, when the city moves from the test number to its own. It is also the way to see what the instance gives back of a Channel that holds credentials.
+
 ```
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
 ```
 
-A file with the type, the name, the description and the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier, the one that Twilio prints in its own code samples. A Channel definition can be kept in a project and imported on another instance with the token supplied at import.
+A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier. To import this file elsewhere, the token is supplied at import, from the `.env` of that project.
 
 ## 10.7 Tell Twilio where to send the messages
 
