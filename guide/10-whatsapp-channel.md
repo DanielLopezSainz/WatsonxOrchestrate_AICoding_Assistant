@@ -73,7 +73,15 @@ TWILIO_AUTH_TOKEN=<the Auth Token>
 
 Mode: Ask, in a new conversation.
 
-A Twilio WhatsApp Channel needs four things: the Agent it belongs to and the environment, Live here; a name for the Channel; and the two Twilio values, the Account SID and the Auth Token. It needs no phone number: the number is Twilio's, the test number during development and the city's own number later. The definition is a small Python file that reads the two values from the environment, so that no value is written in the project; the ADK imports the file into the environment of the Agent. The prompt gives Bob these four things, the format of the definition, and where the two values are.
+A Twilio WhatsApp Channel needs:
+
+- The Agent and the environment: `civic_info_agent` in Live.
+- A name for the Channel.
+- The two Twilio values, the Account SID and the Auth Token, from `.env`.
+- No phone number: the number is Twilio's.
+- A definition in a Python file that reads the two values from the environment, imported with the ADK.
+
+The prompt gives Bob these five points.
 
 ```
 I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
