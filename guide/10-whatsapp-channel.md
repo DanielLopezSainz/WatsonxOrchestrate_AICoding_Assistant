@@ -168,7 +168,7 @@ Bob shows the record that the platform keeps for the Channel. Read it as the Cha
 
 The third prompt exports the Channel to a file in the project. The Channel has no file of its own, because it was created with a command; the export gives it one. The file is useful in three cases:
 
-- To recreate the Channel elsewhere: on a second instance, for example the city's production instance after a test instance, or on the Agent in Draft to test a change before residents see it. The import command of the ADK takes the file and the token from the `.env` of that project.
+- To recreate the Channel elsewhere: on a second instance, for example the city's production instance after a test instance, or on the Agent in Draft to test a change before residents see it. The file says what to recreate, the type, the name and the description; the command of the import script recreates it, with the token from the `.env` of that project.
 - To keep a record of what is on the instance, in the project and under git, as the Agent definitions are. When someone changes the Channel in the interface, a new export shows the difference.
 - To see what the instance gives back of a Channel that holds credentials, which is the point of running it now.
 
@@ -176,7 +176,7 @@ The third prompt exports the Channel to a file in the project. The Channel has n
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
 ```
 
-A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier. To import this file elsewhere, the token is supplied at import, from the `.env` of that project.
+A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier. The file is not imported as it is: a YAML file cannot read `.env`, and the token must never be typed into it. The command of the import script recreates the Channel from the same values.
 
 ## 10.7 Tell Twilio where to send the messages
 
