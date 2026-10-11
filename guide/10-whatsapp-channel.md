@@ -73,6 +73,8 @@ TWILIO_AUTH_TOKEN=<the Auth Token>
 
 Mode: Ask, in a new conversation.
 
+Use a similar structure for any prompt that you use in the future to create a WhatsApp Channel. This prompt gives Bob the five requisites described below and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one. Last, name the command line of the ADK, `orchestrate channels create`.
+
 A Twilio WhatsApp Channel needs:
 
 - The Orchestrate asset named, as in chapter 8: a Channel of type Twilio WhatsApp, the type as the ADK lists it.
@@ -82,8 +84,6 @@ A Twilio WhatsApp Channel needs:
 - No phone number: the number is Twilio's.
 
 A Channel is created with one ADK command that takes the two values from the `.env` file.
-
-Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the five requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one. Name the command line of the ADK as well, `orchestrate channels create`: Bob's other way, the channel operation of the Orchestrate server, takes the two values in the chat, and Bob asks you for them.
 
 ```
 I want to add an Orchestrate channel of type Twilio WhatsApp to
