@@ -10,7 +10,7 @@ In this chapter, the front desk Agent of chapter 9 gets a WhatsApp number. Bob c
 
 To use the Orchestrate Agents you are not limited to a standard chatbot page: an Orchestrate Channel connects an Agent to different messaging services like WhatsApp, SMS, Slack, Teams...
 
-This chapter needs an Orchestrate instance: Channels are not available on the Developer Edition, and a messaging service cannot reach an Agent that runs on your machine. On the Developer Edition, read the chapter without running it. No later chapter depends on it.
+This chapter needs an Orchestrate instance: on the Developer Edition the ADK refuses to create a Channel, and a messaging service could not reach an Agent that runs on your machine in any case. On the Developer Edition, read the chapter without running it. No later chapter depends on it.
 
 ## 10.1 Before you start
 
@@ -176,7 +176,7 @@ The third prompt exports the Channel to a file in the project. A Channel created
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
 ```
 
-A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The instance returns the Account SID but not the secret. A YAML file cannot read `.env` and the token must never be typed into it, so the file is not imported as it is; the command of the import script recreates the Channel from the same values.
+A file with the type, the name, the description, the Account SID, a feedback setting (`enable_feedback: false`), and `twilio_authentication_token: null`. The instance returns the Account SID but not the secret. A YAML file cannot read `.env` and the token must never be typed into it, so the file is not imported as it is; the command of the import script recreates the Channel from the same values.
 
 ## 10.7 Tell Twilio where to send the messages
 
@@ -206,14 +206,14 @@ The answer arrives within a few seconds, from the Waste Sorting Rules: a broken 
 - `Do I need a permit for a garden shed of 12 square metres?` The Building Permit Guide, through the Permits and Planning department: over 10 square metres, a permit is required. The answer may come in two messages, the second one, "How do we know?", naming the document; that is the platform's citation, which the chat shows as a footnote and WhatsApp as a message.
 - `When does the swimming pool open?` The refusal of chapter 9: the question is outside the three departments, so the Agent names an office that might help and invents no contact.
 
-WhatsApp shows only the answers. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft, whose definition is the one deployed in Live, so the steps are the same.
+WhatsApp shows only the answers. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft. Nothing changed in Draft since the deployment of chapter 9, so Draft and Live hold the same definition and the steps are the same.
 
 If no answer arrives, Twilio's log says why: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is an event URL that does not belong to the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
 
 ## 10.9 What Bob built
 
 - The instance holds one Orchestrate Channel, CivicPulse WhatsApp, of type Twilio WhatsApp, attached to `civic_info_agent` in Live. It holds the two Twilio values. The Agent is unchanged.
-- The project holds one line in the import script, the command that creates the Channel with the two values read from `.env`; one line in the delete script, placed before the removal of the Agent; and `exports/whatsapp-channel.yaml`, the export of 10.6, with the token empty.
+- The project holds one command in the import script, the one that creates the Channel with the two values read from `.env`; one command in the delete script, placed before the removal of the Agent; and `exports/whatsapp-channel.yaml`, the export of 10.6, with the token empty.
 - Bob's MCP tab and the Agent files are unchanged, because a Channel is attached to an Agent from the outside.
 
 The Channel belongs to the Live environment of the Agent. When a later chapter changes the Agent in Draft and deploys it again, the Channel stays where it is and residents on WhatsApp get the new version.
@@ -233,9 +233,9 @@ The prompt of 10.4 follows the practice of chapter 8 for any new asset, and the 
 
 1. Name the Orchestrate asset to create, and its type as the ADK lists it.
 2. Name the Agent it belongs to and the environment.
-3. Say where the credentials are and that the command reads them from the environment, never the values.
-4. Say what is not needed, when Bob tends to ask for it.
-5. Say what must not change.
+3. Say where the credentials are and that the command reads them from the environment; never write a value in the prompt (here, the two Twilio values in `.env`).
+4. Say what is not needed when Bob tends to ask for it (here, the sender number).
+5. Say what must not change (here, the Agent).
 6. End with the three questions: what Bob understood, what it needs, what exists.
 
 In chapter 11, CivicPulse is added to the city's website with the web chat Channel.
