@@ -212,7 +212,7 @@ Each question reaches the department that owns it, as in chapter 9, and the answ
 
 WhatsApp shows the answers and nothing else. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft, whose definition is the one deployed in Live, so the steps are the same.
 
-If no answer arrives: check that the event URL in Twilio is the one from Bob's answer and that you clicked Save; check that your phone is still joined, which lapses after three days, by sending the join code again; and ask Bob `List the channels of civic_info_agent in live.` to confirm that the Channel exists.
+If no answer arrives, Twilio's log says why: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is a URL that is not the one of the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
 
 ## 10.9 What Bob built
 
