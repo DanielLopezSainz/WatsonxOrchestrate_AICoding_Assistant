@@ -59,7 +59,7 @@ Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
 **The two values that the Channel needs**
 
-The Channel identifies itself to Twilio with two values of your account: the **Account SID** and the **Auth Token**. Both are on the home page of the console, under Account Info. Open `.env` in your project folder and add them as two lines. After the change, the file looks like this, with your own values in place of the placeholders:
+The Channel sends Twilio two values: the **Account SID** and the **Auth Token**. You can get them in the Twilio home page, Console, under Account Info. Open `.env` in your project folder and add them as you can see below:
 
 ```
 WO_INSTANCE=<the URL of your instance>
