@@ -128,7 +128,8 @@ Goal: residents reach civic_info_agent on WhatsApp through Twilio.
 Context: the Twilio account SID and auth token are in @.env as
   TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. The agent is deployed in live.
 Constraints: create one channel of type twilio_whatsapp, named CivicPulse
-  WhatsApp, on civic_info_agent in the live environment, with the command
+  WhatsApp, with the description "Residents reach CivicPulse on WhatsApp.",
+  on civic_info_agent in the live environment, with the command
   line of the ADK, orchestrate channels create, run in the shell with .env
   loaded so that the two values are read from the environment variables. Do
   not use the channel operation of the Orchestrate server. The channel has two
