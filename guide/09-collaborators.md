@@ -226,4 +226,4 @@ You have split one Agent into a team: a front desk Agent that residents talk to,
 - A Collaborator Agent must be on the instance before the Agent that names it is imported, and each Agent is deployed on its own.
 - A change to one department changes one Agent definition; only its contact details are also in the front desk Agent's facts.
 
-The team answers questions and takes reports, one exchange at a time. In chapter 10, the permit application itself becomes an Orchestrate Flow: a fixed sequence of steps that an Agent runs the same way for every resident.
+The team answers residents in the chat of watsonx Orchestrate. In chapter 10, it answers them on WhatsApp, through an Orchestrate Channel.
