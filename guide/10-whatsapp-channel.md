@@ -4,7 +4,7 @@ Level: intermediate. Time: about 45 minutes. Prerequisites: chapter 9 completed,
 
 ## Overview
 
-Saturday morning at the gym. A dumbbell slips out of your hand, and the mirror behind the rack comes down in pieces. The manager arrives with a broom, looks at the pieces, looks at you, and says the glass container outside is full of bottles and nobody ever told him where a mirror goes. He looks angry, and you had better have an answer. In your phone you have the WhatsApp contact of the City of Utopia. You send a WhatsApp message: "Does a broken mirror go in the glass bin?" After a few seconds, you get the answer. You did not need to call the 311 Call Center, or even log in to the city's website.
+Saturday morning at the gym. A dumbbell slips out of your hand, and the mirror behind the rack comes down in pieces. The manager arrives with a broom, looks at the pieces, looks at you, and says the glass container outside is full of bottles and nobody ever told him where a mirror goes. He looks angry, and you had better have an answer. In your phone you have the WhatsApp contact of the City of Utopia. You send a WhatsApp message: "Does a broken mirror go in the glass bin?" After a few seconds, you get the answer. You did not need to call the 311 Call Center, or even log in to the city's website. An Orchestrate Channel saved your gym membership.
 
 In this chapter, the front desk Agent of chapter 9 gets a WhatsApp number. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
 
