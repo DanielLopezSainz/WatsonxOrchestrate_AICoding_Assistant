@@ -8,7 +8,7 @@ Saturday morning at the gym. A dumbbell slips out of your hand, and the mirror b
 
 In this chapter, the front desk Agent of chapter 9 gets a WhatsApp number. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
 
-An Orchestrate Channel connects an Agent to a messaging service that people already use, such as WhatsApp, SMS, Slack or Microsoft Teams, or to a chat window on a website.
+To use the Orchestrate Agents you are not limited to a standard chatbot page: an Orchestrate Channel connects an Agent to different messaging services like WhatsApp, SMS, Slack, Teams...
 
 This chapter needs an Orchestrate instance: Channels are not available on the Developer Edition, and a messaging service cannot reach an Agent that runs on your machine. On the Developer Edition, read the chapter without running it. No later chapter depends on it.
 
