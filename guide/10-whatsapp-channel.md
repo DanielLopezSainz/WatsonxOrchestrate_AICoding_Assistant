@@ -20,7 +20,7 @@ This chapter needs an Orchestrate instance: Channels are not available on the De
 - A Twilio account, created in 10.3. The free trial is enough: it needs no payment card and includes the test number that this chapter uses.
 - A new conversation in Bob for this chapter.
 
-Check that the Agent is in Live: open the watsonx Orchestrate chat and ask `What are the quiet hours?`. The front desk Agent answers from the Noise Ordinance.
+The Channel is attached to the Agent in Live, so the chapter 9 version must be deployed there, which is not the case if you imported the four Agents from the walkthrough folder. To check, ask in the watsonx Orchestrate chat, which talks to the Agent in Live: `What are the quiet hours?`. An answer from the Noise Ordinance means the chapter 9 Agent is deployed. If the chat shows an older version, or no Agent, deploy the four Agents as in section 9.9.
 
 ## 10.2 What an Orchestrate Channel is
 
