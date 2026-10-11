@@ -216,9 +216,9 @@ If no answer arrives, Twilio's log says why: in the console, **Monitor**, then *
 
 ## 10.9 What Bob built
 
-Open the import script. The Channel is one command after the import of `civic_info_agent`, with the type, the name, the description, and the two values as the names of the variables. A Channel has no file of its own in the project: its definition is that command, and the values are on the instance. The delete script has the matching command, placed before the removal of the Agent, because a Channel belongs to its Agent. When a Channel is exported from the instance, the Auth Token comes back empty.
-
-Bob's MCP tab has nothing new, and the Agent definitions are unchanged: a Channel is attached to an Agent from the outside, in one environment, and the Agent does not know it is there.
+- On the instance: one Orchestrate Channel, CivicPulse WhatsApp, of type Twilio WhatsApp, attached to `civic_info_agent` in Live. It holds the two Twilio values. The Agent is unchanged.
+- In the project: one line in the import script, the command that creates the Channel with the two values read from `.env`; one line in the delete script, placed before the removal of the Agent; and `exports/whatsapp-channel.yaml`, the export of 10.6, with the token empty.
+- Nothing in Bob's MCP tab and no Agent file touched: a Channel is attached to an Agent from the outside.
 
 The Channel belongs to the Live environment of the Agent. When a later chapter changes the Agent in Draft and deploys it again, the Channel stays where it is and residents on WhatsApp get the new version.
 
