@@ -119,6 +119,8 @@ In the previous chapters, Bob wrote a design, you approved it, and the build pro
 - Verify: how Bob proves that the Channel exists, so that its answer ends with a check and not with "done".
 - Stop: when Bob must ask you instead of continuing.
 
+Use the same structure for any prompt that creates a WhatsApp Channel in the future: the Constraints part carries the same lines as in 10.4, the command line of the ADK, the two fields and "no sender number", and the Verify part asks for the list of the Agent's Channels.
+
 Create a new conversation, switch to Agent mode, and send:
 
 ```
