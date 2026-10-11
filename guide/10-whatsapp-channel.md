@@ -150,7 +150,7 @@ Approve each request as it comes. Bob runs the command, reports the event URL, a
 
 Mode: Ask, same conversation.
 
-Before Twilio is told where to send the messages, look at what the platform holds about the Channel. Three questions, one per message:
+Before starting testing, run these three prompts with Bob to get some information about the Channel:
 
 ```
 List the channels of civic_info_agent in live and in draft.
