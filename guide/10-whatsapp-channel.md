@@ -90,9 +90,9 @@ exists on my instance.
 
 Look for these points in Bob's answer:
 
-- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent`, in the Live environment, with the two values taken from `.env`.
-- Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
-- Bob may still ask for a sender number or for a different name; the prompt has answered both, so go on to 10.5. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
+- Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, defined in `channels/whatsapp.py` with the two values read from `.env`, and the import command of the ADK for channels.
+- Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them, and in the project no `channels` folder yet.
+- Bob may ask for a description of the Channel, which it can choose itself, and it says that the event URL will have to be pasted into Twilio, which is section 10.6. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
 ## 10.5 Agent mode: create the Channel
 
