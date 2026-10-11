@@ -144,9 +144,33 @@ Verify: list the channels of civic_info_agent in live and show that CivicPulse
 Stop: if the command returns an error, show me its exact text and wait.
 ```
 
-Approve each request as it comes. Bob runs the command, reports the event URL, a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time. Copy the event URL from Bob's answer; 10.6 needs it.
+Approve each request as it comes. Bob runs the command, reports the event URL, a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time. Copy the event URL from Bob's answer; 10.7 needs it.
 
-## 10.6 Tell Twilio where to send the messages
+## 10.6 Look at the Channel with Bob
+
+Mode: Ask, same conversation.
+
+Before Twilio is told where to send the messages, look at what the platform holds about the Channel. Three questions, one per message:
+
+```
+List the channels of civic_info_agent in live and in draft.
+```
+
+One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation time; none in Draft. A Channel belongs to one environment of one Agent.
+
+```
+Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
+```
+
+The type, the name, the description, the identifier, the creation time and the event URL. The two Twilio values do not appear: the platform never returns a credential.
+
+```
+Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
+```
+
+A file with the type, the name, the description and the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier, the one that Twilio prints in its own code samples. A Channel definition can be kept in a project and imported on another instance with the token supplied at import.
+
+## 10.7 Tell Twilio where to send the messages
 
 Back in Twilio's console, on the page of 10.3, open the second tab, **Sandbox settings**. In the field **When a message comes in**, replace the address that Twilio put there with the event URL from Bob's answer, leave the method on POST, and click **Save**. The setting is not applied until you click Save.
 
@@ -154,7 +178,7 @@ Screenshot: the Sandbox settings tab, with the event URL in the field and the Sa
 
 From this moment, every message that your phone sends to the test number reaches the Agent.
 
-## 10.7 Try it
+## 10.8 Try it
 
 In WhatsApp on your phone, in the conversation with the test number, send:
 
@@ -168,7 +192,7 @@ WhatsApp shows the answers and nothing else. To see the reasoning, which Tool wa
 
 If no answer arrives: check that the event URL in Twilio is the one from Bob's answer and that you clicked Save; check that your phone is still joined, which lapses after three days, by sending the join code again; and ask Bob `List the channels of civic_info_agent in live.` to confirm that the Channel exists.
 
-## 10.8 What Bob built
+## 10.9 What Bob built
 
 Open the import script. The Channel is one command after the import of `civic_info_agent`, with the type, the name, the description, and the two values as the names of the variables. A Channel has no file of its own in the project: its definition is that command, and the values are on the instance. The delete script has the matching command, placed before the removal of the Agent, because a Channel belongs to its Agent. When a Channel is exported from the instance, the Auth Token comes back empty.
 
@@ -178,7 +202,7 @@ The Channel belongs to the Live environment of the Agent. When a later chapter c
 
 Save your work: `Commit everything I changed with a short message saying what was built.`
 
-## 10.9 Summary
+## 10.10 Summary
 
 CivicPulse answers on WhatsApp. The Agent is the one of chapter 9; what was added is one Channel on the Agent in Live, and an address in Twilio's settings. Every other Channel type is added the same way: an account on the outside service, one definition, one command, and one address to set.
 
