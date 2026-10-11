@@ -198,7 +198,7 @@ In WhatsApp on your phone, in the conversation with the test number, send:
 Does a broken mirror go in the glass bin?
 ```
 
-The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror is not accepted as glass and goes wrapped in the grey bin, with the Waste and Recycling contact. Then keep the phone in hand. Everything the Agents learned in the earlier chapters is now one WhatsApp message away; send these, in any order, and watch the answers come back:
+The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror does not go in the glass container, with the Waste and Recycling contact. Then keep the phone in hand. Everything the Agents learned in the earlier chapters is now one WhatsApp message away; send these, in any order, and watch the answers come back:
 
 - `What are the quiet hours?` The front desk Agent answers itself, from the Noise Ordinance.
 - `Which day is the green bin collected at 18 elm st?` The address as you would type it on a phone; the Address Registry of chapter 8 corrects it and the Waste and Recycling department gives the day.
