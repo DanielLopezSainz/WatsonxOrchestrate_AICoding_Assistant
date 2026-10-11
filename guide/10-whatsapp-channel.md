@@ -55,7 +55,7 @@ The Orchestrate Agent that you created in the previous chapters will be reachabl
 
 Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
-3. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
+3. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Use the phone whose number you gave at sign-up: a trial account exchanges messages only with verified numbers, and that one is verified. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
 
 **The two values that the Channel needs**
 
