@@ -90,8 +90,8 @@ account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
 TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel needs only these two values, no
 sender number. The channel is named CivicPulse WhatsApp and is created on
 civic_info_agent in live with the ADK command for channels, which reads the
-two values from the environment variables, as the import script does for the
-connection of chapter 7. The agent is deployed in live and must not change.
+two values from the environment variables. The agent is deployed in live and
+must not change.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
