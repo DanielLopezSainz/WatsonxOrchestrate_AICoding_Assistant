@@ -104,7 +104,7 @@ Look for these points in Bob's answer:
 
 - Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent` in the Live environment, created with `orchestrate channels create` in the shell and the two values from `.env`.
 - Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
-- Bob may ask for a description of the Channel, which it can choose itself, and it says that the event URL will have to be pasted into Twilio, which is section 10.6. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
+- Bob shows the command it will run, with `--field account_sid=$TWILIO_ACCOUNT_SID` and `--field twilio_authentication_token=$TWILIO_AUTH_TOKEN`, and asks whether you run it yourself or it runs it in Agent mode. Section 10.5 answers that. If Bob asks for a description of the Channel, it can choose one itself.
 
 ## 10.5 Agent mode: create the Channel
 
