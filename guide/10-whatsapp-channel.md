@@ -144,7 +144,7 @@ Verify: list the channels of civic_info_agent in live and show that CivicPulse
 Stop: if the command returns an error, show me its exact text and wait.
 ```
 
-Approve each request as it comes. Bob runs the command and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.6 needs it.
+Approve each request as it comes. Bob runs the command, reports the event URL, a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time. Copy the event URL from Bob's answer; 10.6 needs it.
 
 ## 10.6 Tell Twilio where to send the messages
 
@@ -170,7 +170,7 @@ If no answer arrives: check that the event URL in Twilio is the one from Bob's a
 
 ## 10.8 What Bob built
 
-Open the import script. The Channel is one command at the end, with the type, the name, a description, and the two values as the names of the variables. A Channel has no file of its own in the project: its definition is that command, and the values are on the instance. The delete script has the matching command. When a Channel is exported from the instance, the Auth Token comes back empty.
+Open the import script. The Channel is one command after the import of `civic_info_agent`, with the type, the name, the description, and the two values as the names of the variables. A Channel has no file of its own in the project: its definition is that command, and the values are on the instance. The delete script has the matching command, placed before the removal of the Agent, because a Channel belongs to its Agent. When a Channel is exported from the instance, the Auth Token comes back empty.
 
 Bob's MCP tab has nothing new, and the Agent definitions are unchanged: a Channel is attached to an Agent from the outside, in one environment, and the Agent does not know it is there.
 
