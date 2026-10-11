@@ -88,7 +88,7 @@ Look for these points in Bob's answer:
 
 - Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent`, in the Live environment, with the two values taken from `.env`.
 - Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
-- Bob may ask for a name for the Channel, whether the Channel goes on the Agent in Draft or in Live, and whether to write the definition into the project. The next prompt answers all three. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
+- Bob asks for a name for the Channel, and may ask for a WhatsApp sender number. A Twilio WhatsApp Channel has two fields only, the Account SID and the Auth Token; the number is on Twilio's side. The next prompt gives the name and says that no number is needed. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
 ## 10.5 Agent mode: create the Channel
 
@@ -101,10 +101,12 @@ Goal: residents reach civic_info_agent on WhatsApp through Twilio.
 Context: the Twilio account SID and auth token are in @.env as
   TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. The agent is deployed in live.
 Constraints: create one channel of type twilio_whatsapp, named CivicPulse
-  WhatsApp, on civic_info_agent in the live environment. Write its definition
-  to channels/whatsapp.yaml, with the two values taken from the environment
-  variables and never written in a file or shown in the chat. Change nothing
-  in the agent. Add the channel to the import and delete scripts.
+  WhatsApp, on civic_info_agent in the live environment. The channel has two
+  fields, the account SID and the auth token; no sender number is needed.
+  Write its definition to channels/whatsapp.yaml, with the two values taken
+  from the environment variables and never written in a file or shown in the
+  chat. Change nothing in the agent. Add the channel to the import and delete
+  scripts.
 Deliverable: the channel created on the instance, and the event URL that the
   platform returned, quoted in your answer.
 Verify: list the channels of civic_info_agent in live and show that CivicPulse
