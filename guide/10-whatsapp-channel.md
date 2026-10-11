@@ -144,7 +144,9 @@ Verify: list the channels of civic_info_agent in live and show that CivicPulse
 Stop: if the command returns an error, show me its exact text and wait.
 ```
 
-Approve each request as it comes. Bob runs the command, reports the event URL, a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time. Copy the event URL from Bob's answer; 10.7 needs it.
+Approve each request as it comes. Bob runs the command, reports the event URL, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time.
+
+The event URL is the address of this Channel on your instance: a long address that names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. It is where Twilio will send every WhatsApp message that reaches the test number: the platform receives the message there, runs the Agent in Live, and returns the answer to Twilio, which delivers it to the phone. The URL is the one link between Twilio and your Agent, which is why 10.7 pastes it into Twilio. Copy it from Bob's answer.
 
 ## 10.6 Look at the Channel with Bob
 
