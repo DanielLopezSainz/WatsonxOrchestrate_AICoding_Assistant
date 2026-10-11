@@ -6,11 +6,11 @@ Level: intermediate. Time: about 45 minutes. Prerequisites: chapter 9 completed,
 
 Saturday morning at the gym. A dumbbell slips out of your hand, and the mirror behind the rack comes down in pieces. The manager arrives with a broom, looks at the pieces, looks at you, and says the glass container outside is full of bottles and nobody ever told him where a mirror goes. He looks angry, and you had better have an answer. On your phone you have the WhatsApp contact of the City of Utopia. You send a WhatsApp message: "Does a broken mirror go in the glass bin?" After a few seconds, you get the answer. You did not need to call the 311 Call Center, or even log in to the city's website. An Orchestrate Channel saved your gym membership.
 
-In this chapter, the front desk Agent of chapter 9 gets a WhatsApp number. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
+In this chapter, the front desk Agent of chapter 9 becomes reachable on WhatsApp. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
 
 To use the Orchestrate Agents you are not limited to a standard chatbot page: an Orchestrate Channel connects an Agent to different messaging services like WhatsApp, SMS, Slack, Teams...
 
-This chapter needs an Orchestrate instance: on the Developer Edition, the ADK refuses to create a Channel. On the Developer Edition, read the chapter without running it. No later chapter depends on it.
+This chapter needs an Orchestrate instance: on the Developer Edition, the ADK refuses to create a Channel, so read the chapter without running it. No later chapter depends on it.
 
 ## 10.1 Before you start
 
@@ -38,13 +38,13 @@ A Channel is attached to an Agent in one environment. A Channel on the Agent in 
 
 **Twilio and its test number**
 
-Twilio is a service that companies use to send and receive SMS and WhatsApp messages from their applications. A business number on WhatsApp requires a business account approved by Meta; for development, Twilio provides a shared test number, the Sandbox, that any phone can join by sending it a code. This chapter uses the Sandbox. Its limits: a phone stays joined for three days and must then send the code again; a trial account lasts 30 days and includes 100 WhatsApp messages; messages can only be exchanged with phones that joined. For the city's real number, the city applies for a WhatsApp business account through Twilio and the Channel stays the same.
+Twilio is a service that companies use to send and receive SMS and WhatsApp messages from their applications. A business number on WhatsApp requires a business account approved by Meta; for development, Twilio provides a shared test number, the Sandbox, that a phone joins by sending it a code. This chapter uses the Sandbox. Its limits: a phone stays joined for three days and must then send the code again; a trial account lasts 30 days and includes 100 WhatsApp messages; messages can only be exchanged with phones that joined. For the city's real number, the city applies for a WhatsApp business account through Twilio and the Channel stays the same.
 
 **Where you will use it**
 
-A Channel makes an Agent available outside watsonx Orchestrate. The Agents you build after this guide will answer employees in Slack or Teams, customers on WhatsApp, and callers of a contact centre, with the same definition that you test in the Orchestrate chat. For each new Channel, you set an account and an address on the outside service, and on the Orchestrate side you run one command.
+A Channel makes an Agent available outside watsonx Orchestrate. The Agents you build after this guide will answer employees in Slack or Teams and customers on WhatsApp, with the same definition that you test in the Orchestrate chat. For each new Channel, you set an account and an address on the outside service, and on the Orchestrate side you run one command.
 
-IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values go into `.env` as in chapter 7 and reach the instance through the command that Bob runs, never through the chat; the only file that holds them is `.env`, which git ignores.
+IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values go into `.env` as in chapter 7 and reach the instance through the command that Bob runs, never through the chat; the only file that holds the Auth Token is `.env`, which git ignores.
 
 ## 10.3 Create the Twilio account and join the test number
 
@@ -59,7 +59,7 @@ Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
 **The two values that the Channel needs**
 
-The Channel sends Twilio two values: the **Account SID** and the **Auth Token**. You can get them in the Twilio home page, Console, under Account Info, and add them to `.env` in your project folder as you can see below:
+The Channel sends Twilio two values: the **Account SID** and the **Auth Token**. You can get them on the Twilio home page, Console, under Account Info, and add them to `.env` in your project folder as you can see below:
 
 ```
 WO_INSTANCE=<the URL of your instance>
@@ -116,7 +116,7 @@ In the previous chapters, Bob wrote a design, you approved it, and the build pro
 - Context: the files and the environment Bob works with.
 - Constraints: the command to use, the two fields, no sender number, nothing shown in the chat, the Agent untouched.
 - Deliverable: what Bob must show you at the end, here the event URL.
-- Verify: how Bob proves that the Channel exists, the part of the goal that Bob can check; Twilio's part is 10.7. Its answer then ends with a check.
+- Verify: how Bob proves that the Channel exists, the part of the goal that Bob can check; Twilio's part is 10.7 and the test 10.8. Bob's answer then ends with that check.
 - Stop: when Bob must ask you instead of continuing.
 
 For another WhatsApp Channel, keep the Constraints part as it is here and have the Verify part ask for the list of the Agent's Channels.
@@ -146,7 +146,7 @@ Stop: if the command returns an error, show me its exact text and wait.
 
 Approve each request as it comes. Bob runs the command, reports the event URL, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time.
 
-The event URL, the address of this Channel on your instance, names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. Twilio sends every WhatsApp message that a joined phone sends to the test number to this address, and the platform answers through it. The URL is the only link between Twilio and your Agent; section 10.7 pastes it into Twilio. Copy it from Bob's answer.
+The event URL, the address of this Channel on your instance, names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. Twilio sends to this address every WhatsApp message that a joined phone sends to the test number, and the platform answers through it. The URL is the only link between Twilio and your Agent; section 10.7 pastes it into Twilio. Copy it from Bob's answer.
 
 ## 10.6 Look at the Channel with Bob
 
@@ -164,7 +164,7 @@ One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation t
 Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
 ```
 
-Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because the platform treats it as an identifier; the Auth Token shows as redacted, because the platform treats it as a secret and never returns one. The same distinction explains the export of the next prompt. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
+Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, as an identifier. The Auth Token shows as redacted: the platform never returns a secret, and the export of the next prompt shows it as null. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
 
 The third prompt exports the Channel to a file in the project. A Channel created with a command has no file of its own; the export gives it one. That file is useful when you need to:
 
