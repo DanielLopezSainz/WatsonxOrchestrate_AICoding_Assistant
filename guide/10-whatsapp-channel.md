@@ -80,9 +80,9 @@ A Twilio WhatsApp Channel needs:
 - The two Twilio values, the Account SID and the Auth Token, in `.env`.
 - No phone number: the number is Twilio's.
 
-A Channel is created with one ADK command, which takes the two values from the shell, as the command of chapter 7 took the key of the 311 Call Center. The command goes into the import script, and no file of the project holds a value.
+A Channel is created with one ADK command that takes the two values from the `.env` file.
 
-The prompt gives Bob these four points and the command, and asks for its understanding, its questions and what exists on the instance; nothing is created yet. Two lines of the prompt are there because Bob would otherwise go wrong. "No sender number": the channel operation of the Orchestrate server shows a WhatsApp number in its example, and Bob asks for one unless told that none is needed. "With the ADK command, which reads the two values from the environment variables": that same operation takes the values as arguments, which would put them in the chat. Keep both lines in any prompt that asks Bob for a WhatsApp Channel through Twilio.
+Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the four requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one.
 
 ```
 I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
