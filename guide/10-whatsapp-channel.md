@@ -108,9 +108,9 @@ Look for these points in Bob's answer:
 
 ## 10.5 Agent mode: create the Channel
 
-Mode: Agent, in a new conversation.
+Mode: Agent, same conversation.
 
-In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode and goes from Ask mode to Agent mode with the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
+In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode and goes from Ask mode to Agent mode in the same conversation, where Bob keeps what it found in 10.4, with the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
 
 - Goal: what must exist when Bob is done.
 - Context: the files and the environment Bob works with.
@@ -121,7 +121,7 @@ In the previous chapters, Bob wrote a design, you approved it, and the build pro
 
 Use the same structure for any prompt that creates a WhatsApp Channel in the future: the Constraints part carries the same lines as in 10.4, the command line of the ADK, the two fields and "no sender number", and the Verify part asks for the list of the Agent's Channels.
 
-Create a new conversation, switch to Agent mode, and send:
+Switch to Agent mode and send:
 
 ```
 Goal: residents reach civic_info_agent on WhatsApp through Twilio.
