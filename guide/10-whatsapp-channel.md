@@ -166,7 +166,11 @@ Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in li
 
 Bob shows the record that the platform keeps for the Channel. Read it as the Channel's identity card: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret, not even to you. One thing is missing: the event URL. The platform prints it once, when the Channel is created, and does not store it. Bob rebuilds it anyway, because the URL is made of the identifiers of the record in a fixed order: tenant, Agent, environment, type and identifier of the Channel. If you ever lose the URL, this question gives it back.
 
-The third prompt exports the Channel. An export is how a definition leaves the instance: the file it produces is what you import on another instance, or on the Agent in another environment, when the city moves from the test number to its own. It is also the way to see what the instance gives back of a Channel that holds credentials.
+The third prompt exports the Channel to a file in the project. The Channel has no file of its own, because it was created with a command; the export gives it one. The file is useful in three cases:
+
+- To recreate the Channel elsewhere: on a second instance, for example the city's production instance after a test instance, or on the Agent in Draft to test a change before residents see it. The import command of the ADK takes the file and the token from the `.env` of that project.
+- To keep a record of what is on the instance, in the project and under git, as the Agent definitions are. When someone changes the Channel in the interface, a new export shows the difference.
+- To see what the instance gives back of a Channel that holds credentials, which is the point of running it now.
 
 ```
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
