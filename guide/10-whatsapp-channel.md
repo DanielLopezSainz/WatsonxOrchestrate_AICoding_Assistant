@@ -226,7 +226,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 10.10 Summary
 
-CivicPulse answers on WhatsApp. The Agent is the one of chapter 9; what was added is one Channel on the Agent in Live, and an address in Twilio's settings. Every other Channel type is added the same way: an account on the outside service, one definition, one command, and one address to set.
+The Utopia Agent is now reachable from WhatsApp. Take this chapter as your walkthrough guide when you perform similar implementations: the items that should be included in the prompts, the list of facts to verify and test, and the questions to ask Bob about the result.
 
 - An Orchestrate Channel connects an Agent in one environment to an outside service: web chat, WhatsApp, SMS, Slack, Teams, Facebook Messenger, Genesys. One Channel of each type per environment.
 - The platform gives each Channel an event URL; the outside service sends every message there and receives the answer.
