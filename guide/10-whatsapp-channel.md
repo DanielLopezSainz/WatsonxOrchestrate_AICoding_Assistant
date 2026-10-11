@@ -110,7 +110,16 @@ Look for these points in Bob's answer:
 
 Mode: Agent, in a new conversation.
 
-This chapter has no design to approve: the change is one definition and one command. Chapter 3 gave a template for this case, the structured prompt for a task in Agent mode, with a Verify line that says how Bob proves that the task worked and a Stop line that says when Bob must ask instead of continuing. This is the first chapter that uses it. Create a new conversation, switch to Agent mode, and send:
+In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode and goes from Ask mode to Agent mode with the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
+
+- Goal: what must exist when Bob is done.
+- Context: the files and the environment Bob works with.
+- Constraints: the command to use, the two fields, no sender number, nothing shown in the chat, the Agent untouched.
+- Deliverable: what Bob must show you at the end, here the event URL.
+- Verify: how Bob proves that the Channel exists, so that its answer ends with a check and not with "done".
+- Stop: when Bob must ask you instead of continuing.
+
+Create a new conversation, switch to Agent mode, and send:
 
 ```
 Goal: residents reach civic_info_agent on WhatsApp through Twilio.
@@ -133,8 +142,6 @@ Stop: if the command returns an error, show me its exact text and wait.
 ```
 
 Approve each request as it comes. Bob runs the command and reports the event URL: a long address on your instance that ends with `/channels/twilio_whatsapp/<an identifier>/events`. Copy it from Bob's answer; 10.6 needs it.
-
-The Verify line is why Bob ends with the list of Channels of the Agent rather than with "done". Without it, the answer would stop at the command's output.
 
 ## 10.6 Tell Twilio where to send the messages
 
