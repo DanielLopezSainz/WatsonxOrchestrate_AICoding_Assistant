@@ -81,7 +81,7 @@ A Twilio WhatsApp Channel needs:
 - No phone number: the number is Twilio's.
 - A definition in a Python file that reads the two values from the environment, imported with the ADK.
 
-The prompt gives Bob these five points.
+The prompt gives Bob these five points and asks for its understanding, its questions and what exists on the instance; nothing is created yet. Two of the points are there because Bob would otherwise go wrong: without "no sender number", Bob asks for a WhatsApp number, because the channel operation of the Orchestrate server shows one in its example; without "a Python file that reads the two values from the environment", Bob writes a YAML definition, and a YAML definition has to contain the values themselves. Keep both lines in any prompt that asks Bob for a WhatsApp Channel through Twilio.
 
 ```
 I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
