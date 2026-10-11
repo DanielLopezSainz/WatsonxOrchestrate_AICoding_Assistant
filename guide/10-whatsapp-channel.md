@@ -15,12 +15,12 @@ This chapter needs an Orchestrate instance: Channels are not available on the De
 ## 10.1 Before you start
 
 - The setup from chapter 2, complete, with your environment active in the Environment Manager and the Orchestrate server connected in Bob's MCP tab. An activated environment lasts two hours (section 2.4), and a server that shows as disconnected is restarted from the tab (section 2.8).
-- The four Agents of chapter 9 on your instance, deployed in Live: `civic_info_agent`, `permits_agent`, `roads_agent` and `waste_agent`. The Channel of this chapter is attached to the Agent in Live, the one residents talk to.
+- The four Agents of chapter 9 deployed in Live: `civic_info_agent`, `permits_agent`, `roads_agent` and `waste_agent`. If you imported them from the walkthrough folder, deploy them as in section 9.9.
 - A phone with WhatsApp.
 - A Twilio account, created in 10.3. The free trial is enough: it needs no payment card and includes the test number that this chapter uses.
 - A new conversation in Bob for this chapter.
 
-The Channel is attached to the Agent in Live, so the chapter 9 version must be deployed there, which is not the case if you imported the four Agents from the walkthrough folder. To check, ask in the watsonx Orchestrate chat, which talks to the Agent in Live: `What are the quiet hours?`. An answer from the Noise Ordinance means the chapter 9 Agent is deployed. If the chat shows an older version, or no Agent, deploy the four Agents as in section 9.9.
+To verify that the chapter 9 Agent is in Live, ask in the watsonx Orchestrate chat: `There is a pothole at 7 harbour ln, and which day is the green bin collected there?`. The answer has a request number and a collection day.
 
 ## 10.2 What an Orchestrate Channel is
 
