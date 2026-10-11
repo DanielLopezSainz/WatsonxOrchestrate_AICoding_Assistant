@@ -51,7 +51,7 @@ IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values
 The Orchestrate Agent that you created in the previous chapters will be reachable through WhatsApp. For the test, you use your own phone: a free Twilio account, created with your phone number, lets your WhatsApp talk to the Agent. Create the account as described below; this section is done by hand, in Twilio's console and on your phone, and Bob takes over in 10.4.
 
 1. Create a free account at twilio.com. Twilio asks for an email address, then for your phone number, which it verifies by SMS. No payment card is asked. Answer the questions of the sign-up as you like.
-2. In the left menu, open **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
+2. In the console, from the Account Dashboard, open the **Develop** tab of the left panel, then **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
 
 Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
@@ -182,7 +182,7 @@ A file with the type, the name, the description, the Account SID, and `twilio_au
 
 Configure Twilio to send the messages to the event URL discussed in 10.5.
 
-1. In Twilio's console, open **Messaging**, then **Try it out**, then **Send a WhatsApp message**, and click the second tab, **Sandbox settings**.
+1. In Twilio's console, from the Account Dashboard, open the **Develop** tab of the left panel, then **Messaging**, then **Try it out**, then **Send a WhatsApp message**, and click the second tab, **Sandbox settings**.
 2. In the field **When a message comes in**, replace the address that Twilio put there (its own demo reply) with the event URL from Bob's answer. Leave the method on **POST**. Leave **Status callback URL** empty.
 3. Click **Save**. The setting is not applied until you click Save.
 
