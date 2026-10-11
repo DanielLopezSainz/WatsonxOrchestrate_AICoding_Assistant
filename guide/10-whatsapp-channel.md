@@ -4,7 +4,7 @@ Level: intermediate. Time: about 45 minutes. Prerequisites: chapter 9 completed,
 
 ## Overview
 
-You are on the bus with a broken mirror in a bag, on the way to the recycling point, and you no longer know whether a mirror goes with the glass. You have no computer, and the city's website is not a thing you open on a bus. The city's number is in your WhatsApp contacts. You type "Does a broken mirror go in the glass bin?" and the answer arrives in the same conversation, from the Waste Sorting Rules, before the next stop.
+Saturday morning. The wardrobe you were moving took the mirror with it, and the pieces are in a bag at your feet, on the bus to the recycling point, which closes at noon. Glass container or not? Nobody opens a city website on a bus, but CivicPulse is in your WhatsApp contacts, next to the dentist and the school. You type "Does a broken mirror go in the glass bin?" and the answer is there before the next stop: wrapped, in the grey bin, from the Waste Sorting Rules.
 
 In this chapter, the front desk Agent of chapter 9 gets a WhatsApp number. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
 
