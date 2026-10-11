@@ -73,12 +73,14 @@ TWILIO_AUTH_TOKEN=<the Auth Token>
 
 Mode: Ask, in a new conversation.
 
-The prompt says where residents should reach the Agent and where the credentials are. Bob says what a Channel needs and what exists on the instance.
+A Twilio WhatsApp Channel needs four things: the Agent it belongs to and the environment, Live here; a name for the Channel; and the two Twilio values, the Account SID and the Auth Token. It needs no phone number: the number is Twilio's, the test number during development and the city's own number later. The prompt gives Bob these four things and says where the two values are.
 
 ```
 I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
 account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
-TWILIO_AUTH_TOKEN. The agent is deployed in live and must not change.
+TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel needs only these two values, no
+sender number. The channel is named CivicPulse WhatsApp. The agent is deployed
+in live and must not change.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -88,7 +90,7 @@ Look for these points in Bob's answer:
 
 - Bob understood a Channel of type Twilio WhatsApp on `civic_info_agent`, in the Live environment, with the two values taken from `.env`.
 - Bob finds on the instance the four Agents of chapter 9 and no Channel on any of them.
-- Bob asks for a name for the Channel, and may ask for a WhatsApp sender number. A Twilio WhatsApp Channel has two fields only, the Account SID and the Auth Token; the number is on Twilio's side. The next prompt gives the name and says that no number is needed. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
+- Bob may still ask for a sender number or for a different name; the prompt has answered both, so go on to 10.5. If Bob ends by asking you to switch to Agent mode, stay in Ask mode until you have read its answer.
 
 ## 10.5 Agent mode: create the Channel
 
