@@ -202,11 +202,11 @@ The answer arrives within a few seconds, from the Waste Sorting Rules: a broken 
 
 - `What are the quiet hours?` The front desk Agent answers itself, from the Noise Ordinance.
 - `Which day is the green bin collected at 18 elm st?` The address as you would type it on a phone; the Address Registry of chapter 8 corrects it and the Waste and Recycling department gives the day.
-- `Where is my permit application PP-2026-0412?` The Permits and Planning department reads the record of chapter 6: under review, decision due 2026-10-12.
+- `Where is my permit application PP-2026-0412?` The Permits and Planning department reads the record of chapter 6: under review.
 - `There is a pothole at 7 harbour ln.` A report to the 311 Call Center of chapter 7, and a request number in return.
 - `Which streets are in the Old Town district?` The Address Registry again: Mill Road, High Street, Station Road.
-- `Do I need a permit for a garden shed of 12 square metres?` The Building Permit Guide, through the Permits and Planning department.
-- `When does the swimming pool open?` The refusal of chapter 9, with the office that might help and no invented contact.
+- `Do I need a permit for a garden shed of 12 square metres?` The Building Permit Guide, through the Permits and Planning department: over 10 square metres, a permit is required. The answer may come in two messages, the second one, "How do we know?", naming the document; that is the platform's citation, which the chat shows as a footnote and WhatsApp as a message.
+- `When does the swimming pool open?` The refusal of chapter 9: outside the three departments, an office that might help, no contact invented.
 
 Each question reaches the department that owns it, as in chapter 9, and the answer comes back in WhatsApp with the department's contact.
 
