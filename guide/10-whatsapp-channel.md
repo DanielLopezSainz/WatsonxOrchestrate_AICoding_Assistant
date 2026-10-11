@@ -75,6 +75,7 @@ Mode: Ask, in a new conversation.
 
 A Twilio WhatsApp Channel needs:
 
+- The Orchestrate asset named, as in chapter 8: a Channel of type Twilio WhatsApp, the type as the ADK lists it.
 - The Agent and the environment: `civic_info_agent` in Live.
 - A name for the Channel.
 - The two Twilio values, the Account SID and the Auth Token, in `.env`.
@@ -82,16 +83,16 @@ A Twilio WhatsApp Channel needs:
 
 A Channel is created with one ADK command that takes the two values from the `.env` file.
 
-Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the four requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one.
+Keep a similar structure for any prompt that you use to create a WhatsApp Channel. This prompt gives Bob the five requisites described above and mentions the ADK. You also need to add a "no number needed" instruction; otherwise Bob will try to get one.
 
 ```
-I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
-account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
-TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel needs only these two values, no
-sender number. The channel is named CivicPulse WhatsApp and is created on
-civic_info_agent in live with the ADK command for channels, which reads the
-two values from the environment variables. The agent is deployed in live and
-must not change.
+I want to add an Orchestrate channel of type Twilio WhatsApp to
+civic_info_agent. The city uses Twilio; the account SID and the auth token are
+in .env as TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN. A Twilio WhatsApp channel
+needs only these two values, no sender number. The channel is named CivicPulse
+WhatsApp and is created on civic_info_agent in live with the ADK command for
+channels, which reads the two values from the environment variables. The agent
+is deployed in live and must not change.
 
 Tell me what you understood, what you need to know from me, and what already
 exists on my instance.
@@ -171,5 +172,14 @@ CivicPulse answers on WhatsApp. The Agent is the one of chapter 9; what was adde
 - The platform gives each Channel an event URL; the outside service sends every message there and receives the answer.
 - A Channel holds the credentials of the outside service. They reach the instance through `.env` and the command, as a Connection's do.
 - Twilio's Sandbox is a shared test number for development; the city's own number comes with a WhatsApp business account, and the Channel does not change.
+
+The prompt of 10.4 follows the practice of chapter 8 for any new asset, and the same six points apply to a Connection, a Toolkit or the next Channel you create:
+
+1. Name the Orchestrate asset to create, and its type as the ADK lists it.
+2. Name the Agent it belongs to and the environment.
+3. Say where the credentials are and that the command reads them from the environment, never the values.
+4. Say what is not needed, when Bob tends to ask for it.
+5. Say what must not change.
+6. End with the three questions: what Bob understood, what it needs, what exists.
 
 Residents who prefer the website are next. In chapter 11, CivicPulse goes on the city's website through the web chat Channel, and the deployed definition is exported as the record of what is live.
