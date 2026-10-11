@@ -180,7 +180,7 @@ A file with the type, the name, the description, the Account SID, and `twilio_au
 
 ## 10.7 Tell Twilio where to send the messages
 
-Twilio must now be told where to send the messages: the event URL of 10.5.
+Configure Twilio to send the messages to the event URL discussed in 10.5.
 
 1. In Twilio's console, open **Messaging**, then **Try it out**, then **Send a WhatsApp message**, and click the second tab, **Sandbox settings**.
 2. In the field **When a message comes in**, replace the address that Twilio put there (its own demo reply) with the event URL from Bob's answer. Leave the method on **POST**. Leave **Status callback URL** empty.
