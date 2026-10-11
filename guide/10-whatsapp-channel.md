@@ -24,7 +24,7 @@ To verify that the chapter 9 Agent is in Live, ask in the watsonx Orchestrate ch
 
 ## 10.2 What an Orchestrate Channel is
 
-Until now, residents reached CivicPulse in one place: the chat of watsonx Orchestrate. An Orchestrate Channel connects an Agent to a place where people already are. The Agent does not change; the Channel receives each message from the outside service, passes it to the Agent, and sends the answer back the same way.
+An Orchestrate Channel connects an Agent to a messaging service, a website or a contact-centre platform. The Agent you created does not change; the Channel receives each message from the service, passes it to the Agent, and sends the answer back the same way.
 
 **The types of Channel**
 
