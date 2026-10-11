@@ -76,8 +76,8 @@ Mode: Ask, in a new conversation.
 The prompt says where residents should reach the Agent and where the credentials are. Bob says what a Channel needs and what exists on the instance.
 
 ```
-I want residents to reach civic_info_agent on WhatsApp. The city uses Twilio;
-the account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
+I want to integrate civic_info_agent with WhatsApp. The city uses Twilio; the
+account SID and the auth token are in .env as TWILIO_ACCOUNT_SID and
 TWILIO_AUTH_TOKEN. The agent is deployed in live and must not change.
 
 Tell me what you understood, what you need to know from me, and what already
