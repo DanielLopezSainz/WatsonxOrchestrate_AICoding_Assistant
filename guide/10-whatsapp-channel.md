@@ -6,7 +6,7 @@ Level: intermediate. Time: about 45 minutes. Prerequisites: chapter 9 completed,
 
 Saturday morning at the gym. A dumbbell slips out of your hand, and the mirror behind the rack comes down in pieces. The manager arrives with a broom, looks at the pieces, looks at you, and says the glass container outside is full of bottles and nobody ever told him where a mirror goes. He looks angry, and you had better have an answer. On your phone you have the WhatsApp contact of the City of Utopia. You send a WhatsApp message: "Does a broken mirror go in the glass bin?" After a few seconds, you get the answer. You did not need to call the 311 Call Center, or even log in to the city's website. An Orchestrate Channel saved your gym membership.
 
-In this chapter, the front desk Agent of chapter 9 becomes reachable on WhatsApp. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects the number to the Agent.
+In this chapter, the front desk Agent of chapter 9 becomes reachable on WhatsApp. Bob creates an Orchestrate Channel for it, and Twilio, the telephony service that carries the messages, connects WhatsApp to the Agent.
 
 To use the Orchestrate Agents you are not limited to a standard chatbot page: an Orchestrate Channel connects an Agent to different messaging services like WhatsApp, SMS, Slack, Teams...
 
@@ -110,7 +110,7 @@ Look for these points in Bob's answer:
 
 Mode: Agent, in the same conversation as 10.4. Do not start a new conversation: Bob's answer of 10.4 is the context of this step.
 
-In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode. It goes from Ask mode to Agent mode in the same conversation, where Bob keeps what it found in 10.4, and it uses the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
+In the previous chapters, Bob wrote a design that you approved, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode. It goes from Ask mode to Agent mode in the same conversation, where Bob keeps what it found in 10.4, and it uses the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
 
 - Goal: what must exist when Bob is done.
 - Context: the files and the environment Bob works with.
@@ -196,7 +196,7 @@ In WhatsApp on your phone, in the conversation with the test number, send:
 Does a broken mirror go in the glass bin?
 ```
 
-The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror does not go in the glass container, with the Waste and Recycling contact. Then keep the phone in hand. Everything the Agents learned in the earlier chapters is now one WhatsApp message away; send these, in any order, and watch the answers come back:
+The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror does not go in the glass container, with the Waste and Recycling contact. Then keep the phone in hand: everything the Agents learned in the earlier chapters now answers on WhatsApp. Send these, in any order:
 
 - `What are the quiet hours?` The front desk Agent answers itself, from the Noise Ordinance.
 - `Which day is the green bin collected at 18 elm st?` The address as you would type it on a phone; the Address Registry of chapter 8 corrects it and the Waste and Recycling department gives the day.
@@ -208,7 +208,7 @@ The answer arrives within a few seconds, from the Waste Sorting Rules: a broken 
 
 WhatsApp shows only the answers. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft. Nothing changed in Draft since the deployment of chapter 9, so the reasoning through Bob shows which department and which Tool answer that question; the steps of a second run may differ in detail from the first.
 
-If no answer arrives, Twilio's logs show where the message stopped. In the console, **Monitor**, then **Logs**, then **Messaging**: if your message is not listed, Twilio did not receive it, and the usual reason is that your phone is no longer joined, which happens after three days; send the join code again. If the message is listed with an error 11200, Twilio called the event URL and got no valid answer; one cause is a URL that no longer belongs to a Channel on the instance, for example after a Channel was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
+If no answer arrives, Twilio's logs show where the message stopped. In the console, **Monitor**, then **Logs**, then **Messaging**. If your message is not listed, Twilio did not receive it. The usual reason is that your phone is no longer joined, which happens after three days, so send the join code again. If the message is listed with an error 11200, Twilio called the event URL and got no valid answer. One cause is a URL that no longer belongs to a Channel on the instance, for example after a Channel was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
 
 ## 10.9 What Bob built
 
