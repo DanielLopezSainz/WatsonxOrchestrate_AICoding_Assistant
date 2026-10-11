@@ -34,23 +34,23 @@ When Bob creates a Channel, the platform gives it an event URL, an address on th
 
 **Draft and Live**
 
-A Channel is attached to an Agent in one environment. A Channel on the Agent in Draft is for testing by builders; a Channel on the Agent in Live is for residents. The two are separate assets with separate event URLs. This chapter creates the Channel in Live, because the Agent there is the one chapter 9 deployed, and because the test from your phone is the test that residents will make.
+A Channel is attached to an Agent in one environment. A Channel on the Agent in Draft is for testing by builders; a Channel on the Agent in Live is for residents. The two are separate assets with separate event URLs. This chapter creates the Channel in Live because chapter 9 deployed the Agent there, and a test from your phone then follows the path that residents use.
 
 **Twilio and its test number**
 
-Twilio is a service that companies use to send and receive SMS and WhatsApp messages from their applications. A business number on WhatsApp requires a business account approved by Meta; for development, Twilio provides a shared test number, the Sandbox, that any phone can join by sending it a code. The Sandbox is what this chapter uses. Its limits: a phone stays joined for three days and then sends the code again; a trial account lasts 30 days and includes 100 WhatsApp messages; messages can only be exchanged with phones that joined. For the city's real number, the city applies for a WhatsApp business account through Twilio and the Channel stays the same.
+Twilio is a service that companies use to send and receive SMS and WhatsApp messages from their applications. A business number on WhatsApp requires a business account approved by Meta; for development, Twilio provides a shared test number, the Sandbox, that any phone can join by sending it a code. This chapter uses the Sandbox. Its limits: a phone stays joined for three days and must then send the code again; a trial account lasts 30 days and includes 100 WhatsApp messages; messages can only be exchanged with phones that joined. For the city's real number, the city applies for a WhatsApp business account through Twilio and the Channel stays the same.
 
 **Where you will use it**
 
-A Channel is how an Agent leaves the builder's screen. The Agents you build after this guide will answer employees in Slack or Teams, customers on WhatsApp, and callers of a contact centre, with the same definition that you test in the Orchestrate chat. The work of each new Channel is on the side of the outside service, an account and an address to set; on the Orchestrate side it is one definition and one command.
+A Channel makes an Agent available outside the screen where it is built. The Agents you build after this guide will answer employees in Slack or Teams, customers on WhatsApp, and callers of a contact centre, with the same definition that you test in the Orchestrate chat. For each new Channel, you set an account and an address on the outside service, and on the Orchestrate side you run one command.
 
 IMPORTANT: a Channel holds credentials, like a Connection. The two Twilio values go into `.env` as in chapter 7 and reach the instance through the command that Bob runs, never through the chat or a file of the project.
 
 ## 10.3 Create the Twilio account and join the test number
 
-The Orchestrate Agent that you created in the previous chapters will be reachable through WhatsApp. For the test, you use your own phone: a free Twilio account, created with your phone number, lets your WhatsApp talk to the Agent. Create the account as described below; this section is done by hand, in Twilio's console and on your phone, and Bob takes over in 10.4.
+The Orchestrate Agent that you created in the previous chapters will be reachable through WhatsApp. For the test, you use your own phone: a free Twilio account, created with your phone number, lets your WhatsApp talk to the Agent. Create the account as described below. You do this section by hand, in Twilio's console and on your phone, and Bob takes over in 10.4.
 
-1. Create a free account at twilio.com. Twilio asks for an email address, then for your phone number, which it verifies by SMS. No payment card is asked. Answer the questions of the sign-up as you like.
+1. Create a free account at twilio.com. Twilio asks for an email address, then for your phone number, which it verifies by SMS. Twilio does not ask for a payment card. Answer the questions of the sign-up as you like.
 2. In the console, from the Account Dashboard, open the **Develop** tab of the left panel, then **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
 
 Screenshot: the Sandbox tab, with the number, the join code and the QR code.
@@ -59,7 +59,7 @@ Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
 **The two values that the Channel needs**
 
-The Channel sends Twilio two values: the **Account SID** and the **Auth Token**. You can get them in the Twilio home page, Console, under Account Info. Open `.env` in your project folder and add them as you can see below:
+The Channel sends Twilio two values: the **Account SID** and the **Auth Token**. You can get them in the Twilio home page, Console, under Account Info, and add them to `.env` in your project folder as you can see below:
 
 ```
 WO_INSTANCE=<the URL of your instance>
@@ -110,16 +110,16 @@ Look for these points in Bob's answer:
 
 Mode: Agent, in the same conversation as 10.4. Do not start a new conversation: Bob's answer of 10.4 is the context of this step.
 
-In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode and goes from Ask mode to Agent mode in the same conversation, where Bob keeps what it found in 10.4, with the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
+In the previous chapters, Bob wrote a design, you approved it, and the build prompt was one line. A Channel is too small for that: one command creates it. So this chapter skips Plan mode. It goes from Ask mode to Agent mode in the same conversation, where Bob keeps what it found in 10.4, and it uses the structured prompt of chapter 3, the one with six parts. Each part answers a question that Bob would otherwise decide alone:
 
 - Goal: what must exist when Bob is done.
 - Context: the files and the environment Bob works with.
 - Constraints: the command to use, the two fields, no sender number, nothing shown in the chat, the Agent untouched.
 - Deliverable: what Bob must show you at the end, here the event URL.
-- Verify: how Bob proves that the Channel exists, so that its answer ends with a check and not with "done".
+- Verify: how Bob proves that the Channel exists, so that its answer ends with a check.
 - Stop: when Bob must ask you instead of continuing.
 
-Use the same structure for any prompt that creates a WhatsApp Channel in the future: the Constraints part carries the same lines as in 10.4, the command line of the ADK, the two fields and "no sender number", and the Verify part asks for the list of the Agent's Channels.
+For another WhatsApp Channel, keep the Constraints lines of 10.4 and have the Verify part ask for the list of the Agent's Channels.
 
 Stay in the conversation of 10.4, switch to Agent mode, and send:
 
@@ -146,7 +146,7 @@ Stop: if the command returns an error, show me its exact text and wait.
 
 Approve each request as it comes. Bob runs the command, reports the event URL, and ends with the list of the Agent's Channels in Live: one entry, CivicPulse WhatsApp, with its identifier and its creation time.
 
-The event URL is the address of this Channel on your instance: a long address that names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. It is where Twilio will send every WhatsApp message that reaches the test number: the platform receives the message there, runs the Agent in Live, and returns the answer to Twilio, which delivers it to the phone. The URL is the one link between Twilio and your Agent, which is why 10.7 pastes it into Twilio. Copy it from Bob's answer.
+The event URL is the address of this Channel on your instance. It names your tenant, the Agent, the environment, the type of Channel and the identifier of the Channel, and ends with `/events`. Twilio sends every WhatsApp message that reaches the test number to this address, and the platform answers through it. The URL is the only link between Twilio and your Agent; section 10.7 pastes it into Twilio. Copy it from Bob's answer.
 
 ## 10.6 Look at the Channel with Bob
 
@@ -158,25 +158,25 @@ Before starting testing, run these three prompts with Bob to get some informatio
 List the channels of civic_info_agent in live and in draft.
 ```
 
-One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation time; none in Draft. A Channel belongs to one environment of one Agent.
+One Channel in Live, CivicPulse WhatsApp, with its identifier and its creation time; none in Draft.
 
 ```
 Show me the details of the channel CivicPulse WhatsApp of civic_info_agent in live, including its event URL.
 ```
 
-Bob shows the record that the platform keeps for the Channel. Read it as the Channel's identity card: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret, not even to you. One thing is missing: the event URL. The platform prints it once, when the Channel is created, and does not store it. Bob rebuilds it anyway, because the URL is made of the identifiers of the record in a fixed order: tenant, Agent, environment, type and identifier of the Channel. If you ever lose the URL, this question gives it back.
+Bob shows the record that the platform keeps for the Channel: its type, its name and description, its own identifier, and the identifiers of the Agent and of the environment it belongs to. The Account SID is there, because it is an identifier. The Auth Token shows as redacted: the platform never returns a secret. The record does not include the event URL, which the platform prints once, when the Channel is created, and does not store. Bob rebuilds it anyway, from the identifiers of the record, in the order given in 10.5. If you ever lose the URL, this question gives it back.
 
-The third prompt exports the Channel to a file in the project. The Channel has no file of its own, because it was created with a command; the export gives it one. The file is useful in three cases:
+The third prompt exports the Channel to a file in the project. A Channel created with a command has no file of its own; the export gives it one. That file is useful when you need to:
 
-- To recreate the Channel elsewhere: on a second instance, for example the city's production instance after a test instance, or on the Agent in Draft to test a change before residents see it. The file says what to recreate, the type, the name and the description; the command of the import script recreates it, with the token from the `.env` of that project.
-- To keep a record of what is on the instance, in the project and under git, as the Agent definitions are. When someone changes the Channel in the interface, a new export shows the difference.
-- To see what the instance gives back of a Channel that holds credentials, which is the point of running it now.
+- Recreate the Channel elsewhere: on a second instance, for example the city's production instance after a test instance, or on the Agent in Draft to test a change before residents see it. The file says what to recreate, the type, the name and the description; the command of the import script recreates it, with the token from the `.env` of that project.
+- Keep a record of what is on the instance, in the project and under git, as the Agent definitions are. When someone changes the Channel in the interface, a new export shows the difference.
+- See what the instance returns for a Channel that holds credentials.
 
 ```
 Export the channel CivicPulse WhatsApp of civic_info_agent in live to exports/whatsapp-channel.yaml and show me the file.
 ```
 
-A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The secret does not come back from the instance; the Account SID does, because it is an identifier. The file is not imported as it is: a YAML file cannot read `.env`, and the token must never be typed into it. The command of the import script recreates the Channel from the same values.
+A file with the type, the name, the description, the Account SID, and `twilio_authentication_token: null`. The instance returns the Account SID but not the secret. A YAML file cannot read `.env` and the token must never be typed into it, so the file is not imported as it is; the command of the import script recreates the Channel from the same values.
 
 ## 10.7 Tell Twilio where to send the messages
 
@@ -187,8 +187,6 @@ Configure Twilio to send the messages to the event URL discussed in 10.5.
 3. Click **Save**. The setting is not applied until you click Save.
 
 Screenshot: the Sandbox settings tab, with the event URL in the field and the Save button.
-
-From this moment, every message that your phone sends to the test number reaches the Agent.
 
 ## 10.8 Try it
 
@@ -206,19 +204,17 @@ The answer arrives within a few seconds, from the Waste Sorting Rules: a broken 
 - `There is a pothole at 7 harbour ln.` A report to the 311 Call Center of chapter 7, and a request number in return.
 - `Which streets are in the Old Town district?` The Address Registry again: Mill Road, High Street, Station Road.
 - `Do I need a permit for a garden shed of 12 square metres?` The Building Permit Guide, through the Permits and Planning department: over 10 square metres, a permit is required. The answer may come in two messages, the second one, "How do we know?", naming the document; that is the platform's citation, which the chat shows as a footnote and WhatsApp as a message.
-- `When does the swimming pool open?` The refusal of chapter 9: outside the three departments, an office that might help, no contact invented.
+- `When does the swimming pool open?` The refusal of chapter 9: the question is outside the three departments, so the Agent names an office that might help and invents no contact.
 
-Each question reaches the department that owns it, as in chapter 9, and the answer comes back in WhatsApp with the department's contact.
+WhatsApp shows only the answers. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft, whose definition is the one deployed in Live, so the steps are the same.
 
-WhatsApp shows the answers and nothing else. To see the reasoning, which Tool was called and which department answered, ask the same question through Bob, with `Ask civic_info_agent:` in front and the request for reasoning. Bob's chat operation reaches the Agent in Draft, whose definition is the one deployed in Live, so the steps are the same.
-
-If no answer arrives, Twilio's log says why: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is a URL that is not the one of the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
+If no answer arrives, Twilio's log says why: in the console, **Monitor**, then **Logs**, then **Errors**. An error 11200 with the event URL means that the platform refused the call, and the usual cause is an event URL that does not belong to the Channel on the instance, for example the URL of a Channel that was deleted and created again. Reload the Sandbox settings page, paste the URL from Bob's answer, click Save, and reload the page to check that it holds. No entry in the log means that Twilio never received the message: your phone is no longer joined, which happens after three days, so send the join code again. To confirm that the Channel exists, ask Bob `List the channels of civic_info_agent in live.`.
 
 ## 10.9 What Bob built
 
-- On the instance: one Orchestrate Channel, CivicPulse WhatsApp, of type Twilio WhatsApp, attached to `civic_info_agent` in Live. It holds the two Twilio values. The Agent is unchanged.
-- In the project: one line in the import script, the command that creates the Channel with the two values read from `.env`; one line in the delete script, placed before the removal of the Agent; and `exports/whatsapp-channel.yaml`, the export of 10.6, with the token empty.
-- Nothing in Bob's MCP tab and no Agent file touched: a Channel is attached to an Agent from the outside.
+- The instance holds one Orchestrate Channel, CivicPulse WhatsApp, of type Twilio WhatsApp, attached to `civic_info_agent` in Live. It holds the two Twilio values. The Agent is unchanged.
+- The project holds one line in the import script, the command that creates the Channel with the two values read from `.env`; one line in the delete script, placed before the removal of the Agent; and `exports/whatsapp-channel.yaml`, the export of 10.6, with the token empty.
+- Bob's MCP tab and the Agent files are unchanged, because a Channel is attached to an Agent from the outside.
 
 The Channel belongs to the Live environment of the Agent. When a later chapter changes the Agent in Draft and deploys it again, the Channel stays where it is and residents on WhatsApp get the new version.
 
