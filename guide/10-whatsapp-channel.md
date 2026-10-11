@@ -57,8 +57,6 @@ Screenshot: the Sandbox tab, with the number, the join code and the QR code.
 
 3. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
 
-The page also offers a tutorial in steps (Business-initiated message, User-initiated conversation, Wrap-up). It is Twilio's, not this chapter's; leave it.
-
 **The two values that the Channel needs**
 
 The Channel identifies itself to Twilio with two values of your account: the **Account SID** and the **Auth Token**. Both are on the home page of the console, under Account Info. Open `.env` in your project folder and add them as two lines. After the change, the file looks like this, with your own values in place of the placeholders:
