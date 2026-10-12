@@ -2,7 +2,7 @@
 
 A hands-on guide to creating AI agents on IBM watsonx Orchestrate with IBM Bob, IBM's AI coding assistant. You describe what the Agent must do; Bob writes the definitions, the Tools and the tests, sends them to your instance, and reports what happened. You read, decide and approve.
 
-Across twelve chapters you build CivicPulse, the citizen services platform of the fictional City of Utopia. The first Agent tells residents which department to call about a dark street light. By the last chapter, a team of Agents searches the city's regulations, looks up permit applications, reports potholes to the 311 Call Center, and answers residents on WhatsApp and from a chat window on the city's website. Each chapter adds one component of watsonx Orchestrate. Every chapter was run, as written, with Bob on a real instance.
+Across ten chapters you build CivicPulse, the citizen services platform of the fictional City of Utopia. The first Agent tells residents which department to call about a dark street light. By the last chapter, a team of Agents searches the city's regulations, looks up permit applications, reports potholes to the 311 Call Center, and answers residents on WhatsApp. Each chapter adds one component of watsonx Orchestrate. Every chapter was run, as written, with Bob on a real instance.
 
 The guide is for people who build Orchestrate Agents, with or without coding experience, and for anyone who wants to see how an AI coding assistant changes that work. Each chapter states its level and its prerequisites, so that you can follow the chapters in order or start at the one you need. The guide uses Bob and the watsonx Orchestrate ADK extension as shipped; other assistants that connect to the watsonx Orchestrate ADK MCP server can follow the same steps, and chapter 2 points to their setup instructions.
 
@@ -33,6 +33,6 @@ To connect your assistant to watsonx Orchestrate, start with chapter 2. Read cha
 - [Chapter 9. One Agent per department: Collaborator Agents](guide/09-collaborators.md)
 - [Chapter 10. CivicPulse on WhatsApp: the Orchestrate Channel](guide/10-whatsapp-channel.md)
 
-The guide was written and tested against watsonx Orchestrate ADK 2.16.1 and IBM Bob 2.1.
+The guide was written and tested against watsonx Orchestrate ADK 2.18.0 and IBM Bob 2.1.
 
 IBM CSM Team, France

@@ -97,7 +97,7 @@ You approve twice in every Agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which Agents exist and what each one is for, which Tools each Agent has, which external systems need a Connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the Agent is built and tested. Every Agent, Tool and Knowledge Base that Bob imports is stored in the Draft environment of the instance. An Agent reaches its users only when it is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction; chapter 11 describes it in full. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine.
+The deployment approval takes place when the Agent is built and tested. Every Agent, Tool and Knowledge Base that Bob imports is stored in the Draft environment of the instance. An Agent reaches its users only when it is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction, and every later chapter repeats it. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine.
 
 In chapter 4, Bob writes the design for the city information Agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -112,7 +112,7 @@ Bob revises the file and waits again. When the design is complete, you start a n
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob builds and tests the Agent, and the Agent exists in Draft. For the deployment approval, in chapter 11, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the Agent is in Draft, where only the builders of the instance reach it.
+Bob builds and tests the Agent, and the Agent exists in Draft. For the deployment approval, at the end of each chapter from chapter 4, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the Agent is in Draft, where only the builders of the instance reach it.
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 

@@ -238,4 +238,4 @@ The prompt of 10.4 follows the practice of chapter 8 for any new asset, and the 
 5. Say what must not change (here, the Agent).
 6. End with the three questions: what Bob understood, what it needs, what exists.
 
-In chapter 11, CivicPulse is added to the city's website with the web chat Channel.
+This is the last chapter. CivicPulse answers residents in the chat of watsonx Orchestrate and on WhatsApp: a front desk Agent and three departments, the city's documents, Tools, a Connection, a Toolkit and a Channel, written by Bob from your prompts and tested by you.

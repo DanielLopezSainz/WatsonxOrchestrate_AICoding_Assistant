@@ -147,9 +147,9 @@ An instance has two environments. Draft is the builders' environment: an Agent i
 
 When Bob imports the Agent, or imports it again after a correction, it changes the Agent in Draft. The Agent in Live does not change until you deploy: one operation that takes the Agent as it is in Draft and deploys it in Live. Until then, residents keep talking to the previous deployment, so nobody meets an Agent that is being repaired. If a deployment turns out to be wrong, undeploying returns the Agent in Live to its previous deployment.
 
-Everything that Bob does in the next sections happens in Draft: the build imports the Agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the Agent in Live is one instruction to Bob at the end of 4.9. Chapter 11 describes deployment in full.
+Everything that Bob does in the next sections happens in Draft: the build imports the Agent into Draft, the tests run against it, and the correction in 4.9 replaces it. Deploying the Agent in Live is one instruction to Bob at the end of 4.9.
 
-The Developer Edition has only the Draft environment: its chat shows the Agents in Draft, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter; chapter 11 returns to it on a tenant.
+The Developer Edition has only the Draft environment: its chat shows the Agents in Draft, and deploying is not possible there. If you use the Developer Edition, skip the deployment at the end of this chapter and of the later chapters.
 
 ## 4.6 Agent mode: build and test
 
