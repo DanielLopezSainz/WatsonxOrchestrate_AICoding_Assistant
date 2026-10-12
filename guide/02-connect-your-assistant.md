@@ -75,7 +75,7 @@ The message tells Bob to switch to Agent mode, to load the Orchestrate skills, a
 3. Use the fetched skills and `watsonx-orchestrate-adk` MCP for all agent, tool, and environment operations. Consult `watsonx-orchestrate-adk-docs` MCP for API reference and documentation guidance.
 ```
 
-You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. If Bob first requests approval to run `fetch_all_skills`, approve it; step 7 sets the approvals for the rest of the guide. The number of skills depends on the version of the ADK; version 2.17 provides eight. Chapter 12 uses the skills, which are stored in `.bob/skills` in the project folder.
+You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. If Bob first requests approval to run `fetch_all_skills`, approve it; step 7 sets the approvals for the rest of the guide. The number of skills depends on the version of the ADK; version 2.18 provides eight. The skills are stored in `.bob/skills` in the project folder, and Bob reads them in every chapter from chapter 4.
 
 Step 5. Connect to your instance.
 
