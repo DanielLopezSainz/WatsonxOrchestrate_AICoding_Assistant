@@ -1,8 +1,8 @@
 # Building watsonx Orchestrate Agents with IBM Bob
 
-Imagine a resident of a city typing "the street light outside my house is dark" and getting, in seconds, the department to call, its hours, and a request number for the repair. Now imagine that you built that service without writing a single file by hand: you described it, and your coding assistant wrote the Agent, its Tools, its documents and its tests, sent them to the platform, and ran the tests in front of you.
+Ten chapters, one fictional city, and a working citizen service at the end, built on IBM watsonx Orchestrate without writing a file by hand. You brief IBM Bob; Bob writes the Agents, the Tools, the documents and the tests, runs them on your instance, and shows you the result.
 
-That is this guide. Over ten chapters you build CivicPulse, the citizen service of the City of Utopia, on IBM watsonx Orchestrate, with IBM Bob as the pair of hands. The city is fictional; the Agents, the Tools, the WhatsApp number and the mistakes are real. Every chapter was run, as written, on a real instance, and the text tells you what Bob answered, where it went wrong, and which line of a prompt put it right.
+CivicPulse starts as an Agent that knows three phone numbers. By chapter 10 it reads the city's regulations, looks up permit applications, reports potholes to the 311 Call Center, understands "18 elm st", works as a team of four Agents, and answers residents on WhatsApp. Every chapter adds one component of the platform and one way of working with Bob. Every chapter was run as written, and the text keeps what Bob got wrong and the line of a prompt that put it right.
 
 ## What you will have built
 
