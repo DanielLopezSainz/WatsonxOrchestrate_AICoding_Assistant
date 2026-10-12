@@ -189,7 +189,7 @@ The following components appear by name in Bob's messages and in the MCP tab.
 
 1. The Orchestrate server reads and writes only inside the folder that was open when you initialised the workspace. Always open this folder in Bob.
 2. On a tenant, the API key you gave in step 5 produced a token that expires after two hours. After that, every operation fails with an authentication error until you activate the environment again in the Environment Manager.
-3. The ADK keeps one active environment per machine, and Bob and any other coding assistant on the machine use it. Switching the environment in the Environment Manager switches it for all of them. Chapter 11 is the only chapter that switches environments.
+3. The ADK keeps one active environment per machine, and Bob and any other coding assistant on the machine use it. Switching the environment in the Environment Manager switches it for all of them. No chapter of this guide switches environments.
 
 ## 2.5 The approvals, explained
 

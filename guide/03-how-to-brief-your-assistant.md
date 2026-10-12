@@ -263,7 +263,7 @@ Prompts to avoid:
 | "Build me a citizen services agent" | Bob invents the users, the facts, the Tools and the names | The structured prompt with the six questions, in Ask mode |
 | "Give it tools, a knowledge base and a few collaborators" | Each component is a possible cause of a wrong answer. With several added together, finding the cause takes much longer | One component per iteration, as the walkthroughs do |
 | "It does not work, fix it" | Bob guesses what is wrong and changes that | Request the reasoning of the failing test first |
-| "Make it production ready" | The prompt names no check that Bob can perform, and what Bob builds stays in Draft until you deploy it | Build and test in Draft; deploy in chapter 11 |
+| "Make it production ready" | The prompt names no check that Bob can perform, and what Bob builds stays in Draft until you deploy it | Build and test in Draft; deploy when the tests pass |
 
 ## 3.5 What Bob reads from the project folder
 
