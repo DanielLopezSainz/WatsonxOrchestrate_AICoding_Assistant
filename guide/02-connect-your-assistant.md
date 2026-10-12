@@ -39,7 +39,7 @@ Step 1. Clone the repository.
 
 You should see: the folder name at the top of the panel, and `.env` listed next to `.env.example`.
 
-The `.env` file is where this guide keeps the values that must stay on your machine: the tenant's URL and key now, one more value in chapter 7. Git ignores it, so it is not committed and does not reach your repository; you never paste its contents into a chat with Bob. In step 5 you type the key into the extension once; `.env` is where you find it again when the extension asks for it later.
+The `.env` file is where this guide keeps the values that must stay on your machine: the tenant's URL and key now, one more value in chapter 7 and two in chapter 10. Git ignores it, so it is not committed and does not reach your repository; you never paste its contents into a chat with Bob. In step 5 you type the key into the extension once; `.env` is where you find it again when the extension asks for it later.
 
 Step 2. Install the extension.
 

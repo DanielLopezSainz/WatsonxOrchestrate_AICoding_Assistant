@@ -19,7 +19,7 @@ Skip this chapter if you have already imported an MCP server into watsonx Orches
 
 Check that the Agent is there: in Ask mode, ask `Which tools does civic_info_agent have?` and confirm the four names, `get_permit_status`, `get_request_status`, `get_collection_days` and `report_issue`.
 
-The list comes from the Agent in Draft. Bob's Orchestrate server reads and changes only the Draft environment of the active instance. The Agent deployed in Live in chapter 7 is not touched until section 8.9.
+The list comes from the Agent in Draft. Bob's Orchestrate server reads and changes only the Draft environment of the active instance; what reaches Live, the deployments and the Live credential of chapter 7, goes through the ADK commands that Bob runs. The Agent deployed in Live in chapter 7 is not touched until section 8.9.
 
 ## 8.2 What an MCP server is, and what an Orchestrate Toolkit is
 
@@ -191,7 +191,7 @@ Save your work: `Commit everything I changed with a short message saying what wa
 
 ## 8.8 Try it
 
-Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of the Agent in the watsonx Orchestrate builder (Build, Agents, `civic_info_agent`). On a tenant, do not use the chat of the home page yet: it talks to the Agent deployed in Live, which is still the chapter 7 version and answers that it has no record for "18 elm st". The chat shows the change after 8.9. On the Developer Edition, the chat shows the Agent in Draft and answers correctly already.
+Ask the Agent, through Bob with `Ask civic_info_agent:` in front, or in the preview panel of the Agent in the watsonx Orchestrate builder (Build, Agents, `civic_info_agent`). On a tenant, do not use the chat on the landing page yet: it talks to the Agent deployed in Live, which is still the chapter 7 version and answers that it has no record for "18 elm st". The chat shows the change after 8.9. On the Developer Edition, the chat shows the Agent in Draft and answers correctly already.
 
 ```
 The rubbish was not collected today at 18 elm st, which days do they collect it?

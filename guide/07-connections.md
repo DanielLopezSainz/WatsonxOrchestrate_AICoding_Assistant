@@ -55,7 +55,7 @@ A Connection is either shared by everyone, `team`, with one credential that an a
 
 **The 311 Call Center of this chapter**
 
-The City of Utopia has no 311 system, so this chapter uses a public test service, Postman Echo, which answers every request by sending back what it received, including the headers. The mechanism is the same as with a real 311 system: the Tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key can be any value you invent, because the test service accepts anything. A real 311 system would also return a request number; the test service does not, so the Tool creates one in the format of chapter 6.
+The 311 Call Center has not given the city's builders access to its system yet, so this chapter uses a public test service in its place, Postman Echo, which answers every request by sending back what it received, including the headers. The mechanism is the same as with a real 311 system: the Tool sends the report with the key in a header, and it treats the report as accepted only if the service echoes that header back. The key can be any value you invent, because the test service accepts anything. A real 311 system would also return a request number; the test service does not, so the Tool creates one in the format of chapter 6.
 
 ## 7.3 Ask mode: describe the report
 

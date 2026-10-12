@@ -43,7 +43,7 @@ No prompt tells the Agent to call a Tool for a given question, just as none tell
 | Python Tool | A Python function in a file, uploaded to the instance and run there | This chapter |
 | OpenAPI Tool | An existing REST API, described by its OpenAPI file; no code to write | The alternative to a Python Tool when the API already exists |
 | Orchestrate Toolkit | A set of Tools served by an MCP server, like the one that Bob uses to talk to your instance | Chapter 8 |
-| Orchestrate Flow | A sequence of steps with Tools and Agents in it, which the Agent calls as one Tool | Chapter 10 |
+| Orchestrate Flow | A sequence of steps with Tools and Agents in it, which the Agent calls as one Tool | Not built in this guide |
 
 A Python Tool consists of a function, a description, parameters and a result, in one file, which section 6.7 describes.
 

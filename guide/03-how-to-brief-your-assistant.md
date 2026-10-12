@@ -97,7 +97,7 @@ You approve twice in every Agent project: the design, before Bob builds it, and 
 
 The design approval takes place between Plan mode and Agent mode. You approve a list: which Agents exist and what each one is for, which Tools each Agent has, which external systems need a Connection, which documents become knowledge, and the build order. If the list is not clear, return it to Bob with your questions. When the design is correct, the approval is one line. Agent mode starts in a new conversation, so in chapter 4 that line, with the design file referenced, is the complete prompt.
 
-The deployment approval takes place when the Agent is built and tested. Every Agent, Tool and Knowledge Base that Bob imports is stored in the Draft environment of the instance. An Agent reaches its users only when it is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction, and every later chapter repeats it. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine.
+The deployment approval takes place when the Agent is built and tested. Every Agent that Bob imports is stored in the Draft environment of the instance; Tools and Knowledge Bases belong to the instance and serve both environments. An Agent reaches its users only when it is deployed; deployment is done with an ADK command that Bob never runs on its own initiative. Chapter 4 performs it once, with a single instruction, and chapters 5 to 9 repeat it. If you built the Agent in the Developer Edition and deploy it to a SaaS tenant, the active environment must be switched to the tenant before the deployment. The switch affects Bob and any other coding assistant on the machine.
 
 In chapter 4, Bob writes the design for the city information Agent and waits for your approval. You read the file and notice that it says nothing about what a resident sees before typing a question. You write, in the same Plan-mode conversation:
 
@@ -112,7 +112,7 @@ Bob revises the file and waits again. When the design is complete, you start a n
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-Bob builds and tests the Agent, and the Agent exists in Draft. For the deployment approval, at the end of each chapter from chapter 4, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the Agent is in Draft, where only the builders of the instance reach it.
+Bob builds and tests the Agent, and the Agent exists in Draft. For the deployment approval, at the end of chapters 4 to 9, you ask Bob to deploy the Agent; Bob shows the deployment command and asks for confirmation before running it. Until you confirm, the Agent is in Draft, where only the builders of the instance reach it.
 
 IMPORTANT: deploying, switching environment, setting a credential and removing an artifact are not among the operations pre-approved in chapter 2, so Bob asks for approval before each of them. If Bob performs one of these actions without asking, the approval settings differ from chapter 2. Go through the checklist in section 2.7.
 
@@ -138,7 +138,7 @@ Which tools does civic_info_agent have, and what does each one do?
 ```
 
 ```
-Why did civic_info_agent answer that permit BP-2041 was unknown in the last test?
+Why did civic_info_agent answer that permit PP-2026-0412 was unknown in the last test?
 ```
 
 Use a question to understand the project or the instance, to find out why something happened, or to check what Bob understood before assigning it work. Questions belong in Ask mode, where Bob cannot make changes.
@@ -171,7 +171,7 @@ Return only the file.
 To correct Bob's previous answer, in a conversation that is already in progress:
 
 ```
-Use permit BP-2043 as the example instead.
+Use permit PP-2026-0398 as the example instead.
 ```
 
 ```
@@ -249,10 +249,10 @@ A better prompt references the files with @ mentions, names the Agent and the da
 
 | Situation | Weak | Better | Why |
 |---|---|---|---|
-| Starting an Agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing Tool referenced with @, and "Tell me what you understood, what you need to know, and what exists on the instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent Tools and import before you have seen a name |
+| Starting an Agent project (structured prompt) | "Build me a citizen services agent for the City of Utopia that can track permits, answer questions about regulations and take problem reports.", typed in Agent mode | The structured prompt with the six questions: three example user sentences, the data files and the existing Tool referenced with @, and "Tell me what you understood, what you need to know from me, and what already exists on my instance", in Ask mode | The weak prompt leaves Bob to assume the data, invent Tools and import before you have seen a name |
 | Running a test (instruction) | "Test the agent." | "Send the test questions from design/civic-info-design.md to civic_info_agent, with reasoning, and show the answers next to the expected ones." | "Test the agent" leaves Bob to choose the questions and the way to report. The better prompt names the questions, the Agent and the form of the answer |
 | Adding one Tool (structured prompt) | "Add the permit status tool to the agent." | The six-part prompt shown in 3.3 | The weak prompt names neither a file nor an Agent, and gives no proof of success. Bob might create the Tool from scratch, rename it, or report success as soon as the import returns |
-| Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit BP-2041 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the reasoning is where to look for it |
+| Investigating a failure (question) | "The agent does not work, fix it." | "Why did civic_info_agent answer that permit PP-2026-0412 was unknown in the last test? Look at the reasoning of that test and tell me which tool was called and what it returned." | "Fix it" leads Bob to change the first thing it finds. The question asks for the cause first, and the reasoning is where to look for it |
 | Requesting a file (instruction) | "Write me an agent definition for permit tracking." | The file request shown in 3.3, with the Agent's name, purpose and Tools listed, ending "Return only the file" | The name, the purpose and the Tools are stated. The weak prompt produces a plausible file with an invented name |
 | Correcting a previous answer (instruction) | "That's not right, try again." | "The table is right but the answer is too long. Keep the table, remove the introduction, and keep the whole answer under 80 words." | "Try again" gives Bob nothing to change, so it guesses what was wrong |
 
@@ -267,7 +267,7 @@ Prompts to avoid:
 
 ## 3.5 What Bob reads from the project folder
 
-Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. Neither needs editing.
+Two items in the project folder, both written by the watsonx Orchestrate ADK extension in chapter 2, are available to Bob in every conversation: the settings file `.bob/mcp.json`, from which Bob starts the Orchestrate server and the documentation server and which sets the folder that Bob can work in, and the Orchestrate skills in `.bob/skills`, which Bob activates when a task matches their description. You do not edit them by hand; the two cases in which an entry of `.bob/mcp.json` changes, in chapters 2 and 8, are done by Bob.
 
 Bob does not read the other files of the project automatically. Reference a file with an @ mention when Bob must read it, for example the design file in an Agent-mode prompt.
 

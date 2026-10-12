@@ -1,6 +1,6 @@
 # Chapter 5. Adding an Orchestrate Knowledge Base (RAG)
 
-Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or its Agent imported from the walkthrough folder as the chapter's Overview describes.
+Level: beginner. Time: about 60 minutes. Prerequisites: chapter 4 completed, or its Agent imported from the walkthrough folder as that chapter's Overview describes.
 
 ## Overview
 
@@ -15,7 +15,7 @@ Skip this chapter if you have already connected a Knowledge Base to an Agent wit
 ## 5.1 Before you start
 
 - The setup from chapter 2, complete.
-- The Agent `civic_info_agent` from chapter 4 on your instance, in draft, with the correction of section 4.9. If you skipped chapter 4, import it as described in that chapter's Overview; the file in the walkthrough folder already contains the correction.
+- The Agent `civic_info_agent` from chapter 4 on your instance, in Draft, with the correction of section 4.9. If you skipped chapter 4, import it as described in that chapter's Overview; the file in the walkthrough folder already contains the correction.
 - A new conversation in Bob for this chapter.
 
 Check that the Agent is there: in Ask mode, ask `Which agents exist on my instance?` and confirm that `civic_info_agent` is listed.

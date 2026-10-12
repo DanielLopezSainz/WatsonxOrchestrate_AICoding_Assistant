@@ -169,7 +169,7 @@ The prompt has two sentences: the first approves the design and the second start
 The design in @design/civic-info-design.md is approved. Build it.
 ```
 
-The build takes Bob a minute or two. In the run, Bob:
+Approve each request as it comes. The build takes Bob a minute or two. In the run, Bob:
 
 1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how Agents are built and tested. Everything that follows comes from the design and from that skill.
 2. Wrote the Agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.

@@ -72,4 +72,4 @@ The city, its departments, its residents and all its data are fictional. The gui
 | 9 | Split the work between a front desk Agent and one Agent per department | Collaborator Agents | Plan mode for a design with several Agents |
 | 10 | Give CivicPulse a WhatsApp number | Orchestrate Channel | A structured prompt for a task in Agent mode, without a design |
 
-From chapter 4 onwards, each chapter has an overview with a skip note, prerequisites, steps, tests, a deployment and a summary. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
+From chapter 4 onwards, each chapter has an overview with a skip note, prerequisites, steps, tests and a summary, and chapters 4 to 9 end with a deployment. The files that each chapter produces are in the `walkthroughs` folder of the repository, so that you can start at any chapter.
