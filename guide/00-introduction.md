@@ -1,6 +1,6 @@
 # Introduction
 
-Building watsonx Orchestrate Agents with IBM Bob. Daniel Lopez Sainz, IBM Customer Success, France. Written and tested in September and October 2026 with IBM Bob 2.1, the watsonx Orchestrate ADK 2.18.0 and a watsonx Orchestrate instance on IBM Cloud, on macOS.
+Building watsonx Orchestrate Agents with IBM Bob. IBM CSM Team, France. Written and tested in September and October 2026 with IBM Bob 2.1, the watsonx Orchestrate ADK 2.18.0 and a watsonx Orchestrate instance on IBM Cloud, on macOS.
 
 ## Who this guide is for
 
