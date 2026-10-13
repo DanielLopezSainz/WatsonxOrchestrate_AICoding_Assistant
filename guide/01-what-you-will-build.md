@@ -19,7 +19,7 @@ You build your Agent incrementally, and every improvement is built on top of the
 
 - Chapter 5: the Agent has access to the city's regulations, so that it answers questions about permits, waste and noise from the official documents.
 - Chapter 6: Tools that look up a resident's own records: a permit application, a road repair, the collection days of a street.
-- Chapter 7: a Connection to the city's 311 Call Center, so that it reports a pothole and gets a request number back.
+- Chapter 7: a Connection to the city's 311 Call Center, so that residents can report problems and get a request number to follow them.
 - Chapter 8: an address registry, so that "18 elm st" is understood as Elm Street.
 - Chapter 9: a team of specialised Agents, one per department, behind a front desk.
 - Chapter 10: a WhatsApp number, so that residents reach it from their phone.
