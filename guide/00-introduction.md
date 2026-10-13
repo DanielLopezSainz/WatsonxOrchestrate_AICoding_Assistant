@@ -16,8 +16,6 @@ Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced de
 | A phone with WhatsApp | Only if you want to use Orchestrate from WhatsApp, chapter 10 |
 | About eight hours | Our estimate of the average time required to complete all the chapters. You are free to jump directly to the chapter of your choice |
 
-Chapter 10 and the deployments at the end of chapters 4 to 9 need an instance; on the Developer Edition, the chapters say what to skip.
-
 ## How to read it
 
 The chapters build on each other, in order: chapter 2 connects Bob to your instance, chapter 3 gives the way of working, and chapters 4 to 10 add one component each to the same Agent. Every chapter from chapter 4 opens with a skip note: the files of the previous chapters are in the `walkthroughs` folder of the repository, with one instruction to Bob that imports them, so that you can start at the chapter you need. Chapter 3 has a reading table for those who know the platform or Bob already.
