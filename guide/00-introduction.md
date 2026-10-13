@@ -18,7 +18,7 @@ Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced de
 
 ## How to read it
 
-The chapters build on each other, in order: chapter 2 connects Bob to your instance, chapter 3 gives the way of working, and chapters 4 to 10 add one component each to the same Agent. Every chapter from chapter 4 opens with a skip note: the files of the previous chapters are in the `walkthroughs` folder of the repository, with one instruction to Bob that imports them, so that you can start at the chapter you need. Chapter 3 has a reading table for those who know the platform or Bob already.
+The chapters build on each other, in order: chapter 2 connects Bob to your instance, chapter 3 gives the way of working, and chapters 4 to 10 add one component each to the same Agent. Every chapter from chapter 4 opens with a skip note: the files of the previous chapters are in the `walkthroughs` folder of the repository, with one instruction to Bob that imports them, so that you can start at the chapter you need. Chapter 3 starts with a table that says which of its sections to read and which to skip, depending on whether you have used an AI assistant before, use one but not Bob, or already use Bob.
 
 Each chapter states its level, its time and its prerequisites in its first line, and ends with a summary of what was built and what to keep in mind.
 
