@@ -1,8 +1,6 @@
 # Building watsonx Orchestrate Agents with IBM Bob
 
-Ten chapters, one fictional city, and a working citizen service at the end, built on IBM watsonx Orchestrate without writing a file by hand. You brief IBM Bob; Bob writes the Agents, the Tools, the documents and the tests, runs them on your instance, and shows you the result.
-
-CivicPulse starts as an Agent that knows three phone numbers. By chapter 10 it reads the city's regulations, looks up permit applications, reports potholes to the 311 Call Center, understands "18 elm st", works as a team of four Agents, and answers residents on WhatsApp. Every chapter adds one component of the platform and one way of working with Bob. Every chapter was run as written, and the text keeps what Bob got wrong and the line of a prompt that put it right.
+Use IBM Bob to build complex AI Agents on IBM watsonx Orchestrate. This course is for experienced Orchestrate users who want to accelerate their development, and for novice users who want to build complex Agents. A minimum of theoretical knowledge of watsonx Orchestrate is desirable but not required.
 
 ## What you will have built
 
