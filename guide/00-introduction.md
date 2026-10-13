@@ -4,9 +4,7 @@ Building watsonx Orchestrate Agents with IBM Bob. IBM CSM Team, France. Written 
 
 ## Who this guide is for
 
-For anyone who has to build an Agent on watsonx Orchestrate: a consultant, an architect, a developer, or a business analyst who has never written a line of code. Bob writes the files; you describe, read, decide and approve. A reader with coding experience reads the same files and understands the platform faster; a reader without it follows the chapters as they are.
-
-At the end, you have built a working city service with every component the platform offers to an Agent, and you know how to brief Bob for the next one.
+Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced developers will find that working with Bob increases their productivity.
 
 ## What you need
 
