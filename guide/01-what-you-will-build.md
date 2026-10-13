@@ -15,7 +15,7 @@ In this guide you build the agentic application CivicPulse for the City of Utopi
 
 CivicPulse answers them, and when a resident needs something done, such as reporting a problem or opening a support case, it does it for them.
 
-You build it the way a city would: a little at a time, and every step working before the next. The first version, in chapter 4, is modest: an Agent that tells residents which of the three city departments to contact, with its phone number and opening hours. Each chapter then gives it a new capability:
+You build your Agent incrementally, and every improvement is built on top of the previous one. The first version of the Agent, in chapter 4, is simple: an Agent that tells residents which of the three city departments to contact, depending on their question. On top of this you add:
 
 - Chapter 5: the city's regulations, so that it answers questions about permits, waste and noise from the official documents.
 - Chapter 6: Tools that look up a resident's own records: a permit application, a road repair, the collection days of a street.
