@@ -6,7 +6,21 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 Creating an Agent in watsonx Orchestrate the traditional way means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the Agent must do in natural language. Bob performs the development for you, sends the code to your Orchestrate instance, and tests the result to confirm that the AI Agent works as expected.
 
-In this guide you build CivicPulse, the AI Agent of the City of Utopia, a fictional city that wants its residents to get answers without queuing at the town hall. Which department handles a dark street light? Do I need a permit for a garden shed? When is the green bin collected on my street? A resident asks, CivicPulse answers, and when something has to be done, such as reporting a pothole, it does it. You start in chapter 4 with one Agent that knows three phone numbers. Chapter by chapter you make it grow: the city's regulations to search, Tools that look up records, a Connection to the city's 311 Call Center, an address registry, a team of specialised Agents, and a WhatsApp number.
+In this guide you build the agentic application CivicPulse for the City of Utopia, a fictional city that wants its residents to get answers without queuing at the town hall. Residents ask CivicPulse questions such as:
+
+- Which department handles a dark street light?
+- Do I need a permit for a garden shed?
+- When is the green bin collected on my street?
+- Where is my permit application?
+
+A resident asks, CivicPulse answers, and when something has to be done, such as reporting a pothole, it does it. You start in chapter 4 with one Agent that knows three phone numbers. Chapter by chapter you make it grow:
+
+- The city's regulations, to search and quote.
+- Tools that look up records: a permit application, a road repair, the collection days of a street.
+- A Connection to the city's 311 Call Center, to report problems.
+- An address registry, so that "18 elm st" is understood.
+- A team of specialised Agents, one per department.
+- A WhatsApp number.
 
 At the end of chapter 10, you have built:
 
