@@ -16,7 +16,7 @@ CivicPulse, the citizen service of the City of Utopia: an Agent that starts with
 
 ## How it works
 
-You write prompts; Bob writes everything else. Each chapter follows the same three steps: in Ask mode, Bob says what it understood and what exists on your instance; in Plan mode, it writes a design that you read and approve; in Agent mode, it builds, imports, tests and reports. You approve each file and each command as it comes, and you deploy when the tests pass. Chapter 3 explains the method in twenty minutes; the chapters after it practise it.
+You write prompts; Bob writes everything else. Each chapter follows the same three steps: in Ask mode, Bob says what it understood and what exists on your instance; in Plan mode, it writes a design that you read and approve; in Agent mode, it builds, imports, tests and reports.
 
 ## Who it is for
 
