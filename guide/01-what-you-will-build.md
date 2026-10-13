@@ -17,7 +17,7 @@ CivicPulse answers them, and when a resident needs something done, such as repor
 
 You build your Agent incrementally, and every improvement is built on top of the previous one. The first version of the Agent, in chapter 4, is simple: an Agent that tells residents which of the three city departments to contact, depending on their question. On top of this you add:
 
-- Chapter 5: the city's regulations, so that it answers questions about permits, waste and noise from the official documents.
+- Chapter 5: the Agent has access to the city's regulations, so that it answers questions about permits, waste and noise from the official documents.
 - Chapter 6: Tools that look up a resident's own records: a permit application, a road repair, the collection days of a street.
 - Chapter 7: a Connection to the city's 311 Call Center, so that it reports a pothole and gets a request number back.
 - Chapter 8: an address registry, so that "18 elm st" is understood as Elm Street.
