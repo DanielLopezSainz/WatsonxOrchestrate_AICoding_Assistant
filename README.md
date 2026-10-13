@@ -2,19 +2,17 @@
 
 Use IBM Bob to build complex AI Agents on IBM watsonx Orchestrate. This course is for experienced Orchestrate users who want to accelerate their development, and for novice users who want to build complex Agents. A minimum of theoretical knowledge of watsonx Orchestrate is desirable but not required.
 
-## What you will have built
+## What you will build
 
-| By the end of | CivicPulse can |
-|---|---|
-| Chapter 4 | Tell a resident which department handles their question, with contact and hours |
-| Chapter 5 | Answer from the city's regulations: permits, waste sorting, noise, with the document named |
-| Chapter 6 | Look up a permit application, a road repair or the collection day of a street |
-| Chapter 7 | Report a pothole to the city's 311 Call Center, with the key kept out of the chat |
-| Chapter 8 | Understand "18 elm st" through an address registry that Bob wrote as an MCP server |
-| Chapter 9 | Route each question to the right department, one Agent per department behind a front desk |
-| Chapter 10 | Answer on WhatsApp |
+CivicPulse, the citizen service of the City of Utopia: an Agent that starts with three phone numbers and ends as a team that answers residents on WhatsApp. Each chapter adds one component of watsonx Orchestrate, and by the end you have built them all:
 
-One component of watsonx Orchestrate per chapter: Agent, Knowledge Base, Tools, Connection, Toolkit, Collaborator Agents, Channel. And one thing about working with Bob per chapter: the three modes, the design you approve before anything is built, the prompts that carry what the platform needs to know, the tests Bob runs, the reasoning you read.
+- **Agent**: the front desk of the city, with its instructions, its welcome message and its starter prompts.
+- **Knowledge Base**: the city's regulations, searched and quoted by the Agent.
+- **Tools**: Python functions that look up a permit application, a road repair or the collection day of a street.
+- **Connection**: the API key of the 311 Call Center, kept out of the chat and used by a Tool that reports potholes.
+- **Toolkit**: an MCP server that Bob writes, so that the Agent understands "18 elm st".
+- **Collaborator Agents**: one Agent per department behind the front desk, each with its own Tools and documents.
+- **Channel**: the WhatsApp number where residents reach the whole team.
 
 ## How it works
 
