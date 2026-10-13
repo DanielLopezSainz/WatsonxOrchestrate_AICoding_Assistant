@@ -26,7 +26,7 @@ You build your Agent incrementally, and every improvement is built on top of the
 
 By the end, CivicPulse is a team of four Agents with access to the city's regulations (a Knowledge Base, searched with RAG), Tools (Python programs), a Connection (to an external system, the 311 Call Center), a Toolkit (an MCP server) and a Channel (WhatsApp), every one of them written by Bob from your prompts.
 
-If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
+If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and to section 1.4 if you want to jump to a specific chapter.
 
 ## 1.1 The 2 main characters
 
