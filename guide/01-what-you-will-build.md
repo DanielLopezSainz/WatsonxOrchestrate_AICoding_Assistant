@@ -6,12 +6,12 @@ Level: beginner. Time: about 5 minutes of reading. Prerequisites: none.
 
 Creating an Agent in watsonx Orchestrate the traditional way means writing definition files, Python functions and commands by hand. With IBM Bob, you describe what the Agent must do in natural language. Bob performs the development for you, sends the code to your Orchestrate instance, and tests the result to confirm that the AI Agent works as expected.
 
-In this guide you build the agentic application CivicPulse for the City of Utopia, a fictional city that wants its residents to get answers without queuing at the town hall. Residents ask CivicPulse questions such as:
+In this guide you build the agentic application CivicPulse for the City of Utopia. Residents ask CivicPulse questions such as:
 
 - Which department handles a dark street light?
 - Do I need a permit for a garden shed?
 - When is the green bin collected on my street?
-- Where is my permit application?
+- What is the status of my permit application?
 
 A resident asks, CivicPulse answers, and when something has to be done, such as reporting a pothole, it does it. You start in chapter 4 with one Agent that knows three phone numbers. Chapter by chapter you make it grow:
 
