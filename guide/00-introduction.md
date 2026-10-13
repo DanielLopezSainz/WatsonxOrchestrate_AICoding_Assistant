@@ -12,7 +12,7 @@ Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced de
 |---|---|
 | IBM Bob 2.1 or later, installed | The assistant that writes and runs everything |
 | A watsonx Orchestrate instance, or the Developer Edition on your machine | Where the Agents live. Chapter 2 connects Bob to it |
-| Git, installed | Bob uses it to clone the repository and to save your work; you type no git command |
+| Git, installed | Bob uses it to clone the repository and to save your work; not mandatory to complete the course |
 | A phone with WhatsApp | Only if you want to use Orchestrate from WhatsApp, chapter 10 |
 | About eight hours | The ten chapters, at their stated times; each one fits in a working session |
 
