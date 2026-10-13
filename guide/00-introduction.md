@@ -4,7 +4,7 @@ Building watsonx Orchestrate Agents with IBM Bob. IBM CSM Team, France. Written 
 
 ## Who this guide is for
 
-Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced developers will find that working with Bob increases their productivity.
+Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced developers will find that working with Bob increases their productivity. For new users, Bob offers the opportunity to develop fully fledged AI Agents with sophisticated features without having to be expert developers.
 
 ## What you need
 
