@@ -67,4 +67,4 @@ When you work through the chapters, Bob and the ADK extension add their own fold
 
 Written and tested with watsonx Orchestrate ADK 2.18.0 and IBM Bob 2.1, on an instance on IBM Cloud, in September and October 2026. The platform and Bob change with their versions; if a step reads differently on yours, open an issue with the chapter, the section, what you sent and what you got.
 
-Daniel Lopez Sainz, IBM Customer Success, France
+IBM CSM Team, France
