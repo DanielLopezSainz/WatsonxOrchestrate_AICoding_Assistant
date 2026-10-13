@@ -24,7 +24,7 @@ You build your Agent incrementally, and every improvement is built on top of the
 - Chapter 9: a team of specialised Agents added to the main Agent, one per department, each working on the tasks of its department.
 - Chapter 10: a WhatsApp number, so that residents can use their favourite messaging service to interact with CivicPulse.
 
-By the end, CivicPulse is a team of four Agents with documents, Tools, a Connection, a Toolkit and a Channel, every one of them written by Bob from your prompts.
+By the end, CivicPulse is a team of four Agents with access to the city's regulations (a Knowledge Base, searched with RAG), Tools (Python programs), a Connection (to an external system, the 311 Call Center), a Toolkit (an MCP server) and a Channel (WhatsApp), every one of them written by Bob from your prompts.
 
 If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
