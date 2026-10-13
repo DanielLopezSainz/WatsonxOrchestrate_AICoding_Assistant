@@ -22,7 +22,7 @@ You build your Agent incrementally, and every improvement is built on top of the
 - Chapter 7: a Connection to the city's 311 Call Center, so that residents can report problems and get a request number to follow them.
 - Chapter 8: an address registry, so that "18 elm st" is understood as Elm Street.
 - Chapter 9: a team of specialised Agents added to the main Agent, one per department, each working on the tasks of its department.
-- Chapter 10: a WhatsApp number, so that residents reach it from their phone.
+- Chapter 10: a WhatsApp number, so that residents can use their favourite messaging service to interact with CivicPulse.
 
 By the end, CivicPulse is a team of four Agents with documents, Tools, a Connection, a Toolkit and a Channel, every one of them written by Bob from your prompts.
 
