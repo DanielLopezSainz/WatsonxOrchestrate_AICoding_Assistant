@@ -190,6 +190,8 @@ Open the `tools` folder in the File Explorer. It has six files: three Python fil
 
 Open `get_permit_status.py` and find the function `get_permit_status`, in the run near the bottom of the file. Around the function are the following:
 
+![tools/get_permit_status.py in the editor: the @tool line, the description and the parameter](images/ch06-tool-file.png)
+
 - The line `@tool` above the function. It tells watsonx Orchestrate that this function is a Tool.
 - Just under the function name, the text between triple quotes. This is the description: one sentence on what the Tool does, one line on the parameter, one line on the result. These are the words the Agent reads when it decides whether to call the Tool.
 - `permit_number`, the parameter. The Agent must find a value for it in the resident's question before it can call the Tool.
@@ -240,6 +242,8 @@ Bob now shows the steps along with the answer: the Agent called `get_permit_stat
 Next, ask the shed question with reasoning. The Knowledge Base appears in the steps as a Tool named `city_regulations`, with the query the Agent sent it and the passages it got back. The Agent can answer this question by two routes, the record and the guide, and the steps show which it took: in the test runs, it used both sources on one run and the guide alone on another, and both answers were correct.
 
 When an Agent with Tools answers wrongly, open its reasoning steps. They show which Tool was called and with which values, and that narrows the search: a wrong Tool points at the Tool descriptions, a wrong value at the parameter descriptions, and no call at all at the instructions. Tell Bob what you found, in one sentence, as in 4.9.
+
+![The reasoning of an answer in the preview panel: the call to get_permit_status with its input and output](images/ch06-reasoning-tool-call.png)
 
 ## 6.9 Deploy the change in Live
 

@@ -178,6 +178,8 @@ Open `agents/permits_agent.yaml` in the File Explorer. It is a definition like t
 
 The three departments are listed in the chat next to the front desk Agent. Open one and ask it something outside its subject. It answers about its own subject and refuses the rest. It has no welcome message, because it is made to serve another Agent. The departments stay visible in this guide so that you can open and test them this way. In a production deployment, consider the field `hidden: true` at the top level of each department's definition. The chat then lists the front desk Agent only, and residents cannot go around it.
 
+![The Manage Agents page with the front desk Agent and the three department Agents](images/ch09-four-agents.png)
+
 Open `agents/civic_info_agent.yaml`. Its `tools` list is empty. The three names are in `collaborators`, and `knowledge_base` keeps `city_regulations`. The instructions are much shorter than in chapter 8: the welcome, the general contacts and hours, the rule for the Noise Ordinance, the routing rule, and the refusal of questions outside the three departments. The welcome message and the starter prompts are unchanged.
 
 Bob's MCP tab has nothing new and the project folder has Agent files only, because a Collaborator Agent is declared in the definition of the Agent that calls it.
@@ -200,6 +202,8 @@ The answer has both parts: a request number for the pothole and the green bin da
 - Wrong address: "Which day is the grey bin collected at 3 Castle Street?" The waste Agent asks you to check the address; the front desk Agent passes that on.
 
 Ask the first question again with reasoning. A Collaborator Agent appears as a tool of the front desk Agent, named after its display name: `chat_with_collaborator_roads_and_infrastructure`, with a response that starts "Transferring to" and names the department. The steps that follow are labelled with the department's name, Roads and Infrastructure, and are the Tool calls of chapter 8: `lookup_address`, then `report_issue`. Then the same for Waste and Recycling, with `lookup_address` and `get_collection_days`. Each department receives its part of the question in the words of the front desk Agent, and the answer has the two parts one after the other, each with its department's contact.
+
+![The reasoning: Transferring to Roads and Infrastructure, then the department's Tool calls](images/ch09-reasoning-transfer.png)
 
 The waste Agent may credit the collection day to the Waste Sorting Rules, a Tool result named as if it came from the document. Its instructions say to name the document for every answer from the Knowledge Base, and it applies the rule too widely.
 

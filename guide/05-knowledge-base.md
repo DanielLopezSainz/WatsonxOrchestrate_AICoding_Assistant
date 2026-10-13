@@ -171,6 +171,8 @@ The @ mention tells Bob to read the design file. Bob:
 4. Updates the Agent: the Knowledge Base is attached, the instructions are extended, and the Agent is imported again, replacing the Agent in Draft.
 5. Tests the Agent with the questions from the design and reports.
 
+![Bob waiting for the Knowledge Base to finish indexing](images/ch05-indexing-wait.png)
+
 Approve each request as it comes. If an import fails, Bob reads the error and corrects the file before continuing.
 
 ## 5.7 What Bob built
@@ -211,6 +213,8 @@ Ask civic_info_agent: "How loud can a party be after 10 pm on a Saturday?"
 ```
 
 Read each answer with your rules of 5.3 next to you. The shed needs no permit, because it is under 10 square metres, provided it is detached and under 2.5 metres high. The mirror goes wrapped in the grey bin. On a Saturday, music must not be audible outside the property after 23:00, and a one-night exemption can be requested five days ahead. Check that each answer names its document.
+
+![The preview panel with the shed answer and the Building Permit Guide named](images/ch05-preview-shed-answer.png)
 
 Then ask as residents do:
 

@@ -158,6 +158,8 @@ UTOPIA_311_API_KEY=<a word and a number>
 
 On the Developer Edition, the first two lines are empty and only the third matters.
 
+![The .env file in the editor with its three variables, the values blurred](images/ch07-env-file.png)
+
 That variable is how the key reaches the instance without passing through the chat: the ADK command that Bob runs reads it from the shell, so the key appears in no conversation and in no project file other than `.env`. In a company, the value comes from a vault instead of a `.env` file, and the command is the same one that a deployment pipeline runs.
 
 ## 7.7 Agent mode: build and test
@@ -231,6 +233,8 @@ Deploy civic_info_agent from draft to live.
 ```
 
 When Bob reports the deployment, go to the watsonx Orchestrate chat and report the pothole: the resident of the Overview gets a request number.
+
+![The Connections page of watsonx Orchestrate with utopia_311 and its Draft and Live environments](images/ch07-connections-page.png)
 
 ## 7.11 Summary
 

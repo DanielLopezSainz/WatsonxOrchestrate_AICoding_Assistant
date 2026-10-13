@@ -66,6 +66,8 @@ exists on my instance.
 
 Bob first looks at your instance, which takes a few seconds, so that its answer describes what is there. The answer usually contains:
 
+![Bob's answer to the first prompt: what it understood, what exists on the instance, its questions](images/ch04-ask-answer.png)
+
 1. A summary of what Bob understood. Read it against what you meant. If it is wrong, correct it now.
 2. A list of what already exists on the instance: the Agents, Tools, Knowledge Bases and Connections, and whether the name of the new Agent is free. Bob reads this from the instance.
 3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the Agent.
@@ -108,6 +110,8 @@ Write the design for this agent into design/civic-info-design.md.
 ```
 
 Bob writes the file after you approve the request, and shows a summary. Open the file and read it as the specification of what you are about to receive. The layout is Bob's choice and differs from one run to another. The table lists what the file must contain.
+
+![The request to write design/civic-info-design.md, with the Approve button](images/ch04-approve-design-write.png)
 
 | Content | What to check |
 |---|---|
@@ -171,6 +175,8 @@ The design in @design/civic-info-design.md is approved. Build it.
 
 Approve each request as it comes. The build takes Bob a minute or two. In the run, Bob:
 
+![The import command shown by Bob in Agent mode, waiting for approval](images/ch04-approve-import-command.png)
+
 1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how Agents are built and tested. Everything that follows comes from the design and from that skill.
 2. Wrote the Agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
 3. Imported it. The Agent then exists on the instance, in Draft, where only the builders can use it.
@@ -204,6 +210,8 @@ Read the file against the design. The two can differ. In the run, the design gav
 Mode: Agent, same conversation.
 
 Open the watsonx Orchestrate panel. In the Explorer section, move the pointer over the Agents row, click the refresh icon that appears on it, and expand Agents. `civic_info_agent` is there, next to the Agents that were already on the instance.
+
+![The Agent in the Manage Agents page of watsonx Orchestrate, with the preview panel and the street light answer](images/ch04-preview-panel.png)
 
 Do not click the Agent's name. A click saves a copy of the Agent from the instance into the project folder and offers to replace the file that Bob wrote, in a longer format with every field the instance stores. If you click by mistake, choose Cancel in the dialog. If the file is replaced, it becomes a copy of the Agent as the instance holds it: the Agent itself is unchanged, but any change made to the file and not yet imported is lost, and the file you read in 4.7 changes shape. The restore request of section 3.6 brings the file back.
 
@@ -263,6 +271,8 @@ Deploy civic_info_agent from draft to live.
 ```
 
 Bob runs the deployment and reports that the Agent was deployed. Open your watsonx Orchestrate instance in the browser: the Agent is now in the chat on the landing page, with its welcome message and its two starter prompts, for anyone who has access to the instance. On the Developer Edition, skip this step; deployment is not available there.
+
+![The watsonx Orchestrate chat after deployment: the welcome message and the two starter prompts](images/ch04-live-chat-welcome.png)
 
 From now on, the Agent exists in both environments. The next time you ask Bob to change the Agent, the change goes to Draft, and the Agent deployed in Live keeps answering as before until you deploy again. The same goes for questions: when you ask Bob to send a question to the Agent, it reaches the Agent in Draft, because the operation that Bob uses to chat with an Agent, `chat_with_agent` on the Orchestrate server, is built for Draft and has no option to point at Live. To talk to the Agent deployed in Live, the one residents talk to, use the chat in watsonx Orchestrate.
 

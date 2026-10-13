@@ -46,6 +46,8 @@ Step 2. Install the extension.
 1. Open the Extensions view: `Cmd Shift X` on a Mac, `Ctrl Shift X` elsewhere.
 2. Search for `watsonx Orchestrate ADK`, publisher watson-devex, and click Install.
 
+![The watsonx Orchestrate ADK extension in the Extensions view, with its Install button](images/ch02-extension-install.png)
+
 You should see: a watsonx Orchestrate icon in the left bar. If the bar is full, the icon is under the three dots at its bottom.
 
 Step 3. Initialise the workspace.
@@ -59,6 +61,8 @@ Step 3. Initialise the workspace.
 You should see: the panel now has two sections. Explorer lists Agents, Tools, Connections, Knowledge Bases and Toolkits; Environment Manager shows an Environment dropdown and an Add button.
 
 Step 4. Send Bob its starting message.
+
+![The starting message placed in the chat input box by the extension, before sending](images/ch02-starting-message.png)
 
 When the initialisation ends, the extension places a message in the chat input box of Bob and does not send it. No notification is displayed, so the message is easy to overlook.
 
@@ -78,6 +82,8 @@ The message tells Bob to switch to Agent mode, to load the Orchestrate skills, a
 You should see: Bob answering that the skills are loaded, with a table of the skills, and that it is in Agent mode. If Bob first requests approval to run `fetch_all_skills`, approve it; step 7 sets the approvals for the rest of the guide. The number of skills depends on the version of the ADK; version 2.18 provides eight. The skills are stored in `.bob/skills` in the project folder, and Bob reads them in every chapter from chapter 4.
 
 Step 5. Connect to your instance.
+
+![The Environment Manager with the saas environment active](images/ch02-environment-manager-active.png)
 
 Your instance is the watsonx Orchestrate service where your Agents run: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment; this is a different use of the word from the Draft and Live environments of chapter 1, which are two parts of one instance. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
 
@@ -122,7 +128,7 @@ Open it with the files icon at the top of the left bar. It shows the project fol
 
 In the File Explorer you read a design or an Agent definition that Bob has written, and open the chapters of this guide.
 
-[Screenshot: the File Explorer with the project folder open]
+![The File Explorer with the project folder open](images/ch02-file-explorer.png)
 
 ### watsonx Orchestrate panel
 
@@ -141,15 +147,13 @@ An item in the Explorer has these actions:
 
 The Environment Manager, below the Explorer, is where you activate an environment again when its token has expired, or switch to another instance.
 
-[Screenshot: the watsonx Orchestrate panel after initialisation, with Explorer and Environment Manager]
+![The watsonx Orchestrate panel after initialisation: Explorer and Environment Manager](images/ch02-orchestrate-panel.png)
 
 ### Source Control
 
 Open it with the branch icon in the left bar; it lists the files that changed since the last commit. From this view you can stage files, type a commit message, commit, and synchronise with the remote repository, by clicking.
 
 Use Source Control to see what Bob changed in the project folder and to keep your work in git. Chapter 3, section 3.6, describes how to do the same operations by asking Bob.
-
-[Screenshot: the Source Control view with changed files]
 
 ### Bob chat panel
 
@@ -163,7 +167,7 @@ The Bob icon opens the panel where you write prompts and read Bob's answers. The
 | @ mention | Typed in the chat input | References a file or folder, so that Bob reads it |
 | Approve and reject buttons | Above the chat input, when Bob requests an action | Allow or refuse the action that Bob proposes |
 
-[Screenshot: the Bob chat panel with the mode dropdown and the Permissions button]
+![The Bob chat panel with the mode dropdown and the Permissions button](images/ch02-chat-panel-modes.png)
 
 ### Bob settings, MCP tab
 
@@ -171,7 +175,7 @@ Open Bob's settings with the settings icon in the Bob chat panel, then select th
 
 The MCP tab is also where you check that both Orchestrate servers are connected, set the Always allow switches, and restart a server when an operation fails for no apparent reason.
 
-[Screenshot: the MCP tab with the two Orchestrate servers and the Always allow switches]
+![The MCP tab with the two Orchestrate servers and the Always allow switches](images/ch02-mcp-tab.png)
 
 ### How the views relate
 

@@ -53,7 +53,7 @@ The Orchestrate Agent that you created in the previous chapters will be reachabl
 1. Create a free account at twilio.com. Twilio asks for an email address, then for your phone number, which it verifies by SMS. Twilio does not ask for a payment card. Answer the questions of the sign-up as you like.
 2. In the console, from the Account Dashboard, open the **Develop** tab of the left panel, then **Messaging**, then **Try it out**, then **Send a WhatsApp message**. The page has two tabs. The first, **Sandbox**, shows Twilio's test number, `+1 415 523 8886`, your join code, `join` followed by two words, and a QR code.
 
-Screenshot: the Sandbox tab, with the number, the join code and the QR code.
+![The Sandbox tab of Twilio: the test number, the join code and the QR code](images/ch10-twilio-sandbox.png)
 
 3. Scan the QR code with your phone, or open WhatsApp and send the join code to the test number. Use the phone whose number you gave at sign-up: a trial account exchanges messages only with verified numbers, and that one is verified. Twilio replies in WhatsApp that you are all set. Your number then appears under Sandbox Participants on the second tab of the page.
 
@@ -186,7 +186,7 @@ Configure Twilio to send the messages to the event URL discussed in 10.5.
 2. In the field **When a message comes in**, replace the address that Twilio put there (its own demo reply) with the event URL from Bob's answer. Leave the method on **POST**. Leave **Status callback URL** empty.
 3. Click **Save**. The setting is not applied until you click Save.
 
-Screenshot: the Sandbox settings tab, with the event URL in the field and the Save button.
+![The Sandbox settings tab with the event URL in the field and the Save button](images/ch10-twilio-sandbox-settings.png)
 
 ## 10.8 Try it
 
@@ -197,6 +197,8 @@ Does a broken mirror go in the glass bin?
 ```
 
 The answer arrives within a few seconds, from the Waste Sorting Rules: a broken mirror does not go in the glass container, with the Waste and Recycling contact. Then keep the phone in hand: everything the Agents learned in the earlier chapters now answers on WhatsApp. Send these, in any order:
+
+![The WhatsApp conversation on the phone: the question and CivicPulse's answer](images/ch10-whatsapp-conversation.png)
 
 - `What are the quiet hours?` The front desk Agent answers itself, from the Noise Ordinance.
 - `Which day is the green bin collected at 18 elm st?` The address as you would type it on a phone; the Address Registry of chapter 8 corrects it and the Waste and Recycling department gives the day.

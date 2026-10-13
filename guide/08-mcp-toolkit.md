@@ -175,6 +175,8 @@ Bob follows the build steps of the design:
 5. Updates the Agent and imports it again, replacing the Agent in Draft. Bob may first put the Toolkit on the `toolkits` line: the import succeeds and the Agent ignores the tools, which Bob sees in its first test; it then lists them under `tools` as `address_registry:lookup_address` and `address_registry:list_streets`, and imports the Agent again.
 6. Sends three test questions to the Agent and reports: an address with an abbreviation, a pothole report with a house number, and an address the registry does not know.
 
+![Bob's MCP tab with the address_registry server next to the two Orchestrate servers, its two tools listed](images/ch08-mcp-tab-registry.png)
+
 Approve each request as it comes. Bob corrects failures of this kind during the build and reports only the results; to see what it corrected, ask in the same conversation: `List every problem you met during the build and how you solved it.`
 
 ## 8.7 What Bob built
@@ -205,6 +207,8 @@ The Agent resolves the address to Elm Street, looks up the collection days, and 
 - An address the Address Registry does not know: "Which day is the grey bin collected at 3 Castle Street?" The Agent says that it does not know that address and asks you to check it. With reasoning, the steps show the lookup and no call to `get_collection_days`.
 
 Ask the first question again with reasoning. The steps show two tool calls in order: `lookup_address` with the address as typed, returning Elm Street, house number 18, North and UT1 1AA, then `get_collection_days` with Elm Street. In the reasoning, the tool appears as `lookup_address`; the Toolkit's name is part of the Agent definition only.
+
+![The reasoning: lookup_address, then get_collection_days with the corrected street](images/ch08-reasoning-two-calls.png)
 
 ## 8.9 Deploy the change in Live
 
