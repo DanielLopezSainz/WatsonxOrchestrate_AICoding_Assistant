@@ -14,7 +14,7 @@ Anyone interested in creating AI Agents with watsonx Orchestrate. Experienced de
 | A watsonx Orchestrate instance, or the Developer Edition on your machine | Where the Agents live. Chapter 2 connects Bob to it |
 | Git, installed | Bob uses it to clone the repository and to save your work; not mandatory to complete the course |
 | A phone with WhatsApp | Only if you want to use Orchestrate from WhatsApp, chapter 10 |
-| About eight hours | The ten chapters, at their stated times; each one fits in a working session |
+| About eight hours | Our estimate of the average time required to complete all the chapters. You are free to jump directly to the chapter of your choice |
 
 Chapter 10 and the deployments at the end of chapters 4 to 9 need an instance; on the Developer Edition, the chapters say what to skip.
 
