@@ -13,21 +13,18 @@ In this guide you build the agentic application CivicPulse for the City of Utopi
 - When is the green bin collected on my street?
 - What is the status of my permit application?
 
-A resident asks, CivicPulse answers, and when something has to be done, such as reporting a pothole, it does it. You start in chapter 4 with one Agent that knows only the contact details and opening hours of the three city departments. Chapter by chapter you add to it:
+CivicPulse answers them, and when a resident needs something done, such as reporting a pothole, it does it for them.
 
-- The city's regulations, to search and quote.
-- Tools that look up records: a permit application, a road repair, the collection days of a street.
-- A Connection to the city's 311 Call Center, to report problems.
-- An address registry, so that "18 elm st" is understood.
-- A team of specialised Agents, one per department.
-- A WhatsApp number.
+You build it the way a city would: a little at a time, and every step working before the next. The first version, in chapter 4, is modest: an Agent that tells residents which of the three city departments to contact, with its phone number and opening hours. Each chapter then gives it a new capability:
 
-At the end of chapter 10, you have built:
+- Chapter 5: the city's regulations, so that it answers questions about permits, waste and noise from the official documents.
+- Chapter 6: Tools that look up a resident's own records: a permit application, a road repair, the collection days of a street.
+- Chapter 7: a Connection to the city's 311 Call Center, so that it reports a pothole and gets a request number back.
+- Chapter 8: an address registry, so that "18 elm st" is understood as Elm Street.
+- Chapter 9: a team of specialised Agents, one per department, behind a front desk.
+- Chapter 10: a WhatsApp number, so that residents reach it from their phone.
 
-- A front desk Agent and three department Agents that work together.
-- An Orchestrate Knowledge Base of city guides and regulations that the Agents search.
-- Orchestrate Tools that read the status of requests and permits, and report new issues to an external system, through an Orchestrate Connection.
-- An Orchestrate Channel: a WhatsApp number for CivicPulse.
+By the end, CivicPulse is a team of four Agents with documents, Tools, a Connection, a Toolkit and a Channel, every one of them written by Bob from your prompts.
 
 If you already know watsonx Orchestrate and Bob, go to section 1.3 for the scenario and section 1.4 for the list of chapters.
 
