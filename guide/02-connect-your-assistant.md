@@ -83,14 +83,14 @@ You should see: Bob answering that the skills are loaded, with a table of the sk
 
 Step 5. Connect to your instance.
 
-![The Environment Manager with the saas environment active](images/ch02-environment-manager-active.png)
-
 Your instance is the watsonx Orchestrate service where your Agents run: a SaaS tenant in IBM Cloud or AWS, or the Developer Edition running on your machine. The ADK calls a connection to an instance an environment; this is a different use of the word from the Draft and Live environments of chapter 1, which are two parts of one instance. The Environment Manager section of the panel shows the environments that exist, and its dropdown shows which one is active; Bob works against the active one.
 
 - Developer Edition running on your machine: nothing to do. The dropdown already reads `local (active)`, and below it "Local server: Started".
 - SaaS tenant: the dropdown is empty on a machine where the ADK was not used before. Click Add and answer four questions in turn: a name for the environment, for example `mytenant`; the instance URL from 2.1; the SSL setting, where you select the first option, Verify SSL (Recommended); and your API key, typed into a masked box. When asked whether to activate the environment now, confirm.
 
 You should see: in Environment Manager, the dropdown reading your environment's name followed by "(active)". In Explorer, expand Agents: the list is read from the instance, so it shows the Agents that exist there. A tenant that nobody has used yet has one, `AskOrchestrate`. The Developer Edition has two, shown as "Try Document Processing Agent (DocProcessing)" and "AskOrchestrate".
+
+![The Environment Manager with the saas environment active](images/ch02-environment-manager-active.png)
 
 Step 6. Check that Bob reaches the two servers.
 

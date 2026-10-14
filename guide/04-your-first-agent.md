@@ -66,11 +66,11 @@ exists on my instance.
 
 Bob first looks at your instance, which takes a few seconds, so that its answer describes what is there. The answer usually contains:
 
-![Bob's answer to the first prompt: what it understood, what exists on the instance, its questions](images/ch04-ask-answer.png)
-
 1. A summary of what Bob understood. Read it against what you meant. If it is wrong, correct it now.
 2. A list of what already exists on the instance: the Agents, Tools, Knowledge Bases and Connections, and whether the name of the new Agent is free. Bob reads this from the instance.
 3. The questions that Bob needs answered before it can write a design, for example the facts for each department, the format of the answers, what to say when a question is outside the facts, and the name of the Agent.
+
+![Bob's answer to the first prompt: what it understood, what exists on the instance, its questions](images/ch04-ask-answer.png)
 
 Bob's questions vary from one run to another, but they come down to the same points: the facts, the tone, the limits of the Agent, and its name. The following answer gives Bob all of them at once, so you can use it whatever the wording of Bob's questions. Send it in the same conversation.
 
@@ -175,13 +175,13 @@ The design in @design/civic-info-design.md is approved. Build it.
 
 Approve each request as it comes. The build takes Bob a minute or two. In the run, Bob:
 
-![The import command shown by Bob in Agent mode, waiting for approval](images/ch04-approve-import-command.png)
-
 1. Read the design, and then one of the Orchestrate skills loaded by the starting message in chapter 2, the one that knows how Agents are built and tested. Everything that follows comes from the design and from that skill.
 2. Wrote the Agent file `agents/civic_info_agent.yaml`, which is the design turned into the form that watsonx Orchestrate accepts: the name, the model, the instructions with the facts, and the welcome message and starter prompts in the exact structure the platform requires.
 3. Imported it. The Agent then exists on the instance, in Draft, where only the builders can use it.
 4. Sent the questions from the design, the street light, the fallen tree, the building permit, the bulky item, the property tax, and one of its own, a second question in the same conversation to check that the Agent remembers the first. It reported each answer with its verdict; every test passed.
 5. Reported a table of the files it wrote, and a list of ways to try the Agent yourself.
+
+![The import command shown by Bob in Agent mode, waiting for approval](images/ch04-approve-import-command.png)
 
 ## 4.7 Read the definition
 
