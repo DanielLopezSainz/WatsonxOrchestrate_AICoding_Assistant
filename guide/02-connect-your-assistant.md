@@ -62,12 +62,12 @@ You should see: the panel now has two sections. Explorer lists Agents, Tools, Co
 
 Step 4. Send Bob its starting message.
 
-![The starting message placed in the chat input box by the extension, before sending](images/ch02-starting-message.png)
-
 When the initialisation ends, the extension places a message in the chat input box of Bob and does not send it. No notification is displayed, so the message is easy to overlook.
 
 1. Find the text headed "SYSTEM PROMPT - IBM watsonx Orchestrate" in the chat input box.
 2. Press Enter to send it as it is.
+
+![The starting message placed in the chat input box by the extension, before sending](images/ch02-starting-message.png)
 
 The message tells Bob to switch to Agent mode, to load the Orchestrate skills, and to use the Orchestrate server for all Agent, Tool and environment operations and the documentation server for reference. If the box is empty, for example because the text was deleted or a new conversation was started before it was sent, paste the following text and send it:
 
