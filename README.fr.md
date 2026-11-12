@@ -2,7 +2,7 @@
 
 Utilisez IBM Bob pour créer des agents d'IA complexes sur IBM watsonx Orchestrate. Ce cours s'adresse aux utilisateurs expérimentés d'Orchestrate qui veulent accélérer leurs développements, et aux débutants qui veulent créer des agents complexes. Un minimum de connaissances théoriques sur watsonx Orchestrate est souhaitable, mais pas obligatoire.
 
-*Ceci est la traduction française du [README](README.md). Les chapitres du guide sont en anglais.*
+*Ceci est la traduction française du [README](README.md). Les chapitres du guide sont traduits en français ; les prompts destinés à Bob restent en anglais, tels qu'ils ont été testés.*
 
 ## Ce que vous allez construire
 
@@ -42,17 +42,17 @@ Vous pouvez aussi commencer à n'importe quel chapitre à partir du 5 : les fich
 
 ## Les chapitres
 
-- [Introduction](guide/00-introduction.md) : à qui s'adresse le guide, ce qu'il vous faut, les conventions.
-- [Chapitre 1. Ce que vous allez construire](guide/01-what-you-will-build.md)
-- [Chapitre 2. Connecter Bob à watsonx Orchestrate](guide/02-connect-your-assistant.md)
-- [Chapitre 3. Comment travailler avec Bob](guide/03-how-to-brief-your-assistant.md)
-- [Chapitre 4. Votre premier agent Orchestrate](guide/04-your-first-agent.md)
-- [Chapitre 5. Ajouter une base de connaissances Orchestrate (RAG)](guide/05-knowledge-base.md)
-- [Chapitre 6. Ajouter des outils Orchestrate](guide/06-tools.md)
-- [Chapitre 7. Signaler un problème : les connexions Orchestrate](guide/07-connections.md)
-- [Chapitre 8. Une recherche d'adresse depuis un serveur MCP : les boîtes à outils Orchestrate](guide/08-mcp-toolkit.md)
-- [Chapitre 9. Un agent par service : les agents collaborateurs](guide/09-collaborators.md)
-- [Chapitre 10. CivicPulse sur WhatsApp : le canal Orchestrate](guide/10-whatsapp-channel.md)
+- [Introduction](guide/00-introduction.fr.md) : à qui s'adresse le guide, ce qu'il vous faut, les conventions.
+- [Chapitre 1. Ce que vous allez construire](guide/01-what-you-will-build.fr.md)
+- [Chapitre 2. Connecter Bob à watsonx Orchestrate](guide/02-connect-your-assistant.fr.md)
+- [Chapitre 3. Comment travailler avec Bob](guide/03-how-to-brief-your-assistant.fr.md)
+- [Chapitre 4. Votre premier agent Orchestrate](guide/04-your-first-agent.fr.md)
+- [Chapitre 5. Ajouter une base de connaissances Orchestrate (RAG)](guide/05-knowledge-base.fr.md)
+- [Chapitre 6. Ajouter des outils Orchestrate](guide/06-tools.fr.md)
+- [Chapitre 7. Signaler un problème : les connexions Orchestrate](guide/07-connections.fr.md)
+- [Chapitre 8. Une recherche d'adresse depuis un serveur MCP : les boîtes à outils Orchestrate](guide/08-mcp-toolkit.fr.md)
+- [Chapitre 9. Un agent par service : les agents collaborateurs](guide/09-collaborators.fr.md)
+- [Chapitre 10. CivicPulse sur WhatsApp : le canal Orchestrate](guide/10-whatsapp-channel.fr.md)
 
 ## Contenu de ce dépôt
 
